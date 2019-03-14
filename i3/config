@@ -197,7 +197,6 @@ bindsym $mod+shift+x exec i3lock -c 000000 # Lock keybinding
 
 #i3-gaps config
 gaps inner 14
-gaps outer 7
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
