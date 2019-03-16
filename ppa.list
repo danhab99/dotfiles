@@ -1,10 +1,6 @@
 http://dl.google.com/linux/chrome/debstable/main
-http://packages.microsoft.com/repos/vscodestable/main
-http://ppa.launchpad.net/certbot/certbot/ubuntucosmic/main
-http://ppa.launchpad.net/fingerprint/fingerprint-gui/ubuntucosmic/main
-http://ppa.launchpad.net/graphics-drivers/ppa/ubuntucosmic/main
-http://ppa.launchpad.net/noobslab/themes/ubuntucosmic/main
-http://ppa.launchpad.net/webupd8team/java/ubuntucosmic/main
+http://ppa.launchpad.net/peterlevi/ppa/ubuntucosmic/main
+http://ppa.launchpad.net/snwh/ppa/ubuntucosmic/main
 https://download.docker.com/linux/ubuntucosmic/stable
 http://security.ubuntu.com/ubuntucosmic-security/main
 http://security.ubuntu.com/ubuntucosmic-security/multiverse
