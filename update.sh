@@ -17,7 +17,7 @@ echo "Copying gtk*"
 cp -r $HOME/.config/gtk* ./
 
 echo "Copying scripts"
-cp $HOME/Pictures/wallpaper/slideshow.sh ./
+cp $HOME/Pictures/wallpaper/*.sh ./
 
 echo "COMITTING"
 git add .
