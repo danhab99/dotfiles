@@ -5,9 +5,8 @@ yes | cp -rf .bash_aliases $HOME
 echo "Installing cosmetics"
 yes | cp -rf ./variety $HOME/.config
 yes | cp -rf ./gtk* $HOME/.config
-
-echo "Installing scripts"
-yes | cp -rf ./myi3lock.sh $HOME/.local/bin
+mkdir -p $HOME/Pictures/wallpaper/.cache
+yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
 
 echo "Adding PPAs"
 apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > /tmp/ppa.list

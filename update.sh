@@ -16,6 +16,9 @@ cp -r $HOME/.config/variety ./
 echo "Copying gtk*"
 cp -r $HOME/.config/gtk* ./
 
+echo "Copying scripts"
+cp $HOME/Pictures/wallpaper/slideshow.sh ./
+
 echo "COMITTING"
 git add .
 git commit . -m "$(date)"
