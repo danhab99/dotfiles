@@ -193,7 +193,7 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec myi3lock.sh & # Lock keybinding
+bindsym $mod+shift+x exec i3lock -i /home/dan/Pictures/wallpaper/.cache/blurred_wallpaper.png # Lock keybinding
 
 #i3-gaps config
 gaps inner 14
@@ -212,6 +212,8 @@ exec variety
 exec google-chrome --password-store=gnome
 exec i3-sensible-terminal
 exec_always ssh-add ~/.ssh/id_rsa
+exec_always /home/dan/Pictures/wallpaper/slideshow.sh
+
 # Audio keys
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
