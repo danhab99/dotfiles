@@ -7,6 +7,8 @@ yes | cp -rf ./variety $HOME/.config
 yes | cp -rf ./gtk* $HOME/.config
 mkdir -p $HOME/Pictures/wallpaper/.cache
 yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
+yes | cp -f  ./changewallpaper.sh $HOME/Pictures/wallpaper
+ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
 echo "Adding PPAs"
 apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > /tmp/ppa.list
