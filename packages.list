@@ -17,7 +17,6 @@ cmake
 cmake-data
 cmatrix
 cmdtest
-code
 compton
 containerd.io
 cowsay
@@ -36,9 +35,9 @@ docker-ce-cli
 duplicity
 espeak
 faba-icon-theme
+faba-mono-icons
 feh
 findutils
-fingerprint-gui
 firefox-locale-en
 font-manager
 fonts-indic
@@ -75,7 +74,6 @@ language-pack-en-base
 language-pack-gnome-en
 language-pack-gnome-en-base
 libasound2-dev
-libbsapi
 libcairo2-dev
 libcurl4-openssl-dev
 libcurses-perl
@@ -141,7 +139,6 @@ openssh-server
 os-prober
 overlay-scrollbar
 pkg-config
-policykit-1-fingerprint-gui
 pulseaudio
 python-gi
 python-pip
@@ -169,8 +166,8 @@ ubuntu-standard
 ubuntu-wallpapers
 unity-tweak-tool
 variety
+variety-slideshow
 vim
-wallch
 xbacklight
 xcb-proto
 xclip
