@@ -1,3 +1,5 @@
+git pull origin master
+
 echo "Installing configs and aliases"
 yes | cp -rf ./i3 $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
@@ -8,6 +10,9 @@ yes | cp -rf ./gtk* $HOME/.config
 mkdir -p $HOME/Pictures/wallpaper/.cache
 yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
 yes | cp -f  ./changewallpaper.sh $HOME/Pictures/wallpaper
+
+ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
+ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
 echo "Adding PPAs"
