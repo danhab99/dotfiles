@@ -1,4 +1,4 @@
-lwd=$(cwd)
+lwd=$(pwd)
 cd $HOME/Documents/dotfiles
 
 echo "Copying configs"
