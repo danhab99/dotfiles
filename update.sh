@@ -1,3 +1,6 @@
+lwd=$(cwd)
+cd $HOME/Documents/dotfiles
+
 echo "Copying configs"
 cp -r $HOME/.config/i3 .
 
@@ -23,3 +26,5 @@ echo "COMITTING"
 git add .
 git commit . -m "$(date)"
 git push origin master
+
+cd $lwd

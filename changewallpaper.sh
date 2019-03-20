@@ -1,25 +1,28 @@
 #!/bin/bash
 
-mkdir -p $HOME/Pictures/wallpaper/.cache
+cache=$HOME/.cache/wallpaper
+lock=$cache/.LOCK
 
-if [ ! -f $HOME/Pictures/wallpaper/.cache/.LOCK ]; then
-	touch $HOME/Pictures/wallpaper/.cache/.LOCK
+mkdir -p $cache
+
+if [ ! -f $lock ]; then
+	touch $lock
 else
 	echo "Lock file exists"
 	echo ""
-	echo "Please run sudo rm $HOME/Pictures/wallpaper/.cache/.LOCK to fix"
+	echo "Please run sudo rm $lock to fix"
 	exit 1
 fi
 
 if [[ $1 =~ http.* ]]; then
 	echo "Downloading..."
-	curl -o- $1 > .cache/current_wallpaper.png
+	curl -o- $1 > $cache/current_wallpaper.png
 else
 	echo "Copying..."
-	cp -f "$1" .cache/current_wallpaper.png
+	cp -f "$1" $cache/current_wallpaper.png
 fi
 
-convert .cache/current_wallpaper.png -blur 0x8 -resize 1920x1080! .cache/blurred_wallpaper.png
-feh --bg-scale .cache/current_wallpaper.png
+convert $cache/current_wallpaper.png -blur 0x8 -resize 1920x1080! $cache/blurred_wallpaper.png
+feh --bg-scale $cache/current_wallpaper.png
 
-rm $HOME/Pictures/wallpaper/.cache/.LOCK
+rm $lock
