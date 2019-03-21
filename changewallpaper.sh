@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cache=$HOME/.cache/wallpaper
+cache=$HOME/Pictures/wallpaper/.cache/
 lock=$cache/.LOCK
 
 mkdir -p $cache

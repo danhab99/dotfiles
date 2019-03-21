@@ -1,3 +1,5 @@
+lwd=$(pwd)
+cd $HOME/Documents/dotfiles
 git pull origin master
 
 echo "Installing configs and aliases"
@@ -37,4 +39,4 @@ do
 done
 
 i3-msg restart
-
+cd $lwd

@@ -204,8 +204,7 @@ exec xinput set-prop 11 280 1
 exec xinput set-prop 11 288 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper.png
 exec xrandr --dpi 180
-exec_always compton -f -r 5 -o 0.8 -e 0.8va
-exec variety
+exec compton -f -r 5 -o 0.8 -e 0.8va
 #exec ~/.screenlayout/olibra_workstation.sh
 
 # Start defaults

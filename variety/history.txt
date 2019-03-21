@@ -1,4 +1,8 @@
 0
+/home/dan/Pictures/wallpaper/27 - Vw44wrY.png
+/home/dan/Pictures/wallpaper/84 - V7vw8lP.jpg
+/home/dan/Pictures/wallpaper/45 - U2yEK9z.jpg
+/home/dan/Pictures/wallpaper/100 - qC7DgkP.jpg
 /home/dan/Pictures/wallpaper/107 - W9nym75.jpg
 /home/dan/Pictures/wallpaper/109 - WHhGEq5.jpg
 /home/dan/Pictures/wallpaper/55 - SOHWqyb.png
@@ -47,7 +51,6 @@
 /home/dan/Pictures/wallpaper/96 - daaQ4ct.jpg
 /home/dan/Pictures/wallpaper/24 - t0fs8ms.jpg
 /home/dan/Pictures/wallpaper/64 - dfxiy1O.jpg
-/home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 /home/dan/Pictures/wallpaper/115 - LoQZc3C.jpg
 /home/dan/Pictures/wallpaper/104 - K6afpsz.jpg
 /home/dan/Pictures/wallpaper/105 - k0X6kk5.jpg
