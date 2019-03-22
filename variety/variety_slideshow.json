@@ -1,15 +1,15 @@
 {
     "sort": "random", 
+    "seconds": 6.0, 
+    "sort_order": "asc", 
     "monitor": 1, 
     "quit_on_motion": null, 
     "title": "Variety Slideshow", 
-    "seconds": 6.0, 
     "zoom": 0.2, 
     "files_and_folders": [
         "/home/dan/Pictures/wallpaper", 
         "/home/dan/Pictures/wallpaper"
     ], 
-    "sort_order": "asc", 
     "mode": "fullscreen", 
     "fade": 0.4, 
     "pan": 0.05
