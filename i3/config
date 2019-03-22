@@ -202,7 +202,7 @@ for_window [class="^.*"] border pixel 0
 # Enviroment setup
 exec xinput set-prop 11 280 1
 exec xinput set-prop 11 288 1
-# exec_always feh --bg-scale /home/dan/Pictures/wallpaper.png
+exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec xrandr --dpi 180
 exec compton -f -r 5 -o 0.8 -e 0.8va
 #exec ~/.screenlayout/olibra_workstation.sh
@@ -211,7 +211,7 @@ exec compton -f -r 5 -o 0.8 -e 0.8va
 exec google-chrome --password-store=gnome
 exec i3-sensible-terminal
 exec_always ssh-add ~/.ssh/id_rsa
-exec_always /home/dan/Pictures/wallpaper/slideshow.sh
+exec /home/dan/Pictures/wallpaper/slideshow.sh
 
 # Audio keys
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume

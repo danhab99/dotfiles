@@ -3,6 +3,7 @@ alsa-utils
 apt-transport-https
 arandr
 arc-theme
+auditd
 autoconf
 automake
 base-passwd
