@@ -3,6 +3,7 @@
 cache=$HOME/Pictures/wallpaper/.cache/
 lock=$cache/.LOCK
 
+rm -rf $cache
 mkdir -p $cache
 
 if [ ! -f $lock ]; then
