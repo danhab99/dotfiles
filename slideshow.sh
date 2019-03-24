@@ -8,6 +8,6 @@ while true; do
 	for f in $here/*.png; do
 		source $here/changewallpaper.sh "$f"
 		notify-send "Changed wallpaper to $f"
-		sleep 1m
+		sleep 10m
 	done
 done
