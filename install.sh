@@ -18,6 +18,13 @@ ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
+echo "Do you want to install the packages [N/y]"
+read doInstall
+
+if [ $doInstall = ""];  then
+	exit 0
+fi
+
 echo "Adding PPAs"
 apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > /tmp/ppa.list
 
