@@ -225,7 +225,10 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screenshot
-bindsym Print exec scrot
+#bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
+bindsym Print exec gnome-screenshot
+bindsym shift+Print exec gnome-screenshot -a
+bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome
 bindsym $mod+shift+w exec google-chrome
