@@ -146,6 +146,7 @@ python-pip
 python-setuptools
 python-xcbgen
 python3-pip
+python3-venv
 qt4-qtconfig
 rfkill
 rofi
