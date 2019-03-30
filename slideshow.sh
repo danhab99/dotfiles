@@ -4,9 +4,10 @@ here=$HOME/Pictures/wallpaper
 cache=$here/.cache
 lock=$cache/.SH_LOCK
 mkdir -p $cache
-touch $lock
 
 if [ ! -f $lock ]; then
+	touch $lock
+	echo "Starting slideshow"
 	echo $BASHPID > $lock
 else
 	PID=$(cat $lock)
