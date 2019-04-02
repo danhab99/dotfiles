@@ -23,7 +23,7 @@ echo "Copying scripts"
 cp $HOME/Pictures/wallpaper/*.sh ./
 
 echo "Copying rofi"
-cp $HOME/.local/share/rofi/themes ./rofi/themes
+cp -r $HOME/.local/share/rofi/themes ./rofi/themes
 
 echo "COMITTING"
 git add .
