@@ -3,9 +3,8 @@ cd $HOME/Documents/dotfiles
 
 echo "Copying configs"
 cp -r $HOME/.config/i3 .
-
-echo "Copying aliases"
 cp $HOME/.bash_aliases .bash_aliases
+cp $HOME/.bash_paths .bash_paths
 
 echo "Copying packages"
 apt-mark showmanual > packages.list
