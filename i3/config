@@ -162,7 +162,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 set $bg-color 	         #2f343f
-set $bg-color-t          #2f343f66
+set $bg-color-t          #2f343f00
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -181,6 +181,7 @@ bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -padding 800 -opacity 50 -bw 0
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	i3bar_command  i3bar -t
 	position bottom
 	colors {
 		background $bg-color-t
@@ -207,7 +208,6 @@ exec xrandr --dpi 180
 #exec compton -f -r 5 -o 0.8 -e 0.8va compton --shadow-exclude '!focused'
 #exec_always compton --config /home/dan/.config/i3/compton.conf
 exec_always compton --shadow-radius=4 --shadow-offset-x=4 --shadow-offset-y=4 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading;
-#exec ~/.screenlayout/olibra_workstation.sh
 
 # Start defaults
 exec google-chrome --password-store=gnome
