@@ -7,7 +7,7 @@ yes | cp -rf ./i3 $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
 
 echo "Installing cosmetics"
-yes | cp -rf ./variety $HOME/.config
+#yes | cp -rf ./variety $HOME/.config
 yes | cp -rf ./gtk* $HOME/.config
 mkdir -p $HOME/Pictures/wallpaper/.cache
 yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper

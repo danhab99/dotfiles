@@ -13,8 +13,8 @@ apt-mark showmanual > packages.list
 echo "Coppying ppas"
 apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > ppa.list
 
-echo "Copying variety"
-cp -r $HOME/.config/variety ./
+#echo "Copying variety"
+#cp -r $HOME/.config/variety ./
 
 echo "Copying gtk*"
 cp -r $HOME/.config/gtk* ./
