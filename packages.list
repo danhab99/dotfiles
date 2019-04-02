@@ -42,6 +42,7 @@ findutils
 firefox-locale-en
 font-manager
 fonts-indic
+fortune-mod
 fprint-demo
 gcc
 git
@@ -120,6 +121,7 @@ linux-generic
 linux-headers-generic
 linux-signed-generic
 login
+lolcat
 lsof
 lua5.2
 lvm2

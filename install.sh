@@ -5,6 +5,7 @@ git pull origin master
 echo "Installing configs and aliases"
 yes | cp -rf ./i3 $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
+yes | cp -rf .bash_paths $HOME
 
 echo "Installing cosmetics"
 #yes | cp -rf ./variety $HOME/.config

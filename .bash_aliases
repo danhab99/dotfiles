@@ -8,4 +8,4 @@ alias valias="vi ~/.bash_aliases"
 alias rtool="python3 ~/Documents/olibra/remotes/rtool/rtool.py"
 alias l="ls"
 alias screenSnowbird="sudo screen -L /dev/ttyUSB0 57600"
-# screenfetch
+alias inspireme="fortune | cowsay | lolcat"
