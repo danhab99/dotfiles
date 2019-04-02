@@ -9,9 +9,14 @@ yes | cp -rf .bash_aliases $HOME
 echo "Installing cosmetics"
 #yes | cp -rf ./variety $HOME/.config
 yes | cp -rf ./gtk* $HOME/.config
+
+echo "Installing wallpaper slideshow"
 mkdir -p $HOME/Pictures/wallpaper/.cache
 yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
 yes | cp -f  ./changewallpaper.sh $HOME/Pictures/wallpaper
+
+echo "Installing rofi"
+yes | cp -rf ./rofi/themes $HOME/.local/share/rofi/themes
 
 echo "Installing commands"
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
