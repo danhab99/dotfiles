@@ -18,6 +18,7 @@ cmake
 cmake-data
 cmatrix
 cmdtest
+code
 compton
 containerd.io
 cowsay
@@ -33,12 +34,13 @@ diffutils
 dmeventd
 docker-ce
 docker-ce-cli
+dunst
 duplicity
 espeak
 faba-icon-theme
-faba-mono-icons
 feh
 findutils
+fingerprint-gui
 firefox-locale-en
 font-manager
 fonts-indic
@@ -47,6 +49,9 @@ fprint-demo
 gcc
 git
 gnome-packagekit
+gnome-panel
+gnome-session
+gnome-settings-daemon
 gnome-tweaks
 gnome-user-share
 gnupg-agent
@@ -76,6 +81,7 @@ language-pack-en-base
 language-pack-gnome-en
 language-pack-gnome-en-base
 libasound2-dev
+libbsapi
 libcairo2-dev
 libcurl4-openssl-dev
 libcurses-perl
@@ -133,6 +139,7 @@ mokutil
 mythes-en-us
 ncurses-base
 ncurses-bin
+neofetch
 net-tools
 nmap
 nodejs
@@ -143,6 +150,7 @@ openssh-server
 os-prober
 overlay-scrollbar
 pkg-config
+policykit-1-fingerprint-gui
 pulseaudio
 python-gi
 python-pip
@@ -166,13 +174,15 @@ thunderbird-locale-en
 thunderbird-locale-en-us
 toilet
 ubuntu-desktop
+ubuntu-gnome-desktop
 ubuntu-minimal
 ubuntu-restricted-addons
 ubuntu-standard
 ubuntu-wallpapers
 unity-tweak-tool
-variety-slideshow
+variety
 vim
+wallch
 xbacklight
 xcb
 xcb-proto
