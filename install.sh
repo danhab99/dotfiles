@@ -17,7 +17,7 @@ yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
 yes | cp -f  ./changewallpaper.sh $HOME/Pictures/wallpaper
 
 echo "Installing rofi"
-yes | cp -rf ./rofi $HOME/.local/share/rofi/themes
+yes | cp -rf ./rofi/* $HOME/.local/share/rofi/themes
 
 echo "Installing commands"
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
