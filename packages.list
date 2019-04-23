@@ -103,6 +103,8 @@ libpango1.0-dev
 libpulse-dev
 libreadline5
 libreoffice-help-en-us
+libsdl2-dev
+libsdl2-ttf-dev
 libstartup-notification0-dev
 libxcb-composite0
 libxcb-composite0-dev
@@ -147,6 +149,7 @@ net-tools
 nmap
 nodejs
 notify-osd
+nudoku
 nvidia-361
 openjdk-8-jdk
 openssh-server
@@ -172,6 +175,7 @@ software-properties-common
 steam-installer
 synaptic
 system-config-samba
+thefuck
 thunderbird-locale-en
 thunderbird-locale-en-us
 toilet

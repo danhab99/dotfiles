@@ -1,4 +1,6 @@
-alias fuck='sudo $(history -p \!\!)'
+#alias fuck='sudo $(history -p \!\!)'
+#eval $(thefuck --alias)
+
 alias cdh="cd ~"
 alias ci3="cd ~/.config/i3"
 alias browse="nautilus --browser . &"
