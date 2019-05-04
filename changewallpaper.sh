@@ -29,6 +29,6 @@ feh --bg-scale $cache/current_wallpaper.png
 echo "Creating lockscreen"
 convert $cache/current_wallpaper.png -blur 0x16 -resize 1920x1080! $cache/blurred_wallpaper.png
 convert $cache/blurred_wallpaper.png -gravity North -pointsize 100 -font helvetica -fill white -annotate +0+100 'Locked' $cache/blurred_wallpaper.png
-convert $cache/blurred_wallpaper.png -gravity North -pointsize 25 -font helvetica -fill white -annotate +0+200 'Start typing to unlock' $cache/blurred_wallpaper.png
+# convert $cache/blurred_wallpaper.png -gravity North -pointsize 25 -font helvetica -fill white -annotate +0+200 'Start typing to unlock' $cache/blurred_wallpaper.png
 
 rm $lock
