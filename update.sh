@@ -5,6 +5,7 @@ echo "Copying configs"
 cp -r $HOME/.config/i3 .
 cp $HOME/.bash_aliases .bash_aliases
 cp $HOME/.bash_paths .bash_paths
+cp $HOME/.bashrc .bashrc
 
 echo "Copying packages"
 apt-mark showmanual > packages.list
@@ -17,6 +18,12 @@ brew list > brew.list
 
 echo "Copying npm globals"
 ls `npm root -g` > npm.list
+
+echo "Copying zsh"
+cp $HOME/.zshrc ./.zshrc
+cp -r $HOME/.oh-my-zsh .
+
+echo "Copying bashrc"
 
 #echo "Copying variety"
 #cp -r $HOME/.config/variety ./
