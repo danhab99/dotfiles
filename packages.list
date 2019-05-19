@@ -177,6 +177,7 @@ python3-venv
 qt4-qtconfig
 rfkill
 rofi
+rxvt-unicode
 samba
 screen
 screenfetch
