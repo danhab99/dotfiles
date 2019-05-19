@@ -7,10 +7,13 @@ auditd
 autoconf
 automake
 base-passwd
+bison
 blueman
 bluetooth
 bluez
 bluez-tools
+bumblebee
+bumblebee-nvidia
 ca-certificates
 certbot
 classicmenu-indicator
@@ -36,13 +39,16 @@ docker-ce-cli
 dunst
 duplicity
 espeak
+exuberant-ctags
 faba-icon-theme
 faba-mono-icons
 feh
 findutils
 firefox-locale-en
+flex
 font-manager
 fonts-indic
+fonts-powerline
 fortune-mod
 fprint-demo
 gcc
@@ -57,6 +63,7 @@ gnome-tweaks
 gnome-user-share
 gnupg-agent
 google-chrome-stable
+gperf
 grep
 grub-common
 grub-efi-amd64-signed
@@ -76,6 +83,7 @@ i3blocks
 imagemagick
 init
 inotify-tools
+iotop
 ipmiutil
 jp2a
 language-pack-en
@@ -131,6 +139,7 @@ libyajl-dev
 linux-generic
 linux-headers-generic
 linux-signed-generic
+lldb
 login
 lolcat
 lsof
@@ -191,7 +200,10 @@ unity-tweak-tool
 variety
 variety-slideshow
 vim
+w3m
+w3m-img
 wallch
+windows95
 xbacklight
 xcb
 xcb-proto
