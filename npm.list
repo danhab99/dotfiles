@@ -3,4 +3,5 @@ create-react-app
 electron
 gitignore
 gtop
+license-generator
 npm
