@@ -16,6 +16,7 @@ bumblebee
 bumblebee-nvidia
 ca-certificates
 certbot
+clang-format
 classicmenu-indicator
 cmake
 cmake-data
@@ -191,6 +192,7 @@ thefuck
 thunderbird-locale-en
 thunderbird-locale-en-us
 toilet
+ttf-mscorefonts-installer
 ubuntu-desktop
 ubuntu-gnome-desktop
 ubuntu-minimal
