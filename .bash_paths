@@ -10,3 +10,7 @@ export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH="$HOME/.go"
 export GOBIN="$GOPATH/bin"
+
+export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
+
+
