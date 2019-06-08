@@ -21,7 +21,7 @@ ls `npm root -g` > npm.list
 
 echo "Copying zsh"
 cp $HOME/.zshrc ./.zshrc
-cp -r $HOME/.oh-my-zsh ./oh-my-zsh
+cp -r $HOME/.oh-my-zsh/* ./oh-my-zsh/
 
 echo "Copying bashrc"
 
