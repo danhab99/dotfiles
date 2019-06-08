@@ -224,8 +224,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screenshot
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
@@ -241,5 +241,3 @@ bindsym $mod+e exec nautilus --browser $HOME
 
 # Polybar
 # exec_always --no-startup-id $HOME/Documents/dotfiles/polybar.sh
-#
-exec_always xinput --disable 13
