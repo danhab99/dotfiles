@@ -22,7 +22,7 @@ yes | cp -rf ./rofi/* $HOME/.local/share/rofi/themes
 
 echo "Installing zsh"
 cp .zshrc $HOME/.zshrc
-cp -r ./oh-my-zsh $HOME/oh-my-zsh
+cp -r ./oh-my-zsh/* $HOME/.oh-my-zsh
 
 echo "Installing commands"
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
