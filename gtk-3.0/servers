@@ -13,4 +13,14 @@
       </metadata>
     </info>
   </bookmark>
+  <bookmark href="sftp://danhabot.xyz/" added="2019-06-17T03:37:20Z" modified="2019-06-17T03:37:20Z" visited="2019-06-17T03:37:20Z">
+    <title>/ on danhabot.xyz</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="nautilus" exec="&apos;nautilus %u&apos;" modified="2019-06-17T03:37:20Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
 </xbel>

@@ -104,6 +104,7 @@ libdebconfclient0
 libdevmapper-event1.02.1
 libev-dev
 libfprint0
+libgconf2-4
 libiw-dev
 libjpeg-turbo8-dev
 liblvm2app2.2
@@ -176,6 +177,7 @@ openssh-server
 openvpn
 os-prober
 overlay-scrollbar
+pavucontrol
 pkg-config
 pulseaudio
 python
