@@ -13,4 +13,6 @@ export GOBIN="$GOPATH/bin"
 
 export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
 
-
+export PATH=$PATH:$ANDROID_HOME/build-tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
