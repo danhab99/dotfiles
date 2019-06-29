@@ -34,25 +34,25 @@ configuration {
 	selected-active-background:  @actbg;
 	active-background:           @selbg;
 
-	line-margin:                 2;
-	line-padding:                2;
+	line-margin:                 0;
+	line-padding:                0;
 	separator-style:             "none";
-	hide-scrollbar:              "true";
+	hide-scrollbar:              "false";
 	margin:                      0;
 	padding:                     0;
 }
 
 window {
-	location:	 west;
-	anchor:		 west;
-	height:		 100%;
+	location:	 south west;
+	anchor:		 south west;
+	height:		 66%;
 	width:		 22%;
-	orientation: horizontal;
+	orientation: vertical;
 	children:	 [mainbox];
 }
 
 mainbox {
-	spacing:  0.8em;
+	spacing:  0.1em;
 	children: [ entry,listview,sidebar ];
 }
 
@@ -69,18 +69,18 @@ inputbar {
 }
 
 listview {
-	spacing: 0.5em;
-	dynamic: false;
+	spacing: 0.1em;
+	dynamic: true;
 	cycle:   true;
 }
 
-element { padding: 10px; }
+element { padding: 2px; }
 
 entry {
 	expand:         false;
 	text-color:     @normal-foreground;
 	vertical-align: 1;
-	padding:        5px;
+	padding:        1px;
 }
 
 element normal.normal {
