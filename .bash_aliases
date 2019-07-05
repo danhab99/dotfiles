@@ -46,6 +46,6 @@ alias tty9="sudo rm /usr/local/tty.bond;sudo ln -s /dev/ttyUSB9 /usr/local/tty.b
 alias tty10="sudo rm /usr/local/tty.bond;sudo ln -s /dev/ttyUSB10 /usr/local/tty.bond"
 
 #switch to dvorak
-alias asdf='setxkbmap dvorak'
+alias asdf='setxkbmap he'
 #switch to us qwerty
 alias aoeu='setxkbmap us'
