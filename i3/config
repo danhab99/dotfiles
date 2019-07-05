@@ -211,7 +211,7 @@ exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper
 #exec xrandr --dpi 180
 #exec compton -f -r 5 -o 0.8 -e 0.8va compton --shadow-exclude '!focused'
 #exec_always compton --config /home/dan/.config/i3/compton.conf
-exec_always compton --shadow-radius=4 --shadow-offset-x=4 --shadow-offset-y=4 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading;
+exec_always compton --shadow-radius=4 --shadow-offset-x=4 --shadow-offset-y=4 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading
 
 # Start defaults
 exec google-chrome --password-store=gnome

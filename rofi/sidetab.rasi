@@ -45,7 +45,7 @@ configuration {
 window {
 	location:	 south west;
 	anchor:		 south west;
-	height:		 66%;
+	height:		 100%;
 	width:		 22%;
 	orientation: vertical;
 	children:	 [mainbox];
