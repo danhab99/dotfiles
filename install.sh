@@ -9,7 +9,6 @@ yes | cp -rf .bash_paths $HOME
 yes | cp -rf .bashrc $HOME
 
 echo "Installing cosmetics"
-#yes | cp -rf ./variety $HOME/.config
 yes | cp -rf ./gtk* $HOME/.config
 
 echo "Installing wallpaper slideshow"
@@ -29,10 +28,9 @@ ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
-echo "Do you want to install the packages [N/y]"
-read doInstall
+read -p "Do you want to install the packages [N/y]" yn
 
-if [ $doInstall == "N" || $doInstall == "" ];  then
+if [[ ! yn =~ ^[Nn]$ ]];  then
 	echo "Skipping"
 else
 	echo "Adding PPAs"
@@ -53,6 +51,13 @@ else
 	do
 		echo "### Installing $package ###"
 		sudo apt install $package -y
+	done
+
+	ls `npm root -g` > /tmp/npm.list
+
+	for package in $(diff -u /tmp/npm.list npm.list | grep -Po "(?<=\+)[a-zA-Z].*");do
+		echo "### Installing npm $package ###"
+		sudo npm install -g $package
 	done
 fi
 
