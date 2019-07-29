@@ -12,7 +12,7 @@ alias l="ls"
 alias screenSnowbird="sudo screen -L /dev/ttyUSB0 57600"
 alias inspireme="fortune | cowsay | lolcat"
 alias git-fix="git submodule sync --recursive; git submodule update --init --recursive"
-
+alias src="source ~/.bashrc"
 # Stop all containers
 dstop() { docker stop $(docker ps -a -q); }
 
@@ -49,3 +49,7 @@ alias tty10="sudo rm /usr/local/tty.bond;sudo ln -s /dev/ttyUSB10 /usr/local/tty
 alias asdf='setxkbmap he'
 #switch to us qwerty
 alias aoeu='setxkbmap us'
+
+alias salias='source ~/.bash_aliases'
+alias vrc='vi ~/.bashrc'
+

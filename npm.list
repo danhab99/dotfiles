@@ -1,4 +1,5 @@
 appium-doctor
+browserify
 cli-clock
 create-react-app
 csvtojson
@@ -8,5 +9,6 @@ gitignore
 gtop
 license-generator
 n
+nodemon
 npm
 yo

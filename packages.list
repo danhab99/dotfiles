@@ -1,5 +1,6 @@
 adb
 alsa-utils
+anbox-modules-dkms
 apt-transport-https
 arandr
 arc-theme
@@ -15,7 +16,6 @@ bluetooth
 bluez
 bluez-tools
 bumblebee
-bumblebee-nvidia
 ca-certificates
 certbot
 clang-format
@@ -163,6 +163,7 @@ lvm2
 lxappearance
 make
 materia-gtk-theme
+mesa-utils
 moka-icon-theme
 mokutil
 moon-buggy
@@ -176,7 +177,7 @@ nmap
 nodejs
 notify-osd
 nudoku
-nvidia-361
+nvidia-prime
 openjdk-8-jdk
 openssh-server
 openvpn
@@ -184,6 +185,7 @@ os-prober
 overlay-scrollbar
 pavucontrol
 pkg-config
+ppa-purge
 pulseaudio
 python
 python-cryptography
