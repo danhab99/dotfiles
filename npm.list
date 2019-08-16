@@ -7,6 +7,7 @@ electron
 generator-code
 gitignore
 gtop
+jshint
 license-generator
 n
 nodemon

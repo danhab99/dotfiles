@@ -9,6 +9,8 @@ audacity
 auditd
 autoconf
 automake
+avrdude
+avrdude-doc
 base-passwd
 bison
 blueman
@@ -66,6 +68,7 @@ gnome-tweaks
 gnome-user-share
 gnupg-agent
 google-chrome-stable
+gparted
 gperf
 gqrx-sdr
 grep
@@ -126,6 +129,7 @@ libreadline5
 libreoffice-help-en-us
 libsdl2-dev
 libsdl2-ttf-dev
+libsqlite3-dev
 libstartup-notification0-dev
 libstdc++6:i386
 libvolk1-bin
@@ -161,6 +165,7 @@ lsof
 lua5.2
 lvm2
 lxappearance
+lzip
 make
 materia-gtk-theme
 mesa-utils
@@ -168,6 +173,7 @@ moka-icon-theme
 mokutil
 moon-buggy
 mythes-en-us
+nbtscan
 ncurses-base
 ncurses-bin
 neofetch
@@ -201,6 +207,7 @@ python3-pip
 python3-venv
 qt4-qtconfig
 qt5-default
+qtcreator
 rfkill
 rofi
 rtv
@@ -211,6 +218,7 @@ screenfetch
 shim-signed
 sl
 software-properties-common
+sqlite3
 steam-installer
 synaptic
 system-config-samba
@@ -230,6 +238,7 @@ unity-tweak-tool
 variety
 variety-slideshow
 vim
+vinagre
 w3m
 w3m-img
 wallch
@@ -240,5 +249,4 @@ xcb
 xcb-proto
 xclip
 xutils-dev
-youtube-dl
 zsh
