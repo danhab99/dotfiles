@@ -184,7 +184,7 @@ bindsym $mod+Shift+Tab exec rofi -show-icons -show ssh -lines 3 -eh 2 -padding 8
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	i3bar_command  i3bar -t
+	i3bar_command i3bar -t
 	position bottom
 	colors {
 		background $bg-color-t

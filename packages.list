@@ -1,6 +1,5 @@
 adb
 alsa-utils
-anbox-modules-dkms
 apt-transport-https
 arandr
 arc-theme
@@ -27,7 +26,6 @@ cmake-data
 cmatrix
 cmdtest
 compton
-containerd.io
 cowsay
 cryptsetup
 cryptsetup-bin
@@ -39,14 +37,11 @@ default-jdk
 default-jre
 diffutils
 dmeventd
-docker-ce
-docker-ce-cli
 dunst
 duplicity
 espeak
 exuberant-ctags
 faba-icon-theme
-faba-mono-icons
 feh
 findutils
 firefox-locale-en
@@ -84,7 +79,9 @@ hostname
 htop
 hwinfo
 hyphen-en-us
+i3-wm
 i3blocks
+i3lock
 imagemagick
 init
 inotify-tools
@@ -101,7 +98,6 @@ libasound2-dev
 libbz2-1.0:i386
 libc6:i386
 libcairo2-dev
-libcurl4-openssl-dev
 libcurses-perl
 libdebconfclient0
 libdevmapper-event1.02.1
@@ -128,6 +124,7 @@ libreoffice-help-en-us
 libsdl2-dev
 libsdl2-ttf-dev
 libsqlite3-dev
+libssl1.0-dev
 libstartup-notification0-dev
 libstdc++6:i386
 libvolk1-bin
@@ -178,9 +175,13 @@ neofetch
 net-tools
 ninvaders
 nmap
+node-gyp
 nodejs
+nodejs-dev
 notify-osd
+npm
 nudoku
+nvidia-367
 nvidia-prime
 openjdk-8-jdk
 openssh-server
@@ -220,6 +221,7 @@ sqlite3
 steam-installer
 synaptic
 system-config-samba
+thefuck
 thunderbird-locale-en
 thunderbird-locale-en-us
 toilet
@@ -233,14 +235,12 @@ ubuntu-wallpapers
 uncrustify
 unity-tweak-tool
 variety
-variety-slideshow
 vim
 vinagre
 w3m
 w3m-img
 wallch
 wget
-windows95
 xbacklight
 xcb
 xcb-proto
