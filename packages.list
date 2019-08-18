@@ -84,8 +84,6 @@ hostname
 htop
 hwinfo
 hyphen-en-us
-i3
-i3-wm
 i3blocks
 imagemagick
 init
@@ -222,7 +220,6 @@ sqlite3
 steam-installer
 synaptic
 system-config-samba
-thefuck
 thunderbird-locale-en
 thunderbird-locale-en-us
 toilet
