@@ -7,9 +7,7 @@ alias browse="nautilus --browser . &"
 alias v="vi"
 alias vi3="vi ~/.config/i3/config"
 alias valias="vi ~/.bash_aliases"
-alias rtool="python3 ~/Documents/olibra/remotes/rtool/rtool.py"
 alias l="ls"
-alias screenSnowbird="sudo screen -L /dev/ttyUSB0 57600"
 alias inspireme="fortune | cowsay | lolcat"
 alias git-fix="git submodule sync --recursive; git submodule update --init --recursive"
 alias src="source ~/.bashrc"
@@ -17,17 +15,6 @@ alias src="source ~/.bashrc"
 dstop() { docker stop $(docker ps -a -q); }
 
 alias dockerNuke="dstop"
-
-alias mm="make monitor"
-alias mfm='make flash monitor -j'
-alias m='make -j'
-alias gs='git status'
-alias mr='make run -j'
-alias lr='echo $?'
-alias mc='make clean'
-alias md="make clean;make CONFIG_OPTIMIZATION_LEVEL_DEBUG=Y CONFIG_OPTIMIZATION_LEVEL_RELEASE="
-
-alias meo="make erase_ota"
 
 alias gf="git submodule sync --recursive; git submodule update --init --recursive"
 alias e="electron ."
@@ -46,10 +33,9 @@ alias tty9="sudo rm /usr/local/tty.bond;sudo ln -s /dev/ttyUSB9 /usr/local/tty.b
 alias tty10="sudo rm /usr/local/tty.bond;sudo ln -s /dev/ttyUSB10 /usr/local/tty.bond"
 
 #switch to dvorak
-alias asdf='setxkbmap he'
-#switch to us qwerty
 alias aoeu='setxkbmap us'
 
 alias salias='source ~/.bash_aliases'
 alias vrc='vi ~/.bashrc'
 
+alias please='sudo'
