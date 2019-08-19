@@ -1,5 +1,6 @@
 http://dl.google.com/linux/chrome/debstable/main
 http://ppa.launchpad.net/graphics-drivers/ppa/ubuntucosmic/main
+https://download.docker.com/linux/ubuntucosmic/stable
 http://security.ubuntu.com/ubuntucosmic-security/main
 http://security.ubuntu.com/ubuntucosmic-security/multiverse
 http://security.ubuntu.com/ubuntucosmic-security/restricted
