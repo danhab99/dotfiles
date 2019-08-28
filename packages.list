@@ -26,6 +26,7 @@ cmake-data
 cmatrix
 cmdtest
 compton
+containerd.io
 cowsay
 cryptsetup
 cryptsetup-bin
@@ -37,6 +38,8 @@ default-jdk
 default-jre
 diffutils
 dmeventd
+docker-ce
+docker-ce-cli
 dunst
 duplicity
 espeak
@@ -178,6 +181,7 @@ nmap
 node-gyp
 nodejs
 nodejs-dev
+nordvpn-release
 notify-osd
 npm
 nudoku
@@ -217,6 +221,7 @@ screenfetch
 shim-signed
 sl
 software-properties-common
+sox
 sqlite3
 steam-installer
 synaptic
@@ -225,6 +230,10 @@ thefuck
 thunderbird-locale-en
 thunderbird-locale-en-us
 toilet
+transmission-cli
+transmission-common
+transmission-daemon
+transmission-gtk
 ttf-mscorefonts-installer
 ubuntu-desktop
 ubuntu-gnome-desktop
@@ -237,6 +246,7 @@ unity-tweak-tool
 variety
 vim
 vinagre
+vlc
 w3m
 w3m-img
 wallch

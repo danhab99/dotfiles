@@ -71,6 +71,7 @@ ENABLE_CORRECTION="true"
 plugins=(git docker coffee github lol node npm pip python screen sudo vscode web-search)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.bash_paths
 
 # User configuration
 
