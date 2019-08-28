@@ -39,3 +39,5 @@ alias salias='source ~/.bash_aliases'
 alias vrc='vi ~/.bashrc'
 
 alias please='sudo'
+fmkcd() { mkdir -p "$1" && cd "$1"; }
+alias mkcd='fmkcd'
