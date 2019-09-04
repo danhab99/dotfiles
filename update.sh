@@ -39,6 +39,7 @@ cp -r $HOME/.local/share/rofi/themes/* ./rofi/
 
 echo "COMITTING"
 git add .
+git diff-tree --no-commit-id --name-only -r HEAD
 git commit . -m "$(date)"
 git push origin master
 
