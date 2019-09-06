@@ -199,22 +199,16 @@ bar {
 bindsym $mod+shift+x exec i3lock -i /home/dan/Pictures/wallpaper/.cache/blurred_wallpaper.png # Lock keybinding
 
 #i3-gaps config
-gaps inner 30
-gaps outer 15
+gaps inner 15
+gaps outer 30
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
-exec_always xinput set-prop 10 282 1
-exec_always xinput set-prop 10 290 1
-exec_always xinput set-prop 10 288 1
-exec_always xinput set-prop 11 282 1
-exec_always xinput set-prop 11 290 1
-exec_always xinput set-prop 11 288 1
-exec_always` feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
-#exec xrandr --dpi 180
-#exec compton -f -r 5 -o 0.8 -e 0.8va compton --shadow-exclude '!focused'
-#exec_always compton --config /home/dan/.config/i3/compton.conf
-exec_always compton --shadow-radius=4 --shadow-offset-x=4 --shadow-offset-y=4 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading
+exec_always xinput set-prop 11 309 1
+exec_always xinput set-prop 11 311 1
+exec_always xinput set-prop 11 317 1
+exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
+exec_always compton --shadow-radius=2 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading
 
 # Start defaults
 exec google-chrome --password-store=gnome

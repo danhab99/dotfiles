@@ -89,6 +89,7 @@ i3lock
 imagemagick
 init
 inotify-tools
+insync
 iotop
 ipmiutil
 jp2a
@@ -123,6 +124,7 @@ libpam-fprintd
 libpam0g-dev
 libpango1.0-dev
 libpulse-dev
+libqalculate-dev
 libreadline5
 libreoffice-help-en-us
 libsdl2-dev
@@ -193,6 +195,7 @@ openssh-server
 openvpn
 os-prober
 overlay-scrollbar
+pastel
 pavucontrol
 pkg-config
 ppa-purge
@@ -209,11 +212,13 @@ python-setuptools
 python-xcbgen
 python3-pip
 python3-venv
+qalc
 qt4-qtconfig
 qt5-default
 qtcreator
 rfkill
 rofi
+rofi-dev
 rtv
 rxvt-unicode
 samba
