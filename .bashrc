@@ -120,6 +120,5 @@ eval $(thefuck --alias)
 source ~/.bash_aliases
 source ~/.bash_paths
 
-chown dan:dan /sys/class/backlight/*/*
 
 zsh
