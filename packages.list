@@ -46,6 +46,7 @@ espeak
 exuberant-ctags
 faba-icon-theme
 feh
+fim
 findutils
 firefox-locale-en
 flex
@@ -129,6 +130,7 @@ libreadline5
 libreoffice-help-en-us
 libsdl2-dev
 libsdl2-ttf-dev
+libsox-fmt-mp3
 libsqlite3-dev
 libssl1.0-dev
 libstartup-notification0-dev
