@@ -1,7 +1,6 @@
 adb
 aircrack-ng
 alsa-utils
-anydesk
 apt-transport-https
 arandr
 arc-theme
@@ -57,7 +56,6 @@ exuberant-ctags
 faba-icon-theme
 feh
 ffmpeg
-fim
 findutils
 fingerprint-gui
 firefox-locale-en
