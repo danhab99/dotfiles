@@ -2,7 +2,7 @@
     __NPM_COMPLETION_FILE="${ZSH_CACHE_DIR:-$ZSH/cache}/npm_completion"
 
     if [[ ! -f $__NPM_COMPLETION_FILE ]]; then
-        npm completion >! $__NPM_COMPLETION_FILE 2>/dev/null
+	npm completion >! $__NPM_COMPLETION_FILE 2>/dev/null
         [[ $? -ne 0 ]] && rm -f $__NPM_COMPLETION_FILE
     fi
 

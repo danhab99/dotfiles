@@ -251,3 +251,6 @@ exec i3_msg restart
 
 bindsym $mod+plus gaps inner all minus 2
 bindsym $mod+minus gaps inner all plus 2
+
+bindsym $mod+y fullscreen disable; floating enable; resize set 800 500; sticky enable; move window to position 1515 20
+
