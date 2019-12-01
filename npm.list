@@ -12,6 +12,7 @@ interactive-websocket-cli
 jshint
 json-parse
 n
+node-gyp
 nodemon
 npm
 play-sound

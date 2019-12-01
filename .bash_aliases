@@ -42,3 +42,4 @@ alias please='sudo'
 fmkcd() { mkdir -p "$1" && cd "$1"; }
 alias mkcd='fmkcd'
 alias here='i3-sensible-terminal'
+alias untar='tar -xf'
