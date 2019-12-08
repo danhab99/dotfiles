@@ -2,10 +2,10 @@ http://dl.google.com/linux/chrome/debstable/main
 http://packages.microsoft.com/repos/vscodestable/main
 http://ppa.launchpad.net/atareao/atareao/ubuntucosmic/main
 http://ppa.launchpad.net/bladerf/bladerf/ubuntucosmic/main
-http://ppa.launchpad.net/fingerprint/fingerprint-gui/ubuntucosmic/main
 http://ppa.launchpad.net/myriadrf/drivers/ubuntucosmic/main
 http://ppa.launchpad.net/nilarimogard/webupd8/ubuntucosmic/main
 http://ppa.launchpad.net/noobslab/themes/ubuntucosmic/main
+http://ppa.launchpad.net/obsproject/obs-studio/ubuntucosmic/main
 http://ppa.launchpad.net/ubuntuhandbook1/audacity/ubuntucosmic/main
 https://download.docker.com/linux/ubuntucosmic/stable
 https://download.mono-project.com/repo/ubuntuvs-bionic/main
