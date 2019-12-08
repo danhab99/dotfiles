@@ -16,5 +16,6 @@ node-gyp
 nodemon
 npm
 play-sound
+server-connection-monitor
 ws-cli
 yo
