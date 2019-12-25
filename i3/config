@@ -204,7 +204,9 @@ gaps outer 30
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
-exec_always /home/dan/.config/i3/xinput.sh
+exec_always xinput set-prop 11 309 1
+exec_always xinput set-prop 11 311 1
+exec_always xinput set-prop 11 317 1
 exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading
 
@@ -251,4 +253,5 @@ exec i3_msg restart
 bindsym $mod+plus gaps inner all minus 2
 bindsym $mod+minus gaps inner all plus 2
 
+bindsym $mod+y fullscreen disable; floating enable; resize set 800 500; sticky enable; move window to position 1515 20
 
