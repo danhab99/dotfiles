@@ -47,6 +47,7 @@ espeak
 exuberant-ctags
 faba-icon-theme
 feh
+ffmpeg
 fim
 findutils
 firefox-locale-en
@@ -89,6 +90,7 @@ i3-wm
 i3blocks
 i3lock
 imagemagick
+indicator-kdeconnect
 init
 inotify-tools
 insync
@@ -96,6 +98,7 @@ iotop
 ipmiutil
 jp2a
 jq
+kdeconnect
 language-pack-en
 language-pack-en-base
 language-pack-gnome-en
@@ -175,9 +178,12 @@ materia-gtk-theme
 mesa-utils
 moka-icon-theme
 mokutil
+mongodb-compass
+mongodb-org-server
 moon-buggy
 mythes-en-us
 nbtscan
+ncdu
 ncurses-base
 ncurses-bin
 neofetch
@@ -200,6 +206,7 @@ os-prober
 overlay-scrollbar
 pastel
 pavucontrol
+pb-for-desktop
 pkg-config
 ppa-purge
 pulseaudio
