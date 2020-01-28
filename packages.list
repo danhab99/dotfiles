@@ -41,6 +41,7 @@ default-jdk
 default-jre
 diffutils
 dirmngr
+dive
 dmeventd
 docker
 docker-ce

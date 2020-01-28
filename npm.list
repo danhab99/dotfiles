@@ -1,5 +1,9 @@
 decaffeinate
+depcheck
 gitignore
+gtop
 interactive-websocket-cli
+n
 nodemon
+npm
 wscat

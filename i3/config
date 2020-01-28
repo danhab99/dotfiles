@@ -214,7 +214,7 @@ exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 -
 exec google-chrome --password-store=gnome
 exec i3-sensible-terminal
 exec_always ssh-add ~/.ssh/id_rsa
-exec /home/dan/Pictures/wallpaper/slideshow.sh
+# exec /home/dan/Pictures/wallpaper/slideshow.sh
 exec pb-for-desktop
 
 # Audio keys
@@ -255,3 +255,6 @@ bindsym $mod+minus gaps inner all plus 2
 
 bindsym $mod+y fullscreen disable; floating enable; resize set 800 500; sticky enable; move window to position 1515 20
 
+# Rotate screens
+bindsym $mod+Ctrl+Shift+r exec $HOME/.screenlayout/tilted-3.sh
+bindsym $mod+Ctrl+Shift+f exec $HOME/.screenlayout/default-3.sh
