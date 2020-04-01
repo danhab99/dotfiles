@@ -241,6 +241,9 @@ bindsym $mod+w exec google-chrome --password-store=gnome
 # Open file browser
 bindsym $mod+e exec nautilus --browser $HOME
 
+# Open VScode
+bindsym $mod+c exec code
+
 # Polybar
 # exec_always --no-startup-id $HOME/Documents/dotfiles/polybar.sh
 
