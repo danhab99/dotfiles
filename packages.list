@@ -43,9 +43,11 @@ diffutils
 dirmngr
 dive
 dmeventd
+dmg2img
 docker
 docker-ce
 docker-ce-cli
+dotnet-sdk-3.1
 dunst
 duplicity
 espeak
@@ -102,6 +104,7 @@ gstreamer1.0-qt5
 gstreamer1.0-tools
 gstreamer1.0-x
 gtk-chtheme
+gtk3-nocsd
 gzip
 hostname
 htop
@@ -147,6 +150,7 @@ libgconf2-4
 libglade2-dev
 libgstreamer1.0-0
 libgtk2.0-dev
+libgtk3-nocsd0:i386
 libiw-dev
 libjpeg-turbo8-dev
 libliquid-dev
@@ -232,7 +236,6 @@ ninvaders
 nmap
 nodejs
 notify-osd
-npm
 nudoku
 nvidia-361
 obs-studio
@@ -241,6 +244,7 @@ openssh-server
 openvpn
 os-prober
 overlay-scrollbar
+packages-microsoft-prod
 pavucontrol
 pkg-config
 portaudio19-dev
@@ -311,6 +315,7 @@ w3m-img
 wallch
 wget
 wine
+wireshark
 xbacklight
 xcb
 xcb-proto

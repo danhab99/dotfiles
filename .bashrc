@@ -120,4 +120,4 @@ eval $(thefuck --alias)
 source ~/.bash_aliases
 source ~/.bash_paths
 
-zsh
+exec zsh

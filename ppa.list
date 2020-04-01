@@ -1,10 +1,12 @@
 http://dl.google.com/linux/chrome/debstable/main
+http://ppa.launchpad.net/inkscape.dev/stable/ubuntucosmic/main
 http://repo.steampowered.com/steamprecise/steam
 https://download.docker.com/linux/ubuntucosmic/stable
 http://security.ubuntu.com/ubuntucosmic-security/main
 http://security.ubuntu.com/ubuntucosmic-security/multiverse
 http://security.ubuntu.com/ubuntucosmic-security/restricted
 http://security.ubuntu.com/ubuntucosmic-security/universe
+https://packages.microsoft.com/ubuntu/18.04/prodbionic/main
 http://us.archive.ubuntu.com/ubuntucosmic-backports/main
 http://us.archive.ubuntu.com/ubuntucosmic-backports/universe
 http://us.archive.ubuntu.com/ubuntucosmic/main
