@@ -261,3 +261,7 @@ bindsym $mod+y fullscreen disable; floating enable; resize set 800 500; sticky e
 # Rotate screens
 bindsym $mod+Ctrl+Shift+r exec $HOME/.screenlayout/tilted-3.sh
 bindsym $mod+Ctrl+Shift+f exec $HOME/.screenlayout/default-3.sh
+
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
