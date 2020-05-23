@@ -223,7 +223,7 @@ exec pb-for-desktop
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
-bindsym XF86AudioMute exec amixer -D pulse sset Master 0%
+bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness

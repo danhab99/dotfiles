@@ -43,3 +43,5 @@ fmkcd() { mkdir -p "$1" && cd "$1"; }
 alias mkcd='fmkcd'
 alias here='i3-sensible-terminal'
 alias untar='tar -xf'
+
+alias mcconsole="ssh mcserver@69.164.214.170 ./mcserver console"
