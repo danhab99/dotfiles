@@ -1,11 +1,8 @@
-decaffeinate
-depcheck
+bower
+browserify
 gitignore
-gtop
 interactive-websocket-cli
-lmfao
+license-checker
 n
-node-gyp
-nodemon
 npm
-wscat
+serve

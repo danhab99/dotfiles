@@ -24,7 +24,7 @@ else
 fi
 
 echo "Setting wallpaper"
-feh --bg-scale $cache/current_wallpaper.png
+feh --no-fehbg --bg-scale $cache/current_wallpaper.png
 
 echo "Creating lockscreen"
 convert $cache/current_wallpaper.png -blur 0x16 -resize 1920x1080! $cache/blurred_wallpaper.png
