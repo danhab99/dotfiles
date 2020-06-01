@@ -134,6 +134,7 @@ libasound2-dev
 libbz2-1.0:i386
 libc6:i386
 libcairo2-dev
+libcurl4-gnutls-dev
 libcurses-perl
 libdaemon-dev
 libdbus-1-dev
@@ -170,6 +171,7 @@ libqalculate-dev
 libreadline5
 libreoffice-help-common
 libreoffice-help-en-us
+librtmp-dev
 libsamplerate0-dev
 libsdl2-dev
 libsdl2-ttf-dev
@@ -238,6 +240,7 @@ neofetch
 net-tools
 ninvaders
 nitrogen
+nload
 nmap
 nodejs
 nordvpn

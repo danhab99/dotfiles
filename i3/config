@@ -207,7 +207,8 @@ for_window [class="^.*"] border pixel 0
 exec_always xinput set-prop 11 309 1
 exec_always xinput set-prop 11 311 1
 exec_always xinput set-prop 11 317 1
-exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
+# exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
+exec_always nitrogen --restore
 exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading
 
 # Start defaults
@@ -265,3 +266,7 @@ bindsym $mod+Ctrl+Shift+f exec $HOME/.screenlayout/default-3.sh
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
+# Disable sleeping
+exec_always xset s off
+exec_always xset -dpms
+exec_always xset s noblank
