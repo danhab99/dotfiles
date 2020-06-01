@@ -45,3 +45,5 @@ alias here='i3-sensible-terminal'
 alias untar='tar -xf'
 
 alias mcconsole="ssh mcserver@69.164.214.170 ./mcserver console"
+
+alias nload="nload -u H enp2s0"
