@@ -69,6 +69,7 @@ fprint-demo
 g++
 gcc
 gdm3
+ghostscript
 gimp
 git
 git-extras
@@ -147,12 +148,14 @@ libfftw3-dev
 libflac++-dev
 libflac-dev
 libfltk1.3-dev
+libfontconfig1-dev
 libfprint0
 libglade2-dev
 libgstreamer1.0-0
 libgtk2.0-dev
 libgtk3-nocsd0:i386
 libiw-dev
+libjpeg-dev
 libjpeg-turbo8-dev
 libliquid-dev
 libmp3lame-dev
@@ -181,6 +184,7 @@ libstartup-notification0-dev
 libstdc++6:i386
 libvolk1-bin
 libvorbis-dev
+libx11-xcb-dev
 libxcb-composite0
 libxcb-composite0-dev
 libxcb-cursor-dev
@@ -245,7 +249,6 @@ nmap
 nodejs
 nordvpn
 nordvpn-release
-notify-osd
 npm
 nudoku
 nvidia-driver-435
@@ -288,6 +291,7 @@ rxvt-unicode
 samba
 screen
 screenfetch
+shadowsocks-libev
 shim-signed
 siege
 sl
@@ -317,7 +321,6 @@ ubuntu-standard
 ubuntu-wallpapers
 udev
 uncrustify
-unity-tweak-tool
 unrar
 update-manager-core
 usbutils
