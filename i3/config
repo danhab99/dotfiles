@@ -196,7 +196,7 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec i3lock -i /home/dan/Pictures/wallpaper/.cache/blurred_wallpaper.png -t # Lock keybinding
+bindsym $mod+shift+x exec i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" # Lock keybinding
 
 #i3-gaps config
 gaps inner 15
