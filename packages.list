@@ -27,6 +27,7 @@ cmake
 cmake-data
 cmatrix
 cmdtest
+code-server
 compton
 console-setup
 containerd.io
@@ -116,7 +117,9 @@ i3-wm
 i3blocks
 i3lock
 icecast2
+ideviceinstaller
 iftop
+ifuse
 imagemagick
 init
 inotify-tools
@@ -154,6 +157,9 @@ libglade2-dev
 libgstreamer1.0-0
 libgtk2.0-dev
 libgtk3-nocsd0:i386
+libimobiledevice-dev
+libimobiledevice-utils
+libimobiledevice6
 libiw-dev
 libjpeg-dev
 libjpeg-turbo8-dev
@@ -169,6 +175,9 @@ libopus-dev
 libpam-fprintd
 libpam0g-dev
 libpango1.0-dev
+libplist++-dev
+libplist-dev
+libplist3
 libpulse-dev
 libqalculate-dev
 libreadline5
@@ -180,8 +189,12 @@ libsdl2-dev
 libsdl2-ttf-dev
 libsox-fmt-mp3
 libsqlite3-dev
+libssl-dev
 libstartup-notification0-dev
 libstdc++6:i386
+libtool
+libusb-1.0-0-dev
+libusb-dev
 libvolk1-bin
 libvorbis-dev
 libx11-xcb-dev
@@ -270,7 +283,9 @@ python
 python-cryptography
 python-future
 python-gi
+python-imobiledevice
 python-pip
+python-plist
 python-pyelftools
 python-pyparsing
 python-serial
@@ -323,6 +338,7 @@ udev
 uncrustify
 unrar
 update-manager-core
+usbmuxd
 usbutils
 variety
 vim
