@@ -199,7 +199,7 @@ bar {
 bindsym $mod+shift+x exec i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" # Lock keybinding
 
 #i3-gaps config
-gaps inner 15
+gaps inner 20
 gaps outer 30
 for_window [class="^.*"] border pixel 0
 
