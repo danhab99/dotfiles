@@ -4,7 +4,6 @@ gitignore
 interactive-websocket-cli
 license-checker
 n
-nitzan-proffs
 nodemon
 npm
 serve
