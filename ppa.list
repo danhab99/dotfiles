@@ -1,4 +1,5 @@
 http://dl.google.com/linux/chrome/debstable/main
+https://download.docker.com/linux/ubuntufocal/stable
 http://security.ubuntu.com/ubuntufocal-security/main
 http://security.ubuntu.com/ubuntufocal-security/multiverse
 http://security.ubuntu.com/ubuntufocal-security/restricted

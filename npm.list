@@ -2,6 +2,7 @@ bower
 browserify
 gitignore
 interactive-websocket-cli
+json2csv
 license-checker
 n
 nodemon
