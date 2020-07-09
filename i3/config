@@ -52,6 +52,10 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+# Move workspace between screens
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Right move workspace to output right
+
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -270,3 +274,7 @@ bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 exec_always xset s off
 exec_always xset -dpms
 exec_always xset s noblank
+
+# Switch audio devices
+bindsym $mod+period exec pacmd set-default-sink alsa_output.usb-DAC-X6_DAC-X6-01.analog-stereo
+bindsym $mod+comma exec pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo

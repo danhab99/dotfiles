@@ -19,6 +19,7 @@ bluez-tools
 build-essential
 bumblebee
 bumblebee-nvidia
+ca-certificates
 certbot
 clang-format
 classicmenu-indicator
@@ -28,6 +29,7 @@ cmatrix
 cmdtest
 compton
 console-setup
+containerd.io
 cowsay
 cryptsetup
 cryptsetup-bin
@@ -41,6 +43,8 @@ diffutils
 dirmngr
 dmeventd
 dmg2img
+docker-ce
+docker-ce-cli
 dunst
 duplicity
 e2fsprogs
@@ -242,6 +246,7 @@ moka-icon-theme
 mokutil
 mongo-tools
 mongodb
+mongodb-compass
 moon-buggy
 mplayer
 mysql-client
@@ -334,6 +339,7 @@ usbmuxd
 usbutils
 variety
 vim
+virtualbox
 vlc
 w3m
 w3m-img
