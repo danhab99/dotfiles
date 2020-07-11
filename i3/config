@@ -200,7 +200,8 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" # Lock keybinding
+bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
+exec_always inotify-hookable --watch-files ~/.config/i3/lock --on-modify-command ./.config/i3/lock.sh
 
 #i3-gaps config
 gaps inner 20
@@ -278,3 +279,9 @@ exec_always xset s noblank
 # Switch audio devices
 bindsym $mod+period exec pacmd set-default-sink alsa_output.usb-DAC-X6_DAC-X6-01.analog-stereo
 bindsym $mod+comma exec pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo
+
+# Bind media keys
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
