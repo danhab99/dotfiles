@@ -1,10 +1,16 @@
 bower
 browserify
+create-react-app
+create-react-native-app
+expo-cli
 gitignore
 interactive-websocket-cli
 json2csv
 license-checker
+marco-server
 n
 nodemon
 npm
+puppet-caster
 serve
+webpack-dev-server
