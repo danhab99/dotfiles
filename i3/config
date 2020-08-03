@@ -289,3 +289,5 @@ bindsym XF86AudioStop exec playerctl stop
 
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
+
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l ~/Documents/g600.log
