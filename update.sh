@@ -33,9 +33,13 @@ cp -r $HOME/.config/gtk* ./
 
 echo "Copying scripts"
 cp $HOME/Pictures/wallpaper/*.sh ./
+cp $HOME/Documents/clipboard/*.sh ./clipboard/
 
 echo "Copying rofi"
 cp -r $HOME/.local/share/rofi/themes/* ./rofi/
+
+echo "Copying g600 macros"
+cp $HOME/.config/g600/profiles.conf profiles.conf
 
 echo "COMITTING"
 git add .
