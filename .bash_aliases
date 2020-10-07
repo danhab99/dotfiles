@@ -48,3 +48,6 @@ alias mcconsole="ssh mcserver@69.164.214.170 ./mcserver console"
 
 alias nload="nload -u H enp2s0"
 alias edit-macros="code ~/.config/macro-app/config.json"
+alias fixmouse="sudo systemctl restart g600.service && i3-msg restart"
+
+alias iosinstall="ideviceinstaller -i"
