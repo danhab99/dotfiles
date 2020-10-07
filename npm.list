@@ -5,6 +5,7 @@ create-react-native-app
 expo-cli
 gitignore
 interactive-websocket-cli
+ip-lookup-cli
 json2csv
 license-checker
 marco-server

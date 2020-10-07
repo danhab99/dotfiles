@@ -218,11 +218,11 @@ exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 -
 # exec_always compton --config ~/.config/compton.config
 
 # Start defaults
-exec google-chrome --password-store=gnome
-exec i3-sensible-terminal
+#exec google-chrome --password-store=gnome
+#exec i3-sensible-terminal
 exec_always ssh-add ~/.ssh/id_rsa
 # exec /home/dan/Pictures/wallpaper/slideshow.sh
-exec pb-for-desktop
+#exec pb-for-desktop
 
 # Audio keys
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -236,10 +236,10 @@ bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightness
 
-# Screenshot
+# Screenshota
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
 bindsym Print exec gnome-screenshot
-bindsym Control+Shift+Print exec --no-startup-id gnome-screenshot -a
+bindsym Control+Shift+Print exec gnome-screenshot -a
 bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome

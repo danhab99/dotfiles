@@ -100,3 +100,6 @@ source $HOME/.bash_paths
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.bash_aliases
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/dan/.local/bin/mc mc
