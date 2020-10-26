@@ -25,6 +25,7 @@ avrdude-doc
 baobab
 base-passwd
 bc
+binutils-arm-linux-gnueabi
 bison
 blueman
 bluetooth
@@ -70,6 +71,7 @@ dmg2img
 dmz-cursor-theme
 docker-ce
 docker-ce-cli
+doxygen
 dunst
 duplicity
 e2fsprogs
@@ -236,6 +238,8 @@ libasound2-plugins:i386
 libatk-adaptor
 libbluetooth-dev
 libbz2-1.0:i386
+libc6-armel-cross
+libc6-dev-armel-cross
 libc6:i386
 libcairo2-dev
 libcurl4-gnutls-dev
@@ -432,6 +436,7 @@ python-pyparsing
 python-setuptools
 python2
 python2.7
+python2.7-dev
 python3
 python3-certbot-nginx
 python3-dev
@@ -509,6 +514,7 @@ update-notifier
 usb-creator-gtk
 usbmuxd
 usbutils
+uwsgi
 variety
 vim
 vino
@@ -526,6 +532,7 @@ wine-stable
 wine-stable-i386:i386
 winehq-stable
 wireless-tools
+wireshark
 wpasupplicant
 xbindkeys
 xclip

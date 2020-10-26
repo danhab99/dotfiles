@@ -1,13 +1,17 @@
 bower
 browserify
+btlejuice
 create-react-app
+create-react-library
 create-react-native-app
 expo-cli
 gitignore
 interactive-websocket-cli
+iplookup
 ip-lookup-cli
 json2csv
 license-checker
+lookip
 marco-server
 n
 nodemon
