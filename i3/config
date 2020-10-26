@@ -131,6 +131,23 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# Bind workspaces to monitors
+
+set $SCREEN_LEFT DP-5
+set $SCREEN_CENTER HDMI-0
+SET $SCREEN_RIGHT DP-1
+
+workspace $ws1 output $SCREEN_LEFT
+workspace $ws2 output $SCREEN_CENTER
+workspace $ws3 output $SCREEN_RIGHT
+workspace $ws4 output $SCREEN_LEFT
+workspace $ws5 output $SCREEN_CENTER
+workspace $ws6 output $SCREEN_RIGHT
+workspace $ws7 output $SCREEN_LEFT
+workspace $ws8 output $SCREEN_CENTER
+workspace $ws9 output $SCREEN_RIGHT
+workspace $ws10 output $SCREEN_WS_LEFT
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -239,7 +256,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightne
 # Screenshota
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
 bindsym Print exec gnome-screenshot
-bindsym Control+Shift+Print exec gnome-screenshot -a
+bindsym --release Control+Shift+Print exec gnome-screenshot -a
 bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome
@@ -266,6 +283,7 @@ bindsym $mod+minus gaps inner all plus 2
 bindsym $mod+y fullscreen disable; floating enable; resize set 800 500; sticky enable; move window to position 1515 20
 
 # Rotate screens
+exec $HOME/.screenlayout/normal.sh
 bindsym $mod+Ctrl+Shift+r exec $HOME/.screenlayout/tilted-3.sh
 bindsym $mod+Ctrl+Shift+f exec $HOME/.screenlayout/default-3.sh
 
@@ -290,4 +308,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l ~/Documents/g600.log
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l /var/log/g600.log
+exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
+
+exec_always kbdrate -r 100 -d 50
