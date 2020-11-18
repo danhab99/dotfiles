@@ -4,6 +4,7 @@ btlejuice
 create-react-app
 create-react-library
 create-react-native-app
+create-rest-server
 expo-cli
 gitignore
 interactive-websocket-cli
@@ -17,5 +18,11 @@ n
 nodemon
 npm
 puppet-caster
+react-devtools
+react-native
+react-native-cli
+rnpm
 serve
+turtle-cli
+ungit
 webpack-dev-server

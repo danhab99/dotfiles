@@ -221,8 +221,8 @@ bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
 exec_always inotify-hookable --watch-files ~/.config/i3/lock --on-modify-command ./.config/i3/lock.sh
 
 #i3-gaps config
-gaps inner 20
-gaps outer 30
+gaps inner 25
+gaps outer 5
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
