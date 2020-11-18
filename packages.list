@@ -33,6 +33,7 @@ bluez
 bluez-cups
 bluez-tools
 branding-ubuntu
+bridge-utils
 brltty
 build-essential
 bumblebee
@@ -83,6 +84,7 @@ ethtool
 evince
 exuberant-ctags
 ezstream
+f3
 faba-icon-theme
 feh
 ffmpeg
@@ -165,6 +167,7 @@ google-chrome-stable
 gparted
 gperf
 gpg-agent
+gqrx-sdr
 grep
 grub-common
 grub-efi-amd64-signed
@@ -277,6 +280,7 @@ libncurses5:i386
 libncursesw5-dev
 libnotify-bin
 libnss-mdns
+libnvvm3
 libogg-dev
 libopus-dev
 libpam-fprintd
@@ -393,10 +397,12 @@ nload
 nmap
 nnn
 nudoku
+nvidia-cuda-toolkit
 nvidia-dkms-455
 nvidia-driver-455
 obs-studio
 openjdk-8-jdk
+openjdk-8-jre
 openprinting-ppds
 openshot-qt
 openssh-server
@@ -453,6 +459,7 @@ rfkill
 rhythmbox
 rofi
 rofi-dev
+rpi-imager
 rtv
 rxvt-unicode
 samba
@@ -477,6 +484,7 @@ steam-installer
 steam:i386
 streamer
 synaptic
+sysbench
 system-config-printer
 systemd
 thefuck
@@ -530,6 +538,7 @@ whois
 whoopsie
 wine-stable
 wine-stable-i386:i386
+wine-staging
 winehq-stable
 wireless-tools
 wireshark
