@@ -1,5 +1,7 @@
 apktool
 fzf
+gitsu
+go
 gpatch
 html-xml-utils
 navi
@@ -7,4 +9,5 @@ ncurses
 patchelf
 pkg-config
 pup
+whatscli
 zlib

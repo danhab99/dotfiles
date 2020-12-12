@@ -1,12 +1,15 @@
 bower
 browserify
 btlejuice
+bundle-phobia-cli
+cost-of-modules
 create-react-app
 create-react-library
 create-react-native-app
 create-rest-server
 expo-cli
 gitignore
+hyper
 interactive-websocket-cli
 iplookup
 ip-lookup-cli
@@ -17,6 +20,7 @@ marco-server
 n
 nodemon
 npm
+pnpm
 puppet-caster
 react-devtools
 react-native
