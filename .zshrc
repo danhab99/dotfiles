@@ -8,7 +8,7 @@
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="half-life"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -99,6 +99,10 @@ source $HOME/.bash_paths
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.bash_aliases
+
+JAVA_HOME=$(dirname $( readlink -f $(which java) ))
+JAVA_HOME=$(realpath "$JAVA_HOME"/../)
+export JAVA_HOME
 
 
 autoload -U +X bashcompinit && bashcompinit

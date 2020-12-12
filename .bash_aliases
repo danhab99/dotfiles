@@ -51,3 +51,4 @@ alias edit-macros="code ~/.config/macro-app/config.json"
 alias fixmouse="sudo systemctl restart g600.service && i3-msg restart"
 
 alias iosinstall="ideviceinstaller -i"
+
