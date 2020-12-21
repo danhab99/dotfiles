@@ -1,13 +1,6 @@
 http://dl.google.com/linux/chrome/debstable/main
-http://dl.google.com/linux/chrome-remote-desktop/debstable/main
-http://ppa.launchpad.net/cybermax-dexter/sdl2-backport/ubuntufocal/main
-http://ppa.launchpad.net/graphics-drivers/ppa/ubuntufocal/main
-http://ppa.launchpad.net/libratbag-piper/piper-libratbag-git/ubuntufocal/main
+http://ppa.launchpad.net/kgilmer/speed-ricer/ubuntufocal/main
 http://ppa.launchpad.net/lutris-team/lutris/ubuntufocal/main
-http://ppa.launchpad.net/team-xbmc/ppa/ubuntufocal/main
-https://cli.github.com/packagesfocal/main
-https://dl.winehq.org/wine-builds/ubuntufocal/main
-https://download.docker.com/linux/ubuntufocal/stable
 http://security.ubuntu.com/ubuntufocal-security/main
 http://security.ubuntu.com/ubuntufocal-security/multiverse
 http://security.ubuntu.com/ubuntufocal-security/restricted
