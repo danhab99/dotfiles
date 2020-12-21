@@ -1,11 +1,11 @@
-echo "Adding PPAs"
-apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > /tmp/ppa.list
+#echo "Adding PPAs"
+#apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > /tmp/ppa.list
 
-for ppa in $(diff -u /tmp/ppa.list ppa.list | grep -Po "(?<=\+)http.*");
-do
-  echo "### Adding $ppa ###"
-  sudo add-apt-repository $ppa -y
-done
+#for ppa in $(diff -u /tmp/ppa.list ppa.list | grep -Po "(?<=\+)http.*");
+#do
+#  echo "### Adding $ppa ###"
+#  sudo add-apt-repository $ppa -y
+#done
 
 sudo apt update
 

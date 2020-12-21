@@ -29,4 +29,3 @@ make
 sudo make install
 
 echo "Reboot for good measure"
-sudo reboot
