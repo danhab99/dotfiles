@@ -41,6 +41,9 @@ cp -r $HOME/.local/share/rofi/themes/* ./rofi/
 echo "Copying g600 macros"
 cp $HOME/.config/g600/profiles.conf profiles.conf
 
+echo "Copying vimrc"
+cp $HOME/.vim* ./
+
 echo "COMITTING"
 git add .
 git diff-tree --no-commit-id --name-only -r HEAD

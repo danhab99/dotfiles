@@ -29,5 +29,8 @@ ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
+echo "Installing vimrc"
+cp ./.vim * $HOME
+
 i3-msg restart
 cd $lwd
