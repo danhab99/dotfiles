@@ -18,9 +18,9 @@ do
   sudo apt install $package -y
 done
 
-ls `npm root -g` > /tmp/npm.list
+#ls `npm root -g` > /tmp/npm.list
 
-for package in $(diff -u /tmp/npm.list npm.list | grep -Po "(?<=\+)[a-zA-Z].*");do
-  echo "### Installing npm $package ###"
-  sudo npm install -g $package
-done
+#for package in $(diff -u /tmp/npm.list npm.list | grep -Po "(?<=\+)[a-zA-Z].*");do
+#  echo "### Installing npm $package ###"
+#  sudo npm install -g $package
+#done

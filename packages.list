@@ -38,6 +38,7 @@ brltty
 build-essential
 bumblebee
 bumblebee-nvidia
+ca-certificates
 certbot
 cheese
 clang-format
@@ -46,8 +47,8 @@ cmake
 cmake-data
 cmatrix
 cmdtest
-compton
 console-setup
+containerd.io
 cowsay
 cryptsetup
 cryptsetup-bin
@@ -65,6 +66,8 @@ dirmngr
 dmeventd
 dmg2img
 dmz-cursor-theme
+docker-ce
+docker-ce-cli
 doxygen
 duplicity
 e2fsprogs
@@ -178,6 +181,7 @@ htop
 hunspell-en-us
 hwinfo
 hyphen-en-us
+i3-gaps
 i3blocks
 i3lock
 ibus
@@ -386,6 +390,7 @@ pavucontrol
 pciutils
 pcmciautils
 pcregrep
+picom
 piper
 pkg-config
 playerctl
@@ -425,6 +430,7 @@ qt5-default
 qtcreator
 ratbagd
 rclone
+reactotron-app
 remmina
 rhythmbox
 rofi
@@ -440,6 +446,7 @@ shim-signed
 shotwell
 siege
 sl
+socket
 software-properties-common
 software-properties-gtk
 sox
@@ -502,6 +509,7 @@ wget
 whois
 whoopsie
 wine-stable
+winetricks
 wireguard
 wireless-tools
 wireshark
