@@ -1,6 +1,7 @@
 http://dl.google.com/linux/chrome/debstable/main
 http://ppa.launchpad.net/kgilmer/speed-ricer/ubuntufocal/main
 http://ppa.launchpad.net/lutris-team/lutris/ubuntufocal/main
+https://cli.github.com/packagesfocal/main
 https://download.docker.com/linux/ubuntufocal/stable
 http://security.ubuntu.com/ubuntufocal-security/main
 http://security.ubuntu.com/ubuntufocal-security/multiverse

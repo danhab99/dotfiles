@@ -1,6 +1,6 @@
 export XDG_CURRENT_DESKTOP=GNOME
 export PATH="${PATH}:${HOME}/.local/bin/"
-export GOROOT=/usr/local/go/bin
+export GOROOT=/usr/local/go
 export GOPATH=/home/dan/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export ANDROID_HOME="$HOME/Android/Sdk"
