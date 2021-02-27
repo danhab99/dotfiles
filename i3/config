@@ -315,4 +315,6 @@ bindsym $mod+question exec i3help
 
 exec --no-startup-id i3 --get-socketpath > /tmp/i3wm-socket-path
 
-for_window [instance="ddterminal"] floating enable;
+exec_always scan-sinks
+
+exec_always pactl set-default-sink "alsa_output.usb-DAC-X6_DAC-X6-01.analog-stereo"

@@ -4,6 +4,7 @@ git pull origin master
 
 echo "Installing configs and aliases"
 yes | cp -rf ./i3 $HOME/.config/
+yes | cp -rf ./dunst $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
 yes | cp -rf .bash_paths $HOME
 yes | cp -rf .bashrc $HOME

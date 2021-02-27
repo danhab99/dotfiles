@@ -3,6 +3,7 @@ cd $HOME/Documents/dotfiles
 
 echo "Copying configs"
 cp -r $HOME/.config/i3 .
+cp -r $HOME/.config/dunst .
 cp $HOME/.bash_aliases .bash_aliases
 cp $HOME/.bash_paths .bash_paths
 cp $HOME/.bashrc .bashrc
