@@ -9,6 +9,7 @@ yes | cp -rf .bash_aliases $HOME
 yes | cp -rf .bash_paths $HOME
 yes | cp -rf .bashrc $HOME
 yes | cp -rf ./X* $HOME
+yes | cp -rf ./g600 $HOME/.config
 
 echo "Installing cosmetics"
 yes | cp -rf ./gtk* $HOME/

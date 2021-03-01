@@ -41,10 +41,16 @@ echo "Copying rofi"
 cp -r $HOME/.local/share/rofi/themes/* ./rofi/
 
 echo "Copying g600 macros"
-cp $HOME/.config/g600/profiles.conf profiles.conf
+cp -r $HOME/.config/g600/ .
 
 echo "Copying vimrc"
 cp $HOME/.vim* ./
+
+echo "Copying nitrogen"
+cp -r $HOME/.config/nitrogen .
+
+echo "Updating binaries"
+./update-binaries.sh
 
 echo "COMITTING"
 git add .
