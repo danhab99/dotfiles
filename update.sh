@@ -12,8 +12,11 @@ cp $HOME/.X* .
 echo "Copying packages"
 apt-mark showmanual > packages.list
 
-echo "Copying ppas"
-apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > ppa.list
+#echo "Copying ppas"
+#apt-cache policy | grep http | awk '{print $2 $3}' | sort -u > ppa.list
+
+echo "Copying source list"
+cp /etc/apt/sources.list .
 
 echo "Copying brew"
 brew list > brew.list
