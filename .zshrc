@@ -107,3 +107,6 @@ export JAVA_HOME
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/dan/.local/bin/mc mc
+export PATH="/home/dan/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

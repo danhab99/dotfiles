@@ -284,6 +284,7 @@ libiw-dev
 libjpeg-dev
 libjpeg-turbo8-dev
 libjpeg62
+libjsoncpp-dev
 libldap-2.4-2:i386
 libliquid-dev
 libmp3lame-dev
@@ -521,10 +522,6 @@ system-config-printer
 systemd
 terminator
 thefuck
-thunderbird
-thunderbird-gnome-support
-thunderbird-locale-en
-thunderbird-locale-en-us
 tightvncserver
 toilet
 torbrowser-launcher
