@@ -7,6 +7,7 @@ cp -r $HOME/.config/dunst .
 cp $HOME/.bash_aliases .bash_aliases
 cp $HOME/.bash_paths .bash_paths
 cp $HOME/.bashrc .bashrc
+cp $HOME/.X* .
 
 echo "Copying packages"
 apt-mark showmanual > packages.list
