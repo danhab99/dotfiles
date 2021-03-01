@@ -1,0 +1,106 @@
+! special
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #282a2e
+*.color8:       #373b41
+
+! red
+*.color1:       #a54242
+*.color9:       #cc6666
+
+! green
+*.color2:       #8c9440
+*.color10:      #b5bd68
+
+! yellow
+*.color3:       #de935f
+*.color11:      #f0c674
+
+! blue
+*.color4:       #5f819d
+*.color12:      #81a2be
+
+! magenta
+*.color5:       #85678f
+*.color13:      #b294bb
+
+! cyan
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+
+! white
+*.color7:       #707880
+*.color15:      #c5c8c6
+
+
+! Font to Fira Code Retina, 15px
+URxvt.font: xft:Fira Code Retina:style=Retina:pixelsize=15
+
+! Set Bold Font to Fira Code Bold, 15px
+URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize:15
+
+! Set Italics Font to Fira Code Light, 15px
+URxvt.italicFont: xft:Fira Code:style=Light:pixelsize:15
+
+! Set Background Color
+URxvt.background: #1D262A
+
+! Set Foreground Color
+URxvt.foreground: #E7EBED
+
+! Set Color Scheme
+! Black
+URxvt.color0: #212121
+URxvt.color8: #263238
+
+! Red
+URxvt.color1: #b71c1c
+URxvt.color9: #ef5350
+
+! Green
+URxvt.color2: #004D40
+URxvt.color10: #26A69A
+
+! Yellow
+URxvt.color3: #F57F17
+URxvt.color11: #FFEE58
+
+! Blue
+URxvt.color4: #0D47A1
+URxvt.color12: #42A5F5
+
+! Magenta
+URxvt.color5: #4A148C
+URxvt.color13: #AB47BC
+
+! Cyan
+URxvt.color6: #006064
+URxvt.color14: #26C6DA
+
+! White
+URxvt.color7: #FAFAFA
+URxvt.color15: #FFFFFF
+
+! Use this color for bold
+URxvt.colorBD: #EAEAEA
+
+! Use this color for italics
+URxvt.colorIT: #EAEAEA
+
+! Use this color for underlined text
+URxvt.colorUL: #ef5350
+
+! PERL Extensions
+URxvt.perl-ext-common: default,matcher
+
+! Clickable URLs
+URxvt.url-launcher: /usr/bin/google-chrome-stable
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+
+URxvt.scrollBar: false
+URxvt*internalBorder: 30

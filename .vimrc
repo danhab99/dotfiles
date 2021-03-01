@@ -26,9 +26,11 @@ Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
 Plug 'ycm-core/YouCompleteMe'
 Plug 'beautify-web/js-beautify'
 Plug 'https://github.com/ernstwi/vim-secret'
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
 highlight SignColumn ctermbg=none
 
 nmap <F6> :NERDTreeToggle<CR>
+imap jj <Esc>
