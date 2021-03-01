@@ -2,6 +2,7 @@
 *.log
 *.jpg
 *.png
+*.tmp
 
 # custom files
 oh-my-zsh/custom/
