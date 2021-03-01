@@ -1,19 +1,11 @@
 #!/bin/bash
 
-xdotool key 3
+source ./tf2_keypress.sh
 
-function sleep_rand() {
-  RAND=$(shuf -i $1-$2 -n 1)
-  RAND=$(echo "$RAND / 1000.0" | bc -l)
-  echo "Sleep $RAND"
-  sleep $RAND
-}
+sleep_key 100 200 3
 
-sleep_rand 1000 1200
-xdotool key r
+sleep_key 100 200 r
 
-sleep_rand 500 600
-xdotool key $1
+sleep_key 2900 3000 $1
 
-sleep_rand 2900 3000
-xdotool key e
+sleep_key 10 11 e
