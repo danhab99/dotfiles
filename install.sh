@@ -8,6 +8,7 @@ yes | cp -rf ./dunst $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
 yes | cp -rf .bash_paths $HOME
 yes | cp -rf .bashrc $HOME
+yes | cp -rf ./X* $HOME
 
 echo "Installing cosmetics"
 yes | cp -rf ./gtk* $HOME/
