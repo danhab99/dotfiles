@@ -1,12 +1,4 @@
 #!/bin/bash
-
-# function sleep_rand() {
-#   RAND=$(shuf -i $1-$2 -n 1)
-#   RAND=$(echo "$RAND / 1000.0" | bc -l)
-#   echo "Sleep $RAND"
-#   sleep $RAND
-# }
-
 BOTT=80
 TOP=90
 
