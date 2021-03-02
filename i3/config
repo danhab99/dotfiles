@@ -233,7 +233,7 @@ exec_always xinput set-prop 11 311 1
 exec_always xinput set-prop 11 317 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
-exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading --blur-background --blur-size=1000
+exec_always compton --shadow-radius=16 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.2 --fading --blur-background --blur-size=1000
 #exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading --blur-background --blur-size=5 --blur-method=kernal
 # exec_always compton --config ~/.config/compton.config
 
