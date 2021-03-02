@@ -19,7 +19,7 @@ echo "Copying source list"
 cp /etc/apt/sources.list .
 
 echo "Copying brew"
-brew list > brew.list
+brew list --formula > brew.list
 
 echo "Copying npm globals"
 ls `npm root -g` > npm.list
