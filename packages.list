@@ -69,6 +69,7 @@ deja-dup
 devilspie
 diffutils
 dirmngr
+dive
 dmeventd
 dmg2img
 dmz-cursor-theme
@@ -531,6 +532,7 @@ transmission-cli
 transmission-common
 transmission-daemon
 transmission-gtk
+tshark
 ttf-mscorefonts-installer
 ubuntu-docs
 ubuntu-drivers-common
@@ -555,6 +557,7 @@ usb-creator-gtk
 usbmuxd
 usbutils
 uwsgi
+v4l2loopback-dkms
 variety
 vim
 vim-gtk
