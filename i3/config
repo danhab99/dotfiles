@@ -324,3 +324,5 @@ exec_always pactl set-default-sink "alsa_output.usb-DAC-X6_DAC-X6-01.analog-ster
 smart_borders on
 smart_borders no_gaps
 border_radius 8
+
+exec_always taralli
