@@ -130,3 +130,4 @@ export JAVA_HOME
 
 
 complete -C /home/dan/.local/bin/mc mc
+cbonsai -p
