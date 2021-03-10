@@ -1,0 +1,5 @@
+https://github.com/joshumax/taralli.git
+./configure
+make
+sudo make install
+taralli

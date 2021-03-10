@@ -165,16 +165,17 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        set $SIZE_STEP 10
+        bindsym j resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym k resize grow height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym l resize shrink height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym semicolon resize grow width $SIZE_STEP px or $SIZE_STEP ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym Down resize grow height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym Up resize shrink height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym Right resize grow width $SIZE_STEP px or $SIZE_STEP ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -220,11 +221,11 @@ bar {
 }
 
 bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
-exec_always inotify-hookable --watch-files ~/.config/i3/lock --on-modify-command ./.config/i3/lock.sh
+bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
-gaps inner 25
-#gaps outer 5
+gaps inner 20
+gaps outer 5
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
@@ -233,9 +234,7 @@ exec_always xinput set-prop 11 311 1
 exec_always xinput set-prop 11 317 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
-exec_always compton --shadow-radius=16 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.2 --fading --blur-background --blur-size=1000
-#exec_always compton --shadow-radius=10 --shadow-offset-x=2 --shadow-offset-y=2 --shadow --shadow-exclude '!focused' --shadow-opacity=0.33 --fading --blur-background --blur-size=5 --blur-method=kernal
-# exec_always compton --config ~/.config/compton.config
+exec_always compton --config ~/.config/i3/compton.conf
 
 # Start defaults
 exec_always ssh-add ~/.ssh/id_rsa
@@ -249,7 +248,7 @@ bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightness
 
-# Screenshota
+# Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
 bindsym Print exec gnome-screenshot
 bindsym --release Control+Shift+Print exec gnome-screenshot -a
