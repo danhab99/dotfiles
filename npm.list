@@ -4,6 +4,7 @@ gitignore
 js-beautify
 markserv
 nodemon
+prettier
 react-devtools
 react-native-cli
 serve

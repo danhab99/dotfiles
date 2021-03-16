@@ -103,7 +103,7 @@ source ~/.bash_aliases
 JAVA_HOME=$(dirname $( readlink -f $(which java) ))
 JAVA_HOME=$(realpath "$JAVA_HOME"/../)
 export JAVA_HOME
-
+export PATH=$PATH:$JAVA_HOME/bin
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/dan/.local/bin/mc mc

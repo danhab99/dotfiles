@@ -43,6 +43,7 @@ build-essential
 bumblebee
 bumblebee-nvidia
 ca-certificates
+cava
 cdrdao
 certbot
 cheese
@@ -65,6 +66,7 @@ cups-client
 cups-filters
 curl
 dash
+default-jdk
 deja-dup
 devilspie
 diffutils
