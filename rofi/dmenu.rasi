@@ -7,7 +7,7 @@
     background-color:      rgba(0,0,0,0.3);
     border-color:          White;
     text-color:           White;
-    font:            "Times New Roman 12";
+    font:            "Fira Code 12";
 }
 
 #window {
@@ -32,18 +32,19 @@
 #entry {
     expand:     false;
     width:      10em;
-    padding: 1em 10px 0 10px;
+    padding: 0.15em 10px 0 10px;
 }
 
 #element {
-    padding: 1em 10px 0 10px;
+    padding: 0.15em 10px 0 10px;
 }
 
 #prompt {
-    padding: 1em 10px 0 10px;
+    padding: 0.15em 10px 0 10px;
 }
 
 #element selected {
     background-color: pink;
     text-color: black;
+    border-radius: 10px;
 }
