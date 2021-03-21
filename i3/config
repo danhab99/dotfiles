@@ -203,9 +203,11 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 set $rofi-theme dmenu
 set $rofi-lines 10
 set $rofi-opacity 10
-bindsym $mod+d exec rofi -show run -lines $rofi-lines -eh 2 -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
-bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh 2 -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
-bindsym $mod+Shift+Tab exec rofi -show-icons -show ssh -lines $rofi-lines -eh 2 -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+set $rofi-height 1
+bindsym $mod+d exec rofi -show run -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
