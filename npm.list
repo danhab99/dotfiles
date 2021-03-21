@@ -1,5 +1,6 @@
 apollo
 create-next-app
+create-react-app
 gitignore
 js-beautify
 markserv
@@ -8,3 +9,4 @@ prettier
 react-devtools
 react-native-cli
 serve
+yarn

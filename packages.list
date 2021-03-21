@@ -52,7 +52,6 @@ classicmenu-indicator
 cmake
 cmake-data
 cmatrix
-cmdtest
 console-setup
 containerd.io
 cowsay
@@ -169,7 +168,6 @@ gnome-todo
 gnome-tweaks
 gnome-user-share
 gnupg-agent
-golang
 google-chrome-stable
 gparted
 gperf
@@ -424,6 +422,8 @@ nload
 nmap
 nnn
 nodejs
+nordvpn
+nordvpn-release
 npm
 nudoku
 nvidia-cuda-toolkit
@@ -528,6 +528,7 @@ terminator
 thefuck
 tightvncserver
 toilet
+tor
 torbrowser-launcher
 totem
 transmission-cli
