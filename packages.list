@@ -454,6 +454,7 @@ playerctl
 plymouth-theme-spinner
 policykit-desktop-privileges
 poppler-data
+postgresql
 ppa-purge
 printer-driver-brlaser
 printer-driver-c2esp
@@ -593,6 +594,7 @@ xdg-utils
 xdotool
 xkb-data
 xorg
+xosd-bin
 xul-ext-ubufox
 xutils-dev
 xvfb
