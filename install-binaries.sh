@@ -5,12 +5,14 @@ CWD=$(pwd)
 
 for installable in $(ls ./installs);
 do
-  url=$(head -n1 $installable)
-  name=$(basename $installable)
+  path=$CWD/installs/$installable
+  url=$(head -n1 $path)
+  name=$(basename $path)
   git clone $url $INSTALL_DIRECTORY/$name
   cat ./installs/$installable | sed '1d' > $INSTALL_DIRECTORY/$name/dotfiles-build
   cd $INSTALL_DIRECTORY/$name
   chmod +x dotfiles-build
   echo "### Running $installable ###"
   ./dotfiles-build
+  cd $CWD
 done
