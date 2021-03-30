@@ -107,7 +107,10 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/dan/.local/bin/mc mc
+
 export PATH="/home/dan/.pyenv/bin:$PATH"
+export EDITOR="/usr/bin/vim"
+
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-cbonsai -p -m "$($HOME/.config/i3/motivation)"
+cbonsai -p -m "$(fortune)"
