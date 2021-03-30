@@ -1,9 +1,28 @@
 # Dan's Dotfiles
 
-## Install command 
+- OS: Manjaro Linux
+- WM: i3-gaps
+- Compositor: picom
+- Terminal Emulator: Urxvt
+- Statusbar: i3bar + i3blocks
 
-```bash
-curl -o- https://raw.githubusercontent.com/danhab99/dotfiles/master/install.sh | bash
-```
+## Script usage
 
-* [Wallpaper Dump](https://imgur.com/gallery/5Yeubnx)
+I use some scripts to operate my dotfiles
+
+### update.sh
+
+Copies all the dotfiles from around the system and, then commits and pushes changes
+
+### install.sh
+
+Pulls and places all config files in their place
+
+### update-binaries
+
+Captures and saves dotfile custom build scripts from `~/Documents/install`
+
+### install-binaries.sh
+
+Downloads repos and runs their respective build scripts
+
