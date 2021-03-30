@@ -1,13 +1,4 @@
-apollo
-create-next-app
-create-react-app
-gitignore
-js-beautify
-markserv
-nodemon
-prettier
-react-devtools
-react-native-cli
-serve
-typescript
+node-gyp
+npm
+semver
 yarn

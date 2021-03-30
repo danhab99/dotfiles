@@ -110,4 +110,4 @@ complete -o nospace -C /home/dan/.local/bin/mc mc
 export PATH="/home/dan/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-cbonsai -p -m "$(fortune)"
+cbonsai -p -m "$($HOME/.config/i3/motivation)"

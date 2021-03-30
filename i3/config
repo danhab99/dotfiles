@@ -212,7 +212,7 @@ bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	i3bar_command i3bar -t
 	position bottom
 	colors {
@@ -239,7 +239,8 @@ exec_always xinput set-prop 11 311 1
 exec_always xinput set-prop 11 317 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
-exec_always compton --config ~/.config/i3/compton.conf
+#exec_always compton --config ~/.config/i3/compton.conf
+exec_always picom --config ~/.config/i3/picom.conf
 
 # Start defaults
 exec_always ssh-add ~/.ssh/id_rsa
@@ -260,13 +261,13 @@ bindsym --release Control+Shift+Print exec gnome-screenshot -a
 bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome
-bindsym $mod+w exec google-chrome --password-store=gnome
+bindsym $mod+w exec google-chrome-stable --password-store=gnome
 
 # Open file browser
-bindsym $mod+e exec nautilus --browser $HOME
+bindsym $mod+e exec nemo
 
 # Open VScode
-bindsym $mod+c exec code
+bindsym $mod+c exec code-insider
 
 # Polybar
 # exec_always --no-startup-id $HOME/Documents/dotfiles/polybar.sh
@@ -308,7 +309,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l /home/dan/g600.log
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l /home/dan/g600.log -u /tmp/g600.socket
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50
@@ -326,8 +327,10 @@ exec_always scan-sinks
 exec_always pactl set-default-sink "alsa_output.usb-DAC-X6_DAC-X6-01.analog-stereo"
 
 ################# i3-radius #######################
-smart_borders on
-smart_borders no_gaps
-border_radius 8
+#smart_borders on
+#smart_borders no_gaps
+#border_radius 8
 
 exec_always taralli
+
+exec_always /home/dan/.screenlayout/normal.sh
