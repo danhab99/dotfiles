@@ -26,3 +26,10 @@ Captures and saves dotfile custom build scripts from `~/Documents/install`
 
 Downloads repos and runs their respective build scripts
 
+### update-packages.sh
+
+Saves all packages to a list
+
+### install-packages.sh
+
+Installs all packages at their version
