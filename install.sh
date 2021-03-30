@@ -11,14 +11,6 @@ yes | cp -rf .bashrc $HOME
 yes | cp -rf ./X* $HOME
 yes | cp -rf ./g600 $HOME/.config
 
-echo "Installing cosmetics"
-yes | cp -rf ./gtk* $HOME/
-
-echo "Installing wallpaper slideshow"
-mkdir -p $HOME/Pictures/wallpaper/.cache
-yes | cp -f  ./slideshow.sh $HOME/Pictures/wallpaper
-yes | cp -f  ./changewallpaper.sh $HOME/Pictures/wallpaper
-
 echo "Installing rofi"
 yes | cp -rf ./rofi/* $HOME/.local/share/rofi/themes
 
