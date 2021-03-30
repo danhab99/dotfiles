@@ -28,6 +28,9 @@ cp -r $HOME/.config/nitrogen .
 echo "Updating binaries"
 ./update-binaries.sh
 
+echo "Updating packages"
+./update-packages.sh
+
 echo "COMITTING"
 git add .
 git diff-tree --no-commit-id --name-only -r HEAD
