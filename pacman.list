@@ -17,6 +17,7 @@ bison 3.7.3-1
 bmenu 0.14-1
 btrfs-progs 5.11-1
 bzip2 1.0.8-4
+cava 0.7.3-3
 clipit 1:1.4.3-2
 coreutils-git 8.32.r129.g12abdb757-1
 cowsay 3.04-2
@@ -45,6 +46,7 @@ file 5.39-1
 filesystem 2021.01.19-1
 findutils 4.8.0-1
 flex 2.6.4-3
+fortune-mod 2.12.0-1
 gawk 5.1.0-1
 gcc 10.2.0-6
 gcc-libs 10.2.0-6
@@ -79,6 +81,7 @@ java-runtime-common 3-3
 jdk11-openjdk 11.0.10.u9-1
 jdk8-openjdk 8.u282-1
 jfsutils 1.1.15-7
+jp2a 1.1.0-1
 jre8-openjdk 8.u282-1
 kvantum-manjaro 0.13.5-1
 less 563-1
@@ -129,6 +132,7 @@ ncdu 1.15.1-2
 nemo 4.8.6-1
 neofetch 7.1.0-2
 neovim 0.4.4-1
+netbeans 12.3-1
 netctl 1.24-1
 network-manager-applet 1.20.0-2
 networkmanager 1.30.2-1
@@ -170,6 +174,7 @@ python-pip 20.3.1-1
 qt5-styleplugins 5.0.0.20170311-25
 qt5ct 1.1-1
 ranger 1.9.3.143.g5047d9e5-1
+rclone 1.54.1-1
 reiserfsprogs 3.6.27-3
 rofi 1.6.1-1
 rsync 3.2.3-3
