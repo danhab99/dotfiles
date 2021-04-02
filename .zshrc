@@ -110,6 +110,7 @@ complete -o nospace -C /home/dan/.local/bin/mc mc
 
 export PATH="/home/dan/.pyenv/bin:$PATH"
 export EDITOR="/usr/bin/vim"
+export BROWSER="/usr/bin/google-chrome-stable"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
