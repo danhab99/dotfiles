@@ -229,7 +229,7 @@ bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
 bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
-gaps inner 20
+gaps inner 16
 gaps outer 5
 for_window [class="^.*"] border pixel 0
 
@@ -334,3 +334,6 @@ exec_always pactl set-default-sink "alsa_output.usb-DAC-X6_DAC-X6-01.analog-ster
 exec_always taralli
 
 exec_always /home/dan/.screenlayout/normal.sh
+
+# Make android emulators float
+for_window [title="Android Emulator"] floating enable

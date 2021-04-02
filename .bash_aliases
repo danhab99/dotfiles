@@ -56,3 +56,4 @@ alias iosinstall="ideviceinstaller -i"
 alias gai="git add -ip"
 alias gpl="git pull origin master"
 
+alias listpaths="echo $PATH | sed \"s/:/\n/g\""
