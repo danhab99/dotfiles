@@ -15,6 +15,7 @@ set expandtab
 set number
 set incsearch
 set clipboard=unnamedplus
+set smarttab
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
