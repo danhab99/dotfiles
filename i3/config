@@ -165,10 +165,10 @@ mode "resize" {
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
         set $SIZE_STEP 10
-        bindsym j resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
-        bindsym k resize grow height $SIZE_STEP px or $SIZE_STEP ppt
-        bindsym l resize shrink height $SIZE_STEP px or $SIZE_STEP ppt
-        bindsym semicolon resize grow width $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym h resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym j resize grow height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym k resize shrink height $SIZE_STEP px or $SIZE_STEP ppt
+        bindsym l resize grow width $SIZE_STEP px or $SIZE_STEP ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
