@@ -229,7 +229,6 @@ bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
 gaps inner 16
-gaps outer 5
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
@@ -308,7 +307,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.conf -l /home/dan/g600.log -u /tmp/g600.socket
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.socket
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50

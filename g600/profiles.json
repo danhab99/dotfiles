@@ -1,0 +1,88 @@
+[
+  {
+    "name": "i3",
+    "color": "ff7869",
+    "normal": {
+      "10": { "key": "Super_L+f" },
+      "11": { "key": "Shift_L+Super_L+Right" },
+      "12": { "key": "Super_L+w" },
+      "13": { "key": "Super_L+Return" },
+      "14": { "key": "Super_L+c" },
+      "16": { "key": "Super_L+Shift_L+space" },
+      "17": { "key": "Super_L+h" },
+      "18": { "key": "alt+backslash" },
+      "19": { "cmd": "./.asciishrug.sh" },
+      "20": { "key": "Super_L+Shift_L+r" },
+      "9": { "key": "Shift_L+Super_L+Left" }
+    },
+    "mod": {
+      "10": { "key": "Super_L+q" },
+      "11": { "key": "Control_L+Super_L+Right" },
+      "9": { "key": "Control_L+Super_L+Left" },
+      "17": { "key": "Super_L+v" },
+      "20": { "key": "Super_L+Shift_L+x" },
+      "18": { "key": "Super_L+Shift_L+x" },
+      "13": { "key": "playerctl play-pause" },
+      "14": { "key": "playerctl next" },
+      "12": { "key": "playerctl previous" }
+    }
+  },
+  {
+    "name": "overwatch",
+    "color": "ffa200",
+    "normal": {
+      "10": { "key": "r" },
+      "11": { "key": "e" },
+      "9": { "key": "v" },
+      "12": { "key": "x" },
+      "14": { "key": "z" },
+      "16": { "key": "Control_L+dead_grave" }
+    },
+    "mod": {
+      "10": { "key": "r" },
+      "11": { "key": "shift" }
+    }
+  },
+  {
+    "name": "tf2",
+    "color": "ff0000",
+    "normal": {
+      "10": { "key": "1" },
+      "9": { "key": "2" },
+      "11": { "key": "3" },
+      "14": { "key": "q" },
+      "12": { "key": "e" },
+      "13": { "key": "v" },
+      "17": { "key": "k" },
+      "16": { "key": "j" },
+      "15": { "key": "s" },
+      "20": { "key": "a" },
+      "19": { "key": "z" },
+      "18": { "key": "x" }
+    },
+    "mod": {
+      "16": { "cmd": "playerctl play-pause" },
+      "17": { "cmd": "playerctl next" },
+      "15": { "cmd": "playerctl previous" },
+      "10": { "cmd": "~/.config/g600/tf2_eureka_escape.sh 1" },
+      "11": { "cmd": "~/.config/g600/tf2_eureka_escape.sh 2" },
+      "9": { "cmd": "~/.config/g600/tf2_create_sentry.sh" },
+      "12": { "cmd": "~/.config/g600/tf2_spy.sh" },
+      "14": { "cmd": "~/.config/g600/tf2_thanks.sh" }
+    }
+  },
+  {
+    "name": "satisifactory",
+    "color": "008000",
+    "normal": {
+      "10": { "key": "q" },
+      "11": { "key": "Tab" },
+      "9": { "key": "f" },
+      "14": { "key": "b" },
+      "13": { "key": "e" },
+      "12": { "key": "v" },
+      "17": { "cmd": "xdotool mouseup 1" },
+      "16": { "cmd": "xdotool mousedown 1" }
+    }
+  }
+]

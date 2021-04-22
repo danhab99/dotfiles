@@ -43,6 +43,7 @@ dmraid 1.0.0.rc16.3-13
 dnsmasq 2.84-1
 docker 1:20.10.5-1
 dosfstools 4.2-1
+dotnet-sdk 5.0.5.sdk202-1
 e2fsprogs 1.46.2-1
 ecryptfs-utils 111-4
 efibootmgr 17-2
@@ -106,6 +107,7 @@ lib32-flex 2.6.4-2
 lib32-mesa-demos 8.4.0-2
 lib32-nvidia-utils 460.56-1
 libratbag 0.15-1
+libreoffice-fresh 7.1.2-2
 libtool 2.4.6+42+gb88cebd5-14
 licenses 20200427-1
 lightdm-slick-greeter 1.5.2-1
@@ -129,7 +131,7 @@ manjaro-hotfixes 2018.08-6
 manjaro-i3-settings 20200919-1
 manjaro-ranger-settings 20190513-2
 manjaro-release 21.0-1
-manjaro-system 20210321-2
+manjaro-system 20210412-1
 manjaro-zsh-config 0.20-3
 markdown_previewer 0.r6.64ad4d7-1
 mdadm 4.1-2
@@ -166,6 +168,7 @@ npm 7.6.3-1
 nss-mdns 0.14.1-3
 ntfs-3g 2017.3.23-5
 ntp 4.2.8.p15-1
+nuget 5.8.0-1
 nvidia-utils 460.56-2
 nvtop 1.1.0-2
 obs-studio 26.1.2-1

@@ -43,3 +43,4 @@ alias gpl="git pull origin master"
 alias listpaths="echo $PATH | sed \"s/:/\n/g\""
 
 alias code="code-insiders"
+alias licenses="license-report --output=html | hcat"
