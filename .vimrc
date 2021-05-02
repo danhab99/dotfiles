@@ -16,6 +16,7 @@ set number
 set incsearch
 set clipboard=unnamedplus
 set smarttab
+set mouse=v
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'

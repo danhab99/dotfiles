@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
-ID=$(xinput | grep "ELAN0650:01 04F3:304B Touchpad" | grep -Po "(?<=id=)\d+")
 
-function lp {
+function getIDByName {
+  ID=$(xinput | grep $1 | grep -Po "(?<=id=)\d+")
+}
+
+getIDByName "Hoksi Technology DURGOD Taurus K320 Keyboard"
+xinput enable $ID
+
+getIDByName "ELAN0650:01 04F3:304B Touchpad"
+
+function setProps {
 	i=$(xinput list-props $ID | grep "$1" | head -1 | grep -Po "(?<=\()\d+")
 	xinput set-prop $ID $i 1
 }
 
-lp "libinput Tapping Enabled"
-lp "libinput Natural Scrolling Enabled"
-lp "libinput Tapping Drag Enabled"
+setProps "libinput Tapping Enabled"
+setProps "libinput Natural Scrolling Enabled"
+setProps "libinput Tapping Drag Enabled"
+
+

@@ -103,7 +103,7 @@ URxvt.keysym.C-Delete: perl:matcher:last
 URxvt.keysym.M-Delete: perl:matcher:list
 
 URxvt.scrollBar: false
-URxvt*internalBorder: 30
+URxvt*internalBorder: 20
 
 URxvt.keysym.Home: \033[1~
 URxvt.keysym.End: \033[4~

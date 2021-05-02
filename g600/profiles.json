@@ -18,13 +18,13 @@
     "mod": {
       "10": { "key": "Super_L+q" },
       "11": { "key": "Control_L+Super_L+Right" },
-      "9": { "key": "Control_L+Super_L+Left" },
+      "12": { "cmd": "playerctl previous" },
+      "13": { "cmd": "playerctl play-pause" },
+      "14": { "cmd": "playerctl next" },
       "17": { "key": "Super_L+v" },
-      "20": { "key": "Super_L+Shift_L+x" },
       "18": { "key": "Super_L+Shift_L+x" },
-      "13": { "key": "playerctl play-pause" },
-      "14": { "key": "playerctl next" },
-      "12": { "key": "playerctl previous" }
+      "20": { "key": "Super_L+Shift_L+x" },
+      "9": { "key": "Control_L+Super_L+Left" }
     }
   },
   {
@@ -33,10 +33,10 @@
     "normal": {
       "10": { "key": "r" },
       "11": { "key": "e" },
-      "9": { "key": "v" },
       "12": { "key": "x" },
       "14": { "key": "z" },
-      "16": { "key": "Control_L+dead_grave" }
+      "16": { "key": "Control_L+dead_grave" },
+      "9": { "key": "v" }
     },
     "mod": {
       "10": { "key": "r" },
@@ -48,27 +48,27 @@
     "color": "ff0000",
     "normal": {
       "10": { "key": "1" },
-      "9": { "key": "2" },
       "11": { "key": "3" },
-      "14": { "key": "q" },
       "12": { "key": "e" },
       "13": { "key": "v" },
-      "17": { "key": "k" },
-      "16": { "key": "j" },
+      "14": { "key": "q" },
       "15": { "key": "s" },
-      "20": { "key": "a" },
+      "16": { "key": "j" },
+      "17": { "key": "p" },
+      "18": { "key": "x" },
       "19": { "key": "z" },
-      "18": { "key": "x" }
+      "20": { "key": "a" },
+      "9": { "key": "2" }
     },
     "mod": {
-      "16": { "cmd": "playerctl play-pause" },
-      "17": { "cmd": "playerctl next" },
-      "15": { "cmd": "playerctl previous" },
       "10": { "cmd": "~/.config/g600/tf2_eureka_escape.sh 1" },
       "11": { "cmd": "~/.config/g600/tf2_eureka_escape.sh 2" },
-      "9": { "cmd": "~/.config/g600/tf2_create_sentry.sh" },
       "12": { "cmd": "~/.config/g600/tf2_spy.sh" },
-      "14": { "cmd": "~/.config/g600/tf2_thanks.sh" }
+      "14": {"key": "p"},
+      "15": { "cmd": "playerctl previous" },
+      "16": { "cmd": "playerctl play-pause" },
+      "17": { "cmd": "playerctl next" },
+      "9": { "cmd": "~/.config/g600/tf2_create_sentry.sh" }
     }
   },
   {
@@ -77,12 +77,12 @@
     "normal": {
       "10": { "key": "q" },
       "11": { "key": "Tab" },
-      "9": { "key": "f" },
-      "14": { "key": "b" },
-      "13": { "key": "e" },
       "12": { "key": "v" },
+      "13": { "key": "e" },
+      "14": { "key": "b" },
+      "16": { "cmd": "xdotool mousedown 1" },
       "17": { "cmd": "xdotool mouseup 1" },
-      "16": { "cmd": "xdotool mousedown 1" }
+      "9": { "key": "f" }
     }
   }
 ]

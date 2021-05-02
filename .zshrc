@@ -112,6 +112,11 @@ export PATH="/home/dan/.pyenv/bin:$PATH"
 export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/google-chrome-stable"
 
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey "^[[3~" delete-char
+
+
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 cbonsai -p -m "$(fortune)"
