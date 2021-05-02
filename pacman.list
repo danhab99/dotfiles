@@ -16,6 +16,7 @@ avahi 0.8+15+ge8a3dd0-3
 b43-fwcutter 019-3
 banner 1.3.2-9
 bash 5.1.0-2
+bind 9.16.13-1
 binutils 2.36.1-2
 bison 3.7.3-1
 bmenu 0.14-1
@@ -42,6 +43,7 @@ dmidecode 3.3-1
 dmraid 1.0.0.rc16.3-13
 dnsmasq 2.84-1
 docker 1:20.10.5-1
+docker-compose 1.29.1-1
 dosfstools 4.2-1
 dotnet-sdk 5.0.5.sdk202-1
 e2fsprogs 1.46.2-1
@@ -52,6 +54,7 @@ ethtool 1:5.10-1
 exfat-utils 1.3.0-2
 f2fs-tools 1.14.0-1
 fakeroot 1.25.3-2
+feh 3.6.3-1
 figlet 2.2.5-4
 file 5.39-1
 filesystem 2021.01.19-1
@@ -98,9 +101,11 @@ java-runtime-common 3-3
 jdk11-openjdk 11.0.10.u9-1
 jdk8-openjdk 8.u282-1
 jfsutils 1.1.15-7
+joyutils 1.7.1-2
 jp2a 1.1.0-1
 jq 1.6-4
 jre8-openjdk 8.u282-1
+jstest-gtk-git 0.1.0.r98.g7a51eef-1
 kvantum-manjaro 0.13.5-1
 less 563-1
 lib32-flex 2.6.4-2
@@ -145,6 +150,7 @@ mlocate 0.26.git.20170220-6
 mobile-broadband-provider-info 20201225-1
 moc 1:2.5.2-3
 modemmanager 1.16.2-1
+mongodb-compass 1.26.1-1
 morc_menu 1.0-2
 mousepad 0.5.3-1
 nano 5.6.1-1
@@ -202,7 +208,13 @@ qt5ct 1.1-1
 qt6-base 6.0.2-1
 ranger 1.9.3.143.g5047d9e5-1
 rclone 1.54.1-1
+react-native-debugger 0.11.7-1
+reactotron 2.17.1-2
 reiserfsprogs 3.6.27-3
+retroarch 1.9.1-1
+retroarch-assets-ozone 1:372-1
+retroarch-assets-xmb 1:372-1
+retroarch-standalone-service 2-14
 rofi 1.6.1-1
 rsync 3.2.3-3
 s-nail 14.9.22-1
@@ -274,4 +286,5 @@ xz 5.2.5-1
 yay-git 10.2.0.r8.g2da1e15-1
 youtube-dl 2021.03.25-1
 zensu 0.3-1
+zip 3.0-9
 zoom 5.6.1-1
