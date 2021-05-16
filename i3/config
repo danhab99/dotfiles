@@ -259,7 +259,8 @@ bindsym --release Control+Shift+Print exec gnome-screenshot -a
 bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome
-bindsym $mod+w exec google-chrome-stable --password-store=gnome
+bindsym $mod+w exec /usr/bin/brave
+bindsym $mod+Shift+w exec fluent-reader
 
 # Open file browser
 bindsym $mod+e exec nemo

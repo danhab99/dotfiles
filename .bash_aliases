@@ -44,3 +44,6 @@ alias listpaths="echo $PATH | sed \"s/:/\n/g\""
 
 alias code="code-insiders"
 alias licenses="license-report --output=html | hcat"
+function copy() {
+  cat $1 | xsel -i -b
+}
