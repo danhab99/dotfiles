@@ -97,7 +97,7 @@ URxvt.colorUL: #ef5350
 URxvt.perl-ext-common: default,matcher
 
 ! Clickable URLs
-URxvt.url-launcher: /usr/bin/google-chrome-stable
+URxvt.url-launcher: /usr/bin/brave
 URxvt.matcher.button: 1
 URxvt.keysym.C-Delete: perl:matcher:last
 URxvt.keysym.M-Delete: perl:matcher:list

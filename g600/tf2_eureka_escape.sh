@@ -1,10 +1,11 @@
 #!/bin/bash
 
-source ./tf2_keypress.sh
+source /home/dan/.config/g600/tf2_keypress.sh
 
-sleep_key 100 200 3
 
-sleep_key 100 200 r
+sleep_key 500 600 3
+
+sleep_key 500 600 r
 
 sleep_key 2900 3000 $1
 
