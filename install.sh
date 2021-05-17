@@ -12,6 +12,7 @@ yes | cp -rf ./X* $HOME
 yes | cp -rf ./g600 $HOME/.config
 
 echo "Installing rofi"
+mkdir -p $HOME/.local/share/rofi
 yes | cp -rf ./rofi/* $HOME/.local/share/rofi/themes
 
 echo "Installing zsh"
@@ -22,10 +23,9 @@ echo "Installing commands"
 mkdir -p $HOME/.local/bin
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
-ln -s $HOME/Pictures/wallpaper/changewallpaper.sh $HOME/.local/bin/changewallpaper
 
 echo "Installing vimrc"
-cp ./.vim * $HOME
+cp ./.vim* $HOME
 
 i3-msg restart
 cd $lwd
