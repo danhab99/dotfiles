@@ -46,7 +46,7 @@ URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize:15
 URxvt.italicFont: xft:Fira Code:style=Light:pixelsize:15
 
 ! Set Background Color
-URxvt.background: #1D262A
+URxvt.background: #111
 
 ! Set Foreground Color
 URxvt.foreground: #E7EBED
