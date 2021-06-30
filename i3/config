@@ -238,7 +238,7 @@ exec_always xinput set-prop 11 317 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
-exec_always picom --config ~/.config/i3/picom.conf
+exec_always picom --config ~/.config/i3/picom.conf --experimental-backends --backend glx
 
 # Start defaults
 exec_always ssh-add ~/.ssh/id_rsa

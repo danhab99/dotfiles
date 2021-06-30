@@ -6,5 +6,5 @@ cat pacman.list | while read line
 do
   echo "### Installing $line ###"
   L=$(echo $line | grep -o "^\S*")
-  sudo pacman -S "$line"
+  yes | sudo pacman -S "$L"
 done
