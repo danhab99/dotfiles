@@ -119,4 +119,5 @@ bindkey "^[[3~" delete-char
 eval $(thefuck --alias)
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+xset b off
 cbonsai -p -m "$(fortune)"

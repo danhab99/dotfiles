@@ -37,3 +37,4 @@ highlight SignColumn ctermbg=none
 
 nmap <F6> :NERDTreeToggle<CR>
 imap jj <Esc>
+imap qq :q

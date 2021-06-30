@@ -1,4 +1,4 @@
-INTERFACE=enp3s0
+INTERFACE=wlp3s0
 
 CURRENT_TX=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
 CURRENT_RX=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
