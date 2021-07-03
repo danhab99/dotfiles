@@ -21,6 +21,7 @@ bmenu 0.16-1
 brave 1.25.68-1
 btrfs-progs 5.12.1-1
 bzip2 1.0.8-4
+clight 4.5-1
 clipit 1:1.4.3-2
 cmake 3.20.3-1
 coreutils 8.32-1
@@ -57,7 +58,7 @@ figlet 2.2.5-4
 file 5.40-5
 filesystem 2021.01.19-1
 findutils 4.8.0-1
-firefox 89.0.1-1
+firefox 89.0.2-0.1
 flex 2.6.4-3
 fortune-mod 2.12.0-1
 gawk 5.1.0-1
@@ -73,7 +74,6 @@ gnome-keyring 1:40.0-1
 gnome-screenshot 40.0-2
 gnu-netcat 0.7.1-8
 go 2:1.16.5-1
-google-chrome 91.0.4472.114-1
 grep 3.6-1
 grub 2.06-1
 grub-theme-manjaro-dev 18.0-3
@@ -152,12 +152,15 @@ mlocate 0.26.git.20170220-7
 mobile-broadband-provider-info 20201225-1
 moc 1:2.5.2-3
 modemmanager 1.16.6-1
-mongodb-compass 1.26.1-1
 morc_menu 1.0-2
 mousepad 0.5.5-3
 nano 5.7-1
 ncdu 1.15.1-2
 nemo 4.8.6-1
+nemo-compare 4.8.0-3
+nemo-seahorse 4.8.0-4
+nemo-share 4.8.0-4
+nemo-terminal 4.8.0-4
 neofetch 7.1.0-2
 neovim 0.4.4-2
 net-tools 2.10-1
@@ -170,6 +173,7 @@ networkmanager-pptp 1.2.9dev+10+gb41b0d0-4
 networkmanager-vpnc 1.2.7dev+20+gdca3aea-2
 nfs-utils 2.5.3-1
 nmap 7.91-1
+nnn 4.1.1-1
 nodejs 16.3.0-1
 npm 7.16.0-1
 nss-mdns 0.14.1-3
@@ -204,7 +208,6 @@ psmisc 23.4-1
 pulseaudio-alsa 1:1.2.5-2
 pulseaudio-equalizer 14.2-3
 python-pip 20.3.1-1
-qomui-git 0.8.2.r22.23650ab-2
 qt5-styleplugins 5.0.0.20170311-25
 qt5ct 1.2-1
 qt6-base 6.1.1-1
@@ -249,12 +252,11 @@ usbutils 013-1
 util-linux 2.37-3
 vi 1:070224-5
 viewnior 1.7-3
-vim-plug 0.10.0-1
+visual-studio-code-insiders-bin 1625225577-1
 volumeicon 0.5.1-5
 vulkan-intel 21.1.2-1
 vulkan-radeon 21.1.2-1
 w3m 0.5.3.git20210102_6-1
-wakeonlan 0.41-5
 wget 1.21.1-1
 which 2.21-5
 wmutils 1:1.4-1

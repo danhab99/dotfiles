@@ -25,7 +25,7 @@ ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 
 echo "Installing vimrc"
-cp ./.vim* $HOME
+cp -r ./.vim* $HOME
 
 i3-msg restart
 cd $lwd
