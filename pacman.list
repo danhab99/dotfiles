@@ -14,6 +14,7 @@ avahi 0.8+20+gd1e71b3-1
 b43-fwcutter 019-3
 banner 1.3.2-9
 bash 5.1.008-3
+betterlockscreen 3.2.0-2
 bind 9.16.16-1
 binutils 2.36.1-3
 bison 3.7.6-1
@@ -61,6 +62,7 @@ findutils 4.8.0-1
 firefox 89.0.2-0.1
 flex 2.6.4-3
 fortune-mod 2.12.0-1
+fprintd 1.90.9-1
 gawk 5.1.0-1
 gcc 11.1.0-1
 gcc-libs 11.1.0-1
@@ -111,6 +113,7 @@ lib32-mesa-vdpau 21.1.2-1
 lib32-nvidia-utils 465.31-1
 lib32-vulkan-intel 21.1.2-1
 lib32-vulkan-radeon 21.1.2-1
+libfprint-primex 1.90.2.r34.gb80af1b-1
 libratbag 0.15-1
 libreoffice-fresh 7.1.3-2
 libtool 2.4.6+42+gb88cebd5-16
