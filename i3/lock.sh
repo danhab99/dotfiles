@@ -1,10 +1,14 @@
 #!/bin/bash
 set +x
 dunstctl set-paused true
-#playerctl pause
+MEDIA_STATUS=$(playerctl status)
+playerctl pause
 
-i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" -n
+#i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" -n
+betterlockscreen -l --nofork
 
 dunstctl set-paused false
 
-#playerctl play
+if [ "$MEDIA_STATUS" == "Playing" ]; then
+  playerctl play
+fi
