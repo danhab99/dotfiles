@@ -45,6 +45,7 @@ docker 1:20.10.7-1
 docker-compose 1.29.2-1
 dosfstools 4.2-1
 dotnet-sdk 5.0.6.sdk203-1
+dpkg 1.20.7.1-1
 e2fsprogs 1.46.2-1
 ecryptfs-utils 111-4
 efibootmgr 17-2
@@ -155,6 +156,7 @@ mlocate 0.26.git.20170220-7
 mobile-broadband-provider-info 20201225-1
 moc 1:2.5.2-3
 modemmanager 1.16.6-1
+mongodb-compass 1.27.1-1
 morc_menu 1.0-2
 mousepad 0.5.5-3
 nano 5.7-1
@@ -250,6 +252,7 @@ tree 1.8.0-2
 ttf-dejavu 2.37+18+g9b5d1b2f-3
 ttf-fira-code 5.2-1
 ufw 0.36-5
+unixbench 5.1.3-4
 upower 0.99.11-3
 usbutils 013-1
 util-linux 2.37-3
