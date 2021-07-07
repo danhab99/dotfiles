@@ -17,6 +17,7 @@ set incsearch
 set clipboard=unnamedplus
 set smarttab
 set mouse=v
+set completeopt-=preview
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -30,11 +31,26 @@ Plug 'ycm-core/YouCompleteMe'
 Plug 'beautify-web/js-beautify'
 Plug 'https://github.com/ernstwi/vim-secret'
 Plug 'preservim/nerdcommenter'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 
+let NERDTreeQuitOnOpen=1
+
+autocmd BufWritePost * Neoformat prettier
+
 highlight SignColumn ctermbg=none
+
+hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
+hi Visual ctermbg=White term=reverse
+
+let g:ycm_semantic_triggers = {
+   \   'css': [ 're!^\s{2}', 're!:\s+' ],
+   \ }
 
 nmap <F6> :NERDTreeToggle<CR>
 imap jj <Esc>
 imap qq :q
+nnoremap <leader>p :psearch <C-R><C-W><CR>
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
