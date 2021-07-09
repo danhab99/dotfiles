@@ -8,16 +8,16 @@ yes | cp -rf ./dunst $HOME/.config/
 yes | cp -rf .bash_aliases $HOME
 yes | cp -rf .bash_paths $HOME
 yes | cp -rf .bashrc $HOME
-yes | cp -rf ./X* $HOME
+yes | cp -rf ./.X* $HOME
 yes | cp -rf ./g600 $HOME/.config
 
 echo "Installing rofi"
 mkdir -p $HOME/.local/share/rofi
-yes | cp -rf ./rofi/* $HOME/.local/share/rofi/themes
+yes | cp -rf ./rofi $HOME/.local/share/rofi/themes
 
 echo "Installing zsh"
 cp .zshrc $HOME/.zshrc
-cp -r ./oh-my-zsh/* $HOME/.oh-my-zsh/
+cp -r ./oh-my-zsh $HOME/.oh-my-zsh
 
 echo "Installing commands"
 mkdir -p $HOME/.local/bin
