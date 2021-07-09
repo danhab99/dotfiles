@@ -152,6 +152,7 @@ ntfs-3g 2017.3.23-5
 ntp 4.2.8.p15-1
 nvidia-prime 1.0-4
 nvidia-utils 465.31-1
+nvtop 1.2.1-1
 openresolv 3.12.0-1
 openssh 8.6p1-1
 os-prober 1.78-0.1
