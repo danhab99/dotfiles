@@ -76,10 +76,12 @@ intel-ucode 20210216-1
 inxi 3.3.04.1-1
 iproute2 5.12.0-1
 iputils 20210202-1
+jdk-openjdk 15.0.2.u7-1
 jfsutils 1.1.15-7
 jq 1.6-4
 kdeconnect 21.04.1-2
 kvantum-manjaro 0.13.5-1
+ledcapture-git r8.4d4de86-1
 less 1:581.2-1
 lib32-flex 2.6.4-2
 lib32-libva-vdpau-driver 0.7.4-6
@@ -129,6 +131,7 @@ modemmanager 1.16.6-1
 mongodb-compass 1.27.1-1
 morc_menu 1.0-2
 mousepad 0.5.5-3
+mpd 0.22.8-1
 nano 5.7-1
 ncdu 1.15.1-2
 nemo 4.8.6-1
@@ -170,6 +173,7 @@ picom-rounded-corners r1396.a99772b-1
 pkgconf 1.7.3-1
 playerctl 2.3.1-1
 polkit-gnome 0.105-8
+polybar 3.5.5-1
 powertop 2.14-1
 procps-ng 3.3.17-1
 psmisc 23.4-1
@@ -192,6 +196,7 @@ steam-manjaro 1.0.0.70-1
 sudo 1.9.7-1
 sysfsutils 2.1.1-1
 syslog-ng 3.32.1-1
+sysstat 12.5.3-1
 systemd 248.3-3
 systemd-fsck-silent 239-1
 systemd-sysvcompat 248.3-3
