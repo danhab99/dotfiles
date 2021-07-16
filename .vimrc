@@ -18,6 +18,7 @@ set clipboard=unnamedplus
 set smarttab
 set mouse=v
 set completeopt-=preview
+set laststatus=2
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -49,6 +50,7 @@ let g:ycm_semantic_triggers = {
    \ }
 
 nmap <F6> :NERDTreeToggle<CR>
+nmap O O<Esc>o
 imap jj <Esc>
 imap qq :q
 nnoremap <leader>p :psearch <C-R><C-W><CR>
