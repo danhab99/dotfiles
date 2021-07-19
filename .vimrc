@@ -28,7 +28,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'beautify-web/js-beautify'
 Plug 'https://github.com/ernstwi/vim-secret'
 Plug 'preservim/nerdcommenter'
@@ -36,14 +36,16 @@ Plug 'sbdchd/neoformat'
 
 call plug#end()
 
+colorscheme slate
+
 let NERDTreeQuitOnOpen=1
 
 autocmd BufWritePost * Neoformat prettier
 
-highlight SignColumn ctermbg=none
-
+hi SignColumn ctermbg=none
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
-hi Visual ctermbg=White term=reverse
+"hi Visual ctermbg=White term=reverse
+hi Normal guibg=NONE ctermbg=NONE
 
 let g:ycm_semantic_triggers = {
    \   'css': [ 're!^\s{2}', 're!:\s+' ],

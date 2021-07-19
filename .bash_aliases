@@ -31,8 +31,6 @@ alias mkcd='fmkcd'
 alias here='i3-sensible-terminal'
 alias untar='tar -xf'
 
-alias mcconsole="ssh mcserver@69.164.214.170 ./mcserver console"
-
 alias nload="nload -u H enp2s0"
 alias edit-macros="code ~/.config/macro-app/config.json"
 alias fixmouse="sudo systemctl restart g600.service && i3-msg restart"
@@ -48,3 +46,4 @@ alias licenses="license-report --output=html | hcat"
 function copy() {
   cat $1 | xsel -i -b
 }
+alias xmerge="xrdb -merge ~/.Xresources && xrdb -merge ~/.Xdefaults"

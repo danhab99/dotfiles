@@ -7,44 +7,44 @@ URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize:16
 ! Set Italics Font to Fira Code Light, 16px
 URxvt.italicFont: xft:Fira Code:style=Light:pixelsize:16
 
-! Set Background Color
-URxvt.background: #101010
+! Thanks and credits to https://github.com/sindresorhus/hyperterm-snazzy
 
-! Set Foreground Color
-URxvt.foreground: #E7EBED
+URxvt*font: xft:Menlo\ for\ Powerline:Regular:pixelsize=12
+URxvt*foreground: #eff0eb
+URxvt*background: #0d0e12
+URxvt*cursorColor: #97979b
 
-! Set Color Scheme
-! Black
-URxvt.color0: #212121
-URxvt.color8: #263238
+! Black + DarkGrey
+URxvt*color0: #282a36
+URxvt*color8: #686868
 
-! Red
-URxvt.color1: #b71c1c
-URxvt.color9: #ef5350
+! DarkRed + Red
+URxvt*color1: #ff5c57
+URxvt*color9: #ff5c57
 
-! Green
-URxvt.color2: #009e83
-URxvt.color10: #26A69A
+! DarkGreen + Green
+URxvt*color2: #5af78e
+URxvt*color10:#5af78e
 
-! Yellow
-URxvt.color3: #F57F17
-URxvt.color11: #FFEE58
+! DarkYellow + Yellow
+URxvt*color3: #f3f99d
+URxvt*color11:#f3f99d
 
-! Blue
-URxvt.color4: #0D47A1
-URxvt.color12: #42A5F5
+! DarkBlue + Blue
+URxvt*color4: #57c7ff
+URxvt*color12:#57c7ff
 
-! Magenta
-URxvt.color5: #4A148C
-URxvt.color13: #AB47BC
+! DarkMagenta + Magenta
+URxvt*color5: #ff6ac1
+URxvt*color13:#ff6ac1
 
-! Cyan
-URxvt.color6: #006064
-URxvt.color14: #26C6DA
+! DarkCyan + Cyan (both not tango)
+URxvt*color6: #9aedfe
+URxvt*color14:#9aedfe
 
-! White
-URxvt.color7: #FAFAFA
-URxvt.color15: #FFFFFF
+! LightGrey + White
+URxvt*color7: #eff0eb
+URxvt*color15:#f1f1f0
 
 ! Use this color for bold
 URxvt.colorBD: #EAEAEA
