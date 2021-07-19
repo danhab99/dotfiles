@@ -1,261 +1,261 @@
-accountsservice 0.6.55-3
-acpi 1.7-3
-acpid 2.0.32-2
-alsa-firmware 1.2.4-2
-alsa-plugins 1:1.2.5-2
-alsa-utils 1.2.5.1-1
-android-sdk-platform-tools 31.0.2-1
-arandr 0.1.10-6
-autoconf 2.71-1
-automake 1.16.3-1
-avahi 0.8+20+gd1e71b3-1
-b43-fwcutter 019-3
-bash 5.1.008-3
-betterlockscreen 3.2.0-2
-binutils 2.36.1-3
-bison 3.7.6-1
-bmenu 0.16-1
-brave 1.25.68-1
-btrfs-progs 5.12.1-1
-bzip2 1.0.8-4
-chromium 91.0.4472.114-1
-clipit 1:1.4.3-2
-cmake 3.20.5-1
-coreutils 8.32-1
-cpupower 5.13-1
-crda 4.14-4
-cronie 1.5.7-2
-cryptsetup 2.3.6-1
-cups 1:2.3.3op2-3
-device-mapper 2.03.12-1
-dfc 3.1.1-3
-dhclient 4.4.2.P1-1
-dhcpcd 9.4.0-1
-diffutils 3.7-3
-discord 0.0.15-1
-dmidecode 3.3-1
-dmraid 1.0.0.rc16.3-13
-dnsmasq 2.85-1
-docker 1:20.10.7-1
-dosfstools 4.2-1
-e2fsprogs 1.46.2-1
-ecryptfs-utils 111-4
-efibootmgr 17-2
-epdfview 0.1.8-11
-exfat-utils 1.3.0-2
-f2fs-tools 1.14.0-1
-fakeroot 1.25.3-2
-file 5.40-5
-filesystem 2021.01.19-1
-findutils 4.8.0-1
-firefox 90.0-1
-flex 2.6.4-3
-gawk 5.1.0-1
-gcc 11.1.0-1
-gcc-libs 11.1.0-1
-gcolor2 0.4-9
-gettext 0.21-1
-gimp 2.10.24-5
-github-cli 1.12.1-1
-glibc 2.33-5
-gnome-keyring 1:40.0-1
-gnome-screenshot 40.0-2
-go 2:1.16.5-1
-grep 3.6-1
-grub 2.06-1
-grub-theme-manjaro-dev 18.0-3
-gvfs 1.48.1-1
-gvfs-afc 1.48.1-1
-gvfs-gphoto2 1.48.1-1
-gvfs-mtp 1.48.1-1
-gvfs-smb 1.48.1-1
-gvim 8.2.2891-1
-gzip 1.10-3
-hollywood 1.21-5
-htop 3.0.5-1
-i3-default-artwork 20190912-1
-i3blocks 1.5-3
-i3blocks-contrib 2.0.0-1
-inetutils 2.0-1
-intel-ucode 20210608-1
-inxi 3.3.05.1-1
-iproute2 5.13.0-1
-iputils 20210202-1
-jdk-openjdk 16.0.1.u9-1
-jfsutils 1.1.15-7
-jq 1.6-4
-kdeconnect 21.04.3-1
-kvantum-manjaro 0.13.5-1
-ledcapture-git r8.4d4de86-1
-less 1:581.2-1
-lib32-flex 2.6.4-2
-lib32-libva-vdpau-driver 0.7.4-6
-lib32-mesa-demos 8.4.0-2
-lib32-mesa-vdpau 21.1.4-1
-lib32-nvidia-utils 470.42.01-1
-lib32-vulkan-intel 21.1.4-1
-lib32-vulkan-radeon 21.1.4-1
-libtool 2.4.6+42+gb88cebd5-16
-libva-mesa-driver 21.1.4-1
-libva-vdpau-driver 0.7.4-5
-licenses 20200427-1
-lightdm-slick-greeter 1.5.4-1
-linux510 5.10.49-1
-linux510-nvidia 470.42.01-5
-logrotate 3.18.0-1
-lolcat 100.0.1-1
-lvm2 2.03.12-1
-lxappearance 0.6.3-4
-lxinput 0.3.5-3
-m4 1.4.19-1
-maia-console 1.2-6
-make 4.3-3
-man-db 2.9.4-2
-man-pages 5.12-1
-manjaro-alsa 20210109-1
-manjaro-browser-settings 20201114-1
-manjaro-firmware 20160419-1
-manjaro-hotfixes 2018.08-6
-manjaro-i3-settings 20200919-1
-manjaro-ranger-settings 20190513-2
-manjaro-release 21.1.0rc1-2
-manjaro-system 20210612-1
-manjaro-zsh-config 0.20-3
-markdown_previewer 0.r6.64ad4d7-1
-mdadm 4.1-2
-memtest86+ 5.31b-1
-mesa-demos 8.4.0-4
-mesa-vdpau 21.1.4-1
-mhwd 0.6.5-2
-mhwd-db 0.6.5-9
-mkinitcpio-openswap 0.1.0-3
-mlocate 0.26.git.20170220-7
-mobile-broadband-provider-info 20201225-1
-moc 1:2.5.2-3
-modemmanager 1.16.6-1
-mongodb-compass 1.27.1-1
-morc_menu 1.0-2
-mousepad 0.5.5-3
-mpd 0.22.9-1
-nano 5.8-1
-ncdu 1.16-1
-nemo 5.0.3-3
-nemo-compare 5.0.0-9
-nemo-seahorse 5.0.0-9
-nemo-share 5.0.0-9
-nemo-terminal 5.0.0-9
-neofetch 7.1.0-2
-netctl 1.25-1
-network-manager-applet 1.22.0-1
-networkmanager 1.32.2-1
-networkmanager-openconnect 1.2.7dev+65+gca4187c-1
-networkmanager-openvpn 1.8.14-1
-networkmanager-pptp 1.2.9dev+10+gb41b0d0-4
-networkmanager-vpnc 1.2.7dev+20+gdca3aea-2
-nfs-utils 2.5.4-1
-nodejs 16.4.2-1
-noto-fonts-emoji 20200916-1
-npm 7.17.0-1
-nss-mdns 0.14.1-3
-ntfs-3g 2017.3.23-5
-ntp 4.2.8.p15-1
-nvidia-prime 1.0-4
-nvidia-utils 470.42.01-2
-nvtop 1.2.1-1
-openresolv 3.12.0-1
-openssh 8.6p1-1
-os-prober 1.78-0.1
-p7zip 1:17.04-1
-pacman 6.0.0-1
-palemoon-bin 29.2.1-1
-pamac-gtk 10.1.3-3
-patch 2.7.6-8
-patchutils 0.4.2-2
-pciutils 3.7.0-1
-pcmanfm 1.3.2-1
-perl 5.34.0-1
-perl-file-mimeinfo 0.30-2
-picom-rounded-corners r1396.a99772b-1
-pkgconf 1.7.3-1
-playerctl 2.3.1-1
-polkit-gnome 0.105-8
-polybar 3.5.5-1
-powertop 2.14-1
-procps-ng 3.3.17-1
-psmisc 23.4-1
-pulseaudio 14.2-3
-python-pip 20.3.4-1
-qt5-styleplugins 5.0.0.20170311-25
-qt5ct 1.2-1
-quassel-client 0.13.1-8
-ranger 1.9.3.143.g5047d9e5-1
-reiserfsprogs 3.6.27-3
-rofi 1.6.1-1
-rsync 3.2.3-3
-s-nail 14.9.22-1
-s3cmd 2.1.0-4
-sbxkb 0.7.6-5
-screenfetch 3.9.1-1
-sed 4.8-1
-shadow 4.8.1-4
-snapd 2.51.1-1
-spectre-meltdown-checker 0.44-1
-speedtest-cli 2.1.3-1
-squashfs-tools 4.4_git.1-1
-steam-manjaro 1.0.0.70-1
-sudo 1.9.7.p1-1
-sysfsutils 2.1.1-1
-syslog-ng 3.33.1-1
-sysstat 12.5.4-1
-systemd 248.3-3
-systemd-fsck-silent 239-1
-systemd-sysvcompat 248.3-3
-tar 1.34-1
-terminus-font 4.49.1-2
-texinfo 6.8-1
-tigervnc 1.11.0-6
-tlp 1.3.1-2
-tree 1.8.0-2
-ttf-dejavu 2.37+18+g9b5d1b2f-3
-ttf-fira-code 5.2-1
-ufw 0.36-5
-upower 0.99.12-2
-usbutils 013-1
-util-linux 2.37-3
-vi 1:070224-5
-viewnior 1.7-3
-volumeicon 0.5.1-5
-vulkan-intel 21.1.4-1
-vulkan-radeon 21.1.4-1
-w3m 0.5.3.git20210102_6-1
-wget 1.21.1-1
-which 2.21-5
-wmutils 1:1.4-1
-wpa_supplicant 2:2.9-8
-xautolock 2.2-6
-xbindkeys 1.8.7-2
-xdg-user-dirs 0.17-3
-xdg-utils 1.1.3+19+g9816ebb-1
-xdotool 3.20160805.1-3
-xf86-input-elographics 1.4.2-2
-xf86-input-evdev 2.10.6-2
-xf86-input-libinput 1.1.0-1
-xf86-input-void 1.4.1-5
-xf86-video-amdgpu 19.1.0-2
-xf86-video-ati 1:19.1.0-2
-xf86-video-intel 1:2.99.917+916+g31486f40-1
-xf86-video-nouveau 1.0.17-1
-xfce4-power-manager 4.16.0-3
-xfsprogs 5.12.0-1
-xorg-server 1.20.11-1
-xorg-twm 1.0.11-1
-xorg-xev 1.2.4-1
-xorg-xhost 1.0.8-2
-xorg-xinit 1.4.1-3
-xorg-xkill 1.0.5-2
-xorg-xprop 1.2.5-1
-xterm 368-1
-xz 5.2.5-1
-yay 10.3.0-1
-youtube-dl 2021.06.06-1
-zensu 0.3-1
+accountsservice
+acpi
+acpid
+alsa-firmware
+alsa-plugins
+alsa-utils
+android-sdk-platform-tools
+arandr
+autoconf
+automake
+avahi
+b43-fwcutter
+bash
+betterlockscreen
+binutils
+bison
+bmenu
+brave
+btrfs-progs
+bzip2
+chromium
+clipit
+cmake
+coreutils
+cpupower
+crda
+cronie
+cryptsetup
+cups
+device-mapper
+dfc
+dhclient
+dhcpcd
+diffutils
+discord
+dmidecode
+dmraid
+dnsmasq
+docker
+dosfstools
+e2fsprogs
+ecryptfs-utils
+efibootmgr
+epdfview
+exfat-utils
+f2fs-tools
+fakeroot
+file
+filesystem
+findutils
+firefox
+flex
+gawk
+gcc
+gcc-libs
+gcolor2
+gettext
+gimp
+github-cli
+glibc
+gnome-keyring
+gnome-screenshot
+go
+grep
+grub
+grub-theme-manjaro-dev
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-smb
+gvim
+gzip
+hollywood
+htop
+i3-default-artwork
+i3blocks
+i3blocks-contrib
+inetutils
+intel-ucode
+inxi
+iproute2
+iputils
+jdk-openjdk
+jfsutils
+jq
+kdeconnect
+kvantum-manjaro
+ledcapture-git
+less
+lib32-flex
+lib32-libva-vdpau-driver
+lib32-mesa-demos
+lib32-mesa-vdpau
+lib32-nvidia-utils
+lib32-vulkan-intel
+lib32-vulkan-radeon
+libtool
+libva-mesa-driver
+libva-vdpau-driver
+licenses
+lightdm-slick-greeter
+linux510
+linux510-nvidia
+logrotate
+lolcat
+lvm2
+lxappearance
+lxinput
+m4
+maia-console
+make
+man-db
+man-pages
+manjaro-alsa
+manjaro-browser-settings
+manjaro-firmware
+manjaro-hotfixes
+manjaro-i3-settings
+manjaro-ranger-settings
+manjaro-release
+manjaro-system
+manjaro-zsh-config
+markdown_previewer
+mdadm
+memtest86+
+mesa-demos
+mesa-vdpau
+mhwd
+mhwd-db
+mkinitcpio-openswap
+mlocate
+mobile-broadband-provider-info
+moc
+modemmanager
+mongodb-compass
+morc_menu
+mousepad
+mpd
+nano
+ncdu
+nemo
+nemo-compare
+nemo-seahorse
+nemo-share
+nemo-terminal
+neofetch
+netctl
+network-manager-applet
+networkmanager
+networkmanager-openconnect
+networkmanager-openvpn
+networkmanager-pptp
+networkmanager-vpnc
+nfs-utils
+nodejs
+noto-fonts-emoji
+npm
+nss-mdns
+ntfs-3g
+ntp
+nvidia-prime
+nvidia-utils
+nvtop
+openresolv
+openssh
+os-prober
+p7zip
+pacman
+palemoon-bin
+pamac-gtk
+patch
+patchutils
+pciutils
+pcmanfm
+perl
+perl-file-mimeinfo
+picom-rounded-corners
+pkgconf
+playerctl
+polkit-gnome
+polybar
+powertop
+procps-ng
+psmisc
+pulseaudio
+python-pip
+qt5-styleplugins
+qt5ct
+quassel-client
+ranger
+reiserfsprogs
+rofi
+rsync
+s-nail
+s3cmd
+sbxkb
+screenfetch
+sed
+shadow
+snapd
+spectre-meltdown-checker
+speedtest-cli
+squashfs-tools
+steam-manjaro
+sudo
+sysfsutils
+syslog-ng
+sysstat
+systemd
+systemd-fsck-silent
+systemd-sysvcompat
+tar
+terminus-font
+texinfo
+tigervnc
+tlp
+tree
+ttf-dejavu
+ttf-fira-code
+ufw
+upower
+usbutils
+util-linux
+vi
+viewnior
+volumeicon
+vulkan-intel
+vulkan-radeon
+w3m
+wget
+which
+wmutils
+wpa_supplicant
+xautolock
+xbindkeys
+xdg-user-dirs
+xdg-utils
+xdotool
+xf86-input-elographics
+xf86-input-evdev
+xf86-input-libinput
+xf86-input-void
+xf86-video-amdgpu
+xf86-video-ati
+xf86-video-intel
+xf86-video-nouveau
+xfce4-power-manager
+xfsprogs
+xorg-server
+xorg-twm
+xorg-xev
+xorg-xhost
+xorg-xinit
+xorg-xkill
+xorg-xprop
+xterm
+xz
+yay
+youtube-dl
+zensu
