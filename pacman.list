@@ -41,6 +41,7 @@ dosfstools
 e2fsprogs
 ecryptfs-utils
 efibootmgr
+electrum
 epdfview
 exfat-utils
 f2fs-tools
@@ -74,6 +75,7 @@ gzip
 hollywood
 htop
 i3-default-artwork
+i3-resurrect
 i3blocks
 i3blocks-contrib
 inetutils
@@ -84,6 +86,7 @@ iputils
 jdk-openjdk
 jfsutils
 jq
+jupyter
 kdeconnect
 kvantum-manjaro
 ledcapture-git
@@ -174,7 +177,9 @@ patchutils
 pciutils
 pcmanfm
 perl
+perl-anyevent-i3
 perl-file-mimeinfo
+perl-json-xs
 picom-rounded-corners
 pkgconf
 playerctl
@@ -259,3 +264,4 @@ xz
 yay
 youtube-dl
 zensu
+zig
