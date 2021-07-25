@@ -29,10 +29,10 @@ Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
-Plug 'beautify-web/js-beautify'
 Plug 'https://github.com/ernstwi/vim-secret'
 Plug 'preservim/nerdcommenter'
 Plug 'sbdchd/neoformat'
+Plug 'ziglang/zig.vim'
 
 call plug#end()
 
