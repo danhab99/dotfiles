@@ -9,7 +9,7 @@ URxvt.italicFont: xft:Fira Code:style=Light:pixelsize:16
 
 ! Thanks and credits to https://github.com/sindresorhus/hyperterm-snazzy
 
-URxvt*font: xft:Menlo\ for\ Powerline:Regular:pixelsize=12
+*font: xft:Menlo\ for\ Powerline:Regular:pixelsize=12
 URxvt*foreground: #eff0eb
 URxvt*background: #0d0e12
 URxvt*cursorColor: #97979b
@@ -74,3 +74,5 @@ URxvt.keysym.KP_End:  \033[4~
 
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+
+rofi.font: InconsolataForPowerline Nerd Font 11
