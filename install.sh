@@ -23,6 +23,7 @@ echo "Installing commands"
 mkdir -p $HOME/.local/bin
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
+ln -s $HOME/Documents/dotfiles/work.sh $HOME/.local/bin/work
 
 echo "Installing vimrc"
 cp -r ./.vim* $HOME
