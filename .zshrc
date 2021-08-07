@@ -114,10 +114,14 @@ export BROWSER="/usr/bin/brave"
 export VI_MODE_SET_CURSOR=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 
-
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 
 xset b off
-#cbonsai -p -m "$(fortune)"
+
+if [ -e /tmp/workdir ]
+then
+  echo "Restoring workstation"
+  cd $(cat /tmp/workdir)
+fi

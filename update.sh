@@ -20,7 +20,7 @@ echo "Copying g600 macros"
 cp -r $HOME/.config/g600/ .
 
 echo "Copying vimrc"
-cp -r $HOME/.vim* ./
+cp -r $HOME/.vimrc .
 
 echo "Copying nitrogen"
 cp -r $HOME/.config/nitrogen .
