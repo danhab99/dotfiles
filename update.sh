@@ -26,9 +26,6 @@ grab $HOME/.config/g600
 echo "Copying vimrc"
 grab $HOME/.vimrc
 
-echo "Copying nitrogen"
-grab $HOME/.config/nitrogen
-
 echo "Updating binaries"
 ./update-binaries.sh
 
