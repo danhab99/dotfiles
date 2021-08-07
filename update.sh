@@ -1,29 +1,33 @@
 lwd=$(pwd)
 cd $HOME/Documents/dotfiles
 
+function grab() {
+  cp -r $1 .
+}
+
 echo "Copying configs"
-cp -r $HOME/.config/i3 .
-cp -r $HOME/.config/dunst .
-cp $HOME/.bash_aliases .bash_aliases
-cp $HOME/.bash_paths .bash_paths
-cp $HOME/.bashrc .bashrc
-cp $HOME/.X* .
+grab $HOME/.config/i3
+grab $HOME/.config/dunst
+grab $HOME/.bash_aliases
+grab $HOME/.bash_paths
+grab $HOME/.bashrc
+grab $HOME/.X*
 
 echo "Copying zsh"
-cp $HOME/.zshrc ./.zshrc
-cp -r $HOME/.oh-my-zsh/* ./oh-my-zsh/
+grab $HOME/.zshrc 
+grab $HOME/.oh-my-zsh
 
 echo "Copying rofi"
-cp -r $HOME/.local/share/rofi/themes/* ./rofi/
+grab $HOME/.local/share/rofi/themes
 
 echo "Copying g600 macros"
-cp -r $HOME/.config/g600/ .
+grab $HOME/.config/g600
 
 echo "Copying vimrc"
-cp -r $HOME/.vimrc .
+grab $HOME/.vimrc
 
 echo "Copying nitrogen"
-cp -r $HOME/.config/nitrogen .
+grab $HOME/.config/nitrogen
 
 echo "Updating binaries"
 ./update-binaries.sh

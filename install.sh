@@ -13,11 +13,11 @@ yes | cp -rf ./g600 $HOME/.config
 
 echo "Installing rofi"
 mkdir -p $HOME/.local/share/rofi
-yes | cp -rf ./rofi $HOME/.local/share/rofi/themes
+yes | cp -rf ./rofi/* $HOME/.local/share/rofi
 
 echo "Installing zsh"
-cp .zshrc $HOME/.zshrc
-cp -r ./oh-my-zsh $HOME/.oh-my-zsh
+cp .zshrc $HOME
+cp -r ./.oh-my-zsh $HOME
 
 echo "Installing commands"
 mkdir -p $HOME/.local/bin
