@@ -28,7 +28,7 @@ binutils
 bison
 blender
 bmenu
-brave
+brave-browser
 btrfs-progs
 bzip2
 cava
@@ -175,6 +175,7 @@ mongodb-shell
 morc_menu
 mousepad
 nano
+nautilus-gnome-disks
 ncdu
 nemo
 nemo-terminal
@@ -295,6 +296,7 @@ viewnior
 vim-plug
 virtualbox
 visual-studio-code-insiders-bin
+vmware-workstation
 volumeicon
 vpk-fuse-git
 w3m
@@ -302,6 +304,7 @@ webcamoid
 wget
 which
 wine
+wine-lol
 wmutils
 wol-systemd
 wpa_supplicant
