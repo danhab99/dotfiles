@@ -30,7 +30,7 @@ font pango:monospace 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec xterm
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator --config .config/terminator.conf
 
@@ -216,7 +216,7 @@ bar {
 	position bottom
 	colors {
 		background $bg-color-t
-	    	separator $text-color
+    separator $text-color
 		#                  border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
@@ -328,7 +328,7 @@ exec_always pactl set-default-sink "alsa_output.usb-DAC-X6_DAC-X6-01.analog-ster
 ################# i3-radius #######################
 #smart_borders on
 #smart_borders no_gaps
-#border_radius 8
+border_radius 8
 
 exec_always taralli
 
@@ -340,3 +340,6 @@ for_window [window_role="pop-up"] floating enable
 
 # Fullscreen TF2
 for_window [class="hl2_linux"] fullscreen enable
+
+# Float google assistant
+for_window [title="Google Assistant Unofficial Client"] floating enable, focus, move position center

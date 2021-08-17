@@ -12,6 +12,7 @@ anbox-git
 anbox-image
 android-studio
 arandr
+arc-gtk-theme
 arp-scan
 aspnet-runtime
 atomizer-git
@@ -55,6 +56,7 @@ docker
 docker-compose
 dosfstools
 dotnet-sdk
+dunst
 e2fsprogs
 ecryptfs-utils
 efibootmgr
@@ -62,6 +64,7 @@ entr
 epdfview
 ethtool
 exfat-utils
+exif
 f2fs-tools
 fakeroot
 feh
@@ -103,6 +106,7 @@ gzip
 hardinfo
 htop
 i3-default-artwork
+i3-gaps-rounded-git
 i3blocks
 i3blocks-contrib
 iftop
@@ -150,7 +154,6 @@ manjaro-alsa
 manjaro-browser-settings
 manjaro-firmware
 manjaro-hotfixes
-manjaro-i3-settings
 manjaro-printer
 manjaro-ranger-settings
 manjaro-release
@@ -190,6 +193,7 @@ networkmanager-openvpn
 networkmanager-pptp
 networkmanager-vpnc
 nfs-utils
+nitrogen
 nload
 nmap
 nodejs
@@ -249,6 +253,7 @@ retroarch-standalone-service
 rofi
 rpi-imager
 rsync
+rxvt-unicode
 s-nail
 sbxkb
 screen
@@ -281,6 +286,7 @@ tidy
 tiny-irc-client
 tlp
 toilet
+tor
 tree
 ttf-dejavu
 ttf-fira-code
