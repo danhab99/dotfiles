@@ -1,78 +1,77 @@
 ! Font to Fira Code Retina, 16px
-URxvt.font: xft:Fira Code Retina:style=Retina:pixelsize=16
+*.font: xft:Fira Code Retina:style=Retina:pixelsize=16
 
 ! Set Bold Font to Fira Code Bold, 16px
-URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize:16
+*.boldFont: xft:Fira Code:style=Bold:pixelsize:16
 
 ! Set Italics Font to Fira Code Light, 16px
-URxvt.italicFont: xft:Fira Code:style=Light:pixelsize:16
+*.italicFont: xft:Fira Code:style=Light:pixelsize:16
 
-! Thanks and credits to https://github.com/sindresorhus/hyperterm-snazzy
+*.renderFont: true
 
-*font: xft:Menlo\ for\ Powerline:Regular:pixelsize=12
-URxvt*foreground: #eff0eb
-URxvt*background: #0d0e12
-URxvt*cursorColor: #97979b
+*foreground: #eff0eb
+*background: #0d0e12
+*cursorColor: #97979b
 
 ! Black + DarkGrey
-URxvt*color0: #282a36
-URxvt*color8: #686868
+*color0: #282a36
+*color8: #686868
 
 ! DarkRed + Red
-URxvt*color1: #ff5c57
-URxvt*color9: #ff5c57
+*color1: #ff5c57
+*color9: #ff5c57
 
 ! DarkGreen + Green
-URxvt*color2: #5af78e
-URxvt*color10:#5af78e
+*color2: #5af78e
+*color10:#5af78e
 
 ! DarkYellow + Yellow
-URxvt*color3: #f3f99d
-URxvt*color11:#f3f99d
+*color3: #f3f99d
+*color11:#f3f99d
 
 ! DarkBlue + Blue
-URxvt*color4: #57c7ff
-URxvt*color12:#57c7ff
+*color4: #57c7ff
+*color12:#57c7ff
 
 ! DarkMagenta + Magenta
-URxvt*color5: #ff6ac1
-URxvt*color13:#ff6ac1
+*color5: #ff6ac1
+*color13:#ff6ac1
 
 ! DarkCyan + Cyan (both not tango)
-URxvt*color6: #9aedfe
-URxvt*color14:#9aedfe
+*color6: #9aedfe
+*color14:#9aedfe
 
 ! LightGrey + White
-URxvt*color7: #eff0eb
-URxvt*color15:#f1f1f0
+*color7: #eff0eb
+*color15:#f1f1f0
 
 ! Use this color for bold
-URxvt.colorBD: #EAEAEA
+.colorBD: #EAEAEA
 
 ! Use this color for italics
-URxvt.colorIT: #EAEAEA
+.colorIT: #EAEAEA
 
 ! Use this color for underlined text
-URxvt.colorUL: #ef5350
+.colorUL: #ef5350
 
 ! PERL Extensions
-URxvt.perl-ext-common: default,matcher
+.perl-ext-common: default,matcher
 
 ! Clickable URLs
-URxvt.url-launcher: /usr/bin/brave
-URxvt.matcher.button: 1
-URxvt.keysym.C-Delete: perl:matcher:last
-URxvt.keysym.M-Delete: perl:matcher:list
+*.url-launcher: /usr/bin/brave
+*.matcher.button: 1
+*.keysym.C-Delete: perl:matcher:last
+*.keysym.M-Delete: perl:matcher:list
 
-URxvt.scrollBar: false
-URxvt*internalBorder: 20
+*.scrollBar: false
+*internalBorder: 20
 
-URxvt.keysym.Home: \033[1~
-URxvt.keysym.End: \033[4~
-URxvt.keysym.KP_Home: \033[1~
-URxvt.keysym.KP_End:  \033[4~
+*.keysym.Home: \033[1~
+*.keysym.End: \033[4~
+*.keysym.KP_Home: \033[1~
+*.keysym.KP_End:  \033[4~
 
-URxvt.iso14755: false
-URxvt.iso14755_52: false
+*.iso14755: false
+*.iso14755_52: false
 
 rofi.font: InconsolataForPowerline Nerd Font 11
