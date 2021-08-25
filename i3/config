@@ -30,7 +30,7 @@ font pango:monospace 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec urxvt
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator --config .config/terminator.conf
 
@@ -238,7 +238,7 @@ exec_always xinput set-prop 11 317 1
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
-exec_always picom --config ~/.config/i3/picom.conf --experimental-backends --backend glx
+exec_always picom --config ~/.config/i3/picom.conf --experimental-backends
 
 # Start defaults
 exec_always ssh-add ~/.ssh/id_rsa
@@ -260,13 +260,9 @@ bindsym Control+Print exec gnome-screenshot -w
 
 # Open chrome
 bindsym $mod+w exec /usr/bin/brave
-bindsym $mod+Shift+w exec fluent-reader
 
 # Open file browser
 bindsym $mod+e exec nemo
-
-# Open VScode
-bindsym $mod+c exec code-insiders
 
 # Polybar
 # exec_always --no-startup-id $HOME/Documents/dotfiles/polybar.sh

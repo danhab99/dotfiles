@@ -34,12 +34,31 @@ Plug 'https://github.com/ernstwi/vim-secret'
 Plug 'preservim/nerdcommenter'
 Plug 'sbdchd/neoformat'
 Plug 'ziglang/zig.vim'
+Plug 'alvan/vim-closetag'
 
 call plug#end()
+
+call vundle#begin()
+Plugin 'alvan/vim-closetag'
+
+call vundle#end()
 
 colorscheme slate
 
 let NERDTreeQuitOnOpen=1
+
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.tsx"
+
+let g:ycm_semantic_triggers = {
+   \   'css': [ 're!^\s{2}', 're!:\s+' ],
+   \ }
 
 "autocmd BufWritePost * scilent! Neoformat prettier
 autocmd BufWritePre * silent! Neoformat prettier
@@ -49,15 +68,10 @@ hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
 "hi Visual ctermbg=White term=reverse
 hi Normal guibg=NONE ctermbg=NONE
 
-let g:ycm_semantic_triggers = {
-   \   'css': [ 're!^\s{2}', 're!:\s+' ],
-   \ }
-
 nmap <F6> :NERDTreeToggle<CR>
 nmap O O<Esc>o
 imap jj <Esc>
-imap qq :q
 nnoremap <leader>p :psearch <C-R><C-W><CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <space> :w<CR>
+nnoremap <space> :noh<CR>:w<CR>
