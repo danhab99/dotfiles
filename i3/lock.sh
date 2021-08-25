@@ -5,7 +5,7 @@ MEDIA_STATUS=$(playerctl status)
 playerctl pause
 
 #i3lock -t -i "$(grep -P -o '(?<=file=).*' ~/.config/nitrogen/bg-saved.cfg)" -n
-betterlockscreen -l --nofork
+betterlockscreen -l
 
 dunstctl set-paused false
 

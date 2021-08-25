@@ -21,3 +21,5 @@ export PATH=$PATH:$HOME/.yarn/bin
 
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+
+mkdir -p $HOME/go
