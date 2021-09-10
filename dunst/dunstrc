@@ -424,3 +424,8 @@ timeout = 10
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+
+[brave-rewards]
+  appname= brave
+  urgency= low
+  timeout = 0.1

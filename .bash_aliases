@@ -37,8 +37,17 @@ alias edit-macros="code ~/.config/macro-app/config.json"
 alias fixmouse="sudo systemctl restart g600.service && i3-msg restart"
 
 alias iosinstall="ideviceinstaller -i"
+alias ga="git add"
+alias gaa="git add ."
 alias gai="git add -ip"
 alias gpl="git pull origin master"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gc="git commit"
+alias gcf="git commit -m 'fix'"
+alias gca="git commit --amend"
+alias gp="git push --all"
+alias gs="git status"
 
 alias listpaths="echo $PATH | sed \"s/:/\n/g\""
 
