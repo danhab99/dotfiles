@@ -35,6 +35,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'sbdchd/neoformat'
 Plug 'ziglang/zig.vim'
 Plug 'alvan/vim-closetag'
+Plug 'ekalinin/Dockerfile.vim'
 
 call plug#end()
 
@@ -75,3 +76,9 @@ nnoremap <leader>p :psearch <C-R><C-W><CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
+
+" For local replace
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+
+" For global replace
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>

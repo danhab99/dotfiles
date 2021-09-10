@@ -1,6 +1,7 @@
 accountsservice
 acpi
 acpid
+act
 alsa-firmware
 alsa-plugins
 alsa-utils
@@ -40,6 +41,7 @@ dhclient
 dhcpcd
 diffutils
 discord
+dive
 dmidecode
 dmraid
 dnsmasq
@@ -73,6 +75,7 @@ glibc-locales
 gnome-disk-utility
 gnome-keyring
 gnome-screenshot
+gnu-netcat
 go
 google-chrome
 gparted
@@ -98,6 +101,7 @@ haveged
 hexchat
 htop
 i3-gaps-rounded-git
+i3-resurrect
 i3blocks
 i3blocks-contrib
 inetutils
@@ -111,6 +115,7 @@ jq
 kdeconnect
 kvantum-manjaro
 less
+lf
 lib32-flex
 lib32-mesa-demos
 lib32-nvidia-utils
@@ -152,12 +157,15 @@ memtest86+
 mesa-demos
 mhwd
 mhwd-db
+minecraft-launcher
 mkinitcpio-openswap
 mlocate
 mobile-broadband-provider-info
 moc
 modemmanager
+mongodb-bin
 mongodb-compass
+mongodb-tools-bin
 morc_menu
 mousepad
 nano
@@ -172,6 +180,8 @@ networkmanager-openvpn
 networkmanager-pptp
 networkmanager-vpnc
 nfs-utils
+ninja
+nmap
 nodejs
 npm
 nss-mdns
@@ -213,6 +223,7 @@ sbxkb
 screenfetch
 sed
 shadow
+signal-desktop
 snapd
 spectre-meltdown-checker
 speedtest-cli
