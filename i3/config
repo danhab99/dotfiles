@@ -229,6 +229,7 @@ bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
 gaps inner 16
+gaps outer 12
 for_window [class="^.*"] border pixel 0
 
 # Enviroment setup

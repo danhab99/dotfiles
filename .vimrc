@@ -20,6 +20,10 @@ set mouse=v
 set completeopt-=preview
 set laststatus=2
 set belloff=all
+set t_Co=256
+"set t_AB=^[[48;5;%dm
+"set t_AF=^[[38;5;%dm
+set ttymouse=xterm2
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -31,20 +35,31 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'https://github.com/ernstwi/vim-secret'
-Plug 'preservim/nerdcommenter'
 Plug 'sbdchd/neoformat'
 Plug 'ziglang/zig.vim'
 Plug 'alvan/vim-closetag'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'apzelos/blamer.nvim'
+Plug 'vim-scripts/sudo.vim'
 
 call plug#end()
 
 call vundle#begin()
 Plugin 'alvan/vim-closetag'
+Plugin 'joshdick/onedark.vim'
 
 call vundle#end()
 
-colorscheme slate
+colorscheme desert256
+" colorscheme onedark
 
 let NERDTreeQuitOnOpen=1
 
@@ -60,6 +75,9 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.tsx"
 let g:ycm_semantic_triggers = {
    \   'css': [ 're!^\s{2}', 're!:\s+' ],
    \ }
+let g:UltiSnipsExpandTrigger="<leader><space>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "autocmd BufWritePost * scilent! Neoformat prettier
 autocmd BufWritePre * silent! Neoformat prettier
@@ -77,8 +95,3 @@ nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
 
-" For local replace
-nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
-
-" For global replace
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
