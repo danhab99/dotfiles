@@ -28,6 +28,7 @@ bzip2
 cantarell-fonts
 clipit
 cmake
+cmatrix
 coreutils
 cpupower
 crda
@@ -51,6 +52,7 @@ downgrade
 e2fsprogs
 ecryptfs-utils
 efibootmgr
+emacs
 epdfview
 exfat-utils
 f2fs-tools
@@ -88,6 +90,7 @@ gst-plugins-base
 gst-plugins-good
 gst-plugins-ugly
 gstreamer
+gtk2fontsel
 gtksourceview-pkgbuild
 gufw
 gvfs
@@ -99,6 +102,7 @@ gvim
 gzip
 haveged
 hexchat
+hollywood
 htop
 i3-gaps-rounded-git
 i3-resurrect
@@ -107,6 +111,7 @@ i3blocks-contrib
 inetutils
 intel-ucode
 inxi
+iotop
 iproute2
 iputils
 jdk8-openjdk
@@ -172,6 +177,7 @@ nano
 ncdu
 nemo
 nemo-terminal
+neovim
 netctl
 network-manager-applet
 networkmanager
@@ -187,6 +193,7 @@ npm
 nss-mdns
 ntfs-3g
 ntp
+nvidia-docker
 nvidia-utils
 nvtop
 obs-studio
@@ -247,6 +254,7 @@ ttf-fira-code
 ttf-inconsolata
 ttf-indic-otf
 ttf-liberation
+unimatrix-git
 unzip
 upower
 usbutils
@@ -257,6 +265,7 @@ vibrancy-icons-teal
 viewnior
 vim-plug
 virtualbox
+visual-studio-code-insiders-bin
 vlc
 volumeicon
 vundle
