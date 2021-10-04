@@ -28,6 +28,8 @@ ln -s $HOME/Documents/dotfiles/vgrep.sh $HOME/.local/bin/vgrep
 
 echo "Installing vimrc"
 cp -r ./.vim* $HOME
+cp -r ./.vim/syntax $HOME/.vim
+cp -r ./.vim/color $HOME/.vim
 
 i3-msg restart
 cd $lwd
