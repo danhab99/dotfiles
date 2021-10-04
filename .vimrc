@@ -78,6 +78,7 @@ let g:ycm_semantic_triggers = {
 let g:UltiSnipsExpandTrigger="<leader><space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:python_recommended_style = 0
 
 "autocmd BufWritePost * scilent! Neoformat prettier
 autocmd BufWritePre * silent! Neoformat prettier

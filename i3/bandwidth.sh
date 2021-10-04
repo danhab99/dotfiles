@@ -1,7 +1,5 @@
-INTERFACE=wlp3s0
-
-CURRENT_TX=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
-CURRENT_RX=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
+CURRENT_TX=$(cat /sys/class/net/**/statistics/tx_bytes)
+CURRENT_RX=$(cat /sys/class/net/**/statistics/rx_bytes)
 
 PAST_TX=-1
 PAST_RX=-1
