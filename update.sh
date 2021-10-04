@@ -25,6 +25,8 @@ grab $HOME/.config/g600
 
 echo "Copying vimrc"
 grab $HOME/.vimrc
+grab $HOME/.vim/colors
+grab $HOME/.vim/syntax
 
 echo "Updating binaries"
 ./update-binaries.sh
