@@ -9,6 +9,7 @@ android-studio
 apparmor
 arandr
 artwork-i3
+audacity
 autoconf
 automake
 avahi
@@ -47,12 +48,15 @@ dmidecode
 dmraid
 dnsmasq
 docker
+docker-compose
 dosfstools
 downgrade
 e2fsprogs
+easyeffects
 ecryptfs-utils
 efibootmgr
 emacs
+entr
 epdfview
 exfat-utils
 f2fs-tools
@@ -79,6 +83,7 @@ gnome-keyring
 gnome-screenshot
 gnu-netcat
 go
+go-ethereum
 google-chrome
 gparted
 grep
@@ -108,6 +113,7 @@ i3-gaps-rounded-git
 i3-resurrect
 i3blocks
 i3blocks-contrib
+i3help-git
 inetutils
 intel-ucode
 inxi
@@ -135,6 +141,7 @@ lightdm-slick-greeter
 linux510
 linux510-nvidia
 logrotate
+lutris
 lvm2
 lxappearance
 lxinput
@@ -189,10 +196,10 @@ nfs-utils
 ninja
 nmap
 nodejs
+noto-fonts-emoji
 npm
 nss-mdns
 ntfs-3g
-ntp
 nvidia-docker
 nvidia-utils
 nvtop
@@ -202,7 +209,6 @@ openssh
 os-prober
 p7zip
 pacman
-palemoon-bin
 pamac-gtk
 patch
 patchutils
@@ -215,10 +221,12 @@ pkgconf
 playerctl
 polkit-gnome
 poppler-data
+postman-bin
 powertop
 procps-ng
 psmisc
 pulseaudio
+pulseeffects-legacy
 qt5-styleplugins
 qt5ct
 ranger
@@ -253,12 +261,14 @@ ttf-droid
 ttf-fira-code
 ttf-inconsolata
 ttf-indic-otf
+ttf-joypixels
 ttf-liberation
 unimatrix-git
 unzip
 upower
 usbutils
 util-linux
+uuid
 vertex-maia-themes
 vi
 vibrancy-icons-teal
@@ -290,6 +300,7 @@ xfce4-power-manager
 xfsprogs
 xorg-server
 xorg-twm
+xorg-xev
 xorg-xhost
 xorg-xinit
 xorg-xkill
@@ -298,3 +309,4 @@ xterm
 xz
 yay
 zensu
+zip

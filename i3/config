@@ -340,3 +340,5 @@ for_window [class="hl2_linux"] fullscreen enable
 
 # Float google assistant
 for_window [title="Google Assistant Unofficial Client"] floating enable, focus, move position center
+
+bindsym --release $mod+ctrl+V exec ~/Documents/dotfiles/vgrep.x11.sh

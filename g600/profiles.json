@@ -62,7 +62,7 @@
       "10": { "cmd": "/home/dan/.config/g600/tf2_eureka_escape.sh 1" },
       "11": { "cmd": "/home/dan/.config/g600/tf2_eureka_escape.sh 2" },
       "12": { "cmd": "/home/dan/.config/g600/tf2_spy.sh" },
-      "14": {"key": "F1"},
+      "14": { "key": "F1" },
       "15": { "cmd": "playerctl previous" },
       "16": { "cmd": "playerctl play-pause" },
       "17": { "cmd": "playerctl next" },
@@ -81,6 +81,24 @@
       "16": { "cmd": "xdotool mousedown 1" },
       "17": { "cmd": "xdotool mouseup 1" },
       "9": { "key": "f" }
+    }
+  },
+  {
+    "name": "splitgate",
+    "color": "0f32fe",
+    "normal": {
+      "10": { "key": "r" },
+      "9": { "key": "q" },
+      "11": { "key": "e" },
+      "13": { "key": "v" },
+      "14": { "cmd": "xdotool key q && sleep 3 && xdotool key z" },
+      "12": { "cmd": "xdotool key e && sleep 3 && xdotool key x" }
+    },
+    "mod": {
+      "9": { "key": "z" },
+      "11": { "key": "x" },
+      "10": { "key": "g" },
+      "13": { "cmd": "xdotool key x && sleep 0.25 && xdotool key z" }
     }
   }
 ]
