@@ -24,6 +24,7 @@ mkdir -p $HOME/.local/bin
 ln -s $HOME/Documents/dotfiles/update.sh $HOME/.local/bin/dotfiles-update
 ln -s $HOME/Documents/dotfiles/install.sh $HOME/.local/bin/dotfiles-install
 ln -s $HOME/Documents/dotfiles/work.sh $HOME/.local/bin/work
+ln -s $HOME/Documents/dotfiles/vgrep.sh $HOME/.local/bin/vgrep
 
 echo "Installing vimrc"
 cp -r ./.vim* $HOME
