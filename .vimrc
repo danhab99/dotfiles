@@ -87,6 +87,8 @@ hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
 "hi Visual ctermbg=White term=reverse
 hi Normal guibg=NONE ctermbg=NONE
+hi VGrepFileName ctermfg=green
+hi VGrepLine ctermfg=red
 
 nmap <F6> :NERDTreeToggle<CR>
 nmap O O<Esc>o

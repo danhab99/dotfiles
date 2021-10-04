@@ -1,5 +1,5 @@
 function type() {
-  xdotool type --delay 1 "$1"
+  xdotool type --delay 5 "$1"
 }
 
 function enter() {
