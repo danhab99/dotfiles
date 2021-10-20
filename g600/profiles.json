@@ -100,5 +100,15 @@
       "10": { "key": "g" },
       "13": { "cmd": "xdotool key x && sleep 0.25 && xdotool key z" }
     }
+  },
+  {
+    "name": "enter the gungeon",
+    "color": "e59500",
+    "normal": {
+      "13": { "key": "r" },
+      "10": { "key": "q" },
+      "9": { "key": "Tab" },
+      "11": { "key": "i" }
+    }
   }
 ]

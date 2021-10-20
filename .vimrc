@@ -25,6 +25,7 @@ set t_Co=256
 "set t_AF=^[[38;5;%dm
 set ttymouse=xterm2
 
+
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/itchyny/lightline.vim'
@@ -44,19 +45,26 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'apzelos/blamer.nvim'
 Plug 'vim-scripts/sudo.vim'
+" Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'mbbill/undotree'
 
 call plug#end()
 
 call vundle#begin()
 Plugin 'alvan/vim-closetag'
 Plugin 'joshdick/onedark.vim'
+Plugin 'ericcurtin/VimBlame.vim'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
+
+syntax on 
 
 colorscheme desert256
 " colorscheme onedark
@@ -80,7 +88,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:python_recommended_style = 0
 
-"autocmd BufWritePost * scilent! Neoformat prettier
 autocmd BufWritePre * silent! Neoformat prettier
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
@@ -90,11 +97,13 @@ hi Normal guibg=NONE ctermbg=NONE
 hi VGrepFileName ctermfg=green
 hi VGrepLine ctermfg=red
 
-nmap <F6> :NERDTreeToggle<CR>
+nmap <C-o> :NERDTreeToggle<CR>
+nmap <C-u> :UndotreeToggle<CR>
 nmap O O<Esc>o
 imap jj <Esc>
 nnoremap <leader>p :psearch <C-R><C-W><CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
-
+nnoremap ZZ :bd<CR>
+map -a :call SyntaxAttr()<CR>

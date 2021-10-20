@@ -23,7 +23,7 @@ blender
 blueman
 bluez-utils
 bmenu
-brave-beta-browser
+brave-browser-beta
 btrfs-progs
 bzip2
 cantarell-fonts
@@ -36,6 +36,7 @@ crda
 cronie
 cryptsetup
 darktable
+dbeaver
 deluge
 device-mapper
 dfc
@@ -50,6 +51,7 @@ dnsmasq
 docker
 docker-compose
 dosfstools
+dotnet-sdk-bin
 downgrade
 e2fsprogs
 easyeffects
@@ -115,11 +117,13 @@ i3blocks
 i3blocks-contrib
 i3help-git
 inetutils
+inkscape-git
 intel-ucode
 inxi
 iotop
 iproute2
 iputils
+jdk11-openjdk
 jdk8-openjdk
 jfsutils
 jq
@@ -217,10 +221,12 @@ pciutils
 pcmanfm
 perl
 perl-file-mimeinfo
+pgadmin3
 pkgconf
 playerctl
 polkit-gnome
 poppler-data
+postgresql
 postman-bin
 powertop
 procps-ng
@@ -263,6 +269,7 @@ ttf-inconsolata
 ttf-indic-otf
 ttf-joypixels
 ttf-liberation
+ttf-ms-fonts
 unimatrix-git
 unzip
 upower
