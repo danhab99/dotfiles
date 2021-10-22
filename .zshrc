@@ -68,7 +68,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker github lol node pip python screen sudo vscode brew colorize please docker-compose)
+plugins=(git docker github lol node pip python screen sudo vscode brew colorize please docker-compose )
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_paths
