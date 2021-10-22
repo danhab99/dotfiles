@@ -49,7 +49,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'apzelos/blamer.nvim'
 Plug 'vim-scripts/sudo.vim'
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'mbbill/undotree'
 
@@ -66,8 +66,8 @@ call vundle#end()
 
 syntax on 
 
-colorscheme desert256
-" colorscheme onedark
+" colorscheme desert256
+colorscheme onedark
 
 let NERDTreeQuitOnOpen=1
 
@@ -88,7 +88,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:python_recommended_style = 0
 
-autocmd BufWritePre * silent! Neoformat prettier
+" autocmd BufWritePre * silent! Neoformat prettier
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red

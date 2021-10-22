@@ -105,5 +105,6 @@ hi Ignore	ctermfg=darkgrey
 hi Error	cterm=bold ctermfg=7 ctermbg=1
 hi Variable guifg=#123456
 
+hi javascriptNull guifg=#616161 cterm=italic gui=italic
 
 "vim: sw=4

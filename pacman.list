@@ -239,6 +239,7 @@ ranger
 reiserfsprogs
 rofi
 rsync
+ruby
 s-nail
 sbxkb
 screenfetch
@@ -308,6 +309,7 @@ xfsprogs
 xorg-server
 xorg-twm
 xorg-xev
+xorg-xfontsel
 xorg-xhost
 xorg-xinit
 xorg-xkill
