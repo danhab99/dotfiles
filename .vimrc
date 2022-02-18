@@ -24,10 +24,13 @@ set t_Co=256
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
 set ttymouse=xterm2
-
+set list
+set scrolloff=15
+set clipboard=unnamed
 
 call plug#begin('~/.vim/plugged')
-Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/itchyny/lightline.vim'
 Plug 'https://github.com/terryma/vim-multiple-cursors'
 Plug 'https://github.com/tpope/vim-surround'
@@ -43,7 +46,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -52,15 +54,25 @@ Plug 'vim-scripts/sudo.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'mbbill/undotree'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'matze/vim-move'
+Plug 'pantharshit00/vim-prisma'
+Plug 'jparise/vim-graphql'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'APZelos/blamer.nvim'
 
 call plug#end()
 
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'alvan/vim-closetag'
 Plugin 'joshdick/onedark.vim'
 Plugin 'ericcurtin/VimBlame.vim'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'kien/ctrlp.vim'
+
+Bundle 'nikvdp/ejs-syntax'
 
 call vundle#end()
 
@@ -88,7 +100,24 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:python_recommended_style = 0
 
-" autocmd BufWritePre * silent! Neoformat prettier
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules)$'
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+let g:ycm_always_populate_location_list = 1
+
+autocmd BufWritePre * silent! Neoformat prettier
+au BufNewFile,BufRead *.ejs set filetype=html
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
@@ -105,5 +134,9 @@ nnoremap <leader>p :psearch <C-R><C-W><CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
-nnoremap ZZ :bd<CR>
 map -a :call SyntaxAttr()<CR>
+nmap <C-t> :tab sp<CR>
+nmap <C-x> :wqa<CR>
+nmap <C-r> :source ~/.vimrc<CR>
+nmap <C-s> :Rg<CR>
+nmap <C-h> <C-^>

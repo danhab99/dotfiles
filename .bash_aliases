@@ -24,7 +24,7 @@ alias gf="git submodule sync --recursive; git submodule update --init --recursiv
 alias e="electron ."
 
 alias salias='source ~/.bash_aliases'
-alias vrc='vi ~/.bashrc'
+alias vrc='gvim -v ~/.bashrc'
 
 alias please='sudo'
 fmkcd() { mkdir -p "$1" && cd "$1"; }
@@ -57,3 +57,5 @@ function copy() {
   cat $1 | xsel -i -b
 }
 alias xmerge="xrdb -merge ~/.Xresources && xrdb -merge ~/.Xdefaults"
+alias dc="docker-compose"
+alias gvim -vrc="vim ~/.vimrc"
