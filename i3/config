@@ -31,6 +31,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvt
+bindsym $mod+Ctrl+Return exec rm /tmp/workdir && urxvt
+bindsym $mod+Shift+Return exec urxvt -e ssh mac
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator --config .config/terminator.conf
 
@@ -204,7 +206,8 @@ set $rofi-lines 10
 set $rofi-opacity 10
 set $rofi-height 1
 set $rofi-terminal urxvt
-bindsym $mod+d exec rofi -show run -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+# bindsym $mod+d exec rofi -show run -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+bindsym $mod+d exec $HOME/.config/rofi/launchers/misc/launcher.sh
 bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
 bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme -terminal $rofi-terminal
 
@@ -255,9 +258,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightne
 
 # Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
-bindsym Print exec gnome-screenshot
-bindsym --release Control+Shift+Print exec gnome-screenshot -a
-bindsym Control+Print exec gnome-screenshot -w
+bindsym Print exec $HOME/.config/rofi/applets/android/screenshot.sh
 
 # Open chrome
 bindsym $mod+w exec /usr/bin/brave
@@ -342,3 +343,17 @@ for_window [class="hl2_linux"] fullscreen enable
 for_window [title="Google Assistant Unofficial Client"] floating enable, focus, move position center
 
 bindsym --release $mod+ctrl+V exec ~/Documents/dotfiles/vgrep.x11.sh
+
+bindsym $mod+s exec sleep 0.1 && xdotool type "¯\_(ツ)_/¯"
+
+bindsym $mod+Mod1+h exec xdotool mousemove_relative -p 270 10
+bindsym $mod+Mod1+l exec xdotool mousemove_relative -p 90 10
+bindsym $mod+Mod1+k exec xdotool mousemove_relative -p 0 10
+bindsym $mod+Mod1+j exec xdotool mousemove_relative -p 180 10
+
+bindsym $mod+Shift+Mod1+h exec xdotool mousemove_relative -p 270 100
+bindsym $mod+Shift+Mod1+l exec xdotool mousemove_relative -p 90 100
+bindsym $mod+Shift+Mod1+k exec xdotool mousemove_relative -p 0 100
+bindsym $mod+Shift+Mod1+j exec xdotool mousemove_relative -p 180 100
+
+bindsym $mod+Mod1+c exec xdotool mousedown 1 && xdotool mouseup 1
