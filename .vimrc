@@ -14,7 +14,6 @@ set tabstop=2
 set expandtab
 set number
 set incsearch
-set clipboard=unnamedplus
 set smarttab
 set mouse=v
 set completeopt-=preview
@@ -24,9 +23,8 @@ set t_Co=256
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
 set ttymouse=xterm2
-set list
 set scrolloff=15
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -130,13 +128,17 @@ nmap <C-o> :NERDTreeToggle<CR>
 nmap <C-u> :UndotreeToggle<CR>
 nmap O O<Esc>o
 imap jj <Esc>
+imap kk <Esc>
 nnoremap <leader>p :psearch <C-R><C-W><CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
 map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
-nmap <C-x> :wqa<CR>
+nmap <C-z> :wqa<CR>
 nmap <C-r> :source ~/.vimrc<CR>
 nmap <C-s> :Rg<CR>
 nmap <C-h> <C-^>
+nmap yc yygccp
+nnoremap gg mggg
+nnoremap G mgG
