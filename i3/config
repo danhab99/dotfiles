@@ -259,6 +259,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightne
 # Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
 bindsym Print exec $HOME/.config/rofi/applets/android/screenshot.sh
+bindsym $mod+p exec $HOME/.config/rofi/applets/android/screenshot.sh
 
 # Open chrome
 bindsym $mod+w exec /usr/bin/brave
@@ -306,7 +307,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.socket
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50
