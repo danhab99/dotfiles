@@ -1,4 +1,5 @@
 android-sdk-platform-tools
+android-studio
 bauh
 betterlockscreen
 brave-bin
@@ -9,6 +10,7 @@ i3-gaps-rounded-git
 i3blocks-contrib
 i3help-git
 linode-cli
+minecraft-launcher
 obs-studio-git
 pavucontrol-git
 picom-rounded-corners

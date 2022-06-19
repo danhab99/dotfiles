@@ -69,6 +69,7 @@ Plugin 'ericcurtin/VimBlame.vim'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'puremourning/vimspector'
 
 Bundle 'nikvdp/ejs-syntax'
 
@@ -114,7 +115,13 @@ let g:lightline = {
 
 let g:ycm_always_populate_location_list = 1
 
-autocmd BufWritePre * silent! Neoformat prettier
+let g:vimspector_enable_mappings = 'HUMAN'
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
+augroup END
+
 au BufNewFile,BufRead *.ejs set filetype=html
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
@@ -135,7 +142,7 @@ nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
 map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
-nmap <C-z> :wqa<CR>
+nmap <C-z> mq:wqa<CR>
 nmap <C-r> :source ~/.vimrc<CR>
 nmap <C-s> :Rg<CR>
 nmap <C-h> <C-^>
