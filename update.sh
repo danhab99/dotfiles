@@ -28,6 +28,9 @@ grab $HOME/.vimrc
 cp -r $HOME/.vim/colors ./.vim
 cp -r $HOME/.vim/syntax ./.vim
 
+echo "Copying tmux config"
+grab $HOME/.tmux.conf
+
 echo "Updating binaries"
 ./update-binaries.sh
 
