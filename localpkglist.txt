@@ -1,9 +1,11 @@
 android-sdk-platform-tools
 android-studio
+badgerdb
 bauh
 betterlockscreen
 brave-bin
 drive-bin
+fancontrol-gui
 gdrive
 htop-vim
 i3-gaps-rounded-git

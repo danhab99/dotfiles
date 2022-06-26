@@ -15,7 +15,6 @@ set expandtab
 set number
 set incsearch
 set smarttab
-set mouse=v
 set completeopt-=preview
 set laststatus=2
 set belloff=all
@@ -25,6 +24,7 @@ set t_Co=256
 set ttymouse=xterm2
 set scrolloff=15
 set clipboard=unnamedplus
+set iskeyword-=_
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -58,6 +58,7 @@ Plug 'pantharshit00/vim-prisma'
 Plug 'jparise/vim-graphql'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'APZelos/blamer.nvim'
+" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 call plug#end()
 
@@ -117,6 +118,9 @@ let g:ycm_always_populate_location_list = 1
 
 let g:vimspector_enable_mappings = 'HUMAN'
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
 augroup fmt
   autocmd!
   autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
@@ -149,3 +153,4 @@ nmap <C-h> <C-^>
 nmap yc yygccp
 nnoremap gg mggg
 nnoremap G mgG
+nnoremap gm <C-w>wj<CR>

@@ -46,6 +46,7 @@ cantor
 cervisia
 clipit
 cmake
+cmatrix
 code
 coreutils
 cpupower
@@ -254,6 +255,7 @@ ktorrent
 ktouch
 ktuberling
 kturtle
+kubectl
 kubrick
 kvantum-manjaro
 kwallet-pam
@@ -318,6 +320,7 @@ mesa-demos
 mhwd
 mhwd-db
 milou
+minikube
 minuet
 mkinitcpio-openswap
 mlocate
@@ -447,6 +450,7 @@ terminus-font
 terraform
 texinfo
 tlp
+tmux
 trash-cli
 tree
 ttf-dejavu
