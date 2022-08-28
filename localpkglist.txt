@@ -7,6 +7,7 @@ brave-bin
 drive-bin
 fancontrol-gui
 gdrive
+google-chrome
 htop-vim
 i3-gaps-rounded-git
 i3blocks-contrib
@@ -14,6 +15,7 @@ i3help-git
 linode-cli
 minecraft-launcher
 obs-studio-git
+opencv3-opt
 pavucontrol-git
 picom-rounded-corners
 pikaur

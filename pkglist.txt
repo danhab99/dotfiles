@@ -39,6 +39,7 @@ bomber
 bovo
 breeze
 breeze-gtk
+breezy
 btrfs-progs
 bzip2
 cantarell-fonts
@@ -49,10 +50,12 @@ cmake
 cmatrix
 code
 coreutils
+cpio
+cpulimit
 cpupower
 cronie
 cryptsetup
-darktable
+ctop
 deluge
 delve
 device-mapper
@@ -132,7 +135,6 @@ inxi
 iotop
 iproute2
 iputils
-itinerary
 jfsutils
 jq
 juk
@@ -172,7 +174,6 @@ kdecoration
 kdegraphics-thumbnailers
 kdenetwork-filesharing
 kdenlive
-kdepim-addons
 kdeplasma-addons
 kdesdk-kioslaves
 kdesdk-thumbnailers
@@ -309,13 +310,13 @@ manjaro-release
 manjaro-settings-manager-notifier
 manjaro-system
 manjaro-zsh-config
-marble
 markdown_previewer
 markdownpart
 matcha-gtk-theme
 mbox-importer
 mdadm
 memtest86+
+mercurial
 mesa-demos
 mhwd
 mhwd-db
@@ -329,6 +330,7 @@ moc
 modemmanager
 morc_menu
 mousepad
+mtools
 nano
 ncdu
 nemo
@@ -349,6 +351,7 @@ ntp
 nvidia-utils
 nvtop
 okular
+opencv
 opendoas
 openresolv
 openssh
@@ -359,6 +362,7 @@ pacman
 palapeli
 palemoon-bin
 pamac-gtk
+parallel
 parley
 partitionmanager
 patch
@@ -395,6 +399,7 @@ print-manager
 procps-ng
 psmisc
 pulseaudio
+pv
 qt5ct
 ranger
 redis
@@ -412,6 +417,7 @@ screenfetch
 sddm-kcm
 sed
 shadow
+signal-desktop
 skanlite
 skanpage
 snapd
@@ -468,7 +474,6 @@ vi
 vibrancy-icons-teal
 viewnior
 virtualbox
-virtualbox-host-dkms
 vlc
 volumeicon
 w3m
