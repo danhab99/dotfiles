@@ -70,5 +70,20 @@
       "10": { "key": "g" },
       "13": { "cmd": "xdotool key x && sleep 0.25 && xdotool key z" }
     }
+  },
+  {
+    "name": "satisifactory",
+    "color": "008000",
+    "normal": {
+      "10": { "key": "q" },
+      "11": { "key": "Tab" },
+      "12": { "key": "v" },
+      "13": { "key": "e" },
+      "14": { "key": "b" },
+      "16": { "cmd": "xdotool mousedown 1" },
+      "17": { "cmd": "xdotool mouseup 1" },
+      "9": { "key": "f" }
+    }
   }
 ]
+

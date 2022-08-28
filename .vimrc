@@ -22,7 +22,7 @@ set t_Co=256
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
 set ttymouse=xterm2
-set scrolloff=15
+set scrolloff=5
 set clipboard=unnamedplus
 set iskeyword-=_
 
@@ -58,7 +58,7 @@ Plug 'pantharshit00/vim-prisma'
 Plug 'jparise/vim-graphql'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'APZelos/blamer.nvim'
-" Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 call plug#end()
 
@@ -154,3 +154,8 @@ nmap yc yygccp
 nnoremap gg mggg
 nnoremap G mgG
 nnoremap gm <C-w>wj<CR>
+nnoremap i mii
+nnoremap I miI
+nnoremap a mia
+nnoremap A miA
+nnoremap o mio
