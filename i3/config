@@ -186,19 +186,22 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg-color 	         #2f343f00
+set $bg-color 	         #2f343f
 set $bg-color-t          #2f343f00
 set $inactive-bg-color   #2f343f00
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 set $indicator-color     #333333
+
 # window colors
 #                       border              background         text                 indicator
 client.focused          $bg-color           $bg-color          $text-color          $indicator-color
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $indicator-color
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $indicator-color
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color
+
+for_window [class="^.*"] border pixel 0
 
 # start dmenu (a program launcher)
 set $rofi-theme dmenu
@@ -231,9 +234,8 @@ bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
 bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
-gaps inner 16
+gaps inner 20
 gaps outer 12
-for_window [class="^.*"] border pixel 0
 
 # Enviroment setup
 exec_always xinput set-prop 11 309 1
@@ -358,3 +360,5 @@ bindsym $mod+Shift+Mod1+k exec xdotool mousemove_relative -p 0 100
 bindsym $mod+Shift+Mod1+j exec xdotool mousemove_relative -p 180 100
 
 bindsym $mod+Mod1+c exec xdotool mousedown 1 && xdotool mouseup 1
+
+exec_always --no-startup-id flashfocus
