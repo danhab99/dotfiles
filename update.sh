@@ -31,6 +31,9 @@ cp -r $HOME/.vim/syntax ./.vim
 echo "Copying tmux config"
 grab $HOME/.tmux.conf
 
+echy "Copying flashfocus"
+grap $HOME/.config/flashfocus
+
 echo "Updating binaries"
 ./update-binaries.sh
 

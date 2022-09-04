@@ -6,6 +6,7 @@ betterlockscreen
 brave-bin
 drive-bin
 fancontrol-gui
+flashfocus
 gdrive
 google-chrome
 htop-vim
@@ -26,3 +27,4 @@ vercel
 vertex-maia-themes
 vim-plug
 vundle
+zramd

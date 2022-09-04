@@ -32,6 +32,9 @@ cp -r ./.vim* $HOME
 cp -r ./.vim/syntax $HOME/.vim
 cp -r ./.vim/color $HOME/.vim
 
+echo "Installing flashfocus"
+yes | cp -rf ./flashfocus $HOME/.config
+
 git config --global clone-for-worktrees "!sh $HOME/Documents/dotfiles/git-clone-bare-for-worktrees.sh"
 
 i3-msg restart
