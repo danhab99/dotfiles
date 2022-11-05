@@ -1,0 +1,4 @@
+https://aur.archlinux.org/godoctor-git.git
+sudo pacman -S --needed base-devel git
+makepkg -si
+

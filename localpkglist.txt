@@ -8,12 +8,14 @@ drive-bin
 fancontrol-gui
 flashfocus
 gdrive
+godoctor-git
 google-chrome
 htop-vim
 i3-gaps-rounded-git
 i3blocks-contrib
 i3help-git
 linode-cli
+manjaro-firmware
 minecraft-launcher
 obs-studio-git
 opencv3-opt
@@ -27,4 +29,5 @@ vercel
 vertex-maia-themes
 vim-plug
 vundle
+xinput-gui
 zramd

@@ -22,7 +22,7 @@ set t_Co=256
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
 set ttymouse=xterm2
-set scrolloff=5
+set scrolloff=15
 set clipboard=unnamedplus
 set iskeyword-=_
 
@@ -46,7 +46,7 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' 
 Plug 'apzelos/blamer.nvim'
 Plug 'vim-scripts/sudo.vim'
 Plug 'sheerun/vim-polyglot'
@@ -59,6 +59,8 @@ Plug 'jparise/vim-graphql'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'APZelos/blamer.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'godoctor/godoctor.vim'
+" Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -123,7 +125,8 @@ let g:go_info_mode='gopls'
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
+  " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
+  autocmd BufWritePre *.ts* Neoformat prettier
 augroup END
 
 au BufNewFile,BufRead *.ejs set filetype=html
@@ -147,7 +150,7 @@ nnoremap <space> :noh<CR>:w<CR>
 map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
 nmap <C-z> mq:wqa<CR>
-nmap <C-r> :source ~/.vimrc<CR>
+nmap <C-r> :source ~/.vimrc<CR>:YcmRestartServer<CR>
 nmap <C-s> :Rg<CR>
 nmap <C-h> <C-^>
 nmap yc yygccp

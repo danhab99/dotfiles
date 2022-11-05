@@ -84,6 +84,22 @@
       "17": { "cmd": "xdotool mouseup 1" },
       "9": { "key": "f" }
     }
+  },
+  {
+    "name": "overwatch",
+    "color": "fcba03",
+    "normal": {
+      "9": { "key": "v" },
+      "10": { "key": "r" },
+      "11": { "key": "e" },
+      "12": { "key": "x" },
+      "14": { "key": "z" },
+      "16": { "key": "Control_L+dead_grave" }
+    },
+    "mod": {
+      "10": { "key": "r" },
+      "11": { "key": "shift" }
+    }
   }
 ]
 

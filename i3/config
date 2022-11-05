@@ -309,7 +309,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Macro server
 exec_always macro-server --config ~/.config/macro-app/config.json
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
+exec python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50
@@ -362,3 +362,12 @@ bindsym $mod+Shift+Mod1+j exec xdotool mousemove_relative -p 180 100
 bindsym $mod+Mod1+c exec xdotool mousedown 1 && xdotool mouseup 1
 
 exec_always --no-startup-id flashfocus
+exec_always xinput set-prop 15 284 1
+exec_always xinput set-prop 14 284 1
+exec discord --start-minimized
+exec --no-startup-id libinput-gestures-setup start
+exec_always libinput-gestures-setup restart
+
+focus_follows_mouse yes
+
+exec --no-startup-id python3 ~/Documents/install/center-mouse/i3-center-mouse.py -a
