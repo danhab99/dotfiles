@@ -427,6 +427,7 @@ rofi
 rsync
 s-nail
 sbxkb
+screen
 screenfetch
 sddm-kcm
 sed
@@ -496,6 +497,7 @@ wallpapers-juhraya
 wget
 which
 wine-staging
+wireguard-tools
 wmutils
 wpa_supplicant
 xarchiver

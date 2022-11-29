@@ -117,6 +117,7 @@ export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/brave"
 export VI_MODE_SET_CURSOR=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+export GPG_TTY=$(tty)
 
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line

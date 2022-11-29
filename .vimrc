@@ -162,3 +162,6 @@ nnoremap I miI
 nnoremap a mia
 nnoremap A miA
 nnoremap o mio
+nmap ym myyy'mp
+
+imap <leader>pe if err != nil { panic (err) }
