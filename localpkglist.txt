@@ -22,9 +22,11 @@ opencv3-opt
 pavucontrol-git
 picom-rounded-corners
 pikaur
+pngcheck
 postman-bin
 python-dbg
 qt5-styleplugins
+snowman
 vercel
 vertex-maia-themes
 vim-plug
