@@ -450,6 +450,7 @@ sweeper
 sysbench
 sysfsutils
 syslog-ng
+sysstat
 systemd
 systemd-fsck-silent
 systemd-sysvcompat
@@ -480,6 +481,7 @@ ttf-fira-code
 ttf-inconsolata
 ttf-indic-otf
 ttf-liberation
+ttf-nerd-fonts-symbols-common
 umbrello
 unclutter
 unzip
