@@ -7,6 +7,7 @@ brave-bin
 drive-bin
 fancontrol-gui
 flashfocus
+fontpreview
 gdrive
 godoctor-git
 google-chrome
@@ -19,6 +20,7 @@ manjaro-firmware
 minecraft-launcher
 obs-studio-git
 opencv3-opt
+otf-nerd-fonts-fira-code
 pavucontrol-git
 picom-rounded-corners
 pikaur
