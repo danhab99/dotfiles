@@ -18,7 +18,7 @@ grab $HOME/.zshrc
 grab $HOME/.oh-my-zsh
 
 echo "Copying rofi"
-grab $HOME/.local/share/rofi/themes
+grab $HOME/.config/rofi
 
 echo "Copying g600 macros"
 grab $HOME/.config/g600
