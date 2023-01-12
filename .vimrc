@@ -25,6 +25,7 @@ set ttymouse=xterm2
 set scrolloff=15
 set clipboard=unnamedplus
 set iskeyword-=_
+set updatetime=1000
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -125,20 +126,7 @@ augroup fmt
 augroup END
 " autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
-augroup vimrc_coc
-  autocmd!
-  autocmd VimEnter * call s:setup_coc()
-augroup END
-
-function s:setup_coc() abort
-      \ "signature.target": "echo"
-      \ "suggest.echodocSupport": true,
-      \ "suggest.maxCompleteItemCount": 20,
-        \ "diagnostic.errorSign": "•",
-        \ "diagnostic.warningSign": "•",
-        \ "diagnostic.infoSign": "•"
-        \ })
-endfunction
+autocmd CursorHold * silent call CocActionAsync('doHover')
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
