@@ -8,7 +8,8 @@ export ZSH="/home/dan/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="kennethreitz"
+# ZSH_THEME="kennethreitz"
+ZSH_THEME="half-life"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +69,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker github lol node pip python screen sudo vscode brew colorize please docker-compose )
+plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose go)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_paths
@@ -130,3 +131,4 @@ then
   echo "Restoring workstation"
   cd $(cat /tmp/workdir)
 fi
+
