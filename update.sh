@@ -27,12 +27,13 @@ echo "Copying vimrc"
 grab $HOME/.vimrc
 cp -r $HOME/.vim/colors ./.vim
 cp -r $HOME/.vim/syntax ./.vim
+cp -r $HOME/.vim/coc-settings.json ./.vim
 
 echo "Copying tmux config"
 grab $HOME/.tmux.conf
 
 echy "Copying flashfocus"
-grap $HOME/.config/flashfocus
+grab $HOME/.config/flashfocus
 
 echo "Updating binaries"
 ./update-binaries.sh

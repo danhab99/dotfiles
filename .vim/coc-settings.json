@@ -1,0 +1,32 @@
+{
+  // "suggest.echodocSupport": true,
+  // "suggest.maxCompleteItemCount": 20,
+  // "coc.preferences.formatOnSaveFiletypes": [
+  //   "javascript",
+  //   "typescript",
+  //   "typescriptreact",
+  //   "json",
+  //   "javascriptreact"
+  // ],
+  // "eslint.filetypes": [
+  //   "javascript",
+  //   "typescript",
+  //   "typescriptreact",
+  //   "javascriptreact"
+  // ],
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•",
+  "coc.preferences.enableMarkdown": true,
+  "coc.preferences.formatOnSave": true,
+  "suggest.timeout": 3000,
+  "suggest.enableFloat": true,
+  "suggest.selection": "recentlyUsedByPrefix",
+  "suggest.defaultSortMethod": "alphabetical",
+  "suggest.detailField": "preview",
+  "callHierarchy.enableTooltip": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.messageTarget": "echo",
+  "hover.target": "float",
+  "suggest.autoTrigger": "always"
+}
