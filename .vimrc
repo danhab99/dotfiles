@@ -35,7 +35,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
+" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'https://github.com/ernstwi/vim-secret'
 Plug 'sbdchd/neoformat'
 Plug 'ziglang/zig.vim'
@@ -56,11 +56,12 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'matze/vim-move'
 Plug 'pantharshit00/vim-prisma'
 Plug 'jparise/vim-graphql'
-Plug 'artur-shaik/vim-javacomplete2'
 Plug 'APZelos/blamer.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godoctor/godoctor.vim'
-" Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'embear/vim-localvimrc'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -84,7 +85,6 @@ syntax on
 colorscheme onedark
 
 let NERDTreeQuitOnOpen=1
-
 let g:closetag_regions = {
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
     \ 'javascript.jsx': 'jsxRegion',
@@ -93,7 +93,6 @@ let g:closetag_regions = {
     \ }
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.tsx"
-
 let g:ycm_semantic_triggers = {
    \   'css': [ 're!^\s{2}', 're!:\s+' ],
    \ }
@@ -101,10 +100,8 @@ let g:UltiSnipsExpandTrigger="<leader><space>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:python_recommended_style = 0
-
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules)$'
-
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -115,11 +112,8 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-
 let g:ycm_always_populate_location_list = 1
-
 let g:vimspector_enable_mappings = 'HUMAN'
-
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
@@ -127,9 +121,24 @@ augroup fmt
   autocmd!
   " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
   autocmd BufWritePre *.ts* Neoformat prettier
+  " autocmd BufWritePre *.java Neoformat uncrustify
+augroup END
+" autocmd BufEnter * lcd %:p:h
+au BufNewFile,BufRead *.ejs set filetype=html
+augroup vimrc_coc
+  autocmd!
+  autocmd VimEnter * call s:setup_coc()
 augroup END
 
-au BufNewFile,BufRead *.ejs set filetype=html
+function s:setup_coc() abort
+      \ "signature.target": "echo"
+      \ "suggest.echodocSupport": true,
+      \ "suggest.maxCompleteItemCount": 20,
+        \ "diagnostic.errorSign": "•",
+        \ "diagnostic.warningSign": "•",
+        \ "diagnostic.infoSign": "•"
+        \ })
+endfunction
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
@@ -140,6 +149,7 @@ hi VGrepLine ctermfg=red
 
 nmap <C-o> :NERDTreeToggle<CR>
 nmap <C-u> :UndotreeToggle<CR>
+nmap <C-f> :Neoformat prettier<CR>
 nmap O O<Esc>o
 imap jj <Esc>
 imap kk <Esc>
@@ -163,5 +173,18 @@ nnoremap a mia
 nnoremap A miA
 nnoremap o mio
 nmap ym myyy'mp
+imap <leader>pe if err != nil { panic (err) }<CR>
+nmap <leader>m :set mouse=<CR>
+nmap <leader>M :set mouse=a<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
 
-imap <leader>pe if err != nil { panic (err) }
+"" COC
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>

@@ -11,6 +11,9 @@ alias vv="gvim -v ."
 alias vi3="gvim -v ~/.config/i3/config"
 alias valias="gvim -v ~/.bash_aliases"
 alias vssh="gvim -v ~/.ssh/config"
+alias vfz='gvim -v $(fzf)'
+
+
 alias l="ls"
 alias inspireme="fortune | cowsay | lolcat"
 alias git-fix="git submodule sync --recursive; git submodule update --init --recursive"
@@ -24,7 +27,8 @@ alias gf="git submodule sync --recursive; git submodule update --init --recursiv
 alias e="electron ."
 
 alias salias='source ~/.bash_aliases'
-alias vrc='gvim -v ~/.bashrc'
+alias vbashrc='gvim -v ~/.bashrc'
+alias vrc="gvim -v ~/.vimrc"
 
 alias please='sudo'
 fmkcd() { mkdir -p "$1" && cd "$1"; }
@@ -40,7 +44,7 @@ alias iosinstall="ideviceinstaller -i"
 alias ga="git add"
 alias gaa="git add ."
 alias gai="git add -ip"
-alias gpl="git pull origin master"
+alias gpl="git pull"
 alias gd="git diff"
 alias gds="git diff --staged"
 alias gc="git commit --verbose"
@@ -80,3 +84,10 @@ alias open="xdg-open"
 alias capcpu="sudo cpulimit --limit 1200 -iz -p $(ps -eo %cpu,pid --sort -%cpu | head -n2 | tail -n1 | awk '{{print $2}}')"
 alias capProc="sudo cpulimit --limit 1200 -iz -p "
 alias r=". ranger"
+
+alias clip="xclip -selection c"
+alias upgrade-dashboard="kubectl rollout restart -n default deployment lime-dashboard"
+alias screen-normal="source ~/.screenlayout/normal.sh"
+alias screen-lime="source ~/.screenlayout/lime.sh"
+alias cfzf=' cd $(find . -type d -print | fzf) '
+alias tf="terraform"
