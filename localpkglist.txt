@@ -1,3 +1,5 @@
+2048.c
+act
 betterlockscreen
 cpupower-gui
 cura-5-bin

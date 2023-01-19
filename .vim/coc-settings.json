@@ -1,13 +1,13 @@
 {
   // "suggest.echodocSupport": true,
   // "suggest.maxCompleteItemCount": 20,
-  // "coc.preferences.formatOnSaveFiletypes": [
-  //   "javascript",
-  //   "typescript",
-  //   "typescriptreact",
-  //   "json",
-  //   "javascriptreact"
-  // ],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact"
+  ],
   // "eslint.filetypes": [
   //   "javascript",
   //   "typescript",

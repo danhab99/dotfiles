@@ -7,6 +7,7 @@ alsa-utils
 apparmor
 arandr
 artwork-i3
+astyle
 audacity
 autoconf
 automake
@@ -134,7 +135,6 @@ lib32-flex
 lib32-libva-vdpau-driver
 lib32-mesa-demos
 lib32-mesa-vdpau
-lib32-nvidia-utils
 lib32-vulkan-intel
 lib32-vulkan-radeon
 libdvdcss
@@ -147,12 +147,13 @@ libtool
 libva-intel-driver
 libva-mesa-driver
 licenses
+lightdm
 lightdm-settings
 lightdm-slick-greeter
+linux419-nvidia
 linux510
 linux515
 linux515-headers
-linux515-nvidia
 logrotate
 lutris
 lvm2
@@ -213,7 +214,6 @@ noto-fonts-emoji
 nss-mdns
 ntfs-3g
 ntp
-nvidia-utils
 nvtop
 obs-studio
 opendoas
@@ -237,6 +237,7 @@ picom
 piper
 pkgconf
 playerctl
+plymouth
 polkit-gnome
 poppler-data
 postgresql
@@ -264,6 +265,7 @@ screen
 screenfetch
 screenkey
 scrot
+sddm
 sed
 shadow
 signal-desktop
