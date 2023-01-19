@@ -26,6 +26,8 @@ set scrolloff=15
 set clipboard=unnamedplus
 set iskeyword-=_
 set updatetime=1000
+set breakindent
+set smartindent
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -75,6 +77,7 @@ Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'puremourning/vimspector'
+Plugin 'hashivim/vim-terraform'
 
 Bundle 'nikvdp/ejs-syntax'
 
@@ -122,7 +125,7 @@ augroup fmt
   autocmd!
   " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
   autocmd BufWritePre *.ts* Neoformat prettier
-  " autocmd BufWritePre *.java Neoformat uncrustify
+  autocmd BufWritePre *.java Neoformat astyle
 augroup END
 " autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
@@ -148,7 +151,7 @@ nnoremap <space> :noh<CR>:w<CR>
 map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
 nmap <C-z> mq:wqa<CR>
-nmap <C-r> :source ~/.vimrc<CR>:YcmRestartServer<CR>
+nmap <C-r> :source ~/.vimrc<CR>:CocRestart<CR>
 nmap <C-s> :Rg<CR>
 nmap <C-h> <C-^>
 nmap yc yygccp

@@ -166,7 +166,7 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        set $SIZE_STEP 1
+        set $SIZE_STEP 5
         bindsym h resize shrink width $SIZE_STEP px or $SIZE_STEP ppt
         bindsym j resize grow height $SIZE_STEP px or $SIZE_STEP ppt
         bindsym k resize shrink height $SIZE_STEP px or $SIZE_STEP ppt

@@ -91,3 +91,4 @@ alias screen-normal="source ~/.screenlayout/normal.sh"
 alias screen-lime="source ~/.screenlayout/lime.sh"
 alias cfzf=' cd $(find . -type d -print | fzf) '
 alias tf="terraform"
+alias rmr="rm -r"
