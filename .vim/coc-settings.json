@@ -1,24 +1,9 @@
 {
-  // "suggest.echodocSupport": true,
-  // "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact"
-  ],
-  // "eslint.filetypes": [
-  //   "javascript",
-  //   "typescript",
-  //   "typescriptreact",
-  //   "javascriptreact"
-  // ],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "coc.preferences.enableMarkdown": true,
-  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnSave": false,
   "suggest.timeout": 3000,
   "suggest.enableFloat": true,
   "suggest.selection": "recentlyUsedByPrefix",
@@ -28,5 +13,19 @@
   "diagnostic.enableMessage": "always",
   "diagnostic.messageTarget": "echo",
   "hover.target": "float",
-  "suggest.autoTrigger": "always"
+  "suggest.autoTrigger": "always",
+  "java.completion.guessMethodArguments": false,
+  "inlayHint.enableParameter": false,
+  "java.completion.enabled": true,
+  "java.eclipse.downloadSources": true,
+  "java.import.gradle.enabled": true,
+  "java.server.launchMode": "Standard",
+  "java.import.gradle.java.home": "/usr/lib/jvm/java-16-openjdk",
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "enable": true,
+    }
+  }
 }
