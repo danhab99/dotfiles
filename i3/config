@@ -236,7 +236,9 @@ gaps outer 12
 exec_always xinput set-prop 12 309 1
 exec_always xinput set-prop 12 311 1
 exec_always xinput set-prop 12 317 1
-exec_always xinput set-prop 14 'libinput Accel Speed' 0.55
+exec_always xinput set-prop 14 'libinput Accel Speed' 0.05
+exec_always xinput set-prop 12 'libinput Accel Speed' 0.6
+exec_always xinput set-prop 11 'libinput Accel Speed' 0.6
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
@@ -253,8 +255,8 @@ bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
 bindsym XF86AudioMicMute exec amixer -D pulse sset Capture toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
@@ -367,3 +369,11 @@ focus_follows_mouse yes
 exec_always --no-startup-id python3 ~/Documents/install/center-mouse/i3-center-mouse.py -a
 
 bindsym XF86Display exec arandr
+bindsym XF86Messenger exec xpad -n
+
+exec_always ( killall oneko || true ) && oneko -tofocus
+exec $HOME/.config/i3/battery.sh
+
+for_window [class="xpad" instance="xpad"] floating enable
+
+exec xpad

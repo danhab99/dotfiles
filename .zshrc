@@ -101,9 +101,6 @@ source $HOME/.bash_paths
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.bash_aliases
 
-if [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ]; then
-    source /usr/share/nnn/quitcd/quitcd.bash_zsh
-fi
 
 JAVA_HOME=$(dirname $( readlink -f $(which java) ))
 JAVA_HOME=$(realpath "$JAVA_HOME"/../)
@@ -119,6 +116,7 @@ export BROWSER="/usr/bin/brave"
 export VI_MODE_SET_CURSOR=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export GPG_TTY=$(tty)
+export TEXTNOTE_DIR=~/Documents/notes
 
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line

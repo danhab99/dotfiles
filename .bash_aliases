@@ -23,9 +23,6 @@ dstop() { docker stop $(docker ps -a -q); }
 
 alias dockerNuke="dstop"
 
-alias gf="git submodule sync --recursive; git submodule update --init --recursive"
-alias e="electron ."
-
 alias salias='source ~/.bash_aliases'
 alias vbashrc='gvim -v ~/.bashrc'
 alias vrc="gvim -v ~/.vimrc"
@@ -33,7 +30,7 @@ alias vrc="gvim -v ~/.vimrc"
 alias please='sudo'
 fmkcd() { mkdir -p "$1" && cd "$1"; }
 alias mkcd='fmkcd'
-alias here='i3-sensible-terminal'
+alias here='i3-sensible-terminal &'
 alias untar='tar -xf'
 
 alias nload="nload -u H enp2s0"
@@ -72,7 +69,6 @@ alias gnl="git nicelog"
 
 alias listpaths="echo $PATH | sed \"s/:/\n/g\""
 
-alias code="code-insiders"
 alias licenses="license-report --output=html | hcat"
 function copy() {
   cat $1 | xsel -i -b
@@ -92,3 +88,7 @@ alias screen-lime="source ~/.screenlayout/lime.sh"
 alias cfzf=' cd $(find . -type d -print | fzf) '
 alias tf="terraform"
 alias rmr="rm -r"
+alias tn="textnote"
+alias edithosts="sudo vim /etc/hosts"
+alias c="cat"
+alias d="docker"

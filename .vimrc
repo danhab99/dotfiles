@@ -65,6 +65,7 @@ Plug 'godoctor/godoctor.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'embear/vim-localvimrc'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mfussenegger/nvim-jdtls'
 
 call plug#end()
 
@@ -78,8 +79,6 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'puremourning/vimspector'
 Plugin 'hashivim/vim-terraform'
-
-Bundle 'nikvdp/ejs-syntax'
 
 call vundle#end()
 
@@ -124,8 +123,8 @@ let g:go_info_mode='gopls'
 augroup fmt
   autocmd!
   " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
-  autocmd BufWritePre *.ts* Neoformat prettier
-  autocmd BufWritePre *.java Neoformat astyle
+  " autocmd BufWritePre *.ts* Neoformat prettier
+  " autocmd BufWritePre *.java Neoformat astyle
 augroup END
 " autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
@@ -140,7 +139,7 @@ hi VGrepLine ctermfg=red
 
 nmap <C-o> :NERDTreeToggle<CR>
 nmap <C-u> :UndotreeToggle<CR>
-nmap <C-f> :Neoformat prettier<CR>
+nmap <C-f> :Neoformat<CR>
 nmap O O<Esc>o
 imap jj <Esc>
 imap kk <Esc>
