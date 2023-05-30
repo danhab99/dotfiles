@@ -18,6 +18,7 @@ configuration {
 }
 
 /* -- Light-- */
+/*
 * {
     background:                     #F5F5F5FF;
     background-alt:              	#00000000;
@@ -25,9 +26,10 @@ configuration {
     foreground:                     #000000A6;
     accent:			            	#80808066;
 }
+*/
 
 /* -- Dark -- */
-/*
+
 * {
     background:                     #3E4148FF;
     background-alt:                 #00000000;
@@ -35,7 +37,7 @@ configuration {
     foreground:                     #F5F5F5FF;
     accent:			            	#00000066;
 }
-*/
+
 
 window {
     transparency:                   "real";
