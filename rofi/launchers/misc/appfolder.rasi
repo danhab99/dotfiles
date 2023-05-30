@@ -18,6 +18,7 @@ configuration {
 }
 
 /* -- Light -- */
+/*
 * {
     background:                     #e5e5e5ff;
     background-alt:              	#00000000;
@@ -27,9 +28,9 @@ configuration {
     border:		               		#1A73E9FF;
     selected:               		#D7D7D7FF;
 }
+*/
 
 /* -- Dark -- */
-/*
 * {
     background:                     #212121ff;
     background-alt:              	#00000000;
@@ -39,7 +40,7 @@ configuration {
     border:		               		#1A73E9FF;
     selected:               		#151515ff;
 }
-*/
+
 
 window {
     transparency:                   "real";

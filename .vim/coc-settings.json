@@ -21,11 +21,34 @@
   "java.import.gradle.enabled": true,
   "java.server.launchMode": "Standard",
   "java.import.gradle.java.home": "/usr/lib/jvm/java-16-openjdk",
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "**/*.java",
+    "/home/dan/Lime/simulation-market/**/*.java"
+  ],
+  "java.errors.incompleteClasspath.severity": "ignore",
   "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
       "enable": true,
     }
-  }
+  },
+  "tailwindCSS.cssLanguages": [
+    "css",
+    "less",
+    "postcss",
+    "sass",
+    "scss",
+    "stylus",
+    "vue",
+    "typescriptreact",
+  ],
+  "tailwindCSS.jsLanguages": [
+    "javascript",
+    "javascriptreact",
+    "reason",
+    "typescriptreact"
+  ],
+  "tailwindCSS.emmetCompletions": true,
 }

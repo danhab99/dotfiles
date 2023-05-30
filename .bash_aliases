@@ -65,6 +65,7 @@ gn() {
   git checkout -b dan/$1
 }
 alias gnl="git nicelog"
+alias gaagc="git add . && git commit -a --verbose"
 
 
 alias listpaths="echo $PATH | sed \"s/:/\n/g\""

@@ -7,7 +7,6 @@ set backspace=indent,eol,start
 set autoindent
 set ruler
 set confirm
-set mouse=a
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -57,7 +56,6 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'mbbill/undotree'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'matze/vim-move'
-Plug 'pantharshit00/vim-prisma'
 Plug 'jparise/vim-graphql'
 Plug 'APZelos/blamer.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -66,6 +64,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'embear/vim-localvimrc'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mfussenegger/nvim-jdtls'
+Plug 'prisma/vim-prisma' 
 
 call plug#end()
 
@@ -79,6 +78,10 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'puremourning/vimspector'
 Plugin 'hashivim/vim-terraform'
+Plugin 'majutsushi/tagbar'
+Plugin 'starcraftman/vim-eclim'
+Plugin 'christoomey/vim-titlecase'
+Plugin 'ebnf.vim'
 
 call vundle#end()
 
@@ -119,6 +122,7 @@ let g:ycm_always_populate_location_list = 1
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:tagbar_sort=0
 
 augroup fmt
   autocmd!
@@ -178,3 +182,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+
+nmap <leader>gt <Plug>Titlecase
+vmap <leader>gt <Plug>Titlecase
+nmap <leader>gT <Plug>TitlecaseLine
+nmap <leader>t :TagbarToggle<CR>
+nmap <leader>d :CocDiagnostic<CR>
