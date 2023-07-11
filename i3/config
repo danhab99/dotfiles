@@ -336,7 +336,7 @@ exec_always /home/dan/.screenlayout/normal.sh
 # Make these kinds of windows float
 for_window [title="Android Emulator"] floating enable
 for_window [window_role="pop-up"] floating enable
-for_window [title="Google Keep"] floating disable
+for_window [window_role="pop-up"] resize set 600 500
 
 # Fullscreen TF2
 for_window [class="hl2_linux"] fullscreen enable
