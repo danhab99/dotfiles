@@ -32,7 +32,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec urxvt
 bindsym $mod+Ctrl+Return exec rm /tmp/workdir && urxvt
-bindsym $mod+Shift+Return exec urxvt -e ssh desktop
+bindsym $mod+Shift+Return exec urxvt -e ssh remotestation
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator --config .config/terminator.conf
 
@@ -237,8 +237,10 @@ exec_always xinput set-prop 12 309 1
 exec_always xinput set-prop 12 311 1
 exec_always xinput set-prop 12 317 1
 exec_always xinput set-prop 14 'libinput Accel Speed' 0.05
-exec_always xinput set-prop 12 'libinput Accel Speed' 0.8
 exec_always xinput set-prop 11 'libinput Accel Speed' 0.8
+exec_always xinput set-prop 12 'libinput Accel Speed' 0.8
+exec_always xinput set-prop 18 'libinput Accel Speed' 0.8
+exec_always xinput set-prop 19 'libinput Accel Speed' 0.8
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
@@ -305,7 +307,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
-exec python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
+exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50
@@ -377,3 +379,4 @@ for_window [class="xpad" instance="xpad"] floating enable
 exec xpad
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 bindsym $mod+c exec deepin-calculator
+bindsym $mod+n exec xpad -n

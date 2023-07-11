@@ -9,7 +9,7 @@ export ZSH="/home/dan/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="kennethreitz"
-ZSH_THEME="half-life"
+ZSH_THEME="garyblessington"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
