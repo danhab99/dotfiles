@@ -136,9 +136,9 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Bind workspaces to monitors
 
-set $SCREEN_LEFT DP3
-set $SCREEN_CENTER eDP1
-set $SCREEN_RIGHT HDMI1
+set $SCREEN_LEFT DP-5
+set $SCREEN_CENTER DP-1
+set $SCREEN_RIGHT HDMI-0
 
 workspace $ws1 output $SCREEN_LEFT
 workspace $ws2 output $SCREEN_CENTER

@@ -67,6 +67,7 @@ dotnet-runtime
 dotnet-sdk-6.0
 downgrade
 drkonqi
+dunst
 e2fsprogs
 easyeffects
 ecryptfs-utils
@@ -138,6 +139,7 @@ intel-ucode
 inxi
 iotop
 iproute2
+iptables
 iputils
 iwd
 jdk-openjdk
@@ -145,6 +147,7 @@ jdk11-openjdk
 jdk8-openjdk
 jedi-language-server
 jfsutils
+jq
 kactivitymanagerd
 kde-cli-tools
 kde-gtk-config
@@ -173,6 +176,7 @@ kwrited
 layer-shell-qt
 less
 lib32-flex
+lib32-glibc
 lib32-libva-vdpau-driver
 lib32-mesa-demos
 lib32-mesa-vdpau
@@ -181,6 +185,7 @@ lib32-vulkan-radeon
 libdvdcss
 libfprint
 libgpod
+libinput
 libinput-gestures
 libkscreen
 libksysguard
@@ -198,6 +203,7 @@ linux510
 linux510-virtualbox-host-modules
 linux515
 linux515-headers
+linux515-nvidia-470xx
 logrotate
 lutris
 lvm2
@@ -255,6 +261,7 @@ networkmanager-openvpn
 networkmanager-pptp
 networkmanager-vpnc
 nfs-utils
+ninja
 nitrogen
 nmap
 nodejs
@@ -275,6 +282,7 @@ oxygen
 oxygen-sounds
 p7zip
 pacman
+palemoon-bin
 pamac-gtk
 pandoc-cli
 patch
@@ -345,7 +353,7 @@ sof-firmware
 spectre-meltdown-checker
 speedtest-cli
 sshfs
-steam
+sshuttle
 strace
 subversion
 sudo
