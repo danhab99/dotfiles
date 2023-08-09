@@ -1,7 +1,6 @@
 function backup() {
   set +x
 
-
   tar -cvf - \
     --exclude='**/node_modules' \
     --exclude='**/*cache*' \
