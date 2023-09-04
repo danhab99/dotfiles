@@ -100,6 +100,18 @@
       "10": { "key": "r" },
       "11": { "key": "shift" }
     }
+  },
+  {
+    "name": "magicka",
+    "color": "22e0f5",
+    "normal": {
+      "10": { "cmd": "/home/dan/.config/g600/magicka/power_beam.sh" },
+      "11": { "cmd": "/home/dan/.config/g600/magicka/heal_self.sh" },
+      "9": { "cmd": "/home/dan/.config/g600/magicka/thunderbolt.sh" },
+      "12": { "cmd": "/home/dan/.config/g600/magicka/rain.sh" },
+      "13": { "cmd": "/home/dan/.config/g600/magicka/haste.sh" },
+      "14": { "cmd": "/home/dan/.config/g600/magicka/nullify.sh" }
+    }
   }
 ]
 

@@ -16,16 +16,14 @@
   "suggest.autoTrigger": "always",
   "java.completion.guessMethodArguments": false,
   "inlayHint.enableParameter": false,
-  "java.completion.enabled": true,
-  "java.eclipse.downloadSources": true,
-  "java.import.gradle.enabled": true,
-  "java.server.launchMode": "Standard",
-  "java.import.gradle.java.home": "/usr/lib/jvm/java-16-openjdk",
-  "java.project.referencedLibraries": [
-    "lib/**/*.jar",
-    "**/*.java",
-    "/home/dan/Lime/simulation-market/**/*.java"
-  ],
+  // "java.completion.enabled": true,
+  // "java.eclipse.downloadSources": true,
+  // "java.import.gradle.enabled": true,
+  // "java.server.launchMode": "Standard",
+  // "java.import.gradle.java.home": "/usr/lib/jvm/java-8-openjdk",
+  // "java.project.referencedLibraries": [
+  //   "**/*.java",
+  // ],
   "java.errors.incompleteClasspath.severity": "ignore",
   "languageserver": {
     "terraform": {

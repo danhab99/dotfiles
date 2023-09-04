@@ -125,7 +125,7 @@ let g:go_info_mode='gopls'
 let g:tagbar_sort=0
 
 augroup fmt
-  autocmd!
+  " autocmd!
   " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
   " autocmd BufWritePre *.ts* Neoformat prettier
   " autocmd BufWritePre *.java Neoformat astyle
