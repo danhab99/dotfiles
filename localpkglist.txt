@@ -1,11 +1,16 @@
+backup-brute
 betterlockscreen
+cpupower-gui
 epdfview
 flashfocus
 gcolor2
+genpkgbuild-go
 grub-theme-manjaro-dev
+htop-vim
 i3-gaps-rounded-git
 i3blocks-contrib
 intellij-idea-ce
+keyd
 manjaro-firmware
 markdown_previewer
 mongodb-compass

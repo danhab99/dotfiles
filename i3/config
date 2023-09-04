@@ -236,11 +236,8 @@ gaps outer 12
 exec_always xinput set-prop 12 309 1
 exec_always xinput set-prop 12 311 1
 exec_always xinput set-prop 12 317 1
-exec_always xinput set-prop 14 'libinput Accel Speed' 0.05
-exec_always xinput set-prop 11 'libinput Accel Speed' 0.8
-exec_always xinput set-prop 12 'libinput Accel Speed' 0.8
-exec_always xinput set-prop 18 'libinput Accel Speed' 0.8
-exec_always xinput set-prop 19 'libinput Accel Speed' 0.8
+exec_always xinput set-prop 13 'libinput Accel Speed' 5
+exec_always xinput set-prop 14 'libinput Accel Speed' 5
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
@@ -378,5 +375,7 @@ for_window [class="xpad" instance="xpad"] floating enable
 
 exec xpad
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-bindsym $mod+c exec deepin-calculator
+# bindsym $mod+c exec deepin-calculator
 bindsym $mod+n exec xpad -n
+
+bindsym $mod+c xdotool type "https://rke1-ma.limebrokerage.com/k8s/clusters/c-m-fbvg2bng"

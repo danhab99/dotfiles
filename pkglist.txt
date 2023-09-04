@@ -17,6 +17,7 @@ aws-cli
 b43-fwcutter
 base-devel
 bash
+bind
 bison
 blender
 bluedevil
@@ -130,7 +131,6 @@ gzip
 haveged
 helm
 hexchat
-htop
 i3blocks
 iftop
 inetutils
@@ -175,6 +175,7 @@ kwayland-integration
 kwin
 kwrited
 layer-shell-qt
+lazygit
 less
 lib32-alsa-lib
 lib32-cairo
@@ -217,6 +218,7 @@ linux510-virtualbox-host-modules
 linux515
 linux515-headers
 linux515-nvidia-470xx
+linux515-virtualbox-host-modules
 linux54-headers
 logrotate
 lutris
@@ -305,6 +307,7 @@ pandoc-cli
 patch
 patchutils
 pavucontrol
+pbzip2
 pciutils
 pcmanfm
 perl
@@ -371,6 +374,7 @@ spectre-meltdown-checker
 speedtest-cli
 sshfs
 sshuttle
+steam
 strace
 subversion
 sudo
@@ -495,5 +499,6 @@ xterm
 xz
 yay
 yq
+yt-dlp
 zensu
 zip
