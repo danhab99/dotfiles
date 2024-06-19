@@ -9,7 +9,7 @@ export ZSH="/home/dan/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="kennethreitz"
-ZSH_THEME="garyblessington"
+ZSH_THEME="garyblessington-withhostname"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,7 +69,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose go)
+plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose go fzf qrcode vi-mode dotenv)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_paths
@@ -100,7 +100,12 @@ source $HOME/.bash_paths
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.bash_aliases
+source ~/.local/bin/cli-bookmarks/bookmarks.sh
 
+alias b="bookmark save"
+alias bcd="bookmark cd"
+alias bd="bookmark delete"
+alias bl="bookmark list"
 
 JAVA_HOME=$(dirname $( readlink -f $(which java) ))
 JAVA_HOME=$(realpath "$JAVA_HOME"/../)
@@ -121,12 +126,20 @@ export TEXTNOTE_DIR=~/Documents/notes
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+# bindkey "^h" backward-char
+# bindkey "^j" backward-word
+# bindkey "^l" forward-char
+# bindkey "^k" forward-word
 
 xset b off
 
 if [ -e /tmp/workdir ]
 then
-  echo "Restoring workstation"
-  cd $(cat /tmp/workdir)
+  DIR=$(cat /tmp/workdir)
+  echo "Working in $DIR"
+  cd $DIR
 fi
 
+eval "$(zoxide init zsh)"
+eval "$(ssh-agent -s)"
+eval "$(fzf --zsh)"

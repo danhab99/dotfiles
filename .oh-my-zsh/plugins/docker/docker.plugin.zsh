@@ -16,6 +16,8 @@ alias dni='docker network inspect'
 alias dnls='docker network ls'
 alias dnrm='docker network rm'
 alias dpo='docker container port'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
 alias dpu='docker pull'
 alias dr='docker container run'
 alias drit='docker container run -it'
@@ -57,6 +59,6 @@ fi
     ! is-at-least 23.0.0 ${${(s:,:z)"$(command docker --version)"}[3]}; then
         command cp "${0:h}/completions/_docker" "$ZSH_CACHE_DIR/completions/_docker"
       else
-        command docker completion zsh >| "$ZSH_CACHE_DIR/completions/_docker"
+        command docker completion zsh | tee "$ZSH_CACHE_DIR/completions/_docker" > /dev/null
   fi
 } &|
