@@ -16,14 +16,17 @@
   "suggest.autoTrigger": "always",
   "java.completion.guessMethodArguments": false,
   "inlayHint.enableParameter": false,
-  // "java.completion.enabled": true,
-  // "java.eclipse.downloadSources": true,
-  // "java.import.gradle.enabled": true,
-  // "java.server.launchMode": "Standard",
-  // "java.import.gradle.java.home": "/usr/lib/jvm/java-8-openjdk",
-  // "java.project.referencedLibraries": [
-  //   "**/*.java",
-  // ],
+  "java.completion.enabled": true,
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-18",
+      "path": "/usr/lib/jvm/jdk-18.0.2.1",
+      "default": true
+    },
+  ],
+  "java.project.sourcePaths": [
+    "/home/dan/Lime/tradedesk-rest"
+  ],
   "java.errors.incompleteClasspath.severity": "ignore",
   "languageserver": {
     "terraform": {
@@ -49,4 +52,8 @@
     "typescriptreact"
   ],
   "tailwindCSS.emmetCompletions": true,
+  "java.import.gradle.java.home": "/usr/lib/jvm/jdk-15.0.2",
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v2.0.json": "**/docker-compose*.yml"
+  }
 }

@@ -32,7 +32,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec urxvt
 bindsym $mod+Ctrl+Return exec rm /tmp/workdir && urxvt
-bindsym $mod+Shift+Return exec urxvt -e ssh remotestation
+bindsym $mod+Shift+Return exec urxvt -e ssh -XY remotestation
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator --config .config/terminator.conf
 
@@ -55,12 +55,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# Move workspace between screens
-bindsym $mod+Ctrl+Left move workspace to output left
-bindsym $mod+Ctrl+Right move workspace to output right
-bindsym $mod+Ctrl+h move workspace to output left
-bindsym $mod+Ctrl+l move workspace to output right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -206,8 +200,8 @@ for_window [class="^.*"] border pixel 0
 # start dmenu (a program launcher)
 # bindsym $mod+d exec rofi -show run -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
 bindsym $mod+d exec $HOME/.config/rofi/launchers/misc/launcher.sh
-bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
-bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme -terminal $rofi-terminal
+# bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
+# bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme -terminal $rofi-terminal
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -225,7 +219,9 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
+# bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
+# bindsym $mod+shift+x exec betterlockscreen -l
+bindsym $mod+shift+x exec i3lock -c 000000ff
 bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
@@ -368,7 +364,7 @@ exec_always --no-startup-id python3 ~/Documents/install/center-mouse/i3-center-m
 bindsym XF86Display exec arandr
 bindsym XF86Messenger exec xpad -n
 
-# exec_always ( killall oneko || true ) && oneko -tofocus
+exec_always ( killall oneko || true ) && oneko -tofocus -position +30+0
 exec $HOME/.config/i3/battery.sh
 
 for_window [class="xpad" instance="xpad"] floating enable
@@ -378,4 +374,14 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # bindsym $mod+c exec deepin-calculator
 bindsym $mod+n exec xpad -n
 
-bindsym $mod+c xdotool type "https://rke1-ma.limebrokerage.com/k8s/clusters/c-m-fbvg2bng"
+bindsym $mod+c exec deepin-calculator
+
+
+bindsym $mod+Shift+Ctrl+l exec sleep 0.5 && xdotool type https://www.linkedin.com/in/danhabot/
+bindsym $mod+Ctrl+g exec sleep 0.5 && xdotool type https://github.com/danhab99
+bindsym $mod+Ctrl+e exec sleep 0.5 && xdotool type dan.habot@gmail.com
+
+bindsym $mod+Ctrl+a exec playerctl previous
+bindsym $mod+Ctrl+d exec playerctl next
+bindsym $mod+Ctrl+w exec amixer -D pulse sset Master 5%+
+bindsym $mod+Ctrl+s exec amixer -D pulse sset Master 5%-

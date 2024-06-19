@@ -14,7 +14,7 @@ alias vssh="gvim -v ~/.ssh/config"
 alias vfz='gvim -v $(fzf)'
 
 
-alias l="ls"
+# alias l="ls"
 alias inspireme="fortune | cowsay | lolcat"
 alias git-fix="git submodule sync --recursive; git submodule update --init --recursive"
 alias src="source ~/.bashrc"
@@ -46,7 +46,7 @@ alias gd="git diff"
 alias gds="git diff --staged"
 alias gc="git commit --verbose"
 alias gcf="git commit -m 'fix'"
-alias gca="git commit --amend"
+alias gca="git commit --amend --verbose"
 alias gp="git push --all"
 alias gs="git status"
 alias gwt="git worktree list"
@@ -86,10 +86,24 @@ alias clip="xclip -selection c"
 alias upgrade-dashboard="kubectl rollout restart -n default deployment lime-dashboard"
 alias screen-normal="source ~/.screenlayout/normal.sh"
 alias screen-lime="source ~/.screenlayout/lime.sh"
-alias cfzf=' cd "$(find . -type d -print | fzf)" '
+alias cfzf='cd "$(dirname $(fzf))"'
 alias tf="terraform"
 alias rmr="rm -r"
 alias tn="textnote"
 alias edithosts="sudo vim /etc/hosts"
 alias c="cat"
 alias d="docker"
+alias lg="lazygit"
+
+alias tfa="terraform apply"
+alias tfaa="terraform apply --auto-approve"
+alias tfd="terraform destroy"
+alias tfdd="terraform destroy --auto-approve"
+alias tfp="terraform plan"
+alias tfi="terraform init"
+
+docker-send() {
+  docker save $1 | ssh -C $2 docker load
+}
+
+alias zadd="zoxide add"
