@@ -2,7 +2,7 @@ MODE=$1
 
 function track() {
   ORIGINAL_LOCATION=$1
-  DOTFILES_LOCATION=$2
+  DOTFILES_LOCATION=$2/_$(basename $ORIGINAL_LOCATION)_
 
   case $MODE in
     "update")
@@ -13,13 +13,12 @@ function track() {
     "install")
       echo "Putting $DOTFILES_LOCATION in $ORIGINAL_LOCATION"
       mkdir -p ./$(dirname $DOTFILES_LOCATION)
-      rclone copy -P $DOTFILES_LOCATION $ORIGINAL_LOCATION
+      rclone copy -P $DOTFILES_LOCATION/* ${INSTALL_ORIGIN:=/}/$ORIGINAL_LOCATION
       ;;
     "list")
-      echo "Saving $ORIGINAL_LOCATION in $DOTFILES_LOCATION"
+      echo "Tracking $ORIGINAL_LOCATION in $DOTFILES_LOCATION"
   esac
 }
-
 
 case $MODE in
   "update")
@@ -27,6 +26,7 @@ case $MODE in
     yay -Qqe > pkglist.yay
     ;;
   "install")
+    git pull origin master
     echo "Putting $DOTFILES_LOCATION in $ORIGINAL_LOCATION"
     yay -S --needed - < pkglist.yay
     ;;
@@ -44,7 +44,6 @@ track $HOME/.urxvt/ext urxvt
 track $HOME/.vim/coc-settings.json vim
 track $HOME/.vim/desert256.vim vim
 track $HOME/.vimrc vim
-track $HOME/.vimrc vim
 track $HOME/.bash_aliases bash
 track $HOME/.bash_paths bash
 track $HOME/.bash_profile bash
@@ -55,3 +54,11 @@ track $HOME/.gitconfig git
 track $HOME/.xbindkeys X
 track $HOME/.Xdefaults X
 track $HOME/.Xresources X
+
+case $MODE in
+  "update")
+    git add .
+    git commit -a -m "$(date)"
+    git push origin master
+    ;;
+esac
