@@ -1,5 +1,0 @@
-https://github.com/glennular/i3help.git
-autoreconf --force --install
-./configure
-make
-make install

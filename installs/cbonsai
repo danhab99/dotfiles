@@ -1,3 +1,0 @@
-https://gitlab.com/jallbrit/cbonsai
-make install PREFIX=~/.local
-sudo make install

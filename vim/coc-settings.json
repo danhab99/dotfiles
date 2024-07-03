@@ -1,0 +1,83 @@
+{
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•",
+  "coc.preferences.enableMarkdown": true,
+  "coc.preferences.formatOnSave": false,
+  "suggest.timeout": 3000,
+  "suggest.enableFloat": true,
+  "suggest.selection": "recentlyUsedByPrefix",
+  "suggest.defaultSortMethod": "alphabetical",
+  "suggest.detailField": "preview",
+  "callHierarchy.enableTooltip": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.messageTarget": "echo",
+  "hover.target": "float",
+  "suggest.autoTrigger": "always",
+  "java.completion.enabled": true,
+  "java.eclipse.downloadSources": true,
+  "java.import.gradle.enabled": true,
+  "java.server.launchMode": "Standard",
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.enabled": true,
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-18",
+      "path": "/usr/lib/jvm/jdk-18.0.2.1",
+      "default": true
+    }
+  ],
+  "languageserver": {
+    "csharp-ls": {
+      "command": "csharp-ls",
+      "filetypes": ["cs"],
+      "rootPatterns": ["*.csproj"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "enable": true
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    }
+  },
+  "tailwindCSS.cssLanguages": [
+    "css",
+    "less",
+    "postcss",
+    "sass",
+    "scss",
+    "stylus",
+    "vue",
+    "typescriptreact"
+  ],
+  "tailwindCSS.jsLanguages": [
+    "javascript",
+    "javascriptreact",
+    "reason",
+    "typescriptreact"
+  ],
+  "tailwindCSS.emmetCompletions": true,
+  "java.import.gradle.java.home": "/usr/lib/jvm/java-8-openjdk/jre",
+  "rust-analyzer.inlayHints.typeHints.enable": true,
+  "rust-analyzer.inlayHints.bindingModeHints.enable": false,
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+  "rust-analyzer.inlayHints.closingBraceHints.minLines": 0,
+  "rust-analyzer.inlayHints.closureCaptureHints.enable": false,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "never",
+  "rust-analyzer.inlayHints.closureStyle": "hide",
+  "rust-analyzer.inlayHints.discriminantHints.enable": "never",
+  "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
+  "rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe": false,
+  "rust-analyzer.inlayHints.reborrowHints.enable": "never",
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+}

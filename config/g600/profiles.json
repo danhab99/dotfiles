@@ -1,0 +1,105 @@
+[
+  {
+    "name": "i3",
+    "color": "ff7869",
+    "normal": {
+      "10": { "key": "Super_L+f" },
+      "11": { "key": "Shift_L+Super_L+Right" },
+      "12": { "key": "Super_L+w" },
+      "13": { "key": "Super_L+Return" },
+      "14": { "key": "Super_L+c" },
+      "16": { "key": "Super_L+Shift_L+space" },
+      "19": { "cmd": "./.asciishrug.sh" },
+      "20": { "key": "Super_L+Shift_L+r" },
+      "9": { "key": "Shift_L+Super_L+Left" }
+    },
+    "mod": {
+      "10": { "key": "Super_L+q" },
+      "11": { "key": "Control_L+Super_L+Right" },
+      "12": { "cmd": "playerctl previous" },
+      "13": { "cmd": "playerctl play-pause" },
+      "14": { "cmd": "playerctl next" },
+      "17": { "key": "Super_L+v" },
+      "18": { "key": "Super_L+Shift_L+x" },
+      "20": { "key": "Super_L+Shift_L+x" },
+      "9": { "key": "Control_L+Super_L+Left" }
+    }
+  },
+  {
+    "name": "tf2",
+    "color": "ff0000",
+    "normal": {
+      "10": { "key": "1" },
+      "11": { "key": "3" },
+      "12": { "key": "e" },
+      "13": { "key": "r" },
+      "14": { "key": "q" },
+      "15": { "key": "F2" },
+      "16": { "key": "F1" },
+      "17": { "key": "p" },
+      "18": { "key": "x" },
+      "19": { "key": "z" },
+      "20": { "key": "a" },
+      "9": { "key": "2" }
+    },
+    "mod": {
+      "10": { "cmd": "/home/dan/.config/g600/tf2_eureka_escape.sh 1" },
+      "11": { "cmd": "/home/dan/.config/g600/tf2_eureka_escape.sh 2" },
+      "12": { "cmd": "/home/dan/.config/g600/tf2_spy.sh" },
+      "14": { "key": "F1" },
+      "15": { "cmd": "playerctl previous" },
+      "16": { "cmd": "playerctl play-pause" },
+      "17": { "cmd": "playerctl next" },
+      "9": { "cmd": "/home/dan/.config/g600/tf2_create_sentry.sh" }
+    }
+  },
+  {
+    "name": "splitgate",
+    "color": "0f32fe",
+    "normal": {
+      "10": { "key": "r" },
+      "9": { "key": "q" },
+      "11": { "key": "e" },
+      "13": { "key": "v" },
+      "14": { "cmd": "xdotool key q && sleep 3 && xdotool key z" },
+      "12": { "cmd": "xdotool key e && sleep 3 && xdotool key x" }
+    },
+    "mod": {
+      "9": { "key": "z" },
+      "11": { "key": "x" },
+      "10": { "key": "g" },
+      "13": { "cmd": "xdotool key x && sleep 0.25 && xdotool key z" }
+    }
+  },
+  {
+    "name": "satisifactory",
+    "color": "008000",
+    "normal": {
+      "10": { "key": "q" },
+      "11": { "key": "Tab" },
+      "12": { "key": "v" },
+      "13": { "key": "e" },
+      "14": { "key": "b" },
+      "16": { "cmd": "xdotool mousedown 1" },
+      "17": { "cmd": "xdotool mouseup 1" },
+      "9": { "key": "f" }
+    }
+  },
+  {
+    "name": "overwatch",
+    "color": "fcba03",
+    "normal": {
+      "9": { "key": "v" },
+      "10": { "key": "r" },
+      "11": { "key": "e" },
+      "12": { "key": "x" },
+      "14": { "key": "z" },
+      "16": { "key": "Control_L+dead_grave" }
+    },
+    "mod": {
+      "10": { "key": "r" },
+      "11": { "key": "shift" }
+    }
+  }
+]
+
