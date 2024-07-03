@@ -1,0 +1,16 @@
+**/.git
+**/.git/*
+.git
+.git/
+cache
+Cache
+*/cache
+*/Cache
+**/cache
+**/Cache
+cache*
+Cache*
+*cache
+*Cache
+*cache*
+*Cache*
