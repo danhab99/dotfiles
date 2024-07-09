@@ -1,0 +1,82 @@
+! Font to Fira Code Retina, 16px
+*.font: xft:Fira Code Retina:style=Retina:pixelsize=16
+
+! Set Bold Font to Fira Code Bold, 16px
+*.boldFont: xft:Fira Code:style=Bold:pixelsize:16
+
+! Set Italics Font to Fira Code Light, 16px
+*.italicFont: xft:Fira Code:style=Light:pixelsize:16
+
+*.renderFont: true
+
+*foreground: #eff0eb
+*background: #0d0e12
+*cursorColor: #97979b
+
+! Black + DarkGrey
+*color0: #282a36
+*color8: #686868
+
+! DarkRed + Red
+*color1: #ff5c57
+*color9: #ff5c57
+
+! DarkGreen + Green
+*color2: #5af78e
+*color10:#5af78e
+
+! DarkYellow + Yellow
+*color3: #f3f99d
+*color11:#f3f99d
+
+! DarkBlue + Blue
+*color4: #57c7ff
+*color12:#57c7ff
+
+! DarkMagenta + Magenta
+*color5: #ff6ac1
+*color13:#ff6ac1
+
+! DarkCyan + Cyan (both not tango)
+*color6: #9aedfe
+*color14:#9aedfe
+
+! LightGrey + White
+*color7: #eff0eb
+*color15:#f1f1f0
+
+! Use this color for bold
+.colorBD: #EAEAEA
+
+! Use this color for italics
+.colorIT: #EAEAEA
+
+! Use this color for underlined text
+.colorUL: #ef5350
+
+! PERL Extensions
+.perl-ext-common: default,matcher
+
+! Clickable URLs
+*.url-launcher: /usr/bin/brave
+*.matcher.button: 1
+*.keysym.C-Delete: perl:matcher:last
+*.keysym.M-Delete: perl:matcher:list
+
+*.scrollBar: false
+*internalBorder: 20
+
+*.keysym.Home: \033[1~
+*.keysym.End: \033[4~
+*.keysym.KP_Home: \033[1~
+*.keysym.KP_End:  \033[4~
+
+*.iso14755: false
+*.iso14755_52: false
+
+rofi.font: InconsolataForPowerline Nerd Font 11
+
+URxvt.keysym.C-minus:     resize-font:smaller
+URxvt.keysym.C-plus:      resize-font:bigger
+URxvt.keysym.C-equal:     resize-font:reset
+URxvt.keysym.C-question:  resize-font:show
