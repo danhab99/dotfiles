@@ -9,7 +9,6 @@ export ZSH="/home/dan/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="kennethreitz"
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="garyblessington-withhostname"
 
 # Set list of themes to pick from when loading at random
@@ -70,7 +69,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose go vi-mode)
+plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose go fzf qrcode vi-mode dotenv)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_paths
@@ -123,12 +122,14 @@ export VI_MODE_SET_CURSOR=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export GPG_TTY=$(tty)
 export TEXTNOTE_DIR=~/Documents/notes
-export CVSROOT=:ext:brokuser@cvs-server:/cvs/cvsroot
-export CVS_RSH=ssh
 
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+# bindkey "^h" backward-char
+# bindkey "^j" backward-word
+# bindkey "^l" forward-char
+# bindkey "^k" forward-word
 
 xset b off
 
@@ -140,4 +141,5 @@ then
 fi
 
 eval "$(zoxide init zsh)"
+# eval "$(ssh-agent -s)"
 eval "$(fzf --zsh)"

@@ -33,13 +33,13 @@ case $MODE in
 esac
 
 track $HOME/.config/coc/extensions/package.json config/coc
-track $HOME/.config/g600 config/g600
+track $HOME/.config/g600 $HOST/config/g600
 track $HOME/.config/dunst config/dunst
 track $HOME/.config/i3 config/i3
 track $HOME/.config/rofi config/rofi
 track $HOME/.oh-my-zsh zsh/oh-my-zsh
 track $HOME/.zshrc zsh
-track $HOME/.screenlayout ./screenlayout
+track $HOME/.screenlayout $HOST/screenlayout
 track $HOME/.urxvt/ext urxvt
 track $HOME/.vim/coc-settings.json vim
 track $HOME/.vim/desert256.vim vim
@@ -48,12 +48,11 @@ track $HOME/.bash_aliases bash
 track $HOME/.bash_paths bash
 track $HOME/.bash_profile bash
 track $HOME/.bashrc bash
-track $HOME/.bashrc bash
 track $HOME/.gitignore git
 track $HOME/.gitconfig git
-track $HOME/.xbindkeys X
-track $HOME/.Xdefaults X
-track $HOME/.Xresources X
+track $HOME/.xbindkeys $HOST/X
+track $HOME/.Xdefaults $HOST/X
+track $HOME/.Xresources $HOST/X
 
 case $MODE in
   "update")

@@ -20,7 +20,7 @@ set belloff=all
 set t_Co=256
 "set t_AB=^[[48;5;%dm
 "set t_AF=^[[38;5;%dm
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set scrolloff=15
 set clipboard=unnamedplus
 set iskeyword-=_
@@ -32,63 +32,60 @@ let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/itchyny/lightline.vim'
-Plug 'https://github.com/terryma/vim-multiple-cursors'
-Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/scrooloose/nerdtree'
-Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
-" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
-Plug 'https://github.com/ernstwi/vim-secret'
-Plug 'sbdchd/neoformat'
-Plug 'ziglang/zig.vim'
-Plug 'alvan/vim-closetag'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive' 
-Plug 'apzelos/blamer.nvim'
-Plug 'vim-scripts/sudo.vim'
+" Plug 'APZelos/blamer.nvim'
+" Plug 'SirVer/ultisnips'
+" Plug 'ekalinin/Dockerfile.vim'
+" Plug 'embear/vim-localvimrc'
+" Plug 'honza/vim-snippets'
+" Plug 'jparise/vim-graphql'
+" Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'mfussenegger/nvim-jdtls'
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'mbbill/undotree'
-Plug 'pbrisbin/vim-mkdir'
-Plug 'matze/vim-move'
-Plug 'jparise/vim-graphql'
-Plug 'APZelos/blamer.nvim'
+" Plug 'vim-scripts/sudo.vim'
+" Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --all' }
+" Plug 'ziglang/zig.vim'
+Plug 'alvan/vim-closetag'
+Plug 'ap/vim-css-color'
+Plug 'apzelos/blamer.nvim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godoctor/godoctor.vim'
+Plug 'https://github.com/airblade/vim-gitgutter'
+Plug 'https://github.com/ernstwi/vim-secret'
+Plug 'https://github.com/itchyny/lightline.vim'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/terryma/vim-multiple-cursors'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'embear/vim-localvimrc'
+Plug 'matze/vim-move'
+Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mfussenegger/nvim-jdtls'
+Plug 'pbrisbin/vim-mkdir'
 Plug 'prisma/vim-prisma' 
-Plug 'hashivim/vim-terraform'
-Plug 'vim-syntastic/syntastic'
-Plug 'juliosueiras/vim-terraform-completion'
-Plug 'dhruvasagar/vim-table-mode'
-" Plug 'OmniSharp/omnisharp-vim'
+Plug 'sbdchd/neoformat'
+Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive' 
+Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'wellle/context.vim'
 
 call plug#end()
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'alvan/vim-closetag'
-Plugin 'joshdick/onedark.vim'
-Plugin 'ericcurtin/VimBlame.vim'
+" Plugin 'christoomey/vim-titlecase'
+" Plugin 'ericcurtin/VimBlame.vim'
+" Plugin 'hashivim/vim-terraform'
+" Plugin 'leafgarland/typescript-vim'
 Plugin 'HerringtonDarkholme/yats.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'puremourning/vimspector'
-Plugin 'majutsushi/tagbar'
-Plugin 'starcraftman/vim-eclim'
-Plugin 'christoomey/vim-titlecase'
+Plugin 'alvan/vim-closetag'
 Plugin 'ebnf.vim'
+Plugin 'joshdick/onedark.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'puremourning/vimspector'
+Plugin 'starcraftman/vim-eclim'
 
 call vundle#end()
 
@@ -96,6 +93,7 @@ syntax on
 
 " colorscheme desert256
 colorscheme onedark
+let g:onedark_termcolors=256
 
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
@@ -117,8 +115,6 @@ let g:go_highlight_variable_assignments = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
 let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
-
-let g:OmniSharp_server_stdio = 1
 
 let NERDTreeQuitOnOpen=1
 let g:closetag_regions = {
@@ -154,8 +150,14 @@ let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:tagbar_sort=0
 
+augroup fmt
+  " autocmd!
+  " autocmd BufWritePre *.js,*.ts*,*.py,*.go,*.html,*.css Neoformat
+  " autocmd BufWritePre *.ts* Neoformat prettier
+  " autocmd BufWritePre *.java Neoformat astyle
+augroup END
+" autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
-" au BufWritePost *.c,*.cpp,*.h,*.js*,*.go,*java silent! !ctags -R &
 autocmd CursorHold * silent call CocActionAsync('doHover')
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
@@ -168,6 +170,7 @@ hi VGrepLine ctermfg=red
 nmap <C-o> :NERDTreeToggle<CR>
 nmap <C-u> :UndotreeToggle<CR>
 nmap <C-f> :Neoformat<CR>
+imap <C-f> <Esc>:Neoformat<CR>i
 nmap O O<Esc>o
 imap jj <Esc>
 imap kk <Esc>
@@ -212,5 +215,6 @@ vmap <leader>gt <Plug>Titlecase
 nmap <leader>gT <Plug>TitlecaseLine
 nmap <leader>t :TagbarToggle<CR>
 nmap <leader>d :CocDiagnostic<CR>
+nmap <leader>r :GoRename<CR>
 
-nnoremap <C-S-P> :CtrlPTag<CR>
+nmap <C-q> :wqa<CR>

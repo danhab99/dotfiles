@@ -24,9 +24,7 @@ export PATH=$PATH:$HOME/go/bin
 
 export PATH=$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin
 
-mkdir -p $HOME/go
+mkdir -p $HOME/Documents/go
 export GOPATH=$HOME/Documents/go
 export PATH=$PATH:$GOROOT/bin/:$GOPATH/bin
-
-export PATH="$PATH:/home/dan/.dotnet/tools"
 

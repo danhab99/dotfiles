@@ -14,39 +14,25 @@
   "diagnostic.messageTarget": "echo",
   "hover.target": "float",
   "suggest.autoTrigger": "always",
+  "java.completion.guessMethodArguments": false,
+  "inlayHint.enableParameter": false,
   "java.completion.enabled": true,
-  "java.eclipse.downloadSources": true,
-  "java.import.gradle.enabled": true,
-  "java.server.launchMode": "Standard",
-  "java.errors.incompleteClasspath.severity": "ignore",
-  "java.enabled": true,
   "java.configuration.runtimes": [
     {
       "name": "JavaSE-18",
       "path": "/usr/lib/jvm/jdk-18.0.2.1",
       "default": true
-    }
-  ],
-  "languageserver": {
-    "csharp-ls": {
-      "command": "csharp-ls",
-      "filetypes": ["cs"],
-      "rootPatterns": ["*.csproj"]
     },
+  ],
+  "java.project.sourcePaths": [
+    "/home/dan/Lime/tradedesk-rest"
+  ],
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
-      "enable": true
-    },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
-        }
-      }
+      "enable": true,
     }
   },
   "tailwindCSS.cssLanguages": [
@@ -57,7 +43,7 @@
     "scss",
     "stylus",
     "vue",
-    "typescriptreact"
+    "typescriptreact",
   ],
   "tailwindCSS.jsLanguages": [
     "javascript",
@@ -66,18 +52,8 @@
     "typescriptreact"
   ],
   "tailwindCSS.emmetCompletions": true,
-  "java.import.gradle.java.home": "/usr/lib/jvm/java-8-openjdk/jre",
-  "rust-analyzer.inlayHints.typeHints.enable": true,
-  "rust-analyzer.inlayHints.bindingModeHints.enable": false,
-  "rust-analyzer.inlayHints.chainingHints.enable": false,
-  "rust-analyzer.inlayHints.closingBraceHints.enable": false,
-  "rust-analyzer.inlayHints.closingBraceHints.minLines": 0,
-  "rust-analyzer.inlayHints.closureCaptureHints.enable": false,
-  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "never",
-  "rust-analyzer.inlayHints.closureStyle": "hide",
-  "rust-analyzer.inlayHints.discriminantHints.enable": "never",
-  "rust-analyzer.inlayHints.expressionAdjustmentHints.enable": "never",
-  "rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe": false,
-  "rust-analyzer.inlayHints.reborrowHints.enable": "never",
-  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "java.import.gradle.java.home": "/usr/lib/jvm/jdk-15.0.2",
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/docker/compose/master/compose/config/config_schema_v2.0.json": "**/docker-compose*.yml"
+  }
 }
