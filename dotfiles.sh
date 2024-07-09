@@ -1,4 +1,5 @@
 MODE=$1
+HOST=$(hostname)
 
 function track() {
   ORIGINAL_LOCATION=$1
@@ -58,6 +59,6 @@ case $MODE in
   "update")
     git add .
     git commit -a -m "$(date)"
-    git push origin master
+    # git push origin master
     ;;
 esac
