@@ -69,7 +69,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose fzf qrcode vi-mode dotenv)
+plugins=(git docker github lol node pip python screen sudo vscode brew colorize docker-compose fzf qrcode vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_paths
@@ -110,8 +110,8 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/dan/.local/bin/mc mc
 
 # export PATH="/home/dan/.pyenv/bin:$PATH"
-export EDITOR="/usr/bin/vim"
-export BROWSER="/usr/bin/brave"
+export EDITOR="vim"
+export BROWSER="brave"
 export VI_MODE_SET_CURSOR=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export GPG_TTY=$(tty)
@@ -137,3 +137,19 @@ fi
 eval "$(zoxide init zsh)"
 # eval "$(ssh-agent -s)"
 eval "$(fzf --zsh)"
+
+function ranger-cd {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}

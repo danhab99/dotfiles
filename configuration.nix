@@ -74,6 +74,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -135,7 +136,26 @@
     iotop
     picom
     gnupg
+    terraform
+    terraform-lsp
+    nil
+    pavucontrol
+    pulseaudioFull
+    usbutils
     nvtopPackages.full
+    docker-compose
+    cinnamon.nemo
+    ncdu
+    oneko
+    doppler
+    nnn
+    entr
+    vscode
+    lazygit
+    lazydocker
+    steam
+    xclip
+    xsel
   ];
 
   fonts.packages = with pkgs; [
@@ -149,19 +169,24 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "curses";
+    # pinentryFlavor = "curses";
   };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = false;
+    allowSFTP = true;
+    authorizedKeysInHomedir = true;
+    settings.PasswordAuthentication = false;
+  };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedUDPPorts = [ 22 ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -186,11 +211,12 @@
   #   fsType = "ext4"; # Or your root partition's file system type
   # };
 
-  fileSystems."/home" = {
-    device = "/dev/sda";
-    fsType = "ext4";
-    options = [ "noatime" ]; # Optional: Add mount options as needed
-  };
-
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; services.xserver.videoDrivers = [ "nvidia" ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 }

@@ -80,7 +80,6 @@ alias dc="docker-compose"
 alias open="xdg-open"
 alias capcpu="sudo cpulimit --limit 1200 -iz -p $(ps -eo %cpu,pid --sort -%cpu | head -n2 | tail -n1 | awk '{{print $2}}')"
 alias capProc="sudo cpulimit --limit 1200 -iz -p "
-alias r=". ranger"
 
 alias clip="xclip -selection c"
 alias upgrade-dashboard="kubectl rollout restart -n default deployment lime-dashboard"
@@ -107,3 +106,4 @@ docker-send() {
 }
 
 alias zadd="zoxide add"
+alias r="ranger-cd"

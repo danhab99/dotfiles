@@ -23,6 +23,7 @@
     powerline-fonts
     fira-code
     fontconfig
+    ranger
   ]; 
 
   fonts.fontconfig = {
@@ -37,10 +38,6 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/coc/extensions/package.json" = {
-      source = ./coc/package.json;
-    };
-
     ".config/g600" = {
       source = ./g600;
       recursive = true;
@@ -60,26 +57,8 @@
       recursive = true;
     };
 
-    # ".oh-my-zsh" = {
-    #   source = ./zsh/oh-my-zsh;
-    #   recursive = true;
-    # };
-
     ".zshrc" = {
       source = ./zsh/zshrc;
-    };
-
-    # ".screenlayout" = {
-    #   source = ./config/screenlayout;
-    #   recursive = true;
-    # };
-
-    # ".urxvt/ext" = {
-    #   source = ./urxvt/ext;
-    # };
-
-    ".vim/coc-settings.json" = {
-      source = ./vim/coc-settings.json;
     };
 
     ".vim/desert256.vim" = {
@@ -114,16 +93,17 @@
       source = ./git/gitconfig;
     };
 
-    # ".xbindkeys" = {
-    #   source = ./X/xbindkeys;
-    # };
-
     ".Xdefaults" = {
       source = ./X/Xdefaults;
     };
 
     ".Xresources" = {
       source = ./X/Xresources;
+    };
+
+    ".urxvt/ext" = {
+      source = ./urxvt/ext;
+      recursive = true;
     };
   };
 
@@ -150,4 +130,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.ranger = {
+    enable = true;
+  };
 }
