@@ -3,7 +3,7 @@
 [user]
 	name = Dan Habot
 	email = dan.habot@gmail.com
-	# signingkey = 02C73F51B57609F0917478F3EE8A72CB46231B52
+	signingkey = 1DC36AE6EEEFDB55FE5D8874BAABD1E3FA0A9FB6
 [alias]
 	unstage = reset HEAD --
 	nicelog = log --graph --oneline
@@ -31,7 +31,7 @@
   story ="!sh -c 'ls $(git root) && git status && git diff --stat'"
 
 [commit]
-	# gpgsign = true
+	gpgsign = true
 [merge]
 	tool = fugitive
 [mergetool "fugitive"]
