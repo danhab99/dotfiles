@@ -38,7 +38,7 @@
   # plain files is through 'home.file'.
   home.file = {
     ".config/coc/extensions/package.json" = {
-      source = ./config/coc/package.json;
+      source = ./coc/package.json;
     };
 
     ".config/g600" = {
@@ -47,16 +47,16 @@
     };
 
     ".config/dunst" = {
-      source = ./config/dunst;
+      source = ./dunst;
     };
 
     ".config/i3" = {
-      source = ./config/i3;
+      source = ./i3;
       recursive = true;
     };
 
     ".config/rofi" = {
-      source = ./config/rofi;
+      source = ./rofi;
       recursive = true;
     };
 
