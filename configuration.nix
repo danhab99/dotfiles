@@ -135,6 +135,7 @@
     iotop
     picom
     gnupg
+    nvtopPackages.full
   ];
 
   fonts.packages = with pkgs; [
