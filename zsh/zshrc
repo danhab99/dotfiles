@@ -153,3 +153,13 @@ function ranger-cd {
     fi
     command rm -f -- "$tempfile" 2>/dev/null
 }
+
+function work {
+    echo "Saving workdir"
+    pwd > /tmp/workdir
+}
+
+function vacay {
+    echo "Have funn"
+    rm /tmp/workdir
+}
