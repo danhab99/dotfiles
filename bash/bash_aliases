@@ -5,14 +5,14 @@ alias cdh="cd ~"
 alias ci3="cd ~/.config/i3"
 alias cnix="cd /etc/nixos"
 alias browse="nautilus --browser . &"
-alias vi="vim -v"
-alias vim="vim -v"
-alias v="vim -v"
-alias vv="vim -v ."
-alias vi3="vim -v ~/.config/i3/config"
-alias valias="vim -v ~/.bash_aliases"
-alias vssh="vim -v ~/.ssh/config"
-alias vfz='vim -v $(fzf)'
+alias vi="gvim -v"
+alias vim="gvim -v"
+alias v="gvim -v"
+alias vv="gvim -v ."
+alias vi3="gvim -v ~/.config/i3/config"
+alias valias="gvim -v ~/.bash_aliases"
+alias vssh="gvim -v ~/.ssh/config"
+alias vfz='gvim -v $(fzf)'
 
 
 # alias l="ls"
