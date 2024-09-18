@@ -3,6 +3,7 @@
 
 alias cdh="cd ~"
 alias ci3="cd ~/.config/i3"
+alias cnix="cd /etc/nixos"
 alias browse="nautilus --browser . &"
 alias vi="vim -v"
 alias vim="vim -v"
@@ -24,8 +25,8 @@ dstop() { docker stop $(docker ps -a -q); }
 alias dockerNuke="dstop"
 
 alias salias='source ~/.bash_aliases'
-alias vbashrc='gvim -v ~/.bashrc'
-alias vrc="gvim -v ~/.vimrc"
+alias vbashrc='vim -v ~/.bashrc'
+alias vrc="vim -v ~/.vimrc"
 
 alias please='sudo'
 fmkcd() { mkdir -p "$1" && cd "$1"; }
@@ -107,3 +108,4 @@ docker-send() {
 
 alias zadd="zoxide add"
 alias r="ranger-cd"
+alias npmi="npm install"

@@ -43,9 +43,9 @@
       recursive = true;
     };
 
-    ".config/dunst" = {
-      source = ./dunst;
-    };
+    # ".config/dunst" = {
+    #   source = ./dunst;
+    # };
 
     ".config/i3" = {
       source = ./i3;
@@ -104,6 +104,10 @@
     ".urxvt/ext" = {
       source = ./urxvt/ext;
       recursive = true;
+    };
+
+    ".config/ev-cmd.toml" = {
+      source = ./ev-cmd/ev-cmd.toml;
     };
   };
 

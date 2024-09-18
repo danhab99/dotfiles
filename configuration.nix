@@ -156,6 +156,27 @@
     steam
     xclip
     xsel
+    xdotool
+    gcc
+    gcc10
+    gcc11
+    gcc12
+    gcc13
+    gcc14
+    alsa-utils
+    pamixer
+    sysstat
+    rustc
+    cargo
+    prettierd
+    killall
+    playerctl
+    flameshot
+    xpad
+    gh
+    astyle
+    clang-tools
+    rustfmt
   ];
 
   fonts.packages = with pkgs; [
@@ -169,6 +190,11 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    settings = {
+      default-cache-ttle = 3 * 8.64e+7;
+      max-cache-ttl = 3 * 8.64e+7;
+
+    };
     # pinentryFlavor = "curses";
   };
 
@@ -219,4 +245,6 @@
     dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  environment.noXlibs = false;
 }

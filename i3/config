@@ -209,8 +209,8 @@ bindsym $mod+d exec dmenu_run
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  # status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  status_command i3status
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  # status_command i3status
 	i3bar_command i3bar -t 
 	position bottom
 	colors {
@@ -246,10 +246,10 @@ exec_always picom --config ~/.config/i3/picom.conf
 exec_always ssh-add ~/.ssh/id_rsa
 
 # Audio keys
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
-bindsym XF86AudioMicMute exec amixer -D pulse sset Capture toggle
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioMicMute exec amixer sset Capture toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -257,7 +257,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 
 # Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
-bindsym Print exec $HOME/.config/rofi/applets/android/screenshot.sh
+# bindsym Print exec $HOME/.config/rofi/applets/android/screenshot.sh
+bindsym Print exec flameshot gui
 bindsym $mod+p exec $HOME/.config/rofi/applets/android/screenshot.sh
 
 # Open chrome
@@ -385,5 +386,7 @@ bindsym $mod+Ctrl+e exec sleep 0.5 && xdotool type dan.habot@gmail.com
 
 bindsym $mod+Ctrl+a exec playerctl previous
 bindsym $mod+Ctrl+d exec playerctl next
-bindsym $mod+Ctrl+w exec amixer -D pulse sset Master 5%+
-bindsym $mod+Ctrl+s exec amixer -D pulse sset Master 5%-
+bindsym $mod+Ctrl+w exec amixer sset Master 5%+
+bindsym $mod+Ctrl+s exec amixer sset Master 5%-
+
+exec --no-startup-id /home/dan/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd
