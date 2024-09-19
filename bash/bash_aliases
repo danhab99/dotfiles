@@ -109,3 +109,8 @@ docker-send() {
 alias zadd="zoxide add"
 alias r="ranger-cd"
 alias npmi="npm install"
+alias npmr="npm run"
+alias vcon="z /etc/nixos && vim configuration.nix"
+alias vhome="z /etc/nixos && vim home.nix"
+alias cnix="z /etc/nixos"
+alias znix="z /etc/nixos"
