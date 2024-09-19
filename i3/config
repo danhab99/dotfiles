@@ -202,9 +202,9 @@ for_window [class="^.*"] border pixel 0
 # bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
 # bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme -terminal $rofi-terminal
 
-# bindsym $mod+d exec $HOME/.config/rofi/launchers/misc/launch_drun.sh
-bindsym $mod+d exec dmenu_run
-# bindsym $mod+Tab exec $HOME/.config/rofi/launchers/misc/launch_windows.sh
+bindsym $mod+d exec $HOME/.config/rofi/launchers/misc/launch_drun.sh
+# bindsym $mod+d exec dmenu_run
+bindsym $mod+Tab exec $HOME/.config/rofi/launchers/misc/launch_windows.sh
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -231,11 +231,10 @@ gaps inner 20
 gaps outer 12
 
 # Enviroment setup
-exec_always xinput set-prop 12 309 1
-exec_always xinput set-prop 12 311 1
-exec_always xinput set-prop 12 317 1
-exec_always xinput set-prop 13 'libinput Accel Speed' 5
-exec_always xinput set-prop 14 'libinput Accel Speed' 5
+exec_always xinput set-prop 10 309 1
+exec_always xinput set-prop 10 311 1
+exec_always xinput set-prop 10 317 1
+exec_always xinput set-prop 10 'libinput Accel Speed' 5
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf
@@ -258,7 +257,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 # Screenshots
 #bindsym Print exec scrot /home/dan/Pictures/Screenshots/"$(date)".png
 # bindsym Print exec $HOME/.config/rofi/applets/android/screenshot.sh
-bindsym Print exec flameshot gui
 bindsym $mod+p exec $HOME/.config/rofi/applets/android/screenshot.sh
 
 # Open chrome

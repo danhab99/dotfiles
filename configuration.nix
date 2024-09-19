@@ -122,6 +122,7 @@
     zsh
     fira-code
     fira-code-nerdfont
+    nerdfonts
     i3blocks
     zoxide
     fzf
@@ -177,11 +178,17 @@
     astyle
     clang-tools
     rustfmt
+    nmap
+    pnpm
+    yarn
+    obsidian
+    retry
   ];
 
   fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
+    nerdfonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -190,11 +197,10 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    settings = {
-      default-cache-ttle = 3 * 8.64e+7;
-      max-cache-ttl = 3 * 8.64e+7;
-
-    };
+    # settings = {
+    #   default-cache-ttle = 3 * 8.64e+7;
+    #   max-cache-ttl = 3 * 8.64e+7;
+    # };
     # pinentryFlavor = "curses";
   };
 
