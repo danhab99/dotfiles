@@ -130,7 +130,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Bind workspaces to monitors
 
-set $SCREEN_LEFT DP-3
+set $SCREEN_LEFT DP-5
 set $SCREEN_CENTER DP-1
 set $SCREEN_RIGHT HDMI-1
 
@@ -223,7 +223,8 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
+# bindsym $mod+shift+x exec /home/dan/.config/i3/lock.sh # Lock keybinding
+bindsym $mod+shift+x exec i3lock -c 000000
 bindsym Pause exec /home/dan/.config/i3/lock.sh
 
 #i3-gaps config
@@ -388,3 +389,5 @@ bindsym $mod+Ctrl+w exec amixer sset Master 5%+
 bindsym $mod+Ctrl+s exec amixer sset Master 5%-
 
 exec --no-startup-id /home/dan/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd
+
+exec_always killall logitech-g600-rs && logitech-g600-rs --device-path usb-DZTECH_DZ65RGB-if01-event-kbd

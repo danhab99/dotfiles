@@ -74,6 +74,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    extraConfig.pipewire = {
+    "99-disable-bell" = {
+      "context.properties"= {
+           "module.x11.bell" = false;
+      };
+     };
+    };
     
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
@@ -183,6 +190,12 @@
     yarn
     obsidian
     retry
+    nodePackages.prisma
+    prisma-engines
+    obs-studio
+    ffmpeg
+    rustup
+    libratbag
   ];
 
   fonts.packages = with pkgs; [
@@ -208,7 +221,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = false;
+    enable = true;
     allowSFTP = true;
     authorizedKeysInHomedir = true;
     settings.PasswordAuthentication = false;
@@ -253,4 +266,10 @@
   };
 
   environment.noXlibs = false;
+
+  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+  environment.variables.PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+
+  services.ratbagd.enable = true;
 }
