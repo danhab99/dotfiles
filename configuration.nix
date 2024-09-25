@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -75,13 +74,11 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     extraConfig.pipewire = {
-    "99-disable-bell" = {
-      "context.properties"= {
-           "module.x11.bell" = false;
+      "99-disable-bell" = {
+        "context.properties" = { "module.x11.bell" = false; };
       };
-     };
     };
-    
+
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -97,11 +94,12 @@
   users.users.dan = {
     isNormalUser = true;
     description = "dan";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-      kate
-    #  thunderbird
-    ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
+    packages = with pkgs;
+      [
+        kate
+        #  thunderbird
+      ];
   };
 
   # Install firefox.
@@ -113,96 +111,99 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim-full
-    wget
-    git
-    curl
-    i3-rounded
-    i3status
-    autorandr
+    alsa-utils
     arandr
-    rxvt-unicode
-    rofi
+    astyle
+    autorandr
     brave
-    gnumake
+    cargo
+    cinnamon.nemo
+    clang-tools
     clipit
-    zsh
+    curl
+    docker
+    docker-compose
+    doppler
+    entr
+    ffmpeg
     fira-code
     fira-code-nerdfont
-    nerdfonts
-    i3blocks
-    zoxide
+    flameshot
+    fontforge
     fzf
-    nodejs_22
-    nitrogen
-    ripgrep
-    docker
-    rsync
-    rclone
-    ranger
-    htop
-    iotop
-    picom
-    gnupg
-    terraform
-    terraform-lsp
-    nil
-    pavucontrol
-    pulseaudioFull
-    usbutils
-    nvtopPackages.full
-    docker-compose
-    cinnamon.nemo
-    ncdu
-    oneko
-    doppler
-    nnn
-    entr
-    vscode
-    lazygit
-    lazydocker
-    steam
-    xclip
-    xsel
-    xdotool
     gcc
     gcc10
     gcc11
     gcc12
     gcc13
     gcc14
-    alsa-utils
-    pamixer
-    sysstat
-    rustc
-    cargo
-    prettierd
-    killall
-    playerctl
-    flameshot
-    xpad
     gh
-    astyle
-    clang-tools
-    rustfmt
-    nmap
-    pnpm
-    yarn
-    obsidian
-    retry
-    nodePackages.prisma
-    prisma-engines
-    obs-studio
-    ffmpeg
-    rustup
+    gimp
+    git
+    gnumake
+    gnupg
+    htop
+    i3-rounded
+    i3blocks
+    i3status
+    iotop
+    killall
+    lazydocker
+    lazygit
     libratbag
+    ncdu
+    nerdfonts
+    nil
+    nitrogen
+    nixfmt
+    nmap
+    nnn
+    nodePackages.prisma
+    nodejs_22
+    nvtopPackages.full
+    obs-studio
+    obsidian
+    oneko
+    pamixer
+    pavucontrol
+    picom
+    playerctl
+    pnpm
+    prettierd
+    prisma-engines
+    pulseaudioFull
+    python3
+    ranger
+    rclone
+    retry
+    ripgrep
+    rofi
+    rsync
+    rustc
+    rustfmt
+    rustup
+    rxvt-unicode
+    steam
+    sysstat
+    terraform
+    terraform-lsp
+    unzip
+    usbutils
+    vim-full
+    vscode
+    wget
+    xclip
+    xdotool
+    xorg.xev
+    xpad
+    xsel
+    yarn
+    zip
+    zoxide
+    zsh
   ];
 
-  fonts.packages = with pkgs; [
-    fira-code
-    fira-code-symbols
-    nerdfonts
-  ];
+  fonts.packages = with pkgs; [ fira-code fira-code-symbols nerdfonts ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -221,7 +222,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = true;
+    enable = false;
     allowSFTP = true;
     authorizedKeysInHomedir = true;
     settings.PasswordAuthentication = false;
@@ -256,20 +257,35 @@
   #   fsType = "ext4"; # Or your root partition's file system type
   # };
 
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable; services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.open = false;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall =
+      false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      false; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall =
+      false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   environment.noXlibs = false;
 
-  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
-  environment.variables.PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY =
+    "${pkgs.prisma-engines}/lib/libquery_engine.node";
+  environment.variables.PRISMA_QUERY_ENGINE_BINARY =
+    "${pkgs.prisma-engines}/bin/query-engine";
+  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY =
+    "${pkgs.prisma-engines}/bin/schema-engine";
 
   services.ratbagd.enable = true;
+
+  services.udev = {
+    enable = true;
+    extraRules = ''
+KERNEL=="event*", NAME="input/%k", MODE="660", GROUP="input"
+    '';
+  };
 }

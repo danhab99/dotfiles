@@ -390,4 +390,4 @@ bindsym $mod+Ctrl+s exec amixer sset Master 5%-
 
 exec --no-startup-id /home/dan/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd
 
-exec_always killall logitech-g600-rs && logitech-g600-rs --device-path usb-DZTECH_DZ65RGB-if01-event-kbd
+exec /home/dan/.local/bin/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml > /home/dan/.log/g600.log
