@@ -222,7 +222,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = false;
+    enable = true;
     allowSFTP = true;
     authorizedKeysInHomedir = true;
     settings.PasswordAuthentication = false;
