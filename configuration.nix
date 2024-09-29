@@ -42,53 +42,9 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    desktopManager.xterm.enable = false;
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-rounded;
-    };
-  };
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  services.displayManager.defaultSession = "none+i3";
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    extraConfig.pipewire = {
-      "99-disable-bell" = {
-        "context.properties" = { "module.x11.bell" = false; };
-      };
-    };
-
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dan = {
@@ -127,15 +83,6 @@
     # pinentryFlavor = "curses";
   };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    allowSFTP = true;
-    authorizedKeysInHomedir = true;
-    settings.PasswordAuthentication = false;
-  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
@@ -168,7 +115,61 @@
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.open = false;
-  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # List services that you want to enable:
+  services = {
+    xserver.videoDrivers = [ "nvidia" ];
+
+    ratbagd.enable = true;
+
+    udev = {
+      enable = true;
+      extraRules = ''
+        KERNEL=="event*", NAME="input/%k", MODE="660", GROUP="input"
+      '';
+    };
+
+    xserver = {
+      enable = true;
+      desktopManager.xterm.enable = false;
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-rounded;
+      };
+    };
+    displayManager.sddm.enable = true;
+    xserver.desktopManager.plasma5.enable = true;
+
+    displayManager.defaultSession = "none+i3";
+
+    # Configure keymap in X11
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      extraConfig.pipewire = {
+        "99-disable-bell" = {
+          "context.properties" = { "module.x11.bell" = false; };
+        };
+      };
+    };
+
+    openssh = {
+      enable = true;
+      allowSFTP = true;
+      authorizedKeysInHomedir = true;
+      settings.PasswordAuthentication = false;
+    };
+  };
 
   programs.steam = {
     enable = true;
@@ -187,12 +188,4 @@
   environment.variables.PRISMA_SCHEMA_ENGINE_BINARY =
     "${pkgs.prisma-engines}/bin/schema-engine";
 
-  services.ratbagd.enable = true;
-
-  services.udev = {
-    enable = true;
-    extraRules = ''
-      KERNEL=="event*", NAME="input/%k", MODE="660", GROUP="input"
-    '';
-  };
 }
