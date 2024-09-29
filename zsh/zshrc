@@ -144,7 +144,7 @@ function ranger-cd {
     local ranger_cmd=(
         command
         ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+        --cmd="map q chain shell echo %d > "$tempfile"; quitall"
     )
 
     ${ranger_cmd[@]} "$@"
