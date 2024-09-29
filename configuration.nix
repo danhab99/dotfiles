@@ -276,8 +276,6 @@
       false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  environment.noXlibs = false;
-
   environment.variables.PRISMA_QUERY_ENGINE_LIBRARY =
     "${pkgs.prisma-engines}/lib/libquery_engine.node";
   environment.variables.PRISMA_QUERY_ENGINE_BINARY =
