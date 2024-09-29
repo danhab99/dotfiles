@@ -48,7 +48,8 @@ with pkgs; [
   nerdfonts
   nil
   nitrogen
-  nixfmt
+  nixfmt-classic
+  nixpkgs-lint
   nmap
   nnn
   nodePackages.prisma
