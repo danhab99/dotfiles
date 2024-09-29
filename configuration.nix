@@ -121,6 +121,7 @@
     clang-tools
     clipit
     curl
+    dbeaver-bin
     docker
     docker-compose
     doppler
@@ -142,15 +143,18 @@
     git
     gnumake
     gnupg
+    go
     htop
     i3-rounded
     i3blocks
     i3status
+    iftop
     iotop
     killall
     lazydocker
     lazygit
     libratbag
+    mongodb-compass
     ncdu
     nerdfonts
     nil
@@ -167,6 +171,7 @@
     pamixer
     pavucontrol
     picom
+    pkgsi686Linux.gperftools
     playerctl
     pnpm
     prettierd
@@ -285,7 +290,7 @@
   services.udev = {
     enable = true;
     extraRules = ''
-KERNEL=="event*", NAME="input/%k", MODE="660", GROUP="input"
+      KERNEL=="event*", NAME="input/%k", MODE="660", GROUP="input"
     '';
   };
 }
