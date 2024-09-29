@@ -13,7 +13,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "workstation"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -82,7 +82,6 @@
     # };
     # pinentryFlavor = "curses";
   };
-
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
@@ -181,11 +180,9 @@
       false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY =
-    "${pkgs.prisma-engines}/lib/libquery_engine.node";
-  environment.variables.PRISMA_QUERY_ENGINE_BINARY =
-    "${pkgs.prisma-engines}/bin/query-engine";
-  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY =
-    "${pkgs.prisma-engines}/bin/schema-engine";
-
+  environment.variables = {
+    PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+    PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+    PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+  };
 }
