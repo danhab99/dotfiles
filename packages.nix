@@ -39,6 +39,9 @@ with pkgs; [
   i3status
   iftop
   iotop
+  jdk21_headless
+  jdk22_headless
+  jdk8_headless
   killall
   lazydocker
   lazygit
@@ -58,6 +61,7 @@ with pkgs; [
   obs-studio
   obsidian
   oneko
+  openssl
   pamixer
   pavucontrol
   picom
