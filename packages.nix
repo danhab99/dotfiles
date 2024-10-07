@@ -11,6 +11,7 @@ with pkgs; [
   clipit
   curl
   dbeaver-bin
+  dive
   docker
   docker-compose
   doppler
@@ -33,20 +34,25 @@ with pkgs; [
   gnumake
   gnupg
   go
+  gradle
   htop
   i3-rounded
   i3blocks
   i3status
   iftop
   iotop
+  java-language-server
   jdk21_headless
   jdk22_headless
   jdk8_headless
   killall
+  kubectl
   lazydocker
   lazygit
   libratbag
+  maven
   mongodb-compass
+  mongodb-tools
   ncdu
   nerdfonts
   nil
@@ -61,6 +67,7 @@ with pkgs; [
   obs-studio
   obsidian
   oneko
+  openjdk
   openssl
   pamixer
   pavucontrol
@@ -82,7 +89,9 @@ with pkgs; [
   rustfmt
   rustup
   rxvt-unicode
+  s3cmd
   steam
+  sutils
   sysstat
   terraform
   terraform-lsp
