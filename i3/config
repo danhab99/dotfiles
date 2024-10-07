@@ -130,9 +130,9 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Bind workspaces to monitors
 
-set $SCREEN_LEFT DP-5
-set $SCREEN_CENTER DP-1
-set $SCREEN_RIGHT HDMI-1
+set $SCREEN_LEFT "DP-5"
+set $SCREEN_CENTER "DP-1"
+set $SCREEN_RIGHT "HDMI-1"
 
 workspace $ws1 output $SCREEN_LEFT
 workspace $ws2 output $SCREEN_CENTER
@@ -302,7 +302,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
-exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
+# exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
 exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
 
 exec_always kbdrate -r 100 -d 50
@@ -390,4 +390,4 @@ bindsym $mod+Ctrl+s exec amixer sset Master 5%-
 
 exec --no-startup-id /home/dan/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd
 
-exec /home/dan/.local/bin/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml > /home/dan/.log/g600.log
+exec_always killall logitech-g600-rs || /home/dan/.local/bin/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml > /home/dan/.log/g600.log
