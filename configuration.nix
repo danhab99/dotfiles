@@ -181,10 +181,14 @@
   };
 
   environment.variables = {
-    PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+    PRISMA_QUERY_ENGINE_LIBRARY =
+      "${pkgs.prisma-engines}/lib/libquery_engine.node";
     PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
     PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
   };
 
-  programs.java = { enable = true; package = pkgs.oraclejre8; };
+  programs.java = {
+    enable = false;
+    # package = pkgs.oraclejre8;
+  };
 }
