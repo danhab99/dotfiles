@@ -1,7 +1,7 @@
 urxvt*depth: 32
 urxvt*blurRadius: 20
 urxvt*transparent: true
-urxvt*tintColor: #888
+urxvt*tintColor: #555
 
 URxvt.keysym.Control-Up:     \033[1;5A
 URxvt.keysym.Control-Down:   \033[1;5B
