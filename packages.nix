@@ -4,6 +4,7 @@ with pkgs; [
   arandr
   astyle
   autorandr
+  bat
   brave
   cargo
   cinnamon.nemo
@@ -17,6 +18,7 @@ with pkgs; [
   doppler
   entr
   ffmpeg
+  file
   fira-code
   fira-code-nerdfont
   flameshot
@@ -50,6 +52,7 @@ with pkgs; [
   lazydocker
   lazygit
   libratbag
+  lm_sensors
   maven
   mongodb-compass
   mongodb-tools

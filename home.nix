@@ -135,6 +135,6 @@
   programs.home-manager.enable = true;
 
   programs.ranger = {
-    enable = true;
+    # enable = true;
   };
 }
