@@ -78,6 +78,7 @@ with pkgs; [
   pkgsi686Linux.gperftools
   playerctl
   pnpm
+  postgresql_16
   prettierd
   prisma-engines
   pulseaudioFull
