@@ -54,6 +54,7 @@ with pkgs; [
   libratbag
   lm_sensors
   maven
+  minio-client
   mongodb-compass
   mongodb-tools
   ncdu
