@@ -191,4 +191,6 @@
     enable = false;
     # package = pkgs.oraclejre8;
   };
+
+  services.xserver.xautolock.enable = false;
 }
