@@ -36,6 +36,7 @@ with pkgs; [
   gnumake
   gnupg
   go
+  gparted
   gradle
   htop
   i3-rounded
