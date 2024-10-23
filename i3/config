@@ -238,6 +238,7 @@ exec_always xinput set-prop 10 309 1
 exec_always xinput set-prop 10 311 1
 exec_always xinput set-prop 10 317 1
 exec_always xinput set-prop 10 'libinput Accel Speed' 5
+exec_always xinput set-prop 9 295 0
 # exec_always feh --bg-scale /home/dan/Pictures/wallpaper/.cache/current_wallpaper.png
 exec_always nitrogen --restore
 #exec_always compton --config ~/.config/i3/compton.conf

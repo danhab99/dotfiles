@@ -38,7 +38,7 @@ with pkgs; [
   go
   gparted
   gradle
-  htop
+  htop-vim
   i3-rounded
   i3blocks
   i3status
@@ -48,6 +48,7 @@ with pkgs; [
   jdk21_headless
   jdk22_headless
   jdk8_headless
+  jq
   killall
   kubectl
   lazydocker
