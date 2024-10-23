@@ -70,6 +70,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'wellle/context.vim'
 Plug 'neoclide/coc-java'
+Plug 'madox2/vim-ai'
 
 call plug#end()
 
@@ -219,3 +220,8 @@ nmap <leader>d :CocDiagnostic<CR>
 nmap <leader>r :GoRename<CR>
 
 nmap <C-q> :wqa<CR>
+
+vmap <leader>at :AI generate typescript typedefs from this json object<CR>
+vmap <leader>ad :AI generate default values given this typedef in a json object<CR>
+vmap <leader>ae :AI extract this logic into a function<CR>
+
