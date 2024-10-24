@@ -193,4 +193,5 @@
   };
 
   services.xserver.xautolock.enable = false;
+  boot.initrd.systemd.dbus.enable = true;
 }
