@@ -24,7 +24,13 @@
   };
 
   fileSystems."/home" = {
-    device = "/dev/sda";
+    device = "/dev/disk/by-uuid/0c8203ff-b8be-4907-afb5-84fa6fb151c4";
+    fsType = "ext4";
+    options = [ "noatime" ]; # Optional: Add mount options as needed
+  };
+
+  fileSystems."/bucket" = {
+    device = "/dev/disk/by-uuid/8cce772f-7b2e-45b1-9cb7-4d9d17161f13";
     fsType = "ext4";
     options = [ "noatime" ]; # Optional: Add mount options as needed
   };
