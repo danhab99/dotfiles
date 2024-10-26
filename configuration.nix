@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@inputs: 
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -194,4 +194,6 @@
 
   services.xserver.xautolock.enable = false;
   boot.initrd.systemd.dbus.enable = true;
+
+  systemd = import ./systemd.nix { inherit inputs; };
 }
