@@ -97,6 +97,7 @@ with pkgs; [
   rustup
   rxvt-unicode
   s3cmd
+  screen
   steam
   sutils
   sysstat
@@ -105,6 +106,7 @@ with pkgs; [
   unzip
   usbutils
   vim-full
+  vlc
   vscode
   wget
   xclip
