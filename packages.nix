@@ -105,7 +105,6 @@ with pkgs; [
   sysstat
   terraform
   terraform-lsp
-  toybox
   unzip
   usbutils
   vim-full

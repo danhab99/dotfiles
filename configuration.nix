@@ -195,5 +195,5 @@
   services.xserver.xautolock.enable = false;
   boot.initrd.systemd.dbus.enable = true;
 
-  systemd = import ./systemd.nix { inherit inputs; };
+  systemd = import ./systemd.nix { inherit pkgs; };
 }
