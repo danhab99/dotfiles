@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }@inputs: 
+{ config, pkgs, ... }@inputs:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -46,7 +46,7 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true;  # for 32-bit applications
+  hardware.opengl.driSupport32Bit = true; # for 32-bit applications
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dan = {
@@ -119,7 +119,21 @@
 
   # List services that you want to enable:
   services = {
-    xserver.videoDrivers = [ "nvidia" ];
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      xautolock.enable = false;
+      desktopManager.xterm.enable = false;
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-rounded;
+      };
+      desktopManager.plasma5.enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
 
     ratbagd.enable = true;
 
@@ -130,24 +144,11 @@
       '';
     };
 
-    xserver = {
-      enable = true;
-      desktopManager.xterm.enable = false;
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-rounded;
-      };
-    };
     displayManager.sddm.enable = true;
-    xserver.desktopManager.plasma5.enable = true;
 
     displayManager.defaultSession = "none+i3";
 
     # Configure keymap in X11
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -194,7 +195,6 @@
     # package = pkgs.oraclejre8;
   };
 
-  services.xserver.xautolock.enable = false;
   boot.initrd.systemd.dbus.enable = true;
 
   systemd = import ./systemd.nix inputs;
