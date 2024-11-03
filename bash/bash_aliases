@@ -63,7 +63,7 @@ gcop() {
   git checkout refs/pull/$1/head
 }
 gn() {
-  git checkout -b dan/$(date +%Y-%m-%d/%H-%M)/$1
+  git checkout -b dan/$(date +%Y/%m/%d)/$1
 }
 alias gnl="git nicelog"
 alias gaagc="git add . && git commit -a --verbose"

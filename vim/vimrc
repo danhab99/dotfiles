@@ -177,12 +177,14 @@ nmap O O<Esc>o
 imap jj <Esc>
 imap kk <Esc>
 nnoremap <leader>p :psearch <C-R><C-W><CR>
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nmap <leader>= 5<C-w>+
+nmap <leader>- 5<C-w>-
+" map <S-[> :exe "resize " . (winheight(0) * 3/2)<CR>
+" map <S-]> :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <space> :noh<CR>:w<CR>
 map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
-nmap <C-z> mq:wqa<CR>
+nmap <C-q> mq:wqa<CR>
 nmap <C-r> :source ~/.vimrc<CR>:CocRestart<CR>
 nmap <C-s> :Rg<CR>
 nmap <C-h> <C-^>
@@ -219,9 +221,10 @@ nmap <leader>t :TagbarToggle<CR>
 nmap <leader>d :CocDiagnostic<CR>
 nmap <leader>r :GoRename<CR>
 
-nmap <C-q> :wqa<CR>
-
-vmap <leader>at :AI generate typescript typedefs from this json object<CR>
-vmap <leader>ad :AI generate default values given this typedef in a json object<CR>
-vmap <leader>ae :AI extract this logic into a function<CR>
+augroup TypeScriptMappings
+  autocmd!
+  autocmd FileType typescript vmap <leader>at :AI this is typescript code, generate typedefs from this json object<CR>
+  autocmd FileType typescript vmap <leader>ad :AI this is typescript code, generate default values given this typedef in a json object<CR>
+  autocmd FileType typescript vmap <leader>ae :AI this is typescript code, extract this logic into a function<CR>
+augroup END
 
