@@ -7,14 +7,19 @@
 
       mkdir -p /bucket/backup/$(date +%Y-%m-%d)
 
-      ${pkgs.toybox}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/home.tar.gz /home &
-      ${pkgs.toybox}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/nixstore.tar.gz /nix/store &
+      ${pkgs.gnutar}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/home.tar.gz /home &
+      ${pkgs.gnutar}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/nixstore.tar.gz /nix/store &
       wait
     '';
     serviceConfig = {
       Type = "oneshot";
       User = "root";
     };
+
+    path = with pkgs; [
+      gnutar
+      gzip
+    ];
   };
 
   timers."backup" = {
