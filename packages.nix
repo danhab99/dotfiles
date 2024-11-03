@@ -10,6 +10,7 @@ with pkgs; [
   cinnamon.nemo
   clang-tools
   clipit
+  corepack_22
   curl
   dbeaver-bin
   dive
@@ -72,6 +73,7 @@ with pkgs; [
   nvtopPackages.full
   obs-studio
   obsidian
+  oh-my-zsh
   oneko
   openjdk
   openssl
@@ -103,6 +105,7 @@ with pkgs; [
   sysstat
   terraform
   terraform-lsp
+  toybox
   unzip
   usbutils
   vim-full

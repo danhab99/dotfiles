@@ -24,7 +24,7 @@
     fira-code
     fontconfig
     ranger
-  ]; 
+  ];
 
   fonts.fontconfig = {
     enable = true;
@@ -57,58 +57,36 @@
       recursive = true;
     };
 
-    ".zshrc" = {
-      source = ./zsh/zshrc;
-    };
+    # ".zshrc" = {
+    #   source = ./zsh/zshrc;
+    # };
 
-    ".vim/desert256.vim" = {
-      source = ./vim/desert256.vim;
-    };
+    ".vim/desert256.vim" = { source = ./vim/desert256.vim; };
 
-    ".vimrc" = {
-      source = ./vim/vimrc;
-    };
+    ".vimrc" = { source = ./vim/vimrc; };
 
-    ".bash_aliases" = {
-      source = ./bash/bash_aliases;
-    };
+    ".bash_aliases" = { source = ./bash/bash_aliases; };
 
-    ".bash_paths" = {
-      source = ./bash/bash_paths;
-    };
+    ".bash_paths" = { source = ./bash/bash_paths; };
 
-    ".bash_profile" = {
-      source = ./bash/bash_profile;
-    };
+    ".bash_profile" = { source = ./bash/bash_profile; };
 
-    ".bashrc" = {
-      source = ./bash/bashrc;
-    };
+    ".bashrc" = { source = ./bash/bashrc; };
 
-    ".gitignore" = {
-      source = ./git/gitignore;
-    };
+    ".gitignore" = { source = ./git/gitignore; };
 
-    ".gitconfig" = {
-      source = ./git/gitconfig;
-    };
+    ".gitconfig" = { source = ./git/gitconfig; };
 
-    ".Xdefaults" = {
-      source = ./X/Xdefaults;
-    };
+    ".Xdefaults" = { source = ./X/Xdefaults; };
 
-    ".Xresources" = {
-      source = ./X/Xresources;
-    };
+    ".Xresources" = { source = ./X/Xresources; };
 
     ".urxvt/ext" = {
       source = ./urxvt/ext;
       recursive = true;
     };
 
-    ".config/ev-cmd.toml" = {
-      source = ./ev-cmd/ev-cmd.toml;
-    };
+    ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
   };
 
   # Home Manager can also manage your environment variables through
@@ -129,6 +107,7 @@
   #
   home.sessionVariables = {
     EDITOR = "vim";
+    BROWSER = pkgs.brave;
   };
 
   # Let Home Manager install and manage itself.
@@ -136,5 +115,104 @@
 
   programs.ranger = {
     # enable = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "docker"
+        "github"
+        "lol"
+        "node"
+        "pip"
+        "python"
+        "screen"
+        "sudo"
+        "vscode"
+        "brew"
+        "colorize"
+        "docker-compose"
+        "fzf"
+        "qrcode"
+        "vi-mode"
+      ];
+      theme = "garyblessington";
+    };
+
+    shellAliases = {
+      cdh = "cd ~";
+      ci3 = "cd ~/.config/i3";
+      cnix = "cd /etc/nixos";
+      browse = "nautilus --browser . &";
+      vi = "gvim -v";
+      vim = "gvim -v";
+      v = "gvim -v";
+      vv = "gvim -v .";
+      vi3 = "gvim -v ~/.config/i3/config";
+      valias = "gvim -v ~/.bash_aliases";
+      vssh = "gvim -v ~/.ssh/config";
+      vfz = "gvim -v $(fzf)";
+
+      # alias l="ls"
+      git-fix =
+        "git submodule sync --recursive; git submodule update --init --recursive";
+      ga = "git add";
+      gaa = "git add .";
+      gai = "git add -ip";
+      gpl = "git pull";
+      gd = "git diff";
+      gds = "git diff --staged";
+      gc = "git commit --verbose";
+      gcf = "git commit -m 'fix'";
+      gca = "git commit --amend --verbose";
+      gp = "git push --all";
+      gs = "git status";
+      gwt = "git worktree list";
+      gpt = "git push origin $(git rev-parse --abbrev-ref HEAD)";
+      gco = "git checkout --ignore-other-worktrees";
+      gsc =
+        "git submodule sync --recursive; git submodule update --init --recursive";
+      gf = "git fetch-all";
+      cg = "cd $(git root)";
+      grc = "git rebase --continue";
+      vg = "vim +':Git mergetool'";
+      gus = "git restore --staged -- ";
+      gn = "git checkout -b dan/$(date +%Y/%m/%d)/$1";
+      gnl = "git nicelog";
+      gaagc = "git add . && git commit -a --verbose";
+      gaagca = "git add . && git commit --amend -a --verbose";
+
+      dc = "docker-compose";
+      # alias gvim -vrc="vim ~/.vimrc"
+
+      clip = "xclip -selection c";
+      cfzf = ''cd "$(dirname $(fzf))"'';
+      tf = "terraform";
+      rmr = "rm -r";
+      tn = "textnote";
+      edithosts = "sudo vim /etc/hosts";
+      c = "cat";
+      d = "docker";
+      lg = "lazygit";
+      tfa = "terraform apply";
+      tfaa = "terraform apply --auto-approve";
+      tfd = "terraform destroy";
+      tfdd = "terraform destroy --auto-approve";
+      tfp = "terraform plan";
+      tfi = "terraform init";
+
+      zadd = "zoxide add";
+      r = "ranger-cd";
+      npmi = "npm install";
+      npmr = "npm run";
+      vcon = "z /etc/nixos && vim configuration.nix";
+      vhome = "z /etc/nixos && vim home.nix";
+      znix = "z /etc/nixos";
+    };
   };
 }
