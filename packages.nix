@@ -36,9 +36,11 @@ with pkgs; [
   git
   gnumake
   gnupg
+  gnutar
   go
   gparted
   gradle
+  gzip
   htop-vim
   i3-rounded
   i3blocks
