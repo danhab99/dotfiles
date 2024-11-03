@@ -214,5 +214,28 @@
       vhome = "z /etc/nixos && vim home.nix";
       znix = "z /etc/nixos";
     };
+    initExtra = ''
+if [ -e /tmp/workdir ]
+then
+  DIR=$(cat /tmp/workdir)
+  echo "Working in $DIR"
+  cd $DIR
+fi
+
+function work {
+    echo "Saving workdir"
+    pwd > /tmp/workdir
+}
+
+function vacay {
+    echo "Have funn"
+    rm /tmp/workdir
+}
+    '';
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
