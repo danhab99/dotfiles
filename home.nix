@@ -106,21 +106,17 @@
   #  /etc/profiles/per-user/dan/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "vim";
-    BROWSER = pkgs.brave;
+    EDITOR = pkgs.vim + "/bin/vim";
+    BROWSER = pkgs.brave + "/bin/brave";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.ranger = {
-    # enable = true;
-  };
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-
+  
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -214,24 +210,8 @@
       vhome = "z /etc/nixos && vim home.nix";
       znix = "z /etc/nixos";
     };
-    initExtra = ''
-if [ -e /tmp/workdir ]
-then
-  DIR=$(cat /tmp/workdir)
-  echo "Working in $DIR"
-  cd $DIR
-fi
 
-function work {
-    echo "Saving workdir"
-    pwd > /tmp/workdir
-}
-
-function vacay {
-    echo "Have funn"
-    rm /tmp/workdir
-}
-    '';
+    initExtra = builtins.readFile ./zsh/extras;
   };
 
   programs.zoxide = {

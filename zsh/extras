@@ -1,0 +1,37 @@
+
+export ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BEAM
+export ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+export ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+
+function work {
+    echo "Saving workdir"
+    pwd > /tmp/workdir
+}
+
+function vacay {
+    echo "Have funn"
+    rm /tmp/workdir
+}
+
+function ranger-cd {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+
+if [ -e /tmp/workdir ]
+then
+  DIR=$(cat /tmp/workdir)
+  echo "Working in $DIR"
+  cd $DIR
+fi
