@@ -7,8 +7,16 @@
 
       mkdir -p /bucket/backup/$(date +%Y-%m-%d)
 
-      ${pkgs.gnutar}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/home.tar.gz /home &
-      ${pkgs.gnutar}/bin/tar -czvf /bucket/backup/$(date +%Y-%m-%d)/nixstore.tar.gz /nix/store &
+      function backup() {
+        ${pkgs.gnutar}/bin/tar -cz \
+        --exclude-caches \
+        --exclude="**/node_modules" \
+        --exclude="**/*[Cc]ache*" \
+        -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
+      }
+
+      backup home /home/dan &
+
       wait
     '';
     serviceConfig = {
