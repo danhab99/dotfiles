@@ -119,6 +119,7 @@ with pkgs; [
   xpad
   xsel
   yarn
+  yt-dlp
   zip
   zoxide
   zsh
