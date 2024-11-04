@@ -108,6 +108,8 @@
   home.sessionVariables = {
     EDITOR = pkgs.vim + "/bin/vim";
     BROWSER = pkgs.brave + "/bin/brave";
+    VI_MODE_SET_CURSOR = "true";
+    VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
   };
 
   # Let Home Manager install and manage itself.
@@ -116,7 +118,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-  
+
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -137,7 +139,7 @@
         "qrcode"
         "vi-mode"
       ];
-      theme = "garyblessington";
+      theme = "dstufft";
     };
 
     shellAliases = {
