@@ -22,7 +22,7 @@ set t_Co=256
 "set t_AF=^[[38;5;%dm
 " set ttymouse=xterm2
 set scrolloff=15
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set iskeyword-=_
 set updatetime=1000
 set breakindent

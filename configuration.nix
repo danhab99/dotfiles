@@ -133,6 +133,10 @@
         layout = "us";
         variant = "";
       };
+
+      screenSection = ''
+        Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
+      '';
     };
 
     ratbagd.enable = true;

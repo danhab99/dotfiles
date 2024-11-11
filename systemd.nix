@@ -5,8 +5,6 @@
     script = ''
       set -eu
 
-      mkdir -p /bucket/backup/$(date +%Y-%m-%d)
-
       function backup() {
         ${pkgs.gnutar}/bin/tar -cz \
         --exclude-caches \
