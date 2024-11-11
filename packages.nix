@@ -1,5 +1,6 @@
 { pkgs }:
 with pkgs; [
+  # nodejs_22
   alsa-utils
   arandr
   astyle
@@ -71,7 +72,7 @@ with pkgs; [
   nmap
   nnn
   nodePackages.prisma
-  nodejs_22
+  nodejs_20
   nvtopPackages.full
   obs-studio
   obsidian
@@ -102,6 +103,7 @@ with pkgs; [
   rxvt-unicode
   s3cmd
   screen
+  scrot
   steam
   sutils
   sysstat

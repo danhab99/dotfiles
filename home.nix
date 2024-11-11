@@ -19,7 +19,7 @@
   # environment.
   home.packages = with pkgs; [
     nerdfonts
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" ]; })
     powerline-fonts
     fira-code
     fontconfig
@@ -106,7 +106,7 @@
   #  /etc/profiles/per-user/dan/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = pkgs.vim + "/bin/vim";
+    EDITOR = pkgs.vim-full + "/bin/vim";
     BROWSER = pkgs.brave + "/bin/brave";
     VI_MODE_SET_CURSOR = "true";
     VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
@@ -180,7 +180,6 @@
       grc = "git rebase --continue";
       vg = "vim +':Git mergetool'";
       gus = "git restore --staged -- ";
-      gn = "git checkout -b dan/$(date +%Y/%m/%d)/$1";
       gnl = "git nicelog";
       gaagc = "git add . && git commit -a --verbose";
       gaagca = "git add . && git commit --amend -a --verbose";
