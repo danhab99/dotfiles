@@ -1,7 +1,0 @@
-.vim
-tags
-notes/
-__debug_bin*
-makefile
-out
-.env
