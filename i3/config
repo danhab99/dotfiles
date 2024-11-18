@@ -306,7 +306,8 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
 # exec_always python3 ~/Documents/python/logitech-g600-py/g600.py -c ~/.config/g600/profiles.json -l /home/dan/g600.log -u /tmp/g600.sock
-exec_always xinput disable $(xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+")
+exec_always xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
+exec_always xinput | grep -Po "(?<=LingYao ShangHai Thumb Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
 
 exec_always kbdrate -r 100 -d 50
 
