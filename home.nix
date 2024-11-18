@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./programs/zsh.nix
+    ./programs/git.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "dan";
@@ -37,50 +42,7 @@
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = {
-    ".config/g600" = {
-      source = ./g600;
-      recursive = true;
-    };
-
-    ".config/i3" = {
-      source = ./i3;
-      recursive = true;
-    };
-
-    # ".config/rofi" = {
-    #   source = builtins.fetchGit {
-    #     shallow = true;
-    #     url = "https://github.com/adi1090x/rofi.git";
-    #     rev = "86e6875d9e89ea3cf95c450cef6497d52afceefe";
-    #   };
-    #   recursive = true;
-    # };
-
-    ".config/rofi" = {
-      source = ./rofi;
-      recursive = true;
-    };
-
-    ".vim/desert256.vim" = { source = ./vim/desert256.vim; };
-
-    ".vimrc" = { source = ./vim/vimrc; };
-
-    # ".gitignore" = { source = ./git/gitignore; };
-
-    # ".gitconfig" = { source = ./git/gitconfig; };
-
-    ".Xdefaults" = { source = ./X/Xdefaults; };
-
-    ".Xresources" = { source = ./X/Xresources; };
-
-    ".urxvt/ext" = {
-      source = ./urxvt/ext;
-      recursive = true;
-    };
-
-    ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
-  };
+  home.file = import ./files.nix {};
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -108,153 +70,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "docker"
-        "github"
-        "lol"
-        "node"
-        "pip"
-        "python"
-        "screen"
-        "sudo"
-        "vscode"
-        "brew"
-        "colorize"
-        "docker-compose"
-        "fzf"
-        "qrcode"
-        "vi-mode"
-      ];
-      theme = "dstufft";
-    };
-
-    shellAliases = {
-      cdh = "cd ~";
-      ci3 = "cd ~/.config/i3";
-      cnix = "cd /etc/nixos";
-      browse = "nautilus --browser . &";
-      vi = "gvim -v";
-      vim = "gvim -v";
-      v = "gvim -v";
-      vv = "gvim -v .";
-      vi3 = "gvim -v ~/.config/i3/config";
-      valias = "gvim -v ~/.bash_aliases";
-      vssh = "gvim -v ~/.ssh/config";
-      vfz = "gvim -v $(fzf)";
-
-      # alias l="ls"
-      git-fix =
-        "git submodule sync --recursive; git submodule update --init --recursive";
-      ga = "git add";
-      gaa = "git add .";
-      gai = "git add -ip";
-      gpl = "git pull";
-      gd = "git diff";
-      gds = "git diff --staged";
-      gc = "git commit --verbose";
-      gcf = "git commit -m 'fix'";
-      gca = "git commit --amend --verbose";
-      gp = "git push --all";
-      gs = "git status";
-      gwt = "git worktree list";
-      gpt = "git push origin $(git rev-parse --abbrev-ref HEAD)";
-      gco = "git checkout --ignore-other-worktrees";
-      gsc =
-        "git submodule sync --recursive; git submodule update --init --recursive";
-      gf = "git fetch-all";
-      cg = "cd $(git root)";
-      grc = "git rebase --continue";
-      vg = "vim +':Git mergetool'";
-      gus = "git restore --staged -- ";
-      gnl = "git nicelog";
-      gaagc = "git add . && git commit -a --verbose";
-      gaagca = "git add . && git commit --amend -a --verbose";
-
-      dc = "docker-compose";
-      # alias gvim -vrc="vim ~/.vimrc"
-
-      clip = "xclip -selection c";
-      cfzf = ''cd "$(dirname $(fzf))"'';
-      tf = "terraform";
-      rmr = "rm -r";
-      tn = "textnote";
-      edithosts = "sudo vim /etc/hosts";
-      c = "cat";
-      d = "docker";
-      lg = "lazygit";
-      tfa = "terraform apply";
-      tfaa = "terraform apply --auto-approve";
-      tfd = "terraform destroy";
-      tfdd = "terraform destroy --auto-approve";
-      tfp = "terraform plan";
-      tfi = "terraform init";
-
-      zadd = "zoxide add";
-      r = "ranger-cd";
-      npmi = "npm install";
-      npmr = "npm run";
-      vcon = "z /etc/nixos && vim configuration.nix";
-      vhome = "z /etc/nixos && vim home.nix";
-      znix = "z /etc/nixos";
-    };
-
-    initExtra = builtins.readFile ./zsh/extras;
-  };
-
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
   };
 
-  programs.git = {
-    enable = true;
-
-    aliases = {
-      "unstage" = "reset HEAD --";
-      "nicelog" = "log --graph --oneline";
-      "nl" = "log --graph --oneline";
-      "last" = "show HEAD --show-signature --name-only";
-      "delete" = "branch -D";
-      "undo" = "reset HEAD~1 --mixed";
-      "rank" = "shortlog -s -n --all";
-      "push-this" = "push origin HEAD";
-      "test-push" = "push --dry-run --all origin";
-      "fixed" = ''commit . -m "fix"'';
-      "wtf" = ''commit -m "$(curl -s whatthecommit.com/index.txt)"'';
-      "unpushed" = ''
-        "!sh -c 'git log --oneline remotes/origin/$( git rev-parse --abbrev-ref HEAD )~1..$( git rev-parse --abbrev-ref HEAD )' -"'';
-      "pull-this" =
-        ''"!sh -c 'git pull origin $(git rev-parse --abbrev-ref HEAD)'"'';
-      "track" =
-        ''"branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)"'';
-      "fetch-all" = ''"fetch --update-head-ok origin '*:*'"'';
-      "clone-for-worktrees" = ''"!sh $HOME/git-clone-bare-for-worktrees.sh"'';
-      "cutdown" = "worktree remove --force";
-      "plant" = "worktree add";
-      "root" = "rev-parse --show-toplevel";
-      "heal" = ''"!sh -c 'git restore --staged . && git checkout .'"'';
-      "ignore" = "update-index --assume-unchanged";
-      "unignore" = "update-index --no-assume-unchanged";
-      "ignored" = ''!git ls-files -v | grep "^[[:lower:]]"'';
-      "story" = ''"!sh -c 'ls $(git root) && git status && git diff --stat'"'';
-      "re-main" = "rebase main";
-    };
-
-    userEmail = "dan.habot@gmail.com";
-    userName = "Dan Habot";
-
-    signing = {
-      key = "1DC36AE6EEEFDB55FE5D8874BAABD1E3FA0A9FB6";
-      signByDefault = true;
-    };
-
-    ignores = [ ".vim" "tags" "notes/" "__debug_bin*" "makefile" "out" ".env" ];
-  };
 }
