@@ -7,10 +7,7 @@ flake:
 nix:
 	sudo nixos-rebuild switch --flake .#workstation
 
-home:
-	home-manager switch --flake .#dan@workstation
-
-switch: nix home
+switch: nix
 
 setup:
 	cp /etc/nixos/hardware-configuration.nix .
