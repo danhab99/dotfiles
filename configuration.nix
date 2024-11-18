@@ -53,6 +53,7 @@
     isNormalUser = true;
     description = "dan";
     extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
+    shell = pkgs.zsh;
     packages = with pkgs;
       [
         kate
@@ -246,5 +247,7 @@
     '';
   };
 
-
+  programs.zsh = {
+    enable = true;
+  };
 }

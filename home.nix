@@ -43,10 +43,6 @@
       recursive = true;
     };
 
-    # ".config/dunst" = {
-    #   source = ./dunst;
-    # };
-
     ".config/i3" = {
       source = ./i3;
       recursive = true;
@@ -57,21 +53,9 @@
       recursive = true;
     };
 
-    # ".zshrc" = {
-    #   source = ./zsh/zshrc;
-    # };
-
     ".vim/desert256.vim" = { source = ./vim/desert256.vim; };
 
     ".vimrc" = { source = ./vim/vimrc; };
-
-    ".bash_aliases" = { source = ./bash/bash_aliases; };
-
-    ".bash_paths" = { source = ./bash/bash_paths; };
-
-    ".bash_profile" = { source = ./bash/bash_profile; };
-
-    ".bashrc" = { source = ./bash/bashrc; };
 
     ".gitignore" = { source = ./git/gitignore; };
 
