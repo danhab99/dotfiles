@@ -1,6 +1,8 @@
 { pkgs }:
 with pkgs; [
-  # nodejs_22
+  # jdk22_headless
+  # nodejs_20
+  linuxKernel.packages.linux_zen.nvidia_x11
   alsa-utils
   arandr
   astyle
@@ -19,6 +21,7 @@ with pkgs; [
   docker-compose
   doppler
   entr
+  eza
   ffmpeg
   file
   fira-code
@@ -50,7 +53,6 @@ with pkgs; [
   iotop
   java-language-server
   jdk21_headless
-  jdk22_headless
   jdk8_headless
   jq
   killall
@@ -72,7 +74,7 @@ with pkgs; [
   nmap
   nnn
   nodePackages.prisma
-  nodejs_20
+  nodejs_22
   nvtopPackages.full
   obs-studio
   obsidian
