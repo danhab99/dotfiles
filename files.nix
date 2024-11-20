@@ -29,10 +29,6 @@
 
   ".vimrc" = { source = ./vim/vimrc; };
 
-  # ".gitignore" = { source = ./git/gitignore; };
-
-  # ".gitconfig" = { source = ./git/gitconfig; };
-
   ".Xdefaults" = { source = ./X/Xdefaults; };
 
   ".Xresources" = { source = ./X/Xresources; };

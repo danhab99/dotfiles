@@ -4,6 +4,12 @@
   programs.git = {
     enable = true;
 
+    extraConfig = {
+      pull = {
+        rebase = true;
+      };
+    };
+
     aliases = {
       "unstage" = "reset HEAD --";
       "nicelog" = "log --graph --oneline";
@@ -22,16 +28,16 @@
         ''"!sh -c 'git pull origin $(git rev-parse --abbrev-ref HEAD)'"'';
       "track" =
         ''"branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)"'';
-      "fetch-all" = ''"fetch --update-head-ok origin '*:*'"'';
+      "fetch-all" = "fetch --update-head-ok origin '*:*'";
       "clone-for-worktrees" = ''"!sh $HOME/git-clone-bare-for-worktrees.sh"'';
       "cutdown" = "worktree remove --force";
       "plant" = "worktree add";
       "root" = "rev-parse --show-toplevel";
-      "heal" = ''"!sh -c 'git restore --staged . && git checkout .'"'';
+      "heal" = "!sh -c 'git restore --staged . && git checkout .'";
       "ignore" = "update-index --assume-unchanged";
       "unignore" = "update-index --no-assume-unchanged";
-      "ignored" = ''!git ls-files -v | grep "^[[:lower:]]"'';
-      "story" = ''"!sh -c 'ls $(git root) && git status && git diff --stat'"'';
+      "ignored" = "!git ls-files -v | grep \"^[[:lower:]]\"";
+      "story" = "!sh -c 'ls $(git root) && git status && git diff --stat'";
       "re-main" = "rebase main";
     };
 
