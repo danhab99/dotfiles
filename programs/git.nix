@@ -4,11 +4,7 @@
   programs.git = {
     enable = true;
 
-    extraConfig = {
-      pull = {
-        rebase = true;
-      };
-    };
+    extraConfig = { pull = { rebase = true; }; };
 
     aliases = {
       "unstage" = "reset HEAD --";
@@ -36,7 +32,7 @@
       "heal" = "!sh -c 'git restore --staged . && git checkout .'";
       "ignore" = "update-index --assume-unchanged";
       "unignore" = "update-index --no-assume-unchanged";
-      "ignored" = "!git ls-files -v | grep \"^[[:lower:]]\"";
+      "ignored" = ''!git ls-files -v | grep "^[[:lower:]]"'';
       "story" = "!sh -c 'ls $(git root) && git status && git diff --stat'";
       "re-main" = "rebase main";
     };
@@ -49,6 +45,15 @@
       signByDefault = true;
     };
 
-    ignores = [ ".vim" "tags" "notes/" "__debug_bin*" "makefile" "out" ".env" ];
+    ignores = [
+      ".vim"
+      "tags"
+      "notes/"
+      "__debug_bin*"
+      "makefile"
+      "out"
+      ".env"
+      "storybook-static/"
+    ];
   };
 }
