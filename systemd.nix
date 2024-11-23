@@ -10,6 +10,8 @@
         --exclude-caches \
         --exclude="**/node_modules" \
         --exclude="**/*[Cc]ache*" \
+        --exclude="/home/dan/Videos" \
+        --exclude="/home/dan/Pictures" \
         -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
       }
 
