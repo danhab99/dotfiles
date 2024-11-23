@@ -2,7 +2,6 @@
 with pkgs; [
   # jdk22_headless
   # nodejs_20
-  linuxKernel.packages.linux_zen.nvidia_x11
   alsa-utils
   arandr
   astyle
@@ -60,6 +59,7 @@ with pkgs; [
   lazydocker
   lazygit
   libratbag
+  linuxKernel.packages.linux_zen.nvidia_x11
   lm_sensors
   maven
   minio-client
@@ -67,6 +67,7 @@ with pkgs; [
   mongodb-tools
   ncdu
   nerdfonts
+  ngrok
   nil
   nitrogen
   nixfmt-classic
