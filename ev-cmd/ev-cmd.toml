@@ -71,16 +71,16 @@
 78="xdotool type 0"
 
 # 0, 3
-25=""
+25="/run/current-system/sw/bin/brave http://localhost:3000 && sleep 0.1 && xdotool key Ctrl+Shift+i && sleep 0.1 && xdotool key Ctrl+Shift+r"
 
 # 1, 3
-16=""
+16="/run/current-system/sw/bin/brave https://staging.travelzap.com && sleep 0.1 && xdotool key Ctrl+Shift+i && sleep 0.1 && xdotool key Ctrl+Shift+r"
 
 # 2, 3
-19=""
+19="/run/current-system/sw/bin/brave https://gitlab.com/destify-dev/odyssey/frontend"
 
 # 3, 3
-31=""
+31="/run/current-system/sw/bin/brave https://3.basecamp.com/5705326/my/readings"
 
 # 4, 3
 75="xdotool key Super_L+ShiftL+1 && xdotool key Super_L+ShiftL+2 && xdotool key Super_L+ShiftL+3 && xdotool key Super_L+2"
