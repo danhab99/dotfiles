@@ -2,7 +2,6 @@
 
 {
   enable = true;
-  layout = "us";
   displayManager.startx.enable = true; # Optional if using startx
   videoDrivers = [ "nvidia" ];
 

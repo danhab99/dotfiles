@@ -45,8 +45,8 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport32Bit = true; # for 32-bit applications
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true; # for 32-bit applications
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dan = {

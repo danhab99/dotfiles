@@ -9,7 +9,7 @@ with pkgs; [
   bat
   brave
   cargo
-  cinnamon.nemo
+  nemo
   clang-tools
   clipit
   corepack_22
