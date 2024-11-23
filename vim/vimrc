@@ -71,6 +71,7 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'wellle/context.vim'
 Plug 'neoclide/coc-java'
 Plug 'madox2/vim-ai'
+Plug 'danhab99/claude.vim'
 
 call plug#end()
 
@@ -197,6 +198,8 @@ nnoremap I miI
 nnoremap a mia
 nnoremap A miA
 nnoremap o mio
+nnoremap gd mdgd
+nnoremap gr mrgr
 nmap ym myyy'mp
 imap <leader>pe if err != nil { panic (err) }<CR>
 nmap <leader>m :set mouse=<CR>
