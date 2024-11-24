@@ -161,7 +161,7 @@ augroup fmt
 augroup END
 " autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
-autocmd CursorHold * silent call CocActionAsync('doHover')
+" autocmd CursorHold * silent call CocActionAsync('doHover')
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red

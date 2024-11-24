@@ -71,7 +71,20 @@
   # $ nix search wget
   environment.systemPackages = import ./packages.nix { pkgs = pkgs; };
 
-  fonts.packages = with pkgs; [ fira-code fira-code-symbols nerdfonts ];
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    (nerdfonts.override {
+      fonts = [
+        "Iosevka"
+        "JetBrainsMono"
+        "Mononoki"
+        "FiraCode"
+        "DroidSansMono"
+        "Iosevka"
+      ];
+    })
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

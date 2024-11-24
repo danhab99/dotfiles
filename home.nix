@@ -24,7 +24,7 @@
   # environment.
   home.packages = with pkgs; [
     nerdfonts
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" ]; })
+    # (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" ]; })
     powerline-fonts
     fira-code
     fontconfig
@@ -74,5 +74,4 @@
     enable = true;
     enableZshIntegration = true;
   };
-
 }
