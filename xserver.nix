@@ -17,19 +17,13 @@
     variant = "";
   };
 
-  screenSection = ''
-    Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
-  '';
-
   config = ''
     Section "Device"
         Identifier "GPU0"
         Driver "nvidia" # Replace with your driver if needed
-        Option "TripleBuffer" "True"
-        Option "Coolbits" "4"
         Option "AllowFlipping" "True"
+        Option "TripleBuffer" "True"
         Option "ForceFullCompositionPipeline" "True"
-        Option "TearFree" "true"
     EndSection
 
     Section "Monitor"
