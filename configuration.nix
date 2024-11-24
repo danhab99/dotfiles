@@ -130,6 +130,8 @@
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.open = false;
+  hardware.nvidia.forceFullCompositionPipeline = true;
+  hardware.nvidia.powerManagement.enable = true;
 
   # List services that you want to enable:
   services = {
@@ -198,6 +200,8 @@
   systemd = import ./systemd.nix inputs;
   services.xserver = import ./xserver.nix inputs;
 
-  hardware.nvidia.forceFullCompositionPipeline = false;
   programs.zsh = { enable = true; };
+
+  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.enable = true;
 }
