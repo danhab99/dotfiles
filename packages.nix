@@ -2,14 +2,15 @@
 with pkgs; [
   # jdk22_headless
   # nodejs_20
+  aichat
   alsa-utils
   arandr
+  argc
   astyle
   autorandr
   bat
   brave
   cargo
-  nemo
   clang-tools
   clipit
   corepack_22
@@ -54,6 +55,7 @@ with pkgs; [
   jdk21_headless
   jdk8_headless
   jq
+  kdePackages.kcalc
   killall
   kubectl
   lazydocker
@@ -66,6 +68,8 @@ with pkgs; [
   mongodb-compass
   mongodb-tools
   ncdu
+  nemo
+  neovim
   nerdfonts
   ngrok
   nil
@@ -117,12 +121,14 @@ with pkgs; [
   vim-full
   vlc
   vscode
+  webcamoid
   wget
   xclip
   xdotool
   xorg.xev
   xpad
   xsel
+  yai
   yarn
   yt-dlp
   zip

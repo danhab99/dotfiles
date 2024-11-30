@@ -68,10 +68,14 @@ Plug 'ternjs/tern_for_vim', { 'do' : 'npm install', 'for': 'javascript' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive' 
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'wellle/context.vim'
+" Plug 'wellle/context.vim'
 Plug 'neoclide/coc-java'
 Plug 'madox2/vim-ai'
 Plug 'danhab99/claude.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug 'olimorris/codecompanion.nvim'
 
 call plug#end()
 
@@ -161,7 +165,7 @@ augroup fmt
 augroup END
 " autocmd BufEnter * lcd %:p:h
 au BufNewFile,BufRead *.ejs set filetype=html
-" autocmd CursorHold * silent call CocActionAsync('doHover')
+autocmd CursorHold * silent call CocActionAsync('doHover')
 
 hi SignColumn guibg=darkgrey ctermbg=NONE
 hi SpellBad term=reverse ctermbg=52 gui=undercurl guisp=Red
