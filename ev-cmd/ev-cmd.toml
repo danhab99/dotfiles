@@ -71,7 +71,7 @@
 78="xdotool type 0"
 
 # 0, 3
-25="/run/current-system/sw/bin/brave http://localhost:3000 && sleep 0.1 && xdotool key Ctrl+Shift+i && sleep 0.1 && xdotool key Ctrl+Shift+r"
+25="/run/current-system/sw/bin/brave http://localhost:3000 && sleep 0.1 && xdotool key Ctrl+Shift+i && xdotool key Ctrl+p && sleep 0.1 && xdotool key Ctrl+Shift+r"
 
 # 1, 3
 16="/run/current-system/sw/bin/brave https://staging.travelzap.com && sleep 0.1 && xdotool key Ctrl+Shift+i && sleep 0.1 && xdotool key Ctrl+Shift+r"
