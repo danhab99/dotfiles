@@ -96,6 +96,8 @@
       vcon = "z /etc/nixos && vim configuration.nix";
       vhome = "z /etc/nixos && vim home.nix";
       znix = "z /etc/nixos";
+
+      cai = "aichat -m claude -r %functions%";
     };
 
     initExtra = builtins.readFile ../zsh/extras;
