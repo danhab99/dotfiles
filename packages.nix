@@ -11,6 +11,7 @@ with pkgs; [
   bat
   brave
   cargo
+  chromium
   clang-tools
   clipit
   corepack_22
@@ -116,6 +117,7 @@ with pkgs; [
   sysstat
   terraform
   terraform-lsp
+  tree
   unzip
   usbutils
   vim-full
