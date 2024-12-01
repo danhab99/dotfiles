@@ -4,7 +4,10 @@
   programs.git = {
     enable = true;
 
-    extraConfig = { pull = { rebase = true; }; };
+    extraConfig = {
+      pull.rebase = true;
+      init.defaultBranch = "main";
+    };
 
     aliases = {
       "unstage" = "reset HEAD --";
