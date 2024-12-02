@@ -6,9 +6,12 @@ in {
     recursive = true;
   };
 
-  ".config/i3" = {
-    source = src "i3";
-    recursive = true;
+  ".config/i3blocks.conf" = {
+    source = src "i3blocks/i3blocks.conf";
+  };
+
+  ".config/picom.conf" = {
+    source = src "picom/picom.conf";
   };
 
   # ".config/rofi" = {
