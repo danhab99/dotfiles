@@ -100,6 +100,6 @@
       cai = "aichat -m claude -r %functions%";
     };
 
-    initExtra = builtins.readFile ../zsh/extras;
+    initExtra = builtins.readFile ../config/zsh/extras;
   };
 }

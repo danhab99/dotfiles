@@ -1,13 +1,13 @@
 { }:
-
-{
+let src = name: ../../config/${name};
+in {
   ".config/g600" = {
-    source = ./g600;
+    source = src "g600";
     recursive = true;
   };
 
   ".config/i3" = {
-    source = ./i3;
+    source = src "i3";
     recursive = true;
   };
 
@@ -21,22 +21,22 @@
   # };
 
   ".config/rofi" = {
-    source = ../../config/rofi;
+    source = src "rofi";
     recursive = true;
   };
 
-  ".vim/desert256.vim" = { source = ../../config/vim/desert256.vim; };
+  ".vim/desert256.vim" = { source = src "vim/desert256.vim"; };
 
-  ".vimrc" = { source = ../../config/vim/vimrc; };
+  ".vimrc" = { source = src "./vim/vimrc"; };
 
-  ".Xdefaults" = { source = ../../config/X/Xdefaults; };
+  ".Xdefaults" = { source = src "./X/Xdefaults"; };
 
-  ".Xresources" = { source = ../../config/X/Xresources; };
+  ".Xresources" = { source = src "./X/Xresources"; };
 
   ".urxvt/ext" = {
-    source = ./urxvt/ext;
+    source = src "urxvt/ext";
     recursive = true;
   };
 
-  ".config/ev-cmd.toml" = { source = ../../config/ev-cmd/ev-cmd.toml; };
+  ".config/ev-cmd.toml" = { source = src "ev-cmd/ev-cmd.toml"; };
 }
