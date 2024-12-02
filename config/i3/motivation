@@ -1,4 +1,0 @@
-#!/bin/bash
-
-MOTIVATIONS="$(curl -s http://whatthecommit.com/index.txt)"
-echo $MOTIVATIONS
