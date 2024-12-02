@@ -54,11 +54,6 @@
     description = "dan";
     extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
     shell = pkgs.zsh;
-    packages = with pkgs;
-      [
-        kate
-        #  thunderbird
-      ];
   };
 
   # Install firefox.
@@ -69,7 +64,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = import ./packages.nix { pkgs = pkgs; };
+  environment.systemPackages = import ../../packages.nix { pkgs = pkgs; };
 
   fonts.packages = with pkgs; [
     fira-code

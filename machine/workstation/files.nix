@@ -21,22 +21,22 @@
   # };
 
   ".config/rofi" = {
-    source = ./rofi;
+    source = ../../config/rofi;
     recursive = true;
   };
 
-  ".vim/desert256.vim" = { source = ./vim/desert256.vim; };
+  ".vim/desert256.vim" = { source = ../../config/vim/desert256.vim; };
 
-  ".vimrc" = { source = ./vim/vimrc; };
+  ".vimrc" = { source = ../../config/vim/vimrc; };
 
-  ".Xdefaults" = { source = ./X/Xdefaults; };
+  ".Xdefaults" = { source = ../../config/X/Xdefaults; };
 
-  ".Xresources" = { source = ./X/Xresources; };
+  ".Xresources" = { source = ../../config/X/Xresources; };
 
   ".urxvt/ext" = {
     source = ./urxvt/ext;
     recursive = true;
   };
 
-  ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
+  ".config/ev-cmd.toml" = { source = ../../config/ev-cmd/ev-cmd.toml; };
 }
