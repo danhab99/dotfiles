@@ -99,6 +99,7 @@ with pkgs; [
   prisma-engines
   pulseaudioFull
   python3
+  railway
   ranger
   rclone
   retry
