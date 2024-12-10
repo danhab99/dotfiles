@@ -37,7 +37,7 @@
       "unignore" = "update-index --no-assume-unchanged";
       "ignored" = ''!git ls-files -v | grep "^[[:lower:]]"'';
       "story" = "!sh -c 'ls $(git root) && git status && git diff --stat'";
-      "re-main" = "rebase main";
+      "re-main" = "!sh -c 'git fetch origin main && git rebase origin/main'";
     };
 
     userEmail = "dan.habot@gmail.com";
