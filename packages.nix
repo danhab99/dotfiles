@@ -1,7 +1,15 @@
 { pkgs }:
+let
+  customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: rec {
+    postInstall = ''
+      ${oldAttrs.postInstall or ""}
+      # Remove the reboot symlink if it exists
+      rm -f $out/bin/reboot
+      rm -f $out/bin/host*
+    '';
+  });
+in
 with pkgs; [
-  # jdk22_headless
-  # nodejs_20
   aichat
   alsa-utils
   arandr
@@ -25,8 +33,6 @@ with pkgs; [
   eza
   ffmpeg
   file
-  fira-code
-  fira-code-nerdfont
   flameshot
   fontforge
   fzf
@@ -71,7 +77,6 @@ with pkgs; [
   ncdu
   nemo
   neovim
-  nerdfonts
   ngrok
   nil
   nitrogen
@@ -137,4 +142,5 @@ with pkgs; [
   zip
   zoxide
   zsh
+  customBusybox
 ]

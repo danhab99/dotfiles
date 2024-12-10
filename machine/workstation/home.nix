@@ -23,8 +23,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    nerdfonts
-    # (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Iosevka" ]; })
     powerline-fonts
     fira-code
     fontconfig
