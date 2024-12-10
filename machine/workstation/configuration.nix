@@ -66,19 +66,10 @@
   # $ nix search wget
   environment.systemPackages = import ../../packages.nix { pkgs = pkgs; };
 
-  fonts.packages = with pkgs; [
+  fonts.packages = with pkgs.nerd-fonts; [
     fira-code
-    fira-code-symbols
-    (nerdfonts.override {
-      fonts = [
-        "Iosevka"
-        "JetBrainsMono"
-        "Mononoki"
-        "FiraCode"
-        "DroidSansMono"
-        "Iosevka"
-      ];
-    })
+    iosevka
+    mononoki
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -95,8 +86,8 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 9080 ];
-  networking.firewall.allowedUDPPorts = [ 22 9080 ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedUDPPorts = [ 22 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
