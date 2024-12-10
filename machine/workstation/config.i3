@@ -13,3 +13,4 @@ exec_always xinput set-prop 15 284 1
 exec_always xinput set-prop 9 295 0
 exec_always xinput | grep -Po "(?<=LingYao ShangHai Thumb Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
 exec_always xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
+exec_always ~/.screenlayout/3screen.sh

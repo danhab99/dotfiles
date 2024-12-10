@@ -202,7 +202,7 @@ for_window [class="^.*"] border pixel 0
 # bindsym $mod+Tab exec rofi -show-icons -show window -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme
 # bindsym $mod+Shift+Tab exec rofi -show ssh -lines $rofi-lines -eh $rofi-height -padding 800 -opacity $rofi-opacity -bw 0 -bc -theme $rofi-theme -terminal $rofi-terminal
 
-bindsym $mod+d exec $HOME/.config/rofi/launchers/misc/launch_drun.sh
+bindsym $mod+d exec $HOME/.config/rofi/scripts/launcher_t1
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+Tab exec $HOME/.config/rofi/launchers/misc/launch_windows.sh
 
