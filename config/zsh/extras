@@ -10,6 +10,12 @@ function gn() {
 function work {
     echo "Saving workdir"
     pwd > /tmp/workdir
+    pwd > ~/.config/.workdir
+}
+
+function restorework {
+    echo "Restoring $(cat ~/.config/.workdir)"
+    cp ~/.config/.workdir /tmp/workdir
 }
 
 function vacay {
