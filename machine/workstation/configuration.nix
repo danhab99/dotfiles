@@ -1,4 +1,4 @@
-{ pkgs, ... }@inputs:
+{ pkgs, lib, ... }@inputs:
 
 {
   imports = [
@@ -13,7 +13,9 @@
     ../../services/ratbagd.nix
     ../../services/udev.nix
     (import ../../services/xserver.nix {
-      inherit pkgs inputs;
+      inherit inputs;
+      pkgs = pkgs;
+      lib = lib;
       i3config = ./config.i3;
     })
   ];
