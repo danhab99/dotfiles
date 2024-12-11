@@ -15,6 +15,7 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            ./machine/configuration.nix
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
             home-manager.nixosModules.home-manager
