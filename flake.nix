@@ -28,7 +28,6 @@
     in {
       nixosConfigurations = {
         workstation = mkNix "workstation";
-        laptop = mkNix "laptop";
       };
     };
 }
