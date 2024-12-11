@@ -14,6 +14,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  time.timeZone = "America/New_York";
+
   security.rtkit.enable = true;
 
   virtualisation.docker = {

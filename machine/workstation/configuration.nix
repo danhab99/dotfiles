@@ -30,8 +30,6 @@
     };
   };
 
-  time.timeZone = "America/New_York";
-
   users.users.dan = {
     isNormalUser = true;
     description = "dan";
