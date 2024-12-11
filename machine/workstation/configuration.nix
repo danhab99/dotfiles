@@ -1,12 +1,10 @@
-{ config, pkgs, ... }@inputs:
+{  pkgs, ... }@inputs:
 
 {
   imports = [
-    # ../../programs/git.nix
     ../../programs/gnupg.nix
     ../../programs/java.nix
     ../../programs/steam.nix
-    # ../../programs/zsh.nix
 
     ../../services/display_manager.nix
     ../../services/openssh.nix
