@@ -6,11 +6,20 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    extraModulePackages = [ ];
+
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.kernelModules = [ ];
+    initrd.systemd.dbus.enable = true;
+
+    kernelModules = [ "kvm-intel" ];
+
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true;
+
+    tmp.cleanOnBoot = true;
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/d3fc72e4-c1e0-4a08-a2ca-b6541297d7ff";
@@ -26,27 +35,39 @@
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/0c8203ff-b8be-4907-afb5-84fa6fb151c4";
     fsType = "ext4";
-    options = [ "noatime" ]; # Optional: Add mount options as needed
+    options = [ "noatime" ];
   };
 
   fileSystems."/bucket" = {
     device = "/dev/disk/by-uuid/8cce772f-7b2e-45b1-9cb7-4d9d17161f13";
     fsType = "ext4";
-    options = [ "noatime" ]; # Optional: Add mount options as needed
+    options = [ "noatime" ];
   };
 
   swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  boot.tmp.cleanOnBoot = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # for 32-bit applications
+  };
+
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    open = false;
+    forceFullCompositionPipeline = true;
+    powerManagement.enable = true;
+  };
+
+  hardware.pulseaudio.enable = false;
+
+  powerManagement = {
+    cpuFreqGovernor = "performance";
+    enable = true;
+  };
 }
