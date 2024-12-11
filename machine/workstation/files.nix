@@ -46,4 +46,9 @@ in {
     };
     recursive = true;
   };
+
+  ".local/bin/i3_change.sh" = {
+    source = ../../config/i3/change.sh;
+    executable = true;
+  };
 }
