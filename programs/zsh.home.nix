@@ -24,8 +24,6 @@
         "fzf"
         "qrcode"
         "vi-mode"
-        "gitignore"
-        "gh"
       ];
       theme = "dstufft";
     };
