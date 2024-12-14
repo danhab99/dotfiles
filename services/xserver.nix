@@ -7,40 +7,17 @@
     videoDrivers = [ "nvidia" ];
 
     xautolock.enable = false;
-
     desktopManager.xterm.enable = false;
 
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-rounded;
-
-      configFile = pkgs.writeTextFile {
-        name = "i3config";
-        text = let
-          dir = ../config/i3;
-          files = builtins.attrNames (builtins.readDir dir);
-          common = builtins.concatStringsSep "\n"
-          (map (file: builtins.readFile "${dir}/${file}") files);
-          local = builtins.readFile i3config;
-          in builtins.concatStringsSep "\n" [ common local ];
-        };
-      };
-
-      desktopManager.plasma5.enable = true;
-
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-
+    # X.org configuration
     config = ''
-    Section "Device"
-    Identifier "GPU0"
-    Driver "nvidia" # Replace with your driver if needed
-    Option "AllowFlipping" "True"
-    Option "TripleBuffer" "True"
-    Option "ForceFullCompositionPipeline" "True"
-    EndSection
+      Section "Device"
+        Identifier "GPU0"
+        Driver "nvidia"
+        Option "AllowFlipping" "True"
+        Option "TripleBuffer" "True"
+        Option "ForceFullCompositionPipeline" "True"
+      EndSection
 
       Section "Monitor"
           Identifier "HDMI-0"
@@ -66,6 +43,30 @@
           Option "AllowIndirectGLXProtocol" "True"
           Option "TripleBuffer" "True"
       EndSection
-      '';
+    '';
+
+    # Keyboard settings
+    xkb = {
+      layout = "us";
+      variant = "";
     };
+
+    # Window Manager configuration
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-rounded;
+
+      # i3 config file
+      configFile = pkgs.writeTextFile {
+        name = "i3config";
+        text = let
+          dir = ../config/i3;
+          files = builtins.attrNames (builtins.readDir dir);
+          common = builtins.concatStringsSep "\n"
+            (map (file: builtins.readFile "${dir}/${file}") files);
+          local = builtins.readFile i3config;
+        in builtins.concatStringsSep "\n" [ common local ];
+      };
+    };
+  };
 }

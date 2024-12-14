@@ -17,6 +17,7 @@ with pkgs; [
   astyle
   autorandr
   bat
+  betterlockscreen
   brave
   cargo
   chromium
@@ -24,6 +25,7 @@ with pkgs; [
   clipit
   corepack_22
   curl
+  customBusybox
   dbeaver-bin
   dive
   docker
@@ -84,8 +86,8 @@ with pkgs; [
   nixpkgs-lint
   nmap
   nnn
-  nodePackages.prisma
   nodejs_22
+  nodePackages.prisma
   nvtopPackages.full
   obs-studio
   obsidian
@@ -142,5 +144,4 @@ with pkgs; [
   zip
   zoxide
   zsh
-  customBusybox
 ]
