@@ -223,7 +223,8 @@ bar {
 	}
 }
 
-bindsym $mod+shift+x exec i3lock -c 000000
+# bindsym $mod+shift+x exec i3lock -c 000000
+bindsym $mod+shift+x exec betterlockscreen --lock
 
 #i3-gaps config
 gaps inner 20
@@ -244,3 +245,9 @@ for_window [class="hl2_linux"] fullscreen enable
 
 focus_follows_mouse yes
 for_window [class="xpad" instance="xpad"] floating enable
+
+exec_always setxkbmap -option caps:none
+bindsym Caps_L exec --no-startup-id rofi -show drun
+
+exec_always setxkbmap -option caps:none
+bindsym Caps_Lock exec --no-startup-id exec xdotool key Caps_Lock $HOME/.config/rofi/scripts/launcher_t1
