@@ -28,6 +28,7 @@ with pkgs; [
   customBusybox
   dbeaver-bin
   dive
+  dmenu
   docker
   docker-compose
   doppler

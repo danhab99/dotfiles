@@ -27,7 +27,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.dan = { imports = [ ./machine/home.nix ./machine/${hostname}/home.nix ]; };
+              home-manager.users.dan = {
+                imports = [ ./machine/home.nix ./machine/${hostname}/home.nix ];
+              };
             }
           ];
         };

@@ -1,11 +1,6 @@
 { }:
 let src = name: ../config/${name};
 in {
-  ".config/g600" = {
-    source = src "g600";
-    recursive = true;
-  };
-
   ".config/i3blocks.conf" = {
     source = src "i3blocks/i3blocks.conf";
   };
@@ -35,8 +30,6 @@ in {
     source = src "urxvt/ext";
     recursive = true;
   };
-
-  ".config/ev-cmd.toml" = { source = src "ev-cmd/ev-cmd.toml"; };
 
   ".config/i3blocks-contrib" = {
     source = builtins.fetchGit {
