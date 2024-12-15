@@ -66,8 +66,6 @@
 
   hardware.pulseaudio.enable = false;
 
-  hardware.opengl.enable = true;
-
   powerManagement = {
     cpuFreqGovernor = "performance";
     enable = true;
