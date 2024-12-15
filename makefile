@@ -8,6 +8,7 @@ nix:
 	sudo nixos-rebuild switch --flake .$(cat name)
 
 switch: nix
+	i3-msg restart
 
 setup:
 	cp /etc/nixos/hardware-configuration.nix ./machine/$(cat name)/
