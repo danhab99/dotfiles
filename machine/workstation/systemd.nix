@@ -48,4 +48,27 @@
       Persistent = true;
     };
   };
+
+  services."download-music" = {
+    script = "/home/dan/Music/download.sh";
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+
+    path = with pkgs; [
+      gnutar
+      gzip
+      findutils
+    ];
+  };
+
+  timers."download-music" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 02:00:00";
+      Persistent = true;
+    };
+  };
 }

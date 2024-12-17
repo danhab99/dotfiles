@@ -8,11 +8,11 @@ let
       rm -f $out/bin/host*
     '';
   });
-in
-with pkgs; [
+in with pkgs; [
   aichat
   alsa-utils
   arandr
+  archivemount
   argc
   astyle
   autorandr
@@ -48,6 +48,7 @@ with pkgs; [
   gh
   gimp
   git
+  glances
   gnumake
   gnupg
   gnutar
@@ -119,6 +120,7 @@ with pkgs; [
   rustup
   rxvt-unicode
   s3cmd
+  scdl
   screen
   scrot
   steam
