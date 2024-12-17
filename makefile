@@ -9,6 +9,8 @@ nix:
 
 switch: nix
 	i3-msg restart
+	gpgconf --kill gpg-agent
+	gpgconf --launch gpg-agent
 
 setup:
 	cp /etc/nixos/hardware-configuration.nix ./machine/$(cat name)/
