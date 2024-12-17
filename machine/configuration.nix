@@ -38,4 +38,11 @@
 
   environment.systemPackages = import ../packages.nix { pkgs = pkgs; };
   fonts.packages = with pkgs.nerd-fonts; [ fira-code iosevka mononoki ];
+
+  nixpkgs.config.allowBroken = true;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 }
