@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  tmpfiles.rules = [
+    "L+ /home/dan/Videos - - - - /bucket/Videos"
+    "L+ /home/dan/Pictures - - - - /bucket/Pictures"
+  ];
+
   services."backup" = {
     script = ''
       set -eu
