@@ -5,8 +5,8 @@
     enable = true;
     enableSSHSupport = true;
     settings = {
-      default-cache-ttle = 3 * 8.64e+7;
-      max-cache-ttl = 3 * 8.64e+7;
+      default-cache-ttl = "10000000";
+      max-cache-ttl = "10000000";
     };
     pinentryPackage = pkgs.pinentry-curses;
   };
