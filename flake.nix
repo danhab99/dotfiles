@@ -11,15 +11,21 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-cli = {
+      url = "github:water-sucks/nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, ... }@inputs:
     let
       inherit (self) outputs;
       mkNix = hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            nixos-cli.nixosModules.nixos-cli
             ./machine/configuration.nix
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
