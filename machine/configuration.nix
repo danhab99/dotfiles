@@ -45,4 +45,8 @@
     enable = true;
     binfmt = true;
   };
+
+  services.nixos-cli = {
+    enable = true;
+  };
 }
