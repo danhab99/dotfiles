@@ -19,16 +19,12 @@ in with pkgs; [
   bat
   betterlockscreen
   brave
-  cargo
-  chromium
-  clang-tools
   clipit
   corepack_22
   curl
   customBusybox
   dbeaver-bin
   dive
-  dmenu
   docker
   docker-compose
   doppler
@@ -39,32 +35,18 @@ in with pkgs; [
   flameshot
   fontforge
   fzf
-  gcc
-  gcc10
-  gcc11
-  gcc12
-  gcc13
-  gcc14
   gh
   gimp
   git
   glances
   gnumake
-  gnupg
   gnutar
-  go
   gparted
   gradle
   gzip
   htop-vim
-  i3-rounded
-  i3blocks
-  i3status
   iftop
   iotop
-  java-language-server
-  jdk21_headless
-  jdk8_headless
   jq
   kdePackages.kcalc
   killall
@@ -82,10 +64,6 @@ in with pkgs; [
   nemo
   neovim
   ngrok
-  nil
-  nitrogen
-  nixfmt-classic
-  nixpkgs-lint
   nmap
   nnn
   nodejs_22
@@ -93,13 +71,10 @@ in with pkgs; [
   nvtopPackages.full
   obs-studio
   obsidian
-  oh-my-zsh
   oneko
-  openjdk
   openssl
   pamixer
   pavucontrol
-  picom
   pkgsi686Linux.gperftools
   playerctl
   pnpm
@@ -115,9 +90,6 @@ in with pkgs; [
   ripgrep
   rofi
   rsync
-  rustc
-  rustfmt
-  rustup
   rxvt-unicode
   s3cmd
   scdl
@@ -128,7 +100,6 @@ in with pkgs; [
   sysstat
   terraform
   terraform-lsp
-  tree
   unzip
   usbutils
   vim-full
@@ -146,5 +117,4 @@ in with pkgs; [
   yt-dlp
   zip
   zoxide
-  zsh
 ]
