@@ -1,0 +1,55 @@
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    aichat
+    archivemount
+    argc
+    bat
+    betterlockscreen
+    brave
+    clipit
+    curl
+    dbeaver-bin
+    dive
+    doppler
+    entr
+    eza
+    ffmpeg
+    flameshot
+    fzf
+    gh
+    gimp
+    glances
+    htop-vim
+    iftop
+    iotop
+    jq
+    lazydocker
+    ncdu
+    neofetch
+    ngrok
+    nmap
+    nnn
+    obs-studio
+    obsidian
+    oneko
+    playerctl
+    railway
+    ranger
+    rclone
+    retry
+    ripgrep
+    rsync
+    s3cmd
+    scdl
+    screen
+    scrot
+    steam
+    vim-full
+    vlc
+    vscode
+    webcamoid
+    yt-dlp
+  ];
+}

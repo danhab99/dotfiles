@@ -1,7 +1,12 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../programs/zsh.home.nix ../programs/git.home.nix ];
+  imports = [
+    ../home/git.nix
+    ../home/packages.nix
+    ../home/zoxide.nix
+    ../home/zsh.nix
+  ];
 
   home.username = "dan";
   home.homeDirectory = "/home/dan";
@@ -24,7 +29,7 @@
     VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
   };
 
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
 
   programs.zoxide = {
     enable = true;

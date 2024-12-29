@@ -1,4 +1,4 @@
-{ pkgs, i3config, ... }:
+{ ... }:
 
 {
   services.xserver = {
@@ -49,24 +49,6 @@
     xkb = {
       layout = "us";
       variant = "";
-    };
-
-    # Window Manager configuration
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-rounded;
-
-      # i3 config file
-      configFile = pkgs.writeTextFile {
-        name = "i3config";
-        text = let
-          dir = ../config/i3;
-          files = builtins.attrNames (builtins.readDir dir);
-          common = builtins.concatStringsSep "\n"
-            (map (file: builtins.readFile "${dir}/${file}") files);
-          local = builtins.readFile i3config;
-        in builtins.concatStringsSep "\n" [ common local ];
-      };
     };
   };
 }
