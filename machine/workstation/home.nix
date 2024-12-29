@@ -1,7 +1,9 @@
 { ... }:
 
 {
-  imports = [ ../home.nix ];
+  imports = [
+    ../home.nix
+  ];
 
   home.file = import ./files.nix { };
 

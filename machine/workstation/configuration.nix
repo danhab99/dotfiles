@@ -2,23 +2,28 @@
 
 {
   imports = [
-    ../../programs/gnupg.nix
-    ../../programs/java.nix
-    ../../programs/steam.nix
-
-    ../../services/display_manager.nix
-    ../../services/openssh.nix
-    ../../services/pipewire.nix
-    ../../services/printing.nix
-    ../../services/ratbagd.nix
-    ../../services/udev.nix
-    (import ../../services/xserver.nix {
+    ../../program/appimage.nix
+    ../../program/clang.nix
+    ../../program/gnupg.nix
+    ../../program/go.nix
+    (import ../../program/i3.nix {
       inherit pkgs inputs;
       i3config = ./config.i3;
     })
-  ];
+    ../../program/java.nix
+    ../../program/nixlang.nix
+    ../../program/rust.nix
+    ../../program/steam.nix
+    ../../program/zsh.nix
 
-  programs.zsh.enable = true;
+    ../../service/display_manager.nix
+    ../../service/openssh.nix
+    ../../service/pipewire.nix
+    ../../service/printing.nix
+    ../../service/ratbagd.nix
+    ../../service/udev.nix
+    ../../service/xserver.nix
+  ];
 
   networking = {
     hostName = "workstation";

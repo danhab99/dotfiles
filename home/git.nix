@@ -1,6 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    lazygit
+    git
+  ];
+
   programs.git = {
     enable = true;
 
@@ -37,7 +42,7 @@
       "unignore" = "update-index --no-assume-unchanged";
       "ignored" = ''!git ls-files -v | grep "^[[:lower:]]"'';
       "story" = "!sh -c 'ls $(git root) && git status && git diff --stat'";
-      "re-main" = "!sh -c 'git fetch origin main && git rebase origin/main'";
+      "remain" = "!sh -c 'git fetch origin main && git rebase origin/main'";
       "rebase-main" = "!git fetch origin main && git rebase origin/main";
     };
 
@@ -55,7 +60,7 @@
       "notes/"
       "__debug_bin*"
       "makefile"
-      "out"
+      "*out"
       ".env"
       "storybook-static/"
     ];
