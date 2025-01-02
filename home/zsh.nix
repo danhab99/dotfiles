@@ -1,11 +1,7 @@
+# ZSH configuration
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    oh-my-zsh
-    zsh
-  ];
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -47,7 +43,6 @@
       vssh = "gvim -v ~/.ssh/config";
       vfz = "gvim -v $(fzf)";
 
-      # alias l="ls"
       git-fix =
         "git submodule sync --recursive; git submodule update --init --recursive";
       ga = "git add";
@@ -76,7 +71,6 @@
       gaagca = "git add . && git commit --amend -a --verbose";
 
       dc = "docker-compose";
-      # alias gvim -vrc="vim ~/.vimrc"
 
       clip = "xclip -selection c";
       cfzf = ''cd "$(dirname $(fzf))"'';

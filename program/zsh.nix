@@ -5,7 +5,7 @@
     enable = true;
     enableCompletion = true;
 
-    oh-my-zsh = {
+    ohMyZsh = {
       enable = true;
       plugins = [
         "git"
