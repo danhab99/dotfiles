@@ -39,6 +39,10 @@ function ranger-cd {
     command rm -f -- "$tempfile" 2>/dev/null
 }
 
+function nshl() {
+    nix develop .#$1
+}
+
 if [ -e /tmp/workdir ]
 then
   DIR=$(cat /tmp/workdir)

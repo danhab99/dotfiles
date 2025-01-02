@@ -5,7 +5,7 @@
     ../../program/appimage.nix
     ../../program/clang.nix
     ../../program/gnupg.nix
-    ../../program/go.nix
+    # ../../program/go.nix
     (import ../../program/i3.nix {
       inherit pkgs inputs;
       i3config = ./config.i3;
