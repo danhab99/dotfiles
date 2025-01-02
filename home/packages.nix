@@ -8,7 +8,7 @@
     bat
     betterlockscreen
     brave
-    clipit
+    # clipit
     curl
     dbeaver-bin
     dive

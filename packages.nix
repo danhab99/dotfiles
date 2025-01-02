@@ -9,49 +9,25 @@ let
     '';
   });
 in with pkgs; [
-  aichat
   alsa-utils
   arandr
-  archivemount
-  argc
   astyle
   autorandr
-  bat
-  betterlockscreen
-  brave
-  clipit
   corepack_22
-  curl
   customBusybox
-  dbeaver-bin
-  dive
   docker
   docker-compose
-  doppler
-  entr
-  eza
-  ffmpeg
   file
-  flameshot
   fontforge
-  fzf
-  gh
-  gimp
   git
-  glances
   gnumake
   gnutar
   gparted
   gradle
   gzip
-  htop-vim
-  iftop
-  iotop
-  jq
   kdePackages.kcalc
   killall
   kubectl
-  lazydocker
   lazygit
   libratbag
   linuxKernel.packages.linux_zen.nvidia_x11
@@ -60,52 +36,29 @@ in with pkgs; [
   minio-client
   mongodb-compass
   mongodb-tools
-  ncdu
   nemo
   neovim
-  ngrok
-  nmap
-  nnn
   nodejs_22
   nodePackages.prisma
   nvtopPackages.full
-  obs-studio
-  obsidian
-  oneko
   openssl
   pamixer
   pavucontrol
   pkgsi686Linux.gperftools
-  playerctl
   pnpm
   postgresql_16
   prettierd
   prisma-engines
   pulseaudioFull
   python3
-  railway
-  ranger
-  rclone
-  retry
-  ripgrep
   rofi
-  rsync
   rxvt-unicode
-  s3cmd
-  scdl
-  screen
-  scrot
-  steam
   sutils
   sysstat
   terraform
   terraform-lsp
   unzip
   usbutils
-  vim-full
-  vlc
-  vscode
-  webcamoid
   wget
   xclip
   xdotool
@@ -114,7 +67,6 @@ in with pkgs; [
   xsel
   yai
   yarn
-  yt-dlp
   zip
   zoxide
 ]
