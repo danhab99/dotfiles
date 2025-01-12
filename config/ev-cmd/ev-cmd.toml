@@ -119,7 +119,7 @@
 82="brave --profile-directory='Default'"
 
 # 0, 5
-45="/home/dan/.config/i3/lock.sh"
+45="betterlockscreen --lock"
 
 # 1, 5
 21=""
