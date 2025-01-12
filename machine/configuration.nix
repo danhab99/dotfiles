@@ -49,4 +49,6 @@
   services.nixos-cli = {
     enable = true;
   };
+
+  environment.localBinInPath = true;
 }
