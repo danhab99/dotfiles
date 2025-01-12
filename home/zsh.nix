@@ -29,7 +29,7 @@
       theme = "dstufft";
     };
 
-    shellAliases = {
+    shellAliases = rec {
       cdh = "cd ~";
       ci3 = "cd ~/.config/i3";
       cnix = "cd /etc/nixos";
@@ -69,6 +69,7 @@
       gnl = "git nicelog";
       gaagc = "git add . && git commit -a --verbose";
       gaagca = "git add . && git commit --amend -a --verbose";
+      gpta = "${gaagca} && ${gpt}";
 
       dc = "docker-compose";
 
@@ -97,6 +98,7 @@
       znix = "z /etc/nixos";
 
       cai = "aichat -m claude -r %functions%";
+
     };
 
     initExtra = builtins.readFile ../config/zsh/extras;

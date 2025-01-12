@@ -21,6 +21,7 @@ function restorework {
 function vacay {
     echo "Have funn"
     rm /tmp/workdir
+    rm /tmp/nixshell
 }
 
 function ranger-cd {
@@ -39,7 +40,9 @@ function ranger-cd {
     command rm -f -- "$tempfile" 2>/dev/null
 }
 
-function nshl() {
+function ns() {
+    pwd > /tmp/nixshell
+    echo $1 >> /tmp/nixshell
     nix develop .#$1
 }
 
@@ -48,4 +51,12 @@ then
   DIR=$(cat /tmp/workdir)
   echo "Working in $DIR"
   cd $DIR
+fi
+
+if [ -e /tmp/nixshell ] && [ -z "$IN_NIX_SHELL" ]
+then
+  echo "Restoring nix shell"
+  flake_path=$(cat /tmp/nixshell | head -n 1 | tail -n 1)
+  shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
+  nix develop $flake_path#$shell_name
 fi

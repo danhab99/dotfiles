@@ -2,13 +2,14 @@
 
 {
   home.packages = with pkgs; [
+    # clipit
     aichat
     archivemount
     argc
     bat
     betterlockscreen
+    blender
     brave
-    # clipit
     curl
     dbeaver-bin
     dive
@@ -35,6 +36,7 @@
     obsidian
     oneko
     playerctl
+    python312Packages.pip
     railway
     ranger
     rclone
@@ -45,6 +47,7 @@
     scdl
     screen
     scrot
+    seahorse
     steam
     vim-full
     vlc

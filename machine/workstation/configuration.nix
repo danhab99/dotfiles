@@ -16,6 +16,7 @@
     ../../program/steam.nix
     ../../program/zsh.nix
 
+    ../../service/secrets.nix
     ../../service/display_manager.nix
     ../../service/openssh.nix
     ../../service/pipewire.nix
