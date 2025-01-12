@@ -30,7 +30,7 @@
     enable = true;
     vSync = true;
     shadow = true;
-    shadowOpacity = 0.8;
+    shadowOpacity = 0.9;
 
     shadowExclude = [
       "name = 'Notification'"
