@@ -6,6 +6,7 @@
   ];
 
   services.ollama = {
-    enabe = true;
+    enable = true;
+    home = "/bucket/ollama";
   };
 }

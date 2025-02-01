@@ -25,6 +25,7 @@
     ../../service/udev.nix
     ../../service/xserver.nix
     ../../service/ollama.nix
+    ../../service/flipperzero.nix
   ];
 
   networking = {

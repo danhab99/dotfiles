@@ -9,24 +9,24 @@ let
   github = { repo, rev }: {
     source = builtins.fetchGit {
       shallow = true;
-      url = "https://github.com/${repo}";
+      url = "https://github.com/${repo}.git";
       inherit rev;
     };
     recursive = true;
   };
 in {
   ".config/rofi" = github {
-    repo = "adi1090x/rofi.git";
+    repo = "adi1090x/rofi";
     rev = "86e6875d9e89ea3cf95c450cef6497d52afceefe";
   };
 
   ".urxvt/ext" = github {
-    repo = "simmel/urxvt-resize-font.git";
+    repo = "simmel/urxvt-resize-font";
     rev = "b5935806f159594f516da9b4c88bf1f3e5225cfd";
   };
 
   ".config/i3blocks-contrib" = github {
-    repo = "vivien/i3blocks-contrib.git";
+    repo = "vivien/i3blocks-contrib";
     rev = "9d66d81da8d521941a349da26457f4965fd6fcbd";
   };
 
