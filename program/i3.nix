@@ -38,7 +38,7 @@
       "class_g ?= 'Notify-osd'"
       "class_g = 'Cairo-clock'"
       "_GTK_FRAME_EXTENTS@:c"
-      "!focused"
+      "!focused && !floating"
       "_NET_WM_NAME@:s *= 'Android Emulator'"
     ];
 
