@@ -36,7 +36,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = import ../packages.nix { pkgs = pkgs; };
+  environment.systemPackages = import ./packages.nix { pkgs = pkgs; };
   fonts.packages = with pkgs.nerd-fonts; [ fira-code iosevka mononoki ];
 
   nixpkgs.config.allowBroken = true;
