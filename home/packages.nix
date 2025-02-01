@@ -6,6 +6,7 @@
     aichat
     archivemount
     argc
+    bambu-studio
     bat
     betterlockscreen
     blender

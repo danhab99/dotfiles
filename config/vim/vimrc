@@ -235,3 +235,9 @@ augroup TypeScriptMappings
   autocmd FileType typescript vmap <leader>ae :AI this is typescript code, extract this logic into a function<CR>
 augroup END
 
+" Apply Markdown highlighting for an empty buffer
+augroup markdown_highlighting
+  autocmd!
+  autocmd BufEnter * if &ft == '' | setlocal filetype=markdown | endif
+augroup END
+

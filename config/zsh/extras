@@ -46,6 +46,35 @@ function ns() {
     nix develop .#$1
 }
 
+function notes() {
+  notes_path=~/Documents/notes
+  mkdir -p $notes_path
+  note_dir="$notes_path/$(basename "$(dirname "$PWD")")/$(basename "$PWD")"
+  note_path="$note_dir/$(date +"%Y-%m-%d")"
+
+  case $1 in
+    ls)
+      echo "Notes in $note_dir"
+      ls -lh $note_dir
+      ;;
+    prev)
+      for file in "$note_dir"/*; do
+        if [[ -f "$file" ]]; then
+          bat -r :4 "$file"
+          echo
+        fi
+      done
+    ;;
+    *)
+      if [ -n "$1" ]; then
+        vim $note_path--$1.md
+      else
+        vim $note_path.md
+      fi
+      ;;
+  esac
+}
+
 if [ -e /tmp/workdir ]
 then
   DIR=$(cat /tmp/workdir)
@@ -60,3 +89,6 @@ then
   shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
   nix develop $flake_path#$shell_name
 fi
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
