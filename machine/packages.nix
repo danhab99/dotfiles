@@ -17,6 +17,7 @@ in with pkgs; [
   customBusybox
   docker
   docker-compose
+  docker-credential-helpers
   file
   fontforge
   git
@@ -38,8 +39,8 @@ in with pkgs; [
   mongodb-tools
   nemo
   neovim
-  nodejs_22
   nodePackages.prisma
+  nodejs_22
   nvtopPackages.full
   openssl
   pamixer
