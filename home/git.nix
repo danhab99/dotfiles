@@ -59,6 +59,7 @@
       "*out"
       ".env"
       "storybook-static/"
+      "*.aidoc.md"
     ];
   };
 }

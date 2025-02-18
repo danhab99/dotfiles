@@ -6,26 +6,28 @@
     ../../program/clang.nix
     ../../program/gnupg.nix
     ../../program/go.nix
-    (import ../../program/i3.nix {
-      inherit pkgs inputs;
-      i3config = ./config.i3;
-    })
     ../../program/java.nix
     ../../program/nixlang.nix
     ../../program/rust.nix
     ../../program/steam.nix
     ../../program/zsh.nix
+    (import ../../program/i3.nix {
+      inherit pkgs inputs;
+      i3config = ./config.i3;
+    })
 
-    ../../service/secrets.nix
     ../../service/display_manager.nix
+    ../../service/flipperzero.nix
+    ../../service/kde.nix
+    ../../service/ollama.nix
     ../../service/openssh.nix
     ../../service/pipewire.nix
     ../../service/printing.nix
     ../../service/ratbagd.nix
+    ../../service/secrets.nix
     ../../service/udev.nix
     ../../service/xserver.nix
-    ../../service/ollama.nix
-    ../../service/flipperzero.nix
+    ../../service/urxvt.nix
   ];
 
   networking = {
@@ -41,7 +43,7 @@
   users.users.dan = {
     isNormalUser = true;
     description = "dan";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
     shell = pkgs.zsh;
   };
 

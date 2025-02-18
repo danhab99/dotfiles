@@ -16,15 +16,21 @@
       url = "github:water-sucks/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, stylix, ... }@inputs:
     let
       inherit (self) outputs;
       mkNix = hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            stylix.nixosModules.stylix
             nixos-cli.nixosModules.nixos-cli
             ./machine/configuration.nix
             ./machine/${hostname}/configuration.nix
