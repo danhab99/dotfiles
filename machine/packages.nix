@@ -13,6 +13,7 @@ in with pkgs; [
   arandr
   astyle
   autorandr
+  base16-schemes
   corepack_22
   customBusybox
   docker

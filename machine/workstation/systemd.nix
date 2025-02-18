@@ -21,6 +21,7 @@
         --exclude="**/*[Cc]ache*" \
         --exclude="/home/dan/Videos" \
         --exclude="/home/dan/Pictures" \
+        --seek \
         -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
       }
 

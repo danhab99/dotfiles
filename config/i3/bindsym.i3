@@ -33,7 +33,7 @@ bindsym $mod+Mod1+c exec xdotool mousedown 1 && xdotool mouseup 1
 bindsym XF86Display exec arandr
 bindsym XF86Messenger exec xpad -n
 bindsym $mod+n exec xpad -n
-bindsym $mod+c exec deepin-calculator
+bindsym $mod+c exec kcalc
 bindsym $mod+Shift+Ctrl+l exec sleep 0.5 && xdotool type https://www.linkedin.com/in/danhabot/
 bindsym $mod+Ctrl+g exec sleep 0.5 && xdotool type https://github.com/danhab99
 bindsym $mod+Ctrl+e exec sleep 0.5 && xdotool type dan.habot@gmail.com
