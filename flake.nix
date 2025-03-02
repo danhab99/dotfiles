@@ -29,7 +29,12 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.dan = ./machine/${hostname}/user.nix;
+                users.dan = {
+                  imports = [
+                    ./machine/${hostname}/user.nix
+                    ./machine/${hostname}/home.nix
+                  ];
+                };
               };
             }
           ];

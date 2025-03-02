@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ rofi ];
 
-    home.files = {
+    home.file = {
       ".config/rofi" = {
         source = builtins.fetchGit {
           shallow = true;

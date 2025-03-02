@@ -1,10 +1,10 @@
 { lib, config, pkgs, ... }:
 
 with lib;
-let cfg = config.module.picom;
+let cfg = config.modules.picom;
 
 in {
-  options.module.picom = { enable = mkEnableOption "picom"; };
+  options.modules.picom = { enable = mkEnableOption "picom"; };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ picom ];

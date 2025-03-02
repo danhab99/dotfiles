@@ -1,7 +1,7 @@
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.module.gnupg;
+let cfg = config.modules.gnupg;
 
 in {
   options.modules.gnupg = { enable = mkEnableOption "gnupg"; };

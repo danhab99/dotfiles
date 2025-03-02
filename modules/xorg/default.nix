@@ -15,7 +15,7 @@ in {
       xsel
     ];
 
-    home.files = {
+    home.file = {
       ".Xdefaults" = ./Xdefaults;
       ".Xresources" = ./Xresources;
     };
