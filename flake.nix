@@ -10,24 +10,33 @@
   outputs = { self, nixpkgs, home-manager, nixos-cli, nur, stylix, ... }@inputs:
     let
       inherit (self) outputs;
-      mkNix = hostname:
+
+      mkNix = system: hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
+          system = system;
           modules = [
             stylix.nixosModules.stylix
             nixos-cli.nixosModules.nixos-cli
-            ./machine/configuration.nix
-            ./machine/${hostname}/configuration.nix
+            { networking.hostName = hostname; }
+
             ./machine/${hostname}/hardware-configuration.nix
+            ./machine/configuration.nix
+
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.dan = {
-                imports = [ ./machine/home.nix ./machine/${hostname}/home.nix ];
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.dan = ./machine/${hostname}/user.nix;
               };
             }
           ];
         };
-    in { nixosConfigurations = { workstation = mkNix "workstation"; }; };
+    in {
+      nixosConfigurations = {
+        workstation = mkNix "x86_64-linux" "workstation";
+      };
+    };
 }

@@ -10,7 +10,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       i3-rounded
       i3blocks
       i3status
@@ -19,6 +19,11 @@ in {
       nitrogen
     ];
 
+    services.displayManager = {
+      sddm.enable = true;
+      defaultSession = "none+i3";
+    };
+
     services.xserver.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-rounded;
@@ -26,7 +31,7 @@ in {
       configFile = pkgs.writeTextFile {
         name = "i3config";
         text = let
-          dir = ../config/i3;
+          dir = "./";
           files = builtins.attrNames (builtins.readDir dir);
           common = builtins.concatStringsSep "\n"
             (map (file: builtins.readFile "${dir}/${file}") files);
@@ -35,23 +40,16 @@ in {
       };
     };
 
-    services.picom = {
-      enable = true;
-      vSync = true;
-      shadow = true;
-      shadowOpacity = 0.9;
-
-      shadowExclude = [
-        "name = 'Notification'"
-        "class_g = 'Conky'"
-        "class_g ?= 'Notify-osd'"
-        "class_g = 'Cairo-clock'"
-        "_GTK_FRAME_EXTENTS@:c"
-        "!focused && !floating"
-        "_NET_WM_NAME@:s *= 'Android Emulator'"
-      ];
-
-      settings.blur = { shadow-radius = 12; };
+    home.files = {
+      ".config/i3blocks-contrib" = {
+        source = builtins.fetchGit {
+          shallow = true;
+          url = "https://github.com/vivien/i3blocks-contrib.git";
+          rev = "9d66d81da8d521941a349da26457f4965fd6fcbd";
+        };
+        recursive = true;
+      };
+      ".config/i3blocks.conf" = ./i3blocks.conf;
     };
   };
 }
