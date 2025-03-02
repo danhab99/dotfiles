@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     # clipit
     aichat
+    pass
     archivemount
     argc
     bambu-studio

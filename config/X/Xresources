@@ -59,7 +59,7 @@
 urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed
 
 ! Clickable URLs
-*.url-launcher: /run/current-system/sw/bin/brave
+*.url-launcher: brave
 *.matcher.button: 1
 *.keysym.C-Delete: perl:matcher:last
 *.keysym.M-Delete: perl:matcher:list
