@@ -22,12 +22,7 @@ in {
       nitrogen
     ];
 
-    services.displayManager = {
-      sddm.enable = true;
-      defaultSession = "none+i3";
-    };
-
-    services.xserver.windowManager.i3 = {
+    xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-rounded;
 

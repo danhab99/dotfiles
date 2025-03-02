@@ -18,7 +18,7 @@ in {
 
     services.ollama = {
       enable = true;
-      home = cfg.repoDir;
+      # home = cfg.repoDir;
     };
   };
 }

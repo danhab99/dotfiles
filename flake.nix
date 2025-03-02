@@ -21,6 +21,7 @@
             { networking.hostName = hostname; }
 
             ./machine/${hostname}/hardware-configuration.nix
+            ./machine/${hostname}/configuration.nix
             ./machine/configuration.nix
 
             home-manager.nixosModules.home-manager
@@ -29,12 +30,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.dan = {
-                  imports = [
-                    ./machine/${hostname}/user.nix
-                    ./machine/${hostname}/home.nix
-                  ];
-                };
+                users.dan = ./machine/${hostname}/home.nix;
               };
             }
           ];

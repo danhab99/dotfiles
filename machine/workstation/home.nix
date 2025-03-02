@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ./xserver.nix ];
+  imports = [ ./user.nix ];
 
   home.file = {
     ".config/g600" = {
