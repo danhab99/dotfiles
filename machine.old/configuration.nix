@@ -26,19 +26,20 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ swt nix-ld ];
-
   environment.variables = with pkgs; {
+    PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
+    PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
+    PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
     LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
   };
 
-  environment.localBinInPath = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
 
+  environment.systemPackages = import ./packages.nix { pkgs = pkgs; };
   fonts.packages = with pkgs.nerd-fonts; [ fira-code iosevka mononoki ];
+
+  nixpkgs.config.allowBroken = true;
 
   programs.appimage = {
     enable = true;
@@ -46,6 +47,8 @@
   };
 
   services.nixos-cli = { enable = true; };
+
+  environment.localBinInPath = true;
 
   stylix.base16Scheme =
     "${pkgs.base16-schemes}/share/themes/gruvbox-dark-pale.yaml";

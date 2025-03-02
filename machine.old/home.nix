@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ../home/git.nix
+    ../home/packages.nix
+    ../home/zoxide.nix
+    ../home/zsh.nix
+  ];
+
   home.username = "dan";
   home.homeDirectory = "/home/dan";
 
@@ -13,9 +20,20 @@
     };
   };
 
-  home.sessionVariables = with pkgs; {
-    EDITOR = vim-full + "/bin/vim";
-    BROWSER = brave + "/bin/brave";
+  home.file = import ./files.nix { };
+
+  home.sessionVariables = {
+    EDITOR = pkgs.vim-full + "/bin/vim";
+    BROWSER = pkgs.brave + "/bin/brave";
+    VI_MODE_SET_CURSOR = "true";
+    VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
+  };
+
+  # programs.home-manager.enable = true;
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # This value determines the Home Manager release that your configuration is

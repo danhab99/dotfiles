@@ -14,24 +14,16 @@ in with pkgs; [
   astyle
   autorandr
   base16-schemes
-  corepack_22
   customBusybox
-  docker
-  docker-compose
-  docker-credential-helpers
   file
   fontforge
-  git
   gnumake
   gnutar
   gparted
-  gradle
   gzip
   kdePackages.kcalc
   killall
   kubectl
-  lazygit
-  libratbag
   linuxKernel.packages.linux_zen.nvidia_x11
   lm_sensors
   maven
@@ -41,25 +33,15 @@ in with pkgs; [
   nemo
   neovim
   nix-ld
-  nodePackages.prisma
-  nodejs_22
   nvtopPackages.full
   openssl
   pamixer
   pavucontrol
   pkgsi686Linux.gperftools
-  pnpm
-  postgresql_16
-  prettierd
-  prisma-engines
   pulseaudioFull
-  python3
   rofi
-  rxvt-unicode
   sutils
   sysstat
-  terraform
-  terraform-lsp
   unzip
   usbutils
   wget
@@ -69,7 +51,5 @@ in with pkgs; [
   xpad
   xsel
   yai
-  yarn
   zip
-  zoxide
 ]

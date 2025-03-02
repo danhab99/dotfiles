@@ -7,7 +7,7 @@ in {
   options.modules.gnupg = { enable = mkEnableOption "gnupg"; };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ gnupg pinentry-curses ];
+    home.packages = with pkgs; [ gnupg pinentry-curses pass ];
 
     programs.gnupg.agent = {
       enable = true;

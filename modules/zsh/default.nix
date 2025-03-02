@@ -1,11 +1,18 @@
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.zoxide;
+let cfg = config.modules.zsh;
 
 in {
-  options.modules.zoxide = { enable = mkEnableOption "zoxide"; };
+  options.modules.zsh = { enable = mkEnableOption "zsh"; };
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ zsh oh-my-zsh ];
+
+    home.sessionVariables = {
+      VI_MODE_SET_CURSOR = "true";
+      VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
+    };
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -105,7 +112,7 @@ in {
 
       };
 
-      initExtra = builtins.readFile ../config/zsh/extras;
+      initExtra = builtins.readFile ./extras.sh;
     };
   };
 }
