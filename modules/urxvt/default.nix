@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ rxvt-unicode ];
 
-    services.urxvtd.enable = true;
+    programs.urxvt.enable = true;
 
     home.file = {
       ".urxvt/ext" = github {

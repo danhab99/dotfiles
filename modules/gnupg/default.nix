@@ -9,14 +9,19 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ gnupg pinentry-curses pass ];
 
-    programs.gnupg.agent = {
+    programs.gpg = {
       enable = true;
-      enableSSHSupport = true;
-      settings = {
-        default-cache-ttl = "10000000";
-        max-cache-ttl = "10000000";
-      };
+    };
+
+    services.gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      extraConfig = ''
+        default-cache-ttl = 10000000
+        max-cache-ttl = 10000000
+      '';
       pinentryPackage = pkgs.pinentry-curses;
+      enableZshIntegration = true;
     };
   };
 }
