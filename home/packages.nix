@@ -20,10 +20,12 @@
     eza
     ffmpeg
     flameshot
+    freecad
     fzf
     gh
     gimp
     glances
+    gqrx
     htop-vim
     iftop
     iotop

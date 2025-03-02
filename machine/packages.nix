@@ -40,6 +40,7 @@ in with pkgs; [
   mongodb-tools
   nemo
   neovim
+  nix-ld
   nodePackages.prisma
   nodejs_22
   nvtopPackages.full

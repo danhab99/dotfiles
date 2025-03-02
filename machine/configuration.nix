@@ -26,11 +26,11 @@
     };
   };
 
-  environment.variables = {
-    PRISMA_QUERY_ENGINE_LIBRARY =
-      "${pkgs.prisma-engines}/lib/libquery_engine.node";
-    PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-    PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+  environment.variables = with pkgs; {
+    PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
+    PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
+    PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
+    LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -46,11 +46,13 @@
     binfmt = true;
   };
 
-  services.nixos-cli = {
-    enable = true;
-  };
+  services.nixos-cli = { enable = true; };
 
   environment.localBinInPath = true;
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-pale.yaml";
+  stylix.base16Scheme =
+    "${pkgs.base16-schemes}/share/themes/gruvbox-dark-pale.yaml";
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
 }
