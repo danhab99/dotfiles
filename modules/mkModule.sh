@@ -18,7 +18,15 @@ let cfg = config.modules.$1;
 in {
   options.modules.$1 = { enable = mkEnableOption "$1"; };
   config = mkIf cfg.enable { 
-    // ...
+    home.packages = with pkgs; [ 
+      # ...
+    ];
+
+    home.file = [ 
+      # ...
+    ];
+
+    # ...
   };
 }
 EOF

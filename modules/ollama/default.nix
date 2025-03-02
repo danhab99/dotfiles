@@ -5,9 +5,12 @@ with lib;
 let cfg = config.modules.ollama;
 
 in {
-  options.modules.ollama = { 
+  options.modules.ollama = {
     enable = mkEnableOption "ollama";
-    repoDir = mkOption "repoDir";
+    repoDir = mkOption {
+      type = lib.types.str;
+      description = "Directory for the ollama repository";
+    };
   };
   config = mkIf cfg.enable {
 

@@ -11,7 +11,7 @@ in {
 
     services.urxvtd.enable = true;
 
-    home.files = {
+    home.file = {
       ".urxvt/ext" = github {
         source = builtins.fetchGit {
           shallow = true;

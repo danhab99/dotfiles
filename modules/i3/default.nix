@@ -1,12 +1,15 @@
 { lib, config, pkgs, ... }:
 
 with lib;
-let cfg = config.module.i3;
+let cfg = config.modules.i3;
 
 in {
-  options.module.i3 = {
+  options.modules.i3 = {
     enable = mkEnableOption "i3";
-    configFile = mkOption "configFile";
+    configFile = mkOption {
+      type = lib.types.str;
+      description = "Machine specific i3 config file";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -40,7 +43,7 @@ in {
       };
     };
 
-    home.files = {
+    home.file = {
       ".config/i3blocks-contrib" = {
         source = builtins.fetchGit {
           shallow = true;

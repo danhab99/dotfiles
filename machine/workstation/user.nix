@@ -1,33 +1,33 @@
 { ... }:
 
 {
-  imports = [ ../../modules/default.nix ./xserver.nix ];
+  imports = [ ../../modules/default.nix ];
 
   config.modules = {
     appimage.enable = true;
-    git.enable = true;
-    kde.enable = true;
-    openssh.enable = true;
-    printing.enable = true;
-    steam.enable = true;
-    xorg.enable = true;
-    gnupg.enable = true;
-    picom.enable = true;
-    ratbag.enable = true;
-    urxvt.enable = true;
-    zoxide.enable = true;
     flipperzero.enable = true;
+    git.enable = true;
+    gnupg.enable = true;
     i3 = {
       enable = true;
       configFile = ./i3/config;
     };
-    ollama.enable = true;
+    kde.enable = true;
+    ollama = {
+      enable = true;
+      repoDir = "/bucket/ollama";
+    };
+    openssh.enable = true;
+    picom.enable = true;
     pipewire.enable = true;
+    printing.enable = true;
+    ratbag.enable = true;
     secrets.enable = true;
+    steam.enable = true;
+    urxvt.enable = true;
     vim.enable = true;
+    xorg.enable = true;
+    zoxide.enable = true;
     zsh.enable = true;
   };
-
-  home.files = import ./files.nix;
 }
-

@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 with lib;
-let cfg = config.module.steam;
+let cfg = config.modules.steam;
 
 in {
   options.modules.steam = { enable = mkEnableOption "steam"; };

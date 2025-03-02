@@ -11,7 +11,7 @@ in {
 
     home.sessionVariables = { EDITOR = pkgs.vim-full + "/bin/vim"; };
 
-    home.files = {
+    home.file = {
       ".vim/desert256.vim" =
         builtins.fetchurl "http://hans.fugal.net/vim/colors/desert.vim";
       ".vimrc" = ./vimrc;

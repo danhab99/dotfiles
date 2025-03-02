@@ -26,7 +26,13 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ swt nix-ld ];
+  environment.systemPackages = with pkgs; [
+    swt
+    nix-ld
+    gnupg
+    pinentry-curses
+    pass
+  ];
 
   environment.variables = with pkgs; {
     LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
@@ -52,4 +58,22 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    settings = {
+      default-cache-ttl = "10000000";
+      max-cache-ttl = "10000000";
+    };
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
