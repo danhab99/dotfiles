@@ -17,3 +17,9 @@ exec_always xinput set-prop 9 295 0
 exec_always xinput | grep -Po "(?<=LingYao ShangHai Thumb Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
 exec_always xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable
 exec_always ~/.screenlayout/3screen.sh
+
+assign [class="steam"] $ws2
+assign [class="tf_linux64"] $ws2
+assign [class="steam_app_275850"] $ws2
+assign [class="steam_app_2073850"] $ws2
+assign [class="steam_app_276703 "] $ws2
