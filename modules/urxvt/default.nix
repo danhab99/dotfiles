@@ -12,7 +12,7 @@ in {
     programs.urxvt.enable = true;
 
     home.file = {
-      ".urxvt/ext" = github {
+      ".urxvt/ext" = {
         source = builtins.fetchGit {
           shallow = true;
           url = "https://github.com/simmel/urxvt-resize-font.git";

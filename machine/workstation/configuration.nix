@@ -24,7 +24,7 @@
 
   services.displayManager = {
     sddm.enable = true;
-    defaultSession = "none+i3";
+    # defaultSession = "none+i3";
   };
 
   services.gnome.gnome-keyring = { enable = true; };

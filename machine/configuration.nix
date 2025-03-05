@@ -14,6 +14,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  users.users.dan = {
+    isNormalUser = true;
+    description = "dan";
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
+    shell = pkgs.zsh;
+  };
+
   time.timeZone = "America/New_York";
 
   security.rtkit.enable = true;
@@ -68,6 +75,8 @@
     };
     pinentryPackage = pkgs.pinentry-curses;
   };
+
+  programs.zsh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
