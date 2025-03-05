@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     # clipit
     aichat
-    pass
     archivemount
     argc
     bambu-studio
@@ -20,6 +19,7 @@
     eza
     ffmpeg
     flameshot
+    freecad
     fzf
     gh
     gimp
@@ -37,6 +37,7 @@
     obs-studio
     obsidian
     oneko
+    pass
     playerctl
     python312Packages.pip
     railway
