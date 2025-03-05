@@ -7,7 +7,7 @@ in {
   options.modules.i3 = {
     enable = mkEnableOption "i3";
     configFile = mkOption {
-      type = lib.types.str;
+      type = lib.types.path;
       description = "Machine specific i3 config file";
     };
   };
@@ -394,6 +394,7 @@ in {
 
       extraConfig = ''
         border_radius 8
+        ${(builtins.readFile cfg.configFile)}
       '';
     };
 

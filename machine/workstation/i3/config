@@ -1,3 +1,5 @@
+# CUSTOM CONFIG
+
 exec --no-startup-id libinput-gestures-setup start
 exec xpad
 exec_always ( killall oneko || true ) && oneko -tofocus -position +30+0

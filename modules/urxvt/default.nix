@@ -9,7 +9,13 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ rxvt-unicode ];
 
-    programs.urxvt.enable = true;
+    programs.urxvt = {
+      enable = true;
+
+      fonts = [
+
+      ];
+    }
 
     home.file = {
       ".urxvt/ext" = {
