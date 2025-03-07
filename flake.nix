@@ -37,6 +37,8 @@
           config.allowUnfree = true;
         };
 
+      homeModules = user: [ ./user/home.nix ./user/${user}/home.nix ];
+
       mkNix = { hostname, user }:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -50,9 +52,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.dan = {
-                imports = [ ./user/home.nix ./user/${user}/home.nix ];
-              };
+              home-manager.users.dan = { imports = homeModules user; };
             }
           ];
         };
@@ -61,11 +61,7 @@
           home-manager.lib.homeManagerConfiguration {
             pkgs = pkgsFor system;
             extraSpecialArgs = { inherit inputs outputs; };
-            modules = [
-              ./user/home.nix
-              ./user/${name}/home.nix # You might want to make this more generic
-              # stylix.homeManagerModules.stylix
-            ];
+            modules = homeModules name;
           });
     in {
       nixosConfigurations = {
