@@ -26,6 +26,16 @@
   outputs = { self, nixpkgs, home-manager, nixos-cli, nur, stylix, ... }@inputs:
     let
       inherit (self) outputs;
+      # Supported systems for your flake
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      # Helper function to generate a set of attributes for each system
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+      # Helper function to create default pkgs instance for each system
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      
       mkNix = hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -45,5 +55,25 @@
             }
           ];
         };
-    in { nixosConfigurations = { workstation = mkNix "workstation"; }; };
+    in {
+      nixosConfigurations = {
+        workstation = mkNix "workstation";
+      };
+      
+      # Standalone home-manager configuration
+      homeConfigurations = {
+        "dan" = forAllSystems (system:
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = pkgsFor system;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+            modules = [
+              ./machine/home.nix
+              ./machine/workstation/home.nix  # You might want to make this more generic
+              # stylix.homeManagerModules.stylix
+            ];
+          });
+      };
+    };
 }
