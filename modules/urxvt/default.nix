@@ -15,7 +15,8 @@ in {
       fonts = [
 
       ];
-    }
+      
+    };
 
     home.file = {
       ".urxvt/ext" = {
