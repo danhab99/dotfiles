@@ -407,6 +407,10 @@ in {
         };
         recursive = true;
       };
+
+      ".config/i3blocks.conf" = {
+        source = ./i3blocks.conf;
+      };
     };
   };
 }

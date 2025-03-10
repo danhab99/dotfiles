@@ -7,7 +7,6 @@ in {
   options.modules.git = { enable = mkEnableOption "git"; };
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      git
       lazygit
     ];
 

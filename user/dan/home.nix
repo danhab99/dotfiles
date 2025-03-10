@@ -11,6 +11,7 @@
       enable = true;
       configFile = ./i3/config;
     };
+    rofi.enable = true;
     ollama = {
       enable = false;
       repoDir = "/bucket/ollama";

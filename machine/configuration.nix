@@ -43,6 +43,7 @@
       '';
     });
   in with pkgs; [
+    git
     alsa-utils
     arandr
     astyle
