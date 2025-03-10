@@ -3,6 +3,16 @@
 {
   environment.systemPackages = with pkgs; [ gnome-keyring libsecret seahorse libratbag ];
 
+  networking = {
+    hostName = "workstation";
+    networkmanager.enable = true;
+    firewall = {
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [ 22 ];
+      enable = true;
+    };
+  }; 
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall =
