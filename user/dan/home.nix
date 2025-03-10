@@ -22,6 +22,7 @@
     xorg.enable = true;
     zoxide.enable = true;
     zsh.enable = true;
+    fzf.enable = true;
   };
 
   config.home.file = {

@@ -29,7 +29,6 @@ in {
     dive
     doppler
     entr
-    eza
     ffmpeg
     file
     flameshot
