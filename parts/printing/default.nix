@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.printing;
+let cfg = config.part.printing;
 
 in {
-  options.modules.printing = { enable = mkEnableOption "printing"; };
+  options.part.printing = { enable = mkEnableOption "printing"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

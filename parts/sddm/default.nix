@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.sddm;
+let cfg = config.part.sddm;
 
 in {
-  options.modules.sddm = { enable = mkEnableOption "sddm"; };
+  options.part.sddm = { enable = mkEnableOption "sddm"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

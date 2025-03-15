@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.ratbag;
+let cfg = config.part.ratbag;
 
 in {
-  options.modules.ratbag = { enable = mkEnableOption "ratbag"; };
+  options.part.ratbag = { enable = mkEnableOption "ratbag"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

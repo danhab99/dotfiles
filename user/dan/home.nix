@@ -1,4 +1,4 @@
-{ config, option, ... }:
+{ ... }:
 
 {
   imports = [ ../../modules/default.nix ];

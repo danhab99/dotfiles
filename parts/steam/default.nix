@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.steam;
+let cfg = config.part.steam;
 
 in {
-  options.modules.steam = { enable = mkEnableOption "steam"; };
+  options.part.steam = { enable = mkEnableOption "steam"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

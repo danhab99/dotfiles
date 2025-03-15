@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.ssh;
+let cfg = config.part.ssh;
 
 in {
-  options.modules.ssh = { enable = mkEnableOption "ssh"; };
+  options.part.ssh = { enable = mkEnableOption "ssh"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ openssh ];
 

@@ -2,16 +2,16 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.part.timezone;
+let cfg = config.part.zsh;
 
 in {
-  options.part.timezone = { enable = mkEnableOption "timezone"; };
+  options.part.zsh = { enable = mkEnableOption "zsh"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
         # ...
       ];
 
-    time.timeZone = "America/New_York";
+    programs.zsh.enable = true;
   };
 }

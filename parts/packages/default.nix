@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.packages;
+let cfg = config.part.packages;
 
 in {
-  options.modules.packages = { enable = mkEnableOption "packages"; };
+  options.part.packages = { enable = mkEnableOption "packages"; };
   config = mkIf cfg.enable {
     environment.systemPackages = let
       customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: rec {

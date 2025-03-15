@@ -16,7 +16,14 @@
     ./i18n
     ./nix
     ./packages
+    ./pipewire
+    ./printing
+    ./ratbag
+    ./sddm
+    ./secrets
     ./ssh
+    ./steam
     ./timezone
+    ./xserver
   ];
 }

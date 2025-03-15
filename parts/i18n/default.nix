@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.i18n;
+let cfg = config.part.i18n;
 
 in {
-  options.modules.i18n = { enable = mkEnableOption "i18n"; };
+  options.part.i18n = { enable = mkEnableOption "i18n"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

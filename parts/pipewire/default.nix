@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.pipewire;
+let cfg = config.part.pipewire;
 
 in {
-  options.modules.pipewire = { enable = mkEnableOption "pipewire"; };
+  options.part.pipewire = { enable = mkEnableOption "pipewire"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
