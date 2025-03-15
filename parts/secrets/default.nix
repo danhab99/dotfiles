@@ -2,15 +2,17 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.secrets;
+let cfg = config.part.secrets;
 
 in {
-  options.modules.secrets = { enable = mkEnableOption "secrets"; };
+  options.part.secrets = { enable = mkEnableOption "secrets"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
         # ...
       ];
+
+    security.rtkit.enable = true;
 
     security.pam.services = {
       login.enableGnomeKeyring = true; # Enable for TTY login

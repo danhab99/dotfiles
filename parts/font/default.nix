@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.font;
+let cfg = config.part.font;
 
 in {
-  options.modules.font = { enable = mkEnableOption "font"; };
+  options.part.font = { enable = mkEnableOption "font"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

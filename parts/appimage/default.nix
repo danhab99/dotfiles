@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.appimage;
+let cfg = config.part.appimage;
 
 in {
-  options.modules.appimage = { enable = mkEnableOption "appimage"; };
+  options.part.appimage = { enable = mkEnableOption "appimage"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

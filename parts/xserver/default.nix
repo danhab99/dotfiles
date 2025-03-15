@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.xserver;
+let cfg = config.part.xserver;
 
 in {
-  options.modules.xserver = { enable = mkEnableOption "xserver"; };
+  options.part.xserver = { enable = mkEnableOption "xserver"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [

@@ -13,10 +13,10 @@ cat <<EOF > "$1/default.nix"
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.$1;
+let cfg = config.part.$1;
 
 in {
-  options.modules.$1 = { enable = mkEnableOption "$1"; };
+  options.part.$1 = { enable = mkEnableOption "$1"; };
   config = mkIf cfg.enable { 
     environment.systemPackages = with pkgs; [ 
       # ...

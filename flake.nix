@@ -17,13 +17,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # stylix = {
+    #   url = "github:danth/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, ... }@inputs:
     let
       inherit (self) outputs;
       # Supported systems for your flake
@@ -43,9 +43,8 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            stylix.nixosModules.stylix
+            # stylix.nixosModules.stylix
             nixos-cli.nixosModules.nixos-cli
-            ./machine/configuration.nix
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
             home-manager.nixosModules.home-manager

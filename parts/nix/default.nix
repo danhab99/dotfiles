@@ -2,10 +2,10 @@
 { pkgs, lib, config, ... }:
 
 with lib;
-let cfg = config.modules.nix;
+let cfg = config.part.nix;
 
 in {
-  options.modules.nix = { enable = mkEnableOption "nix"; };
+  options.part.nix = { enable = mkEnableOption "nix"; };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
@@ -19,5 +19,12 @@ in {
     nixpkgs.config.allowBroken = true;
 
     services.nixos-cli = { enable = true; };
+
+    programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
+
+    environment.variables = with pkgs; {
+      LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
+    };
   };
 }

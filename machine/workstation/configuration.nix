@@ -1,77 +1,37 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ gnome-keyring libsecret seahorse libratbag ];
+  imports = [ ../../parts/default.nix ];
 
-  networking = {
-    hostName = "workstation";
-    networkmanager.enable = true;
-    firewall = {
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [ 22 ];
-      enable = true;
-    };
-  }; 
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      false; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      false; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall =
-      false; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
-
-  security.pam.services = {
-    login.enableGnomeKeyring = true; # Enable for TTY login
-    sddm.enableGnomeKeyring = true;
-  };
-
-  services.dbus.enable = true;
-
-  services.displayManager = {
+  config.modules = {
+    appimage.enable = true;
+    docker.enable = true;
+    font.enable = true;
+    i18n.enable = true;
+    nix.enable = true;
+    packages.enable = true;
+    pipewire.enable = true;
+    ratbag.enable = true;
     sddm.enable = true;
-    # defaultSession = "none+i3";
+    secrets.enable = true;
+    ssh.enable = true;
+    steam.enable = true;
+    timezone.enable = true;
+    xserver.enable = true;
   };
 
-  services.gnome.gnome-keyring = { enable = true; };
-
-  services.openssh = {
-    enable = true;
-    allowSFTP = true;
-    authorizedKeysInHomedir = true;
-    settings.PasswordAuthentication = false;
-  };
-
-  services.passSecretService.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    extraConfig.pipewire = {
-      "99-disable-bell" = {
-        "context.properties" = { "module.x11.bell" = false; };
-      };
+  config = {
+    users.users.dan = {
+      isNormalUser = true;
+      description = "dan";
+      extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
+      shell = pkgs.zsh;
     };
-  };
 
-  services.printing.enable = true;
+    environment.localBinInPath = true;
 
-  services.ratbagd = { enable = true; };
-
-  services.xserver = {
-    enable = true;
-    displayManager.startx.enable = true; # Optional if using startx
-    videoDrivers = [ "nvidia" ];
-
-    xautolock.enable = false;
-    desktopManager.xterm.enable = false;
-
-    # X.org configuration
-    config = ''
+    services.dbus.enable = true;
+    services.xserver.config = ''
       Section "Device"
         Identifier "GPU0"
         Driver "nvidia"
@@ -105,11 +65,5 @@
           Option "TripleBuffer" "True"
       EndSection
     '';
-
-    # Keyboard settings
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
   };
 }
