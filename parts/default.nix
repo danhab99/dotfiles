@@ -28,5 +28,6 @@
     ./timezone
     ./xserver
     ./zsh
+    ./displaymanager
   ];
 }

@@ -64,7 +64,7 @@
     powerManagement.enable = true;
   };
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   powerManagement = {
     cpuFreqGovernor = "performance";
