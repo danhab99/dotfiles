@@ -390,6 +390,16 @@ in {
         ];
 
         focus.followMouse = true;
+
+        assigns = {
+          "2" = [
+            { class = "steam"; }
+            { class = "steam_app_2073850"; }
+            { class = "steam_app_275850"; }
+            { class = "steam_app_276703"; }
+            { class = "tf_linux64"; }
+          ];
+        };
       };
 
       extraConfig = ''

@@ -25,12 +25,20 @@
     zsh.enable = true;
   };
 
-  config.home.file = {
-    ".config/g600" = {
-      source = ./g600;
-      recursive = true;
+  config = {
+    home.file = {
+      ".config/g600" = {
+        source = ./g600;
+        recursive = true;
+      };
+
+      ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
     };
 
-    ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
+    xsession.windowManager.i3.config = {
+      keybindings = {
+        "$mod+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
+      };
+    };
   };
 }
