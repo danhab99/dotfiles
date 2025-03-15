@@ -13,7 +13,9 @@
     ./appimage
     ./docker
     ./font
+    ./gnupg
     ./i18n
+    ./i3
     ./nix
     ./packages
     ./pipewire
@@ -25,5 +27,6 @@
     ./steam
     ./timezone
     ./xserver
+    ./zsh
   ];
 }
