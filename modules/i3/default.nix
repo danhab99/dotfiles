@@ -26,7 +26,9 @@ in {
       enable = true;
       package = pkgs.i3-rounded;
 
-      config = let mod = config.xsession.windowManager.i3.config.modifier;
+      config = let
+        mod = config.xsession.windowManager.i3.config.modifier;
+        # mod = "$mod";
       in {
         modifier = "Mod4";
 
@@ -48,7 +50,9 @@ in {
         };
 
         window = {
+          titlebar = false;
           border = 0;
+
           commands = [
             {
               command = "resize set 600 500";
@@ -57,6 +61,10 @@ in {
             {
               command = "fullscreen enable";
               criteria = { class = "hl2_linux"; };
+            }
+            {
+              command = "border pixel 0";
+              criteria = { class = "^.*"; };
             }
           ];
         };
@@ -418,9 +426,7 @@ in {
         recursive = true;
       };
 
-      ".config/i3blocks.conf" = {
-        source = ./i3blocks.conf;
-      };
+      ".config/i3blocks.conf" = { source = ./i3blocks.conf; };
     };
   };
 }

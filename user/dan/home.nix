@@ -27,18 +27,22 @@
 
   config = {
     home.file = {
+      # ".Xdefaults" = { source = ./Xdefaults; };
+      # ".Xresources" = { source = ./Xresources; };
+      ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
       ".config/g600" = {
         source = ./g600;
         recursive = true;
       };
-
-      ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
     };
 
     xsession.windowManager.i3.config = {
-      keybindings = {
-        "$mod+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-      };
+      keybindings = { "$mod+Ctrl+Return" = "exec rm /tmp/workdir && urxvt"; };
     };
+
+    xresources.extraConfig = builtins.concatStringsSep "\n" [
+      (builtins.readFile ./Xresources)
+      (builtins.readFile ./Xdefaults)
+    ];
   };
 }
