@@ -110,6 +110,11 @@ in {
           position = "bottom";
           statusCommand = "i3blocks -c ~/.config/i3blocks.conf";
           command = "i3bar -t";
+
+          fonts = [
+            "monospace 12"
+          ];
+
           colors = {
             background = "#2f343f00";
             statusline = "#f3f4f5";

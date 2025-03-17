@@ -12,10 +12,7 @@ in {
     programs.urxvt = {
       enable = true;
 
-      fonts = [
-
-      ];
-      
+      scroll.bar.enable = false;
     };
 
     home.file = {
