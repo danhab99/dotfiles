@@ -46,6 +46,7 @@
             }
           ];
         };
+
       mkHome = name:
         forAllSystems (system:
           home-manager.lib.homeManagerConfiguration {
@@ -58,6 +59,11 @@
       nixosConfigurations = {
         workstation = mkNix {
           hostname = "workstation";
+          user = "dan";
+        };
+
+        laptop = mkNix {
+          hostname = "laptop";
           user = "dan";
         };
       };
