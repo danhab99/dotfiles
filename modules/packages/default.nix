@@ -1,0 +1,111 @@
+{ pkgs, ... }:
+let
+  customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: {
+    postInstall = ''
+      ${oldAttrs.postInstall or ""}
+      # Remove the reboot symlink if it exists
+      rm -f $out/bin/reboot
+      rm -f $out/bin/host*
+    '';
+  });
+in {
+  home.packages = with pkgs; [
+    aichat
+    alsa-utils
+    arandr
+    archivemount
+    argc
+    astyle
+    autorandr
+    bambu-studio
+    base16-schemes
+    bat
+    betterlockscreen
+    blender
+    brave
+    curl
+    customBusybox
+    dbeaver-bin
+    dive
+    doppler
+    entr
+    ffmpeg
+    file
+    flameshot
+    fontforge
+    freecad
+    fzf
+    gh
+    gimp
+    glances
+    gnumake
+    gnutar
+    gparted
+    gqrx
+    gzip
+    htop-vim
+    iftop
+    iotop
+    jq
+    kdePackages.kcalc
+    killall
+    kubectl
+    lazydocker
+    linuxKernel.packages.linux_zen.nvidia_x11
+    lm_sensors
+    maven
+    minio-client
+    mongodb-compass
+    mongodb-tools
+    ncdu
+    nemo
+    neofetch
+    neovim
+    ngrok
+    nix-ld
+    nmap
+    nnn
+    nvtopPackages.full
+    obs-studio
+    obsidian
+    oneko
+    openssl
+    pamixer
+    pass
+    pavucontrol
+    pkgsi686Linux.gperftools
+    playerctl
+    pulseaudioFull
+    python312Packages.pip
+    railway
+    ranger
+    rclone
+    retry
+    ripgrep
+    rofi
+    rsync
+    s3cmd
+    scdl
+    screen
+    scrot
+    seahorse
+    steam
+    sutils
+    sysstat
+    unzip
+    usbutils
+    vim-full
+    vlc
+    vscode
+    webcamoid
+    wget
+    xclip
+    xdotool
+    xorg.xev
+    xpad
+    xsel
+    yai
+    yt-dlp
+    zip
+  ];
+}
