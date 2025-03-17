@@ -16,6 +16,7 @@
   home.sessionVariables = with pkgs; {
     EDITOR = vim-full + "/bin/vim";
     BROWSER = brave + "/bin/brave";
+    GIT_PAGER = bat + "/bin/bat";
   };
 
   # This value determines the Home Manager release that your configuration is
