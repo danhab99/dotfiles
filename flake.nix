@@ -16,21 +16,13 @@
       url = "github:water-sucks/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # stylix = {
-    #   url = "github:danth/stylix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, flake-utils, ... }@inputs:
     let
       inherit (self) outputs;
-      # Supported systems for your flake
       systems = [ "x86_64-linux" "aarch64-linux" ];
-      # Helper function to generate a set of attributes for each system
       forAllSystems = nixpkgs.lib.genAttrs systems;
-      # Helper function to create default pkgs instance for each system
       pkgsFor = system:
         import nixpkgs {
           inherit system;
@@ -43,7 +35,6 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            # stylix.nixosModules.stylix
             nixos-cli.nixosModules.nixos-cli
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
@@ -62,7 +53,8 @@
             extraSpecialArgs = { inherit inputs outputs; };
             modules = homeModules name;
           });
-    in {
+    in
+    {
       nixosConfigurations = {
         workstation = mkNix {
           hostname = "workstation";
@@ -70,7 +62,21 @@
         };
       };
 
-      # Standalone home-manager configuration
       homeConfigurations = { "dan" = mkHome "dan"; };
+
+      devShells = forAllSystems (system: {
+        default = (pkgsFor system).mkShell {
+          buildInputs = with (pkgsFor system); [
+            git
+            nixpkgs-fmt
+            nil
+            gnumake
+          ];
+
+          shellHook = ''
+            zsh
+          '';
+        };
+      });
     };
 }
