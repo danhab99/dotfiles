@@ -31,4 +31,4 @@ in {
 }
 EOF
 
-echo "Template has been generated at $1/default.nix"
+echo "Module generated at $1/default.nix"

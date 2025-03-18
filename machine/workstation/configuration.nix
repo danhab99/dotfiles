@@ -1,46 +1,32 @@
 { pkgs, ... }:
-
+let
+  mkMachine = import ../mkMachine.nix { inherit pkgs; };
+in
 {
   imports = [ ../../parts/default.nix ];
 
-  config.part = {
-    appimage.enable = true;
-    docker.enable = true;
-    font.enable = true;
-    gnupg.enable = true;
-    i18n.enable = true;
-    i3.enable = true;
-    nix.enable = true;
-    packages.enable = true;
-    pipewire.enable = true;
-    printing.enable = true;
-    ratbag.enable = true;
-    sddm.enable = true;
-    secrets.enable = true;
-    ssh.enable = true;
-    steam.enable = true;
-    timezone.enable = true;
-    xserver.enable = true;
-    zsh.enable = true;
-    # displaymanager.enable = true;
-  };
-
-  config = {
-    users.users.dan = {
-      isNormalUser = true;
-      description = "dan";
-      extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
-      shell = pkgs.zsh;
+  config = mkMachine { hostName = "workstation"; } {
+    part = {
+      appimage.enable = true;
+      docker.enable = true;
+      font.enable = true;
+      gnupg.enable = true;
+      i18n.enable = true;
+      i3.enable = true;
+      nix.enable = true;
+      packages.enable = true;
+      pipewire.enable = true;
+      printing.enable = true;
+      ratbag.enable = true;
+      sddm.enable = true;
+      secrets.enable = true;
+      ssh.enable = true;
+      steam.enable = true;
+      timezone.enable = true;
+      xserver.enable = true;
+      zsh.enable = true;
     };
 
-    networking = { 
-      networkmanager.enable = true;
-      hostName = "workstation";
-    };
-
-    environment.localBinInPath = true;
-
-    services.dbus.enable = true;
     services.xserver.config = ''
       Section "Device"
         Identifier "GPU0"
