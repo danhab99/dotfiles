@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   home.packages = with pkgs; [
     # linuxKernel.packages.linux_zen.nvidia_x11
@@ -17,11 +15,9 @@
     argc
     astyle
     autorandr
-    bambu-studio
     base16-schemes
     bat
     betterlockscreen
-    blender
     brave
     curl
     dbeaver-bin
@@ -30,7 +26,6 @@
     ffmpeg
     file
     flameshot
-    freecad
     gimp
     glances
     gnumake
@@ -76,11 +71,6 @@
     vscode
     webcamoid
     wget
-    xclip
-    xdotool
-    xorg.xev
-    xpad
-    xsel
     yai
     yt-dlp
     zip
