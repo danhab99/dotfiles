@@ -31,7 +31,7 @@
 
       homeModules = user: [ ./user/home.nix ./user/${user}/home.nix ];
 
-      mkNix = { hostname, user }:
+      mkNix = { hostname, users }:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
@@ -42,7 +42,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.dan = { imports = homeModules user; };
+              home-manager.users = builtins.listToAttrs (
+                map
+                  (v: {
+                    name = v;
+                    value = { imports = homeModules v; };
+                  })
+                  users);
             }
           ];
         };
@@ -59,12 +65,12 @@
       nixosConfigurations = {
         workstation = mkNix {
           hostname = "workstation";
-          user = "dan";
+          users = [ "dan" ];
         };
 
         laptop = mkNix {
           hostname = "laptop";
-          user = "dan";
+          users = [ "dan" ];
         };
       };
 

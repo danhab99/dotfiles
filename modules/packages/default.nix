@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   home.packages = with pkgs; [
     # linuxKernel.packages.linux_zen.nvidia_x11
