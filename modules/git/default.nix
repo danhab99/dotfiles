@@ -74,5 +74,9 @@ in {
         "*.aidoc.md"
       ];
     };
+
+    programs.gh = {
+      enable = true;
+    };
   };
 }
