@@ -7,7 +7,13 @@ let cfg = config.modules.xorg;
 in {
   options.modules.xorg = { enable = mkEnableOption "xorg"; };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ xclip xdotool xorg.xev xpad xsel ];
+    home.packages = with pkgs; [
+      xclip
+      xdotool
+      xorg.xev
+      xpad
+      xsel
+    ];
 
     home.file = {
       ".Xdefaults" = { source = ./Xdefaults; };

@@ -9,7 +9,11 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
-        # ...
+        xclip
+        xdotool
+        xorg.xev
+        xpad
+        xsel
       ];
 
     services.xserver = {

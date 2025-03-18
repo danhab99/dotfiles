@@ -4,7 +4,6 @@
   imports = [ ../../modules/default.nix ];
 
   config.modules = {
-    appimage.enable = true;
     fzf.enable = true;
     git.enable = true;
     gnupg.enable = true;
