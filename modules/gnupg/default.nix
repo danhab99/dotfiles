@@ -7,19 +7,19 @@ in {
   options.modules.gnupg = { enable = mkEnableOption "gnupg"; };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ pinentry-curses pass gnupg ];
+    home.packages = with pkgs; [ pass ];
 
     programs.gpg = {
       enable = true;
+      mutableKeys = true;
     };
 
     services.gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      extraConfig = ''
-        default-cache-ttl = 10000000
-        max-cache-ttl = 10000000
-      '';
+      defaultCacheTtl = 10000000;
+      maxCacheTtl = 10000000;
+
       pinentryPackage = pkgs.pinentry-curses;
       enableZshIntegration = true;
     };
