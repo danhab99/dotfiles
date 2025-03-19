@@ -13,9 +13,16 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    nixpkgs2.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
+
+    nixos-cli = {
+      url = "github:water-sucks/nixos";
+      inputs.nixpkgs.follows = "nixpkgs2";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, flake-utils, nixos-cli, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -32,6 +39,7 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            nixos-cli.nixosModules.nixos-cli
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
             home-manager.nixosModules.home-manager
