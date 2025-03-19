@@ -9,7 +9,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
-        # ...
+        nix-index
       ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -18,7 +18,7 @@ in {
 
     nixpkgs.config.allowBroken = true;
 
-    services.nixos-cli = { enable = true; };
+    # services.nixos-cli = { enable = true; };
 
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
