@@ -12,13 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-cli = {
-      url = "github:water-sucks/nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-cli, nur, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, flake-utils, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -35,7 +32,6 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            nixos-cli.nixosModules.nixos-cli
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
             home-manager.nixosModules.home-manager
