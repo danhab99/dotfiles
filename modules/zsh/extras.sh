@@ -1,11 +1,3 @@
-if [ -e /tmp/nixshell ] && [ -z "$IN_NIX_SHELL" ]
-then
-  echo "Restoring nix shell"
-  flake_path=$(cat /tmp/nixshell | head -n 1 | tail -n 1)
-  shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
-  nix develop $flake_path#$shell_name
-fi
-
 export ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
 export ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
 
@@ -106,6 +98,14 @@ then
   DIR=$(cat /tmp/workdir)
   echo "Working in $DIR"
   cd $DIR
+fi
+
+if [ -e /tmp/nixshell ] && [ -z "$IN_NIX_SHELL" ]
+then
+  echo "Restoring nix shell"
+  flake_path=$(cat /tmp/nixshell | head -n 1 | tail -n 1)
+  shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
+  nix develop $flake_path#$shell_name
 fi
 
 # Set up fzf key bindings and fuzzy completion
