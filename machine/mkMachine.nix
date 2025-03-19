@@ -16,4 +16,6 @@ inside // {
   environment.localBinInPath = true;
 
   services.dbus.enable = true;
+
+  services.nixos-cli = { enable = true; };
 }

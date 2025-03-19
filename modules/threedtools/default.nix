@@ -13,10 +13,5 @@ in {
       bambu-studio
     ];
 
-    home.file = [ 
-      # ...
-    ];
-
-    # ...
   };
 }
