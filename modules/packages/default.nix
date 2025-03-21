@@ -24,6 +24,7 @@ import ../module.nix
         # pamixer
         # pkgsi686Linux.gperftools
         # python312Packages.pip
+        acpi
         aichat
         alsa-utils
         arandr
@@ -86,6 +87,7 @@ import ../module.nix
         scrot
         seahorse
         unzip
+        upower
         usbutils
         vim-full
         vlc
@@ -96,7 +98,6 @@ import ../module.nix
         yarn
         yt-dlp
         zip
-
       ];
 
       homeManager = { };

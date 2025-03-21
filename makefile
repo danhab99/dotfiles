@@ -5,7 +5,7 @@ flake:
 	$(MAKE) switch
 
 nix:
-	sudo nixos-rebuild switch --flake .#laptop
+	sudo nixos-rebuild switch --flake .$(cat name)
 
 switch: nix
 	i3-msg restart
