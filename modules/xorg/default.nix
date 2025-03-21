@@ -2,7 +2,7 @@ import ../module.nix {
   name = "xorg";
 
   options = { lib }: with lib; {
-    videoDriver = mkOption {};
+    videoDriver = mkOption { };
   };
 
   output = { pkgs, cfg, ... }: {
@@ -32,11 +32,18 @@ import ../module.nix {
     };
 
     homeManager = {
+      xresources.extraConfig = builtins.concatStringsSep "\n" [
+        (builtins.readFile ./Xresources)
+        (builtins.readFile ./Xdefaults)
+      ];
       home.file = {
-        ".Xdefaults" = {
-          source = ./Xdefaults;
-        };
-        # ".Xresources" = { source = ./Xresources; };
+        # ".Xdefaults" = {
+        #   source = builtins.concatStringsSep "\n" [
+        #     (builtins.readFile ./Xresources)
+        #     (builtins.readFile ./Xdefaults)
+        #   ];
+        # };
+        # # ".Xresources" = { source = ./Xresources; };
       };
     };
   };
