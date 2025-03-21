@@ -19,7 +19,12 @@ import ../module.nix {
       nitrogen
     ];
 
-    nixos = { };
+    nixos = {
+      services.xserver.windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-rounded;
+      };
+    };
 
     homeManager = {
       xsession.windowManager.i3 = {
