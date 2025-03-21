@@ -1,13 +1,24 @@
 { pkgs, ... }:
-
+let
+  customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: rec {
+    postInstall = ''
+      ${oldAttrs.postInstall or ""}
+      # Remove the reboot symlink if it exists
+      rm -f $out/bin/reboot
+      rm -f $out/bin/host*
+    '';
+  });
+in
 {
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
+
     # linuxKernel.packages.linux_zen.nvidia_x11
     # minio-client
     # mongodb-compass
     # mongodb-tools
     # neovim
     # ngrok
+    # pamixer
     # pkgsi686Linux.gperftools
     # python312Packages.pip
     aichat
@@ -22,6 +33,7 @@
     betterlockscreen
     brave
     curl
+    customBusybox
     dbeaver-bin
     dive
     entr
@@ -34,11 +46,14 @@
     gnutar
     gparted
     gqrx
+    gzip
     htop-vim
     iftop
     iotop
     jq
     lazydocker
+    lazygit
+    linuxKernel.packages.linux_zen.nvidia_x11
     lm_sensors
     ncdu
     nemo
@@ -46,7 +61,7 @@
     nix-ld
     nmap
     nnn
-    nodejs_22 
+    nodejs_22
     nvtopPackages.full
     obs-studio
     obsidian
@@ -60,6 +75,7 @@
     rclone
     retry
     ripgrep
+    rofi
     rsync
     s3cmd
     scdl
@@ -74,6 +90,7 @@
     webcamoid
     wget
     yai
+    yarn
     yt-dlp
     zip
   ];

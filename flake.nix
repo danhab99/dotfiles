@@ -39,6 +39,7 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            (import ./modules/module.nix)
             nixos-cli.nixosModules.nixos-cli
             ./machine/${hostname}/configuration.nix
             ./machine/${hostname}/hardware-configuration.nix
