@@ -23,7 +23,10 @@ in
       ssh.enable = true;
       steam.enable = true;
       timezone.enable = true;
-      xserver.enable = true;
+      xserver = {
+        enable = true;
+        videoDriver = "nvidia";
+      };
       zsh.enable = true;
     };
 
