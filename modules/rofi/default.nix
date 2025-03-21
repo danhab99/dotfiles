@@ -1,11 +1,9 @@
 { pkgs, lib, config, ... }:
 
-with lib;
-let cfg = config.modules.rofi;
+lib.mkModule {
+  name = "rofi";
 
-in {
-  options.modules.rofi = { enable = mkEnableOption "rofi"; };
-  config = mkIf cfg.enable {
+  output = { ... }: {
     home.packages = with pkgs; [ rofi ];
 
     home.file = {
