@@ -5,7 +5,12 @@ with lib;
 let cfg = config.part.xserver;
 
 in {
-  options.part.xserver = { enable = mkEnableOption "xserver"; };
+  options.part.xserver = { 
+    enable = mkEnableOption "xserver";
+    videoDriver = mkOption {
+    };
+  };
+
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
@@ -19,7 +24,7 @@ in {
     services.xserver = {
       enable = true;
       displayManager.startx.enable = true; # Optional if using startx
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ cfg.videoDriver ];
 
       xautolock.enable = false;
       desktopManager.xterm.enable = false;

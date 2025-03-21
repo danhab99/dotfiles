@@ -58,7 +58,7 @@ in {
       userName = "Dan Habot";
 
       signing = {
-        key = "1DC36AE6EEEFDB55FE5D8874BAABD1E3FA0A9FB6";
+        key = "0x9D575F7BFF5A6CB4";
         signByDefault = true;
       };
 

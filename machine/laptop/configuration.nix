@@ -5,7 +5,7 @@ in
 {
   imports = [ ../../parts/default.nix ];
 
-  config = mkMachine { hostName = "remotestation"; } {
+  config = mkMachine { hostName = "laptop"; } {
     part = {
       appimage.enable = true;
       docker.enable = true;
@@ -23,7 +23,10 @@ in
       ssh.enable = true;
       steam.enable = false;
       timezone.enable = true;
-      xserver.enable = true;
+      xserver = {
+        enable = true;
+        videoDriver = "modesetting";
+      };
       zsh.enable = true;
     };
   };

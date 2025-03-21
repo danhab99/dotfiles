@@ -108,7 +108,7 @@ in {
 
         bars = [{
           position = "bottom";
-          statusCommand = "i3blocks -c ~/.config/i3blocks.conf";
+          statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/i3blocks.conf";
           command = "i3bar -t";
 
           fonts = [
