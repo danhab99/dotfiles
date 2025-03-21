@@ -1,6 +1,4 @@
-{ lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "zoxide";
 
   output = { ... }: {
@@ -10,5 +8,9 @@ lib.mkModule {
         enableZshIntegration = true;
       };
     };
+
+    nixos = { };
+
+    homeManager = { };
   };
 }

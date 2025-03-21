@@ -1,11 +1,11 @@
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "gnupg";
 
   # output.packages = with pkgs; [ pass ];
 
-  output = { ... }: {
+  output = { pkgs, ... }: {
+    nixos = { };
+
     homeManager = {
       programs.gpg = {
         enable = true;

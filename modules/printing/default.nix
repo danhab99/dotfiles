@@ -1,15 +1,12 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "printing";
 
-  output = { ... }: {
-    environment.systemPackages = with pkgs;
+  output = { pkgs, ... }: {
+    packages = with pkgs;
       [
         # ...
       ];
 
-    services.printing.enable = true;
+    nixos.services.printing.enable = true;
   };
 }

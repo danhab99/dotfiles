@@ -1,21 +1,22 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
+import ../module.nix {
+  name = "docker";
 
-lib.mkModule {
-  name =  "docker";
+  output = { pkgs, ... }: {
+    homeManager = { };
 
-  nixos = {
-    environment.systemPackages = with pkgs;
-      [
-        # ...
-      ];
+    nixos = {
+      environment.systemPackages = with pkgs;
+        [
+          # ...
+        ];
 
-    virtualisation.docker = {
-      enable = true;
-      enableOnBoot = true;
-      rootless = {
+      virtualisation.docker = {
         enable = true;
-        setSocketVariable = true;
+        enableOnBoot = true;
+        rootless = {
+          enable = true;
+          setSocketVariable = true;
+        };
       };
     };
   };

@@ -1,9 +1,7 @@
-{ lib, config, pkgs, ... }:
-
-in lib.mkModule {
+import ../module.nix {
   name = "picom";
 
-  output = { ... }: {
+  output = { pkgs, ... }: {
     homeManager = {
       home.packages = with pkgs; [ picom ];
 
@@ -26,5 +24,7 @@ in lib.mkModule {
         settings.blur = { shadow-radius = 12; };
       };
     };
+
+    nixos = { };
   };
 }

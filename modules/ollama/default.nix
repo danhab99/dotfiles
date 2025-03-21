@@ -1,16 +1,15 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "ollama";
-  options = {
+  options = { lib }: with lib; {
     repoDir = mkOption {
-      type = lib.types.str;
+      type = types.str;
       description = "Directory for the ollama repository";
     };
   };
 
   output = { ... }: {
+    nixos = { };
+
     homeManager = {
       # home.packages = with pkgs; [ ollama ];
 
@@ -19,5 +18,5 @@ lib.mkModule {
         # home = cfg.repoDir;
       };
     };
-  }
+  };
 }

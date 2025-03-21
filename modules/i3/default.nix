@@ -1,23 +1,15 @@
-{ lib, config, pkgs, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "i3";
-  options = {
+
+  options = { lib }: with lib; {
     configFile = mkOption {
-      type = lib.types.path;
+      type = types.nullOr types.path;
       description = "Machine specific i3 config file";
+      default = null;
     };
   };
 
-  options.modules.i3 = {
-    enable = mkEnableOption "i3";
-    configFile = mkOption {
-      type = lib.types.path;
-      description = "Machine specific i3 config file";
-    };
-  };
-
-  output = { ... }: {
+  output = { pkgs, config, cfg, ... }: {
     packages = with pkgs; [
       i3-rounded
       i3blocks
@@ -26,6 +18,9 @@ lib.mkModule {
       picom
       nitrogen
     ];
+
+    nixos = { };
+
     homeManager = {
       xsession.windowManager.i3 = {
         enable = true;
@@ -33,11 +28,10 @@ lib.mkModule {
 
         config =
           let
-            mod = config.xsession.windowManager.i3.config.modifier;
-            # mod = "$mod";
+            mod = "Mod4";
           in
           {
-            modifier = "Mod4";
+            modifier = mod;
 
             fonts = {
               names = [ "monospace" ];
@@ -305,8 +299,7 @@ lib.mkModule {
                 "Right" = "resize grow width 5 px or 5 ppt";
                 "Return" = "mode default";
                 "Escape" = "mode default";
-                "${config.xsession.windowManager.i3.config.modifier}+r" =
-                  "mode default";
+                "${mod}+r" = "mode default";
               };
             };
 
@@ -424,7 +417,7 @@ lib.mkModule {
 
         extraConfig = ''
           border_radius 8
-          ${(builtins.readFile cfg.configFile)}
+          ${if cfg.configFile == null then "" else (builtins.readFile cfg.configFile)}
         '';
       };
 
