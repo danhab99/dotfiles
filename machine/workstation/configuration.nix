@@ -3,31 +3,59 @@ let
   mkMachine = import ../mkMachine.nix { inherit pkgs; };
 in
 {
-  imports = [ ../../parts/default.nix ];
+  imports = [ ../../modules/default.nix ];
 
   config = mkMachine { hostName = "workstation"; } {
-    part = {
+    module = {
       appimage.enable = true;
       docker.enable = true;
       font.enable = true;
+      fzf.enable = true;
+      git.enable = true;
       gnupg.enable = true;
       i18n.enable = true;
-      i3.enable = true;
+      i3 = { enable = true; configFile = ./i3/config; };
       nix.enable = true;
+      ollama = { enable = false; repoDir = "/bucket/ollama"; };
       packages.enable = true;
+      picom.enable = true;
       pipewire.enable = true;
       printing.enable = true;
       ratbag.enable = true;
+      rofi.enable = true;
       sddm.enable = true;
       secrets.enable = true;
       ssh.enable = true;
       steam.enable = true;
+      threedtools.enable = true;
       timezone.enable = true;
-      xserver = {
-        enable = true;
-        videoDriver = "nvidia";
-      };
+      urxvt.enable = true;
+      vim.enable = true;
+      xorg.enable = true;
+      xserver = { enable = true; videoDriver = "nvidia"; };
+      zoxide.enable = true;
       zsh.enable = true;
+    };
+
+    home-manager = {
+      home.file = {
+        # ".Xdefaults" = { source = ./Xdefaults; };
+        # ".Xresources" = { source = ./Xresources; };
+        ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
+        ".config/g600" = {
+          source = ./g600;
+          recursive = true;
+        };
+      };
+
+      xsession.windowManager.i3.config = {
+        keybindings = { "$mod+Ctrl+Return" = "exec rm /tmp/workdir && urxvt"; };
+      };
+
+      xresources.extraConfig = builtins.concatStringsSep "\n" [
+        (builtins.readFile ./Xresources)
+        (builtins.readFile ./Xdefaults)
+      ];
     };
 
     services.xserver.config = ''

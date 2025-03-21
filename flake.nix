@@ -47,13 +47,13 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users = builtins.listToAttrs (
-                map
-                  (v: {
-                    name = v;
-                    value = { imports = homeModules v; };
-                  })
-                  users);
+              # home-manager.users = builtins.listToAttrs (
+              #   map
+              #     (v: {
+              #       name = v;
+              #       value = { imports = homeModules v; };
+              #     })
+              #     users);
             }
           ];
         };
