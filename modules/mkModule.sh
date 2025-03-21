@@ -9,26 +9,25 @@ mkdir -p "$1"
 
 # Generate the Nix template and write it to the file
 cat <<EOF > "$1/default.nix"
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
+import ../module.nix
+{
+  name = "$1";
 
-with lib;
-let cfg = config.modules.$1;
+  output = { pkgs, ... }: {
+    packages = with pkgs; [
 
-in {
-  options.modules.$1 = { enable = mkEnableOption "$1"; };
-  config = mkIf cfg.enable { 
-    home.packages = with pkgs; [ 
-      # ...
     ];
 
-    home.file = [ 
-      # ...
-    ];
+    homeManager = {
 
-    # ...
+    };
+
+    nixos = {
+
+    };
   };
 }
+
 EOF
 
 echo "Module generated at $1/default.nix"

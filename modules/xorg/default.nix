@@ -1,10 +1,11 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "xorg";
 
-  output = { ... }: {
+  options = { lib }: with lib; {
+    videoDriver = mkOption {};
+  };
+
+  output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
       xclip
       xdotool
@@ -14,15 +15,6 @@ lib.mkModule {
     ];
 
     nixos = {
-      environment.systemPackages = with pkgs;
-        [
-          xclip
-          xdotool
-          xorg.xev
-          xpad
-          xsel
-        ];
-
       services.xserver = {
         enable = true;
         displayManager.startx.enable = true; # Optional if using startx

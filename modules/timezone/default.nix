@@ -1,15 +1,14 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "timezone";
 
-  output = { ... }: {
+  output = { pkgs, ... }: {
     environment.systemPackages = with pkgs;
       [
         # ...
       ];
 
-    time.timeZone = "America/New_York";
+    nixos.time.timeZone = "America/New_York";
+
+    homeManager = { };
   };
 }

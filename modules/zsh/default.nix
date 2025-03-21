@@ -1,9 +1,7 @@
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "zsh";
 
-  output = { ... }: {
+  output = { pkgs, ... }: {
     packages = with pkgs; [ zsh oh-my-zsh ];
 
     homeManager = {
@@ -113,6 +111,10 @@ lib.mkModule {
 
         initExtra = builtins.readFile ./extras.sh;
       };
+    };
+
+    nixos = {
+      programs.zsh.enable = true;
     };
   };
 }

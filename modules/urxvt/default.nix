@@ -1,11 +1,10 @@
-# https://github.com/notusknot/dotfiles-nix/blob/e64745a1541d8acd0b1ed548827bd5c59d2140ac/modules/template.nix
-{ pkgs, lib, config, ... }:
-
-lib.mkModule {
+import ../module.nix {
   name = "urxvt";
 
-  output = { ... }: {
+  output = { pkgs, ... }: {
     packages = with pkgs; [ rxvt-unicode ];
+
+    nixos = { };
 
     homeManager = {
       programs.urxvt = {

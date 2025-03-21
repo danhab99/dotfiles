@@ -1,6 +1,7 @@
-{ pkgs }: { hostName }: inside:
+{ hostName }:
+{ pkgs, ... }: 
 
-inside // {
+{
   users.users.dan = {
     isNormalUser = true;
     description = "dan";
@@ -19,7 +20,7 @@ inside // {
 
   services.nixos-cli = { enable = true; };
 
-  home-manager = {
+  home-manager.users.dan = {
     home.username = "dan";
     home.homeDirectory = "/home/dan";
 
@@ -47,4 +48,6 @@ inside // {
     # release notes.
     home.stateVersion = "24.05"; # Please read the comment before changing.
   };
+
+  system.stateVersion = "24.05"; # Please read the comment before changing.
 }

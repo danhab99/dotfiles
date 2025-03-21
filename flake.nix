@@ -7,11 +7,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-utils.url = "github:numtide/flake-utils";
 
     nixpkgs2.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
@@ -22,7 +17,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, flake-utils, nixos-cli, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, nixos-cli, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -33,53 +28,27 @@
           config.allowUnfree = true;
         };
 
-      homeModules = user: [ ./user/home.nix ./user/${user}/home.nix ];
-
-      mkNix = { hostname, users }:
+      mkNix = hostName:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            (import ./modules/module.nix)
             nixos-cli.nixosModules.nixos-cli
-            ./machine/${hostname}/configuration.nix
-            ./machine/${hostname}/hardware-configuration.nix
+            (import ./machine/machine.nix { inherit hostName; })
+            ./machine/${hostName}/configuration.nix
+            ./machine/${hostName}/hardware-configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              # home-manager.users = builtins.listToAttrs (
-              #   map
-              #     (v: {
-              #       name = v;
-              #       value = { imports = homeModules v; };
-              #     })
-              #     users);
             }
           ];
         };
-
-      mkHome = name:
-        forAllSystems (system:
-          home-manager.lib.homeManagerConfiguration {
-            pkgs = pkgsFor system;
-            extraSpecialArgs = { inherit inputs outputs; };
-            modules = homeModules name;
-          });
     in
     {
       nixosConfigurations = {
-        workstation = mkNix {
-          hostname = "workstation";
-          users = [ "dan" ];
-        };
-
-        laptop = mkNix {
-          hostname = "laptop";
-          users = [ "dan" ];
-        };
+        workstation = mkNix "workstation";
+        laptop = mkNix "laptop";
       };
-
-      homeConfigurations = { "dan" = mkHome "dan"; };
 
       devShells = forAllSystems (system: {
         default = (pkgsFor system).mkShell {
