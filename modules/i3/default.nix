@@ -7,6 +7,10 @@ import ../module.nix {
       description = "Machine specific i3 config file";
       default = null;
     };
+    i3blocksConfig = mkOption {
+      type = types.path;
+      description = "Machine specific i3blocks config file";
+    };
   };
 
   output = { pkgs, config, cfg, ... }: {
@@ -114,7 +118,7 @@ import ../module.nix {
 
             bars = [{
               position = "bottom";
-              statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ~/.config/i3blocks.conf";
+              statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ${cfg.i3blocksConfig}";
               command = "i3bar -t";
 
               fonts = [
@@ -436,7 +440,7 @@ import ../module.nix {
           recursive = true;
         };
 
-        ".config/i3blocks.conf" = { source = ./i3blocks.conf; };
+        # ".config/i3blocks.conf" = { source = ./i3blocks.conf; };
       };
     };
   };

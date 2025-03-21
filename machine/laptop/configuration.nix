@@ -11,7 +11,10 @@
     git.enable = true;
     gnupg.enable = true;
     i18n.enable = true;
-    i3 = { enable = true; };
+    i3 = { 
+      enable = true;
+      i3blocksConfig = ./i3blocks.conf;
+    };
     nix.enable = true;
     ollama = { enable = false; };
     packages.enable = true;

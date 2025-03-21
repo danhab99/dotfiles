@@ -12,7 +12,11 @@
       git.enable = true;
       gnupg.enable = true;
       i18n.enable = true;
-      i3 = { enable = true; configFile = ./i3/config; };
+      i3 = { 
+        enable = true;
+        configFile = ./i3/config;
+        i3BlocksConfig = ./i3blocks.conf;
+      };
       nix.enable = true;
       ollama = { enable = false; repoDir = "/bucket/ollama"; };
       packages.enable = true;
