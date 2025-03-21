@@ -10,6 +10,7 @@
   };
 
   networking = {
+    networkmanager.enable = true;
     inherit hostName;
   };
 

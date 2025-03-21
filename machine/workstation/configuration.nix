@@ -35,8 +35,6 @@
       zsh.enable = true;
     };
 
-    networking.networkmanager.enable = true;
-
     home-manager = {
       home.file = {
         # ".Xdefaults" = { source = ./Xdefaults; };
