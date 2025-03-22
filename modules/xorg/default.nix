@@ -32,10 +32,10 @@ import ../module.nix {
     };
 
     homeManager = {
-      xresources.extraConfig = builtins.concatStringsSep "\n" [
-        (builtins.readFile ./Xresources)
-        (builtins.readFile ./Xdefaults)
-      ];
+      # xresources.extraConfig = builtins.concatStringsSep "\n" [
+      #   (builtins.readFile ./Xresources)
+      #   (builtins.readFile ./Xdefaults)
+      # ];
       home.file = {
         # ".Xdefaults" = {
         #   source = builtins.concatStringsSep "\n" [
