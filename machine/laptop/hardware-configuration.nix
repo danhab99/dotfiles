@@ -35,6 +35,12 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
+  networking.networkmanager.enable = true;
+
+  # Allow NetworkManager to store passwords system-wide
+  networking.networkmanager.wifi.powersave = true;
+  networking.networkmanager.wifi.backend = "iwd";  # Optional, better for some setups
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.nvidia.open = true;

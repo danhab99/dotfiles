@@ -15,7 +15,8 @@ import ../module.nix {
         sddm.enableGnomeKeyring = true;
       };
 
-      services.gnome.gnome-keyring = { enable = true; };
+      services.gnome.gnome-keyring.enable = true;
+      programs.seahorse.enable = true;
 
       services.passSecretService.enable = true;
     };
