@@ -36,6 +36,13 @@
     zsh.enable = true;
   };
 
+  config.home-manager.users.dan = {
+    xresources.extraConfig = builtins.concatStringsSep "\n" [
+      (builtins.readFile ./Xresources)
+      (builtins.readFile ./Xdefaults)
+    ];
+  };
+
   config = {
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   };
