@@ -239,7 +239,7 @@ import ../module.nix {
               "${mod}+Ctrl+s" = "exec amixer sset Master 5%-";
               "${mod}+Return" = "exec urxvt";
               "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-              "${mod}+Shift+Return" = "exec urxvt -e ssh -XY remotestation";
+              # "${mod}+Shift+Return" = "exec urxvt -e ssh -XY remotestation";
               "${mod}+q" = "kill";
               "${mod}+h" = "focus left";
               "${mod}+j" = "focus down";

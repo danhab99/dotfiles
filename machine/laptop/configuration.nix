@@ -41,6 +41,10 @@
       (builtins.readFile ./Xresources)
       (builtins.readFile ./Xdefaults)
     ];
+
+    xsession.windowManager.i3.config.keybindings = {
+      "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
+    };
   };
 
   config = {
