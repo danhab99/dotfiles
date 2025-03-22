@@ -24,6 +24,8 @@ import ../module.nix
         # pamixer
         # pkgsi686Linux.gperftools
         # python312Packages.pip
+        archivemount
+        sshfs
         acpi
         aichat
         alsa-utils
