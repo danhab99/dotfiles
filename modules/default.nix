@@ -23,6 +23,7 @@
     ./secrets
     ./ssh
     ./steam
+    ./thinkpad
     ./threedtools
     ./timezone
     ./urxvt

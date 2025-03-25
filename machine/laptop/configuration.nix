@@ -34,6 +34,7 @@
     xorg = { enable = true; videoDriver = "modesetting"; };
     zoxide.enable = true;
     zsh.enable = true;
+    thinkpad.enable = true;
   };
 
   config.home-manager.users.dan = {

@@ -9,7 +9,9 @@ import ../module.nix {
     packages = with pkgs; [
       xclip
       xdotool
+      xorg.xbacklight
       xorg.xev
+      xorg.xf86inputevdev
       xpad
       xsel
     ];
@@ -23,28 +25,40 @@ import ../module.nix {
         xautolock.enable = false;
         desktopManager.xterm.enable = false;
 
+        desktopManager.xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+
         # Keyboard settings
         xkb = {
+          model = "thinkpad";
           layout = "us";
           variant = "";
         };
       };
-    };
 
-    homeManager = {
-      # xresources.extraConfig = builtins.concatStringsSep "\n" [
-      #   (builtins.readFile ./Xresources)
-      #   (builtins.readFile ./Xdefaults)
-      # ];
-      home.file = {
-        # ".Xdefaults" = {
-        #   source = builtins.concatStringsSep "\n" [
-        #     (builtins.readFile ./Xresources)
-        #     (builtins.readFile ./Xdefaults)
-        #   ];
-        # };
-        # # ".Xresources" = { source = ./Xresources; };
+      services.libinput = {
+        enable = true;
+
       };
     };
+
+    # homeManager = {
+    #   # xresources.extraConfig = builtins.concatStringsSep "\n" [
+    #   #   (builtins.readFile ./Xresources)
+    #   #   (builtins.readFile ./Xdefaults)
+    #   # ];
+    #   home.file = {
+    #     # ".Xdefaults" = {
+    #     #   source = builtins.concatStringsSep "\n" [
+    #     #     (builtins.readFile ./Xresources)
+    #     #     (builtins.readFile ./Xdefaults)
+    #     #   ];
+    #     # };
+    #     # # ".Xresources" = { source = ./Xresources; };
+    #   };
+    # };
   };
 }

@@ -7,7 +7,8 @@ import ../module.nix {
         # ...
       ];
 
-    nixos.time.timeZone = "America/New_York";
+    # nixos.time.timeZone = "America/New_York";
+    nixos.time.timeZone = "Asia/Jerusalem";
 
     homeManager = { };
   };
