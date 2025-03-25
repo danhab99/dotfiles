@@ -20,6 +20,8 @@
 
   services.nixos-cli = { enable = true; };
 
+  boot.tmp.cleanOnBoot = true;
+
   home-manager.users.dan = {
     home.username = "dan";
     home.homeDirectory = "/home/dan";
