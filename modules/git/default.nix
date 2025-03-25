@@ -1,7 +1,14 @@
 import ../module.nix {
   name = "git";
 
-  output = { pkgs, ... }: {
+  options = { lib }: with lib; {
+    signingKey = mkOption {
+      type = types.string;
+      description = "GPG signing key";
+    };
+  };
+
+  output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
       lazygit
     ];
@@ -57,7 +64,7 @@ import ../module.nix {
         userName = "Dan Habot";
 
         signing = {
-          key = "0x9D575F7BFF5A6CB4";
+          key = cfg.signingKey;
           signByDefault = true;
         };
 

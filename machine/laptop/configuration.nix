@@ -8,7 +8,10 @@
     docker.enable = true;
     font.enable = true;
     fzf.enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      signingKey = "0x9D575F7BFF5A6CB4";
+    };
     gnupg.enable = true;
     i18n.enable = true;
     i3 = { 
@@ -16,7 +19,7 @@
       i3blocksConfig = ./i3blocks.conf;
     };
     nix.enable = true;
-    ollama = { enable = false; };
+    ollama.enable = false;
     packages.enable = true;
     picom.enable = true;
     pipewire.enable = true;
@@ -31,7 +34,10 @@
     timezone.enable = true;
     urxvt.enable = true;
     vim.enable = true;
-    xorg = { enable = true; videoDriver = "modesetting"; };
+    xorg = { 
+      enable = true;
+      videoDriver = "modesetting";
+    };
     zoxide.enable = true;
     zsh.enable = true;
     thinkpad.enable = true;

@@ -9,16 +9,22 @@
       docker.enable = true;
       font.enable = true;
       fzf.enable = true;
-      git.enable = true;
+      git = {
+        enable = true;
+        signingKey = ""; # TODO populate
+      };
       gnupg.enable = true;
       i18n.enable = true;
-      i3 = { 
+      i3 = {
         enable = true;
         configFile = ./i3/config;
         i3BlocksConfig = ./i3blocks.conf;
       };
       nix.enable = true;
-      ollama = { enable = false; repoDir = "/bucket/ollama"; };
+      ollama = {
+        enable = false;
+        repoDir = "/bucket/ollama";
+      };
       packages.enable = true;
       picom.enable = true;
       pipewire.enable = true;
@@ -33,8 +39,10 @@
       timezone.enable = true;
       urxvt.enable = true;
       vim.enable = true;
-      xorg.enable = true;
-      xserver = { enable = true; videoDriver = "nvidia"; };
+      xorg = {
+        enable = true;
+        videoDriver = "nvidia";
+      };
       zoxide.enable = true;
       zsh.enable = true;
     };
