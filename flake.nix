@@ -9,11 +9,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    nixpkgs2.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
+    nixpkgs_for_nixos_cli.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
 
     nixos-cli = {
       url = "github:water-sucks/nixos";
-      inputs.nixpkgs.follows = "nixpkgs2";
+      inputs.nixpkgs.follows = "nixpkgs_for_nixos_cli";
     };
   };
 
@@ -45,10 +45,15 @@
         };
     in
     {
-      nixosConfigurations = {
-        workstation = mkNix "workstation";
-        laptop = mkNix "laptop";
-      };
+
+      nixosConfigurations =
+        let
+          dir = builtins.readDir ./machine;
+          names = builtins.attrNames dir;
+          machines = builtins.filter (f: dir.${f} == "directory") names;
+          pairs = builtins.map (machineName: { name = machineName; value = mkNix machineName; }) machines;
+        in builtins.listToAttrs pairs;
+
 
       devShells = forAllSystems (system: {
         default = (pkgsFor system).mkShell {

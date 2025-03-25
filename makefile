@@ -1,11 +1,17 @@
 .DEFAULT_GOAL := switch
 
+ifneq ("$(wildcard .env)","")
+  include .env
+  export
+endif
+
+
 flake:
 	nix flake update
 	$(MAKE) switch
 
 nix:
-	sudo nixos-rebuild switch --flake .$(cat name)
+	sudo nixos-rebuild switch --flake .#$(name)
 
 switch: nix
 	i3-msg restart
@@ -13,7 +19,7 @@ switch: nix
 	gpgconf --launch gpg-agent
 
 setup:
-	cp /etc/nixos/hardware-configuration.nix ./machine/$(cat name)/
+	cp /etc/nixos/hardware-configuration.nix ./machine/$(name)/
 	nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
