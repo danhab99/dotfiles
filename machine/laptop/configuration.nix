@@ -53,8 +53,4 @@
       "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
     };
   };
-
-  config = {
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  };
 }
