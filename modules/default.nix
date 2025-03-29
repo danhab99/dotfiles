@@ -14,7 +14,6 @@
     ./nix
     ./ollama
     ./packages
-    ./picom
     ./pipewire
     ./printing
     ./ratbag

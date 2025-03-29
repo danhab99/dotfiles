@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [ ../../modules/default.nix ];
@@ -21,7 +21,6 @@
     nix.enable = true;
     ollama.enable = false;
     packages.enable = true;
-    picom.enable = true;
     pipewire.enable = true;
     printing.enable = true;
     ratbag.enable = false;

@@ -200,7 +200,7 @@ import ../module.nix {
               "XF86MonBrightnessUp" = "exec xbacklight -inc 10";
               "XF86MonBrightnessDown" = "exec xbacklight -dec 10";
               "${mod}+p" = "exec $HOME/.config/rofi/applets/android/screenshot.sh";
-              "${mod}+w" = "exec brave";
+              "${mod}+w" = "exec firefox";
               "${mod}+e" = "exec nemo";
               "${mod}+plus" = "gaps inner all minus 2";
               "${mod}+minus" = "gaps inner all plus 2";
@@ -429,6 +429,25 @@ import ../module.nix {
           border_radius 8
           ${if cfg.configFile == null then "" else (builtins.readFile cfg.configFile)}
         '';
+      };
+
+      services.picom = {
+        enable = true;
+        vSync = true;
+        shadow = true;
+        shadowOpacity = 0.9;
+
+        shadowExclude = [
+          "name = 'Notification'"
+          "class_g = 'Conky'"
+          "class_g ?= 'Notify-osd'"
+          "class_g = 'Cairo-clock'"
+          "_GTK_FRAME_EXTENTS@:c"
+          "!focused && !floating"
+          "_NET_WM_NAME@:s *= 'Android Emulator'"
+        ];
+
+        settings.blur = { shadow-radius = 12; };
       };
 
       home.file = {
