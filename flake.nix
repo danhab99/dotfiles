@@ -52,15 +52,22 @@
           names = builtins.attrNames dir;
           machines = builtins.filter (f: dir.${f} == "directory") names;
           pairs = builtins.map (machineName: { name = machineName; value = mkNix machineName; }) machines;
-        in builtins.listToAttrs pairs;
+        in
+        builtins.listToAttrs pairs;
 
 
       devShells = forAllSystems (system: {
         default = (pkgsFor system).mkShell {
+          NIX_PATH = "nixpkgs=channel:nixos-unstable nil";
+          NVIM_COC_LOG_LEVEL = "debug";
+          NVIM_COC_LOG_FILE = "/tmp/coc.log";
+          VIM_COC_LOG_LEVEL = "debug";
+          VIM_COC_LOG_FILE = "/tmp/coc.log";
+
           buildInputs = with (pkgsFor system); [
             git
             nixpkgs-fmt
-            nil
+            nixd
             gnumake
           ];
 

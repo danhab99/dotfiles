@@ -24,8 +24,6 @@ import ../module.nix
         # pamixer
         # pkgsi686Linux.gperftools
         # python312Packages.pip
-        archivemount
-        sshfs
         acpi
         aichat
         alsa-utils
@@ -45,6 +43,7 @@ import ../module.nix
         entr
         ffmpeg
         file
+        firefox
         flameshot
         gimp
         glances
@@ -88,6 +87,7 @@ import ../module.nix
         screen
         scrot
         seahorse
+        sshfs
         unzip
         upower
         usbutils
