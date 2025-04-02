@@ -13,7 +13,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ ollama ];
+    # home.packages = with pkgs; [ ollama ];
 
     services.ollama = {
       enable = true;
