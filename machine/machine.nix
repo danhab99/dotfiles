@@ -37,7 +37,7 @@
 
     home.sessionVariables = with pkgs; {
       EDITOR = vim-full + "/bin/vim";
-      BROWSER = brave + "/bin/brave";
+      BROWSER = firefox + "/bin/firefox";
       GIT_PAGER = bat + "/bin/bat";
     };
 

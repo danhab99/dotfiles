@@ -24,6 +24,7 @@
     ./steam
     ./thinkpad
     ./threedtools
+    ./thunderbird
     ./timezone
     ./urxvt
     ./vim
