@@ -88,6 +88,7 @@ import ../module.nix
         scrot
         seahorse
         sshfs
+        thunderbird
         unzip
         upower
         usbutils
