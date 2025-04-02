@@ -8,7 +8,7 @@ nix:
 	sudo nixos-rebuild switch --flake .$(cat name)
 
 switch: nix
-	i3-msg restart
+	-i3-msg restart
 	gpgconf --kill gpg-agent
 	gpgconf --launch gpg-agent
 

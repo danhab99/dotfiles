@@ -12,6 +12,7 @@
     # python312Packages.pip
     aichat
     alsa-utils
+    tmux
     arandr
     archivemount
     argc
