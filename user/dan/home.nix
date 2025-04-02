@@ -12,7 +12,7 @@
       configFile = ./i3/config;
     };
     ollama = {
-      enable = false;
+      enable = true;
       repoDir = "/bucket/ollama";
     };
     picom.enable = true;
