@@ -4,6 +4,7 @@
   imports = [ ../../modules/default.nix ];
 
   config.module = {
+    thunderbird.enable = true;
     appimage.enable = true;
     docker.enable = true;
     font.enable = true;
@@ -14,7 +15,7 @@
     };
     gnupg.enable = true;
     i18n.enable = true;
-    i3 = { 
+    i3 = {
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
     };
@@ -33,7 +34,7 @@
     timezone.enable = true;
     urxvt.enable = true;
     vim.enable = true;
-    xorg = { 
+    xorg = {
       enable = true;
       videoDriver = "modesetting";
     };
@@ -50,6 +51,11 @@
 
     xsession.windowManager.i3.config.keybindings = {
       "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
+    };
+
+    programs.zsh.shellAliases = {
+      pull = "rsync -avz \"desktop:$(pwd)/$1\" .";
+      push = "rsync -avz \"$1\" \"desktop:$(pwd)/\"";
     };
   };
 }

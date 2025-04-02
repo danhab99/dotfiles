@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -16,12 +17,14 @@
   boot.loader.systemd-boot.enable = true;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8d3bdd54-e8c6-47c9-b1f9-662eae68b57a";
+    {
+      device = "/dev/disk/by-uuid/8d3bdd54-e8c6-47c9-b1f9-662eae68b57a";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/26FC-CED6";
+    {
+      device = "/dev/disk/by-uuid/26FC-CED6";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
@@ -39,7 +42,7 @@
 
   # Allow NetworkManager to store passwords system-wide
   networking.networkmanager.wifi.powersave = true;
-  networking.networkmanager.wifi.backend = "iwd";  # Optional, better for some setups
+  networking.networkmanager.wifi.backend = "iwd"; # Optional, better for some setups
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
