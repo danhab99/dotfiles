@@ -127,5 +127,29 @@ in
         };
       };
     };
+
+    # services.ollama = {
+    #   enable = true;
+    #   acceleration = "cuda";
+    #   host = "0.0.0.0";
+
+    #   environmentVariables = {
+    #     OLLAMA_MODELS = "/bucket/ollama";
+    #   };
+    # };
+
+    virtualisation.oci-containers.containers = {
+      open-webui = {
+        autoStart = true;
+        image = "ghcr.io/open-webui/open-webui:main";
+        environment = {
+          "OLLAMA_BASE_URL" = "http://host.docker.internal:11434";
+          "WEBUI_SECRET_KEY" = "your_secret_key"; # Replace with a secure secret key
+        };
+        ports = [ "127.0.0.1:20080:8080" ];
+        volumes = [ "/home/dan/.open-webui/backend/data:/app/backend/data" ];
+        extraOptions = [ "--add-host=host.docker.internal:host-gateway" ];
+      };
+    };
   };
 }

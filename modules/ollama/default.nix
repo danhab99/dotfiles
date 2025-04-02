@@ -13,12 +13,15 @@ in {
     };
   };
   config = mkIf cfg.enable {
-
     home.packages = with pkgs; [ ollama ];
 
     services.ollama = {
       enable = true;
-      # home = cfg.repoDir;
+      acceleration = "cuda";
+
+      environmentVariables = {
+        OLLAMA_MODELS = cfg.repoDir;
+      };
     };
   };
 }
