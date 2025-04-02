@@ -4,7 +4,6 @@
   imports = [ ../../modules/default.nix ];
 
   config.module = {
-    thunderbird.enable = true;
     appimage.enable = true;
     docker.enable = true;
     font.enable = true;
