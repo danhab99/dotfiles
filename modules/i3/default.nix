@@ -10,6 +10,7 @@ import ../module.nix {
     i3blocksConfig = mkOption {
       type = types.path;
       description = "Machine specific i3blocks config file";
+      default = ./i3blocks.conf;
     };
   };
 

@@ -18,7 +18,7 @@
       i3 = {
         enable = true;
         configFile = ./i3/config;
-        i3BlocksConfig = ./i3blocks.conf;
+        # i3BlocksConfig = ./i3blocks.conf;
       };
       nix.enable = true;
       ollama = {
@@ -47,7 +47,7 @@
       zsh.enable = true;
     };
 
-    home-manager = {
+    home-manager.users.dan = {
       home.file = {
         # ".Xdefaults" = { source = ./Xdefaults; };
         # ".Xresources" = { source = ./Xresources; };
