@@ -11,10 +11,10 @@
       enable = true;
       configFile = ./i3/config;
     };
-    ollama = {
-      enable = true;
-      repoDir = "/bucket/ollama";
-    };
+    # ollama = {
+    #   enable = true;
+    #   repoDir = "/bucket/ollama";
+    # };
     picom.enable = true;
     rofi.enable = true;
     urxvt.enable = true;
