@@ -11,7 +11,7 @@
       fzf.enable = true;
       git = {
         enable = true;
-        signingKey = ""; # TODO populate
+        signingKey = "1DC36AE6EEEFDB55FE5D8874BAABD1E3FA0A9FB6";
       };
       gnupg.enable = true;
       i18n.enable = true;
