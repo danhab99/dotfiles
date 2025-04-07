@@ -69,6 +69,8 @@
             nixpkgs-fmt
             nixd
             gnumake
+            containerd
+            oci-cli
           ];
 
           shellHook = ''

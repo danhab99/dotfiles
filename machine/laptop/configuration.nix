@@ -19,7 +19,9 @@
       i3blocksConfig = ./i3blocks.conf;
     };
     nix.enable = true;
-    ollama.enable = false;
+    ollama = {
+      enable = true;
+    };
     packages.enable = true;
     pipewire.enable = true;
     printing.enable = true;
