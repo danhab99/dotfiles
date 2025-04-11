@@ -42,14 +42,14 @@ import ../module.nix {
           ci3 = "cd ~/.config/i3";
           cnix = "cd /etc/nixos";
           browse = "nautilus --browser . &";
-          vi = "gvim -v";
-          vim = "gvim -v";
-          v = "gvim -v";
-          vv = "gvim -v .";
-          vi3 = "gvim -v ~/.config/i3/config";
-          valias = "gvim -v ~/.bash_aliases";
-          vssh = "gvim -v ~/.ssh/config";
-          vfz = "gvim -v $(fzf)";
+          vi = "vim";
+          vim = "vim";
+          v = "vim";
+          vv = "vim .";
+          vi3 = "vim ~/.config/i3/config";
+          valias = "vim ~/.bash_aliases";
+          vssh = "vim ~/.ssh/config";
+          vfz = "vim $(fzf)";
 
           git-fix =
             "git submodule sync --recursive; git submodule update --init --recursive";
