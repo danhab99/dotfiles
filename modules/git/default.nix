@@ -6,6 +6,10 @@ import ../module.nix {
       type = types.string;
       description = "GPG signing key";
     };
+    email = mkOption {
+      type = types.string;
+      description = "Email";
+    };
   };
 
   output = { pkgs, cfg, ... }: {
@@ -60,7 +64,7 @@ import ../module.nix {
           "rebase-main" = "!git fetch origin main && git rebase origin/main";
         };
 
-        userEmail = "dan.habot@gmail.com";
+        userEmail = cfg.email;
         userName = "Dan Habot";
 
         signing = {
