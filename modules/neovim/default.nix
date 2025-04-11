@@ -31,7 +31,7 @@ import ../module.nix
           coc-tsserver
           coc-yaml
           ctrlp-vim
-          fzfWrapper
+          fzf-lua
           goyo-vim
           lightline-vim
           neoformat
@@ -47,6 +47,8 @@ import ../module.nix
           vim-gitgutter
           vim-move
           vim-polyglot
+          telescope-nvim
+          transparent-nvim
         ];
 
         viAlias = true;
@@ -55,6 +57,7 @@ import ../module.nix
         withPython3 = true;
 
         extraConfig = builtins.readFile ./vimrc;
+        extraLuaConfig = builtins.readFile ./neovim.lua;
       };
     };
   };
