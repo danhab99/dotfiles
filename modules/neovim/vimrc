@@ -125,7 +125,7 @@ map -a :call SyntaxAttr()<CR>
 nmap <C-t> :tab sp<CR>
 nmap <C-q> mq:wqa<CR>
 nmap <C-r> :source ~/.vimrc<CR>:CocRestart<CR>
-nmap <C-s> :Rg<CR>
+nmap <C-s> :Telescope find_files<CR>
 nmap <C-h> <C-^>
 nmap yc yygccp
 nnoremap gg mggg
@@ -183,3 +183,18 @@ highlight CursorLineNr guibg=NONE ctermbg=NONE
 highlight SignColumn guibg=NONE ctermbg=NONE
 highlight Normal guibg=NONE ctermbg=NONE
 
+set termguicolors
+set background=dark
+
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
+
+" For NERDTree
+highlight NERDTreeNormal guibg=NONE ctermbg=NONE
+highlight NERDTreeDir guibg=NONE ctermbg=NONE
+highlight NERDTreeFile guibg=NONE ctermbg=NONE
+
+" For CtrlP
+highlight CtrlP guibg=NONE ctermbg=NONE
+
+set nocursorline
