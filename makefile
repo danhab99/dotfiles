@@ -5,7 +5,6 @@ ifneq ("$(wildcard .env)","")
   export
 endif
 
-
 flake:
 	nix flake update
 	$(MAKE) switch
