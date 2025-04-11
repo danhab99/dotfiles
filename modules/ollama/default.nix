@@ -1,5 +1,6 @@
 import ../module.nix {
   name = "ollama";
+
   options = { lib }: with lib; {
     repoDir = mkOption {
       type = types.str;
@@ -11,12 +12,14 @@ import ../module.nix {
       description = "Default models to load";
       default = [ ];
     };
+    enableGpu = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
 
   output = { cfg, ... }: {
     nixos = {
-      virtualisation.podman.enable = true;
-
       virtualisation.oci-containers.containers = {
         open-webui = {
           autoStart = true;
@@ -32,14 +35,11 @@ import ../module.nix {
         };
       };
 
-      # services.open-webui = {
-      #   enable = true;
-      #   port = 20080;
-      # };
-
       services.ollama = {
         enable = true;
-        # acceleration = "cuda";
+        acceleration = if cfg.enableGpu then "cuda" else false;
+
+        loadModels = cfg.models;
 
         host = "0.0.0.0";
 
@@ -48,17 +48,6 @@ import ../module.nix {
           OLLAMA_HOST = "0.0.0.0";
         };
       };
-    };
-
-    homeManager = {
-      # services.ollama = {
-      #   enable = true;
-      #   acceleration = "cuda";
-
-      #   environmentVariables = {
-      #     OLLAMA_MODELS = cfg.repoDir;
-      #   };
-      # };
     };
   };
 }

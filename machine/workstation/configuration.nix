@@ -24,6 +24,7 @@
       ollama = {
         enable = false;
         repoDir = "/bucket/ollama";
+        models = [ "mistral" "deepseek-r1" ];
       };
       packages.enable = true;
       picom.enable = true;
