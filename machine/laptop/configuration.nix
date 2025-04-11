@@ -11,6 +11,7 @@
     git = {
       enable = true;
       signingKey = "0x9D575F7BFF5A6CB4";
+      email = "dan.habot@gmail.com";
     };
     gnupg.enable = true;
     i18n.enable = true;
