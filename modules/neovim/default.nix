@@ -13,25 +13,40 @@ import ../module.nix
         };
 
         plugins = with pkgs.vimPlugins; [
-          fzfWrapper
-          vim-polyglot
-          vim-closetag
-          vim-css-color
           blamer-nvim
-          vim-gitgutter
-          lightline-vim
-          nerdtree
-          lightline-vim
-          nvim-surround
-          goyo-vim
-          vim-move
-          undotree
-          neoformat
-          vim-commentary
-          vim-fugitive
-          onedarkpro-nvim
+          coc-clangd
+          coc-css
+          coc-docker
+          coc-git
+          coc-go
+          coc-html
+          coc-java
+          coc-json
+          coc-markdownlint
+          coc-pyright
+          coc-rust-analyzer
+          coc-sh
+          coc-tailwindcss
+          coc-toml
+          coc-tsserver
+          coc-yaml
           ctrlp-vim
+          fzfWrapper
+          goyo-vim
+          lightline-vim
+          neoformat
+          nerdtree
+          nvim-surround
+          onedarkpro-nvim
           tagbar
+          undotree
+          vim-closetag
+          vim-commentary
+          vim-css-color
+          vim-fugitive
+          vim-gitgutter
+          vim-move
+          vim-polyglot
         ];
 
         viAlias = true;
