@@ -30,5 +30,6 @@
     ./xorg
     ./zoxide
     ./zsh
+    ./neovim
   ];
 }

@@ -33,7 +33,6 @@
     threedtools.enable = false;
     timezone.enable = true;
     urxvt.enable = true;
-    vim.enable = true;
     xorg = { 
       enable = true;
       videoDriver = "modesetting";
@@ -41,6 +40,7 @@
     zoxide.enable = true;
     zsh.enable = true;
     thinkpad.enable = true;
+    neovim.enable = true;
   };
 
   config.home-manager.users.dan = {

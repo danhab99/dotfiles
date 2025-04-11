@@ -38,13 +38,13 @@
       threedtools.enable = true;
       timezone.enable = true;
       urxvt.enable = true;
-      vim.enable = true;
       xorg = {
         enable = true;
         videoDriver = "nvidia";
       };
       zoxide.enable = true;
       zsh.enable = true;
+      neovim.enable = true;
     };
 
     home-manager.users.dan = {
