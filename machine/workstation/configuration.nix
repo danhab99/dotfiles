@@ -26,6 +26,7 @@
         enable = false;
         repoDir = "/bucket/ollama";
         models = [ "mistral" "deepseek-r1" ];
+        enableGpu = true;
       };
       packages.enable = true;
       pipewire.enable = true;
