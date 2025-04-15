@@ -47,6 +47,7 @@
       zoxide.enable = true;
       zsh.enable = true;
       neovim.enable = true;
+      ranger.enable = true;
     };
 
     home-manager.users.dan = {
