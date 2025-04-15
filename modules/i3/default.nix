@@ -36,7 +36,7 @@ import ../module.nix {
         enable = true;
         package = pkgs.i3-rounded;
 
-        config = import ./config.nix;
+        config = (import ./config.nix { inherit pkgs cfg; });
 
         extraConfig = ''
           border_radius 8
