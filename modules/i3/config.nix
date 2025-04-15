@@ -1,3 +1,4 @@
+{ pkgs, cfg }:
 let
   mod = "Mod4";
 in

@@ -11,11 +11,13 @@
     ./gnupg
     ./i18n
     ./i3
+    ./neovim
     ./nix
     ./ollama
     ./packages
     ./pipewire
     ./printing
+    ./ranger
     ./ratbag
     ./rofi
     ./sddm
@@ -30,6 +32,5 @@
     ./xorg
     ./zoxide
     ./zsh
-    ./neovim
   ];
 }
