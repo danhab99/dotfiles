@@ -46,7 +46,7 @@
       };
       zoxide.enable = true;
       zsh.enable = true;
-      neovim.enable = true;
+      vim.enable = true;
       ranger.enable = true;
     };
 
