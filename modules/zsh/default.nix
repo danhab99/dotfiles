@@ -105,7 +105,7 @@ import ../module.nix {
           vhome = "z /etc/nixos && vim home.nix";
           znix = "z /etc/nixos";
 
-          cai = "aichat -m claude -r %functions%";
+          cai = "aichat -r %functions%";
 
         };
 
