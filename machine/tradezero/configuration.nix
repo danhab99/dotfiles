@@ -42,6 +42,7 @@
     zsh.enable = true;
     thinkpad.enable = true;
     neovim.enable = true;
+    ranger.enable = true;
   };
 
   config.home-manager.users.dan = {
