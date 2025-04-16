@@ -5,7 +5,16 @@
   users.users.dan = {
     isNormalUser = true;
     description = "dan";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
+    extraGroups = [ 
+      "networkmanager" 
+      "wheel" 
+      "docker" 
+      "input" 
+      "dialout" 
+      "tty" 
+      "video" 
+      "plugdev" 
+    ];
     shell = pkgs.zsh;
   };
 
