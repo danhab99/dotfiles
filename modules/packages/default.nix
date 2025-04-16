@@ -15,7 +15,6 @@ import ../module.nix
     in
     {
       packages = with pkgs; [
-        # linuxKernel.packages.linux_zen.nvidia_x11
         # minio-client
         # mongodb-compass
         # mongodb-tools
@@ -58,7 +57,6 @@ import ../module.nix
         jq
         lazydocker
         lazygit
-        linuxKernel.packages.linux_zen.nvidia_x11
         lm_sensors
         ncdu
         nemo
@@ -102,9 +100,5 @@ import ../module.nix
         yt-dlp
         zip
       ];
-
-      homeManager = { };
-
-      nixos = { };
     };
 }
