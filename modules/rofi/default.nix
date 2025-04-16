@@ -7,11 +7,6 @@ import ../module.nix {
     # homeManager.home.file = {
     #   ".config/rofi" = let rev = "86e6875d9e89ea3cf95c450cef6497d52afceefe";
     #   in {
-    #     # source = builtins.fetchGit {
-    #     #   shallow = true;
-    #     #   url = "https://github.com/adi1090x/rofi.git";
-    #     #   inherit rev;
-    #     # };
     #     source = pkgs.stdenv.mkDerivation {
     #       name = "adi1090x/rofi";
     #       version = rev;
@@ -23,9 +18,18 @@ import ../module.nix {
     #       };
 
     #       installPhase = ''
-    #         cd $src
-    #         cp -r $src $out
-    #         . $out/setup.sh
+    #         echo PWD $(pwd)
+    #         echo LS
+    #         ls $src
+    #         echo ---
+    #         cd $(mktemp -d)
+    #         cp -r $src/* .
+    #         echo PWD $(pwd)
+    #         echo LS
+    #         ls
+    #         echo ---
+    #         . ./setup.sh
+    #         cp -r . $out
     #       '';
     #     };
     #     recursive = true;
