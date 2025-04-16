@@ -24,7 +24,6 @@ import ../module.nix
         # pkgsi686Linux.gperftools
         # python312Packages.pip
         acpi
-        aichat
         alsa-utils
         arandr
         archivemount
@@ -33,16 +32,13 @@ import ../module.nix
         autorandr
         base16-schemes
         bat
-        betterlockscreen
         brave
         curl
         customBusybox
         dbeaver-bin
-        dive
         entr
         ffmpeg
         file
-        firefox
         flameshot
         gimp
         glances
@@ -51,39 +47,16 @@ import ../module.nix
         gparted
         gqrx
         gzip
-        htop-vim
-        iftop
-        iotop
-        jq
-        lazydocker
-        lazygit
         lm_sensors
-        ncdu
-        nemo
-        neofetch
-        nix-ld
         nmap
         nnn
-        nodejs_22
-        nvtopPackages.full
         obs-studio
         obsidian
         oneko
         openssl
         pamixer
-        pavucontrol
-        playerctl
-        pulseaudioFull
-        ranger
-        rclone
-        retry
-        ripgrep
-        rofi
-        rsync
         s3cmd
         scdl
-        screen
-        scrot
         seahorse
         sshfs
         thunderbird
@@ -96,7 +69,6 @@ import ../module.nix
         webcamoid
         wget
         yai
-        yarn
         yt-dlp
         zip
       ];

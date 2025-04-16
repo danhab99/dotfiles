@@ -22,6 +22,9 @@ import ../module.nix {
       dmenu
       picom
       nitrogen
+      betterlockscreen
+      nemo
+      scrot
     ];
 
     nixos = {

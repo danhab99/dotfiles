@@ -4,7 +4,9 @@ import ../module.nix {
   output = { pkgs, ... }: {
     packages = with pkgs;
       [
-        # ...
+        pavucontrol
+        playerctl
+        pulseaudioFull
       ];
 
     nixos = {

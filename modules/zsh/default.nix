@@ -2,7 +2,23 @@ import ../module.nix {
   name = "zsh";
 
   output = { pkgs, ... }: {
-    packages = with pkgs; [ zsh oh-my-zsh ];
+    packages = with pkgs; [ 
+      zsh 
+      oh-my-zsh 
+      htop-vim
+      iftop
+      iotop
+      jq
+      ncdu
+      neofetch
+      nvtopPackages.full
+      ranger
+      rclone
+      retry
+      ripgrep
+      rsync
+      screen
+    ];
 
     homeManager = {
       home.sessionVariables = {

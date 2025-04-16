@@ -18,7 +18,11 @@ import ../module.nix {
     };
   };
 
-  output = { cfg, ... }: {
+  output = { cfg, pkgs, ... }: {
+    packages = with pkgs; [
+      aichat
+    ];
+
     nixos = {
       services.open-webui = {
         enable = true;

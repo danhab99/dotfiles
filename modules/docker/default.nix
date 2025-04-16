@@ -2,14 +2,12 @@ import ../module.nix {
   name = "docker";
 
   output = { pkgs, ... }: {
-    homeManager = { };
+    packages = with pkgs; [
+      dive
+      lazydocker
+    ];
 
     nixos = {
-      environment.systemPackages = with pkgs;
-        [
-          # ...
-        ];
-
       virtualisation.docker = {
         enable = true;
         enableOnBoot = true;
