@@ -15,7 +15,7 @@
     ./nix
     ./nvidia
     ./ollama
-    ./packages
+    ./packages.nix
     ./pipewire
     ./printing
     ./ranger
