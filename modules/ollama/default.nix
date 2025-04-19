@@ -37,8 +37,12 @@ import ../module.nix {
         acceleration = if cfg.enableGpu then "cuda" else false;
 
         loadModels = cfg.models;
+        # home = cfg.repoDir;
+        models = cfg.repoDir;
 
         host = "0.0.0.0";
+
+        user = "ollama-user";
 
         environmentVariables = {
           OLLAMA_MODELS = cfg.repoDir;
