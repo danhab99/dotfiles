@@ -14,7 +14,7 @@ import ../module.nix {
     };
   };
 
-  output = { pkgs, config, cfg, ... }: {
+  output = { pkgs, config, cfg, lib, ... }: {
     packages = with pkgs; [
       i3-rounded
       i3blocks
@@ -39,7 +39,7 @@ import ../module.nix {
         enable = true;
         package = pkgs.i3-rounded;
 
-        config = (import ./config.nix { inherit pkgs cfg; });
+        config = (import ./config.nix { inherit pkgs cfg lib; });
 
         extraConfig = ''
           border_radius 8

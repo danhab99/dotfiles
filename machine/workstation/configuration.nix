@@ -23,7 +23,7 @@
       };
       nix.enable = true;
       ollama = {
-        enable = false;
+        enable = true;
         repoDir = "/bucket/ollama";
         models = [ "mistral" "deepseek-r1" ];
         enableGpu = true;
@@ -61,8 +61,58 @@
         };
       };
 
-      xsession.windowManager.i3.config = {
-        keybindings = { "$mod+Ctrl+Return" = "exec rm /tmp/workdir && urxvt"; };
+      xsession.windowManager.i3.config = 
+      let
+        mod = "Mod4";
+      in
+      {
+        keybindings = { 
+          "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
+          # "${mod}+w" = "exec brave";
+        };
+
+        workspaceOutputAssign = [
+          {
+            workspace = "1";
+            output = "DP-0";
+          }
+          {
+            workspace = "2";
+            output = "DP-4";
+          }
+          {
+            workspace = "3";
+            output = "HDMI-0";
+          }
+          {
+            workspace = "4";
+            output = "DP-0";
+          }
+          {
+            workspace = "5";
+            output = "DP-4";
+          }
+          {
+            workspace = "6";
+            output = "HDMI-0";
+          }
+          {
+            workspace = "7";
+            output = "DP-0";
+          }
+          {
+            workspace = "8";
+            output = "DP-4";
+          }
+          {
+            workspace = "9";
+            output = "HDMI-0";
+          }
+          {
+            workspace = "10";
+            output = "DP-0";
+          }
+        ];
       };
 
       xresources.extraConfig = builtins.concatStringsSep "\n" [

@@ -1,4 +1,4 @@
-{ pkgs, cfg }:
+{ pkgs, cfg, lib }:
 let
   mod = "Mod4";
 in
@@ -110,49 +110,6 @@ in
     };
   }];
 
-  workspaceOutputAssign = [
-    {
-      workspace = "1";
-      output = "DP-1";
-    }
-    {
-      workspace = "2";
-      output = "DP-5";
-    }
-    {
-      workspace = "3";
-      output = "HDMI-0";
-    }
-    {
-      workspace = "4";
-      output = "DP-1";
-    }
-    {
-      workspace = "5";
-      output = "DP-5";
-    }
-    {
-      workspace = "6";
-      output = "HDMI-0";
-    }
-    {
-      workspace = "7";
-      output = "DP-1";
-    }
-    {
-      workspace = "8";
-      output = "DP-5";
-    }
-    {
-      workspace = "9";
-      output = "HDMI-0";
-    }
-    {
-      workspace = "10";
-      output = "DP-1";
-    }
-  ];
-
   keybindings = {
     "Pause" = "exec /home/dan/.config/i3/lock.sh";
     "XF86AudioLowerVolume" = "exec amixer sset Master 5%-";
@@ -161,8 +118,8 @@ in
     "XF86AudioMicMute" = "exec amixer sset Capture toggle";
     "XF86MonBrightnessUp" = "exec xbacklight -inc 10";
     "XF86MonBrightnessDown" = "exec xbacklight -dec 10";
-    "${mod}+p" = "exec $HOME/.config/rofi/applets/android/screenshot.sh";
-    "${mod}+w" = "exec firefox";
+    "${mod}+p" = "exec flameshot gui";
+    "${mod}+w" = "exec brave";
     "${mod}+e" = "exec nemo";
     "${mod}+plus" = "gaps inner all minus 2";
     "${mod}+minus" = "gaps inner all plus 2";
@@ -370,6 +327,10 @@ in
     }
     {
       command = "~/.screenlayout/3screen.sh";
+      always = true;
+    }
+    {
+      command = "flameshot";
       always = true;
     }
   ];
