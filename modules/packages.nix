@@ -45,6 +45,7 @@ in
     lm_sensors
     nmap
     nnn
+    nodejs
     obs-studio
     obsidian
     oneko
