@@ -25,7 +25,16 @@
       ollama = {
         enable = true;
         repoDir = "/bucket/ollama";
-        models = [ "mistral" "deepseek-r1" ];
+        models = [ 
+          "mistral" 
+          "deepseek-r1" 
+          "nomic-embed-text" 
+          "qwq" 
+          "lama3.3" 
+          "mixtral" 
+          "command-r-plus" 
+          "phi4" 
+        ];
         enableGpu = true;
       };
       pipewire.enable = true;
