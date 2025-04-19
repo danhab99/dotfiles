@@ -45,7 +45,6 @@ import ../module.nix
         gnumake
         gnutar
         gparted
-        gqrx
         gzip
         lm_sensors
         nmap

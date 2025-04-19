@@ -20,6 +20,7 @@
     ./ranger
     ./ratbag
     ./rofi
+    ./rtlsdr
     ./sddm
     ./secrets
     ./ssh

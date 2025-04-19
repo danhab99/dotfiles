@@ -70,5 +70,4 @@
     cpuFreqGovernor = "performance";
     enable = true;
   };
-
 }

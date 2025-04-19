@@ -48,6 +48,7 @@
       zsh.enable = true;
       vim.enable = true;
       ranger.enable = true;
+      rtlsdr.enable = true;
     };
 
     home-manager.users.dan = {
