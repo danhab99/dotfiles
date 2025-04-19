@@ -21,7 +21,6 @@
     };
     nix.enable = true;
     ollama.enable = false; 
-    packages.enable = true;
     pipewire.enable = true;
     printing.enable = true;
     ratbag.enable = false;

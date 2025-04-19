@@ -28,7 +28,6 @@
         models = [ "mistral" "deepseek-r1" ];
         enableGpu = true;
       };
-      packages.enable = true;
       pipewire.enable = true;
       printing.enable = true;
       ratbag.enable = true;
