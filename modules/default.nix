@@ -13,6 +13,7 @@
     ./i3
     ./neovim
     ./nix
+    ./nvidia
     ./ollama
     ./packages
     ./pipewire
@@ -33,6 +34,5 @@
     ./xorg
     ./zoxide
     ./zsh
-    ./nvidia
   ];
 }
