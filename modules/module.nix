@@ -2,7 +2,7 @@
 { lib, config, pkgs, ... }:
 let
   cfg = config.module.${name};
-  out = output { inherit cfg lib config pkgs; };
+  out = output { inherit lib config pkgs cfg; };
 in
 {
   options.module.${name} = (options { inherit lib; }) // {

@@ -40,15 +40,13 @@
       threedtools.enable = true;
       timezone.enable = true;
       urxvt.enable = true;
-      xorg = {
-        enable = true;
-        videoDriver = "nvidia";
-      };
+      xorg.enable = true; 
       zoxide.enable = true;
       zsh.enable = true;
       vim.enable = true;
       ranger.enable = true;
       rtlsdr.enable = true;
+      nvidia.enable = true;
     };
 
     home-manager.users.dan = {
