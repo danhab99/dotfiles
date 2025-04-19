@@ -57,13 +57,6 @@
     enable32Bit = true; # for 32-bit applications
   };
 
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    open = false;
-    forceFullCompositionPipeline = true;
-    powerManagement.enable = true;
-  };
-
   services.pulseaudio.enable = false;
 
   powerManagement = {

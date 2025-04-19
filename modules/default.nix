@@ -33,5 +33,6 @@
     ./xorg
     ./zoxide
     ./zsh
+    ./nvidia
   ];
 }

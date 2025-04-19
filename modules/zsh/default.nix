@@ -11,7 +11,6 @@ import ../module.nix {
       jq
       ncdu
       neofetch
-      nvtopPackages.full
       ranger
       rclone
       retry
