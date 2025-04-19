@@ -3,6 +3,10 @@ import ../module.nix {
 
   options = { lib }: with lib; {
     videoDriver = mkOption { };
+    extraConfig = mkOption {
+      type = types.string;
+      default = "";
+    };
   };
 
   output = { pkgs, cfg, ... }: {
@@ -41,24 +45,15 @@ import ../module.nix {
 
       services.libinput = {
         enable = true;
-
       };
     };
 
-    # homeManager = {
-    #   # xresources.extraConfig = builtins.concatStringsSep "\n" [
-    #   #   (builtins.readFile ./Xresources)
-    #   #   (builtins.readFile ./Xdefaults)
-    #   # ];
-    #   home.file = {
-    #     # ".Xdefaults" = {
-    #     #   source = builtins.concatStringsSep "\n" [
-    #     #     (builtins.readFile ./Xresources)
-    #     #     (builtins.readFile ./Xdefaults)
-    #     #   ];
-    #     # };
-    #     # # ".Xresources" = { source = ./Xresources; };
-    #   };
-    # };
+    homeManager = {
+      xresources.extraConfig = builtins.concatStringsSep "\n" [
+        (builtins.readFile ./Xresources)
+        (builtins.readFile ./Xdefaults)
+        cfg.extraConfig
+      ];
+    };
   };
 }

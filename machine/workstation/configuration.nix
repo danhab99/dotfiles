@@ -39,7 +39,16 @@
       threedtools.enable = true;
       timezone.enable = true;
       urxvt.enable = true;
-      xorg.enable = true; 
+      xorg =
+        {
+          enable = true;
+          extraConfig = ''
+            urxvt*depth: 32
+            urxvt*blurRadius: 10
+            urxvt*transparent: true
+            urxvt*tintColor: #555
+          '';
+        };
       zoxide.enable = true;
       zsh.enable = true;
       vim.enable = true;
@@ -50,8 +59,6 @@
 
     home-manager.users.dan = {
       home.file = {
-        # ".Xdefaults" = { source = ./Xdefaults; };
-        # ".Xresources" = { source = ./Xresources; };
         ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
         ".config/g600" = {
           source = ./g600;
@@ -59,64 +66,59 @@
         };
       };
 
-      xsession.windowManager.i3.config = 
-      let
-        mod = "Mod4";
-      in
-      {
-        keybindings = { 
-          "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-          # "${mod}+w" = "exec brave";
+      xsession.windowManager.i3.config =
+        let
+          mod = "Mod4";
+        in
+        {
+          keybindings = {
+            "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
+            # "${mod}+w" = "exec brave";
+          };
+
+          workspaceOutputAssign = [
+            {
+              workspace = "1";
+              output = "DP-0";
+            }
+            {
+              workspace = "2";
+              output = "DP-4";
+            }
+            {
+              workspace = "3";
+              output = "HDMI-0";
+            }
+            {
+              workspace = "4";
+              output = "DP-0";
+            }
+            {
+              workspace = "5";
+              output = "DP-4";
+            }
+            {
+              workspace = "6";
+              output = "HDMI-0";
+            }
+            {
+              workspace = "7";
+              output = "DP-0";
+            }
+            {
+              workspace = "8";
+              output = "DP-4";
+            }
+            {
+              workspace = "9";
+              output = "HDMI-0";
+            }
+            {
+              workspace = "10";
+              output = "DP-0";
+            }
+          ];
         };
-
-        workspaceOutputAssign = [
-          {
-            workspace = "1";
-            output = "DP-0";
-          }
-          {
-            workspace = "2";
-            output = "DP-4";
-          }
-          {
-            workspace = "3";
-            output = "HDMI-0";
-          }
-          {
-            workspace = "4";
-            output = "DP-0";
-          }
-          {
-            workspace = "5";
-            output = "DP-4";
-          }
-          {
-            workspace = "6";
-            output = "HDMI-0";
-          }
-          {
-            workspace = "7";
-            output = "DP-0";
-          }
-          {
-            workspace = "8";
-            output = "DP-4";
-          }
-          {
-            workspace = "9";
-            output = "HDMI-0";
-          }
-          {
-            workspace = "10";
-            output = "DP-0";
-          }
-        ];
-      };
-
-      xresources.extraConfig = builtins.concatStringsSep "\n" [
-        (builtins.readFile ./Xresources)
-        (builtins.readFile ./Xdefaults)
-      ];
     };
 
     services.xserver.config = ''

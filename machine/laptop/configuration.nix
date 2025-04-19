@@ -20,7 +20,7 @@
       i3blocksConfig = ./i3blocks.conf;
     };
     nix.enable = true;
-    ollama.enable = false; 
+    ollama.enable = false;
     pipewire.enable = true;
     printing.enable = true;
     ratbag.enable = false;
@@ -35,6 +35,12 @@
     xorg = {
       enable = true;
       videoDriver = "modesetting";
+      extraConfig = ''
+        urxvt*depth: 0
+        urxvt*blurRadius: 0
+        urxvt*transparent: true
+        urxvt*tintColor: #555
+      '';
     };
     zoxide.enable = true;
     zsh.enable = true;
@@ -44,11 +50,6 @@
   };
 
   config.home-manager.users.dan = {
-    xresources.extraConfig = builtins.concatStringsSep "\n" [
-      (builtins.readFile ./Xresources)
-      (builtins.readFile ./Xdefaults)
-    ];
-
     xsession.windowManager.i3.config.keybindings = {
       "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
     };
