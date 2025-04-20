@@ -32,7 +32,7 @@ in
     enabledNixos //
     {
       environment.systemPackages = enabledPackages;
-      home-manager.users.dan.config = enabledHomemanager;
+      home-manager.users = enabledHomemanagerForUses;
     }
   );
 }
