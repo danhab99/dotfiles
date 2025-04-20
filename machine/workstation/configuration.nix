@@ -27,6 +27,7 @@
         enable = true;
         configFile = ./i3/config;
         # i3BlocksConfig = ./i3blocks.conf;
+        screen = [ "DP-5" "DP-1" "HDMI-0" ];
       };
       nix.enable = true;
       ollama = {
@@ -96,48 +97,6 @@
             # "${mod}+w" = "exec brave";
           };
 
-          workspaceOutputAssign = [
-            {
-              workspace = "1";
-              output = "DP-0";
-            }
-            {
-              workspace = "2";
-              output = "DP-4";
-            }
-            {
-              workspace = "3";
-              output = "HDMI-0";
-            }
-            {
-              workspace = "4";
-              output = "DP-0";
-            }
-            {
-              workspace = "5";
-              output = "DP-4";
-            }
-            {
-              workspace = "6";
-              output = "HDMI-0";
-            }
-            {
-              workspace = "7";
-              output = "DP-0";
-            }
-            {
-              workspace = "8";
-              output = "DP-4";
-            }
-            {
-              workspace = "9";
-              output = "HDMI-0";
-            }
-            {
-              workspace = "10";
-              output = "DP-0";
-            }
-          ];
         };
     };
 
