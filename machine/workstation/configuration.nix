@@ -65,7 +65,7 @@
             urxvt*depth: 32
             urxvt*blurRadius: 10
             urxvt*transparent: true
-            urxvt*tintColor: #555
+            urxvt*tintColor: #525252
           '';
         };
       zoxide.enable = true;
