@@ -42,6 +42,8 @@
           "mixtral" 
           "command-r-plus" 
           "phi4" 
+          "mxbai-embed-large"
+          "bge-m3"
         ];
         enableGpu = true;
       };
