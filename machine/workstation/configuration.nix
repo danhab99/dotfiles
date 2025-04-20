@@ -1,7 +1,14 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../../modules/default.nix ];
+  imports = [ 
+    ../../modules
+    ../../users
+  ];
+
+  config.users = {
+    dan.enable = true;
+  };
 
   config = {
     module = {

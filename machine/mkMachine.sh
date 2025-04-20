@@ -12,7 +12,22 @@ cat <<EOF > "$1/configuration.nix"
 { ... }:
 
 {
-  imports = [ ../../modules/default.nix ];
+  imports = [ 
+    ../../modules
+    ../../users
+  ];
+
+  config.users = {
+EOF
+
+# List all directories in ../users and add them as <name>.enable = true;
+for dir in ../users/*/; do
+  name=$(basename "$dir")
+  echo "    $name.enable = true;" >> "$1/configuration.nix"
+done
+
+cat << EOF >> "$1/configuration.nix"
+  };
 
   config.module = {
 EOF
