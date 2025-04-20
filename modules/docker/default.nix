@@ -5,6 +5,7 @@ import ../module.nix {
     packages = with pkgs; [
       dive
       lazydocker
+      docker-compose
     ];
 
     nixos = {
