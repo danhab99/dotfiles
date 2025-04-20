@@ -12,6 +12,10 @@ import ../module.nix {
       description = "Machine specific i3blocks config file";
       default = ./i3blocks.conf;
     };
+    screen = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
   };
 
   output = { pkgs, config, cfg, lib, ... }: {

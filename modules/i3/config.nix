@@ -216,6 +216,20 @@ in
       "exec --no-startup-id exec xdotool key Caps_Lock $HOME/.config/rofi/scripts/launcher_t1";
   };
 
+  workspaceOutputAssign = let
+    screens         = cfg.screen; 
+    getScreenIndex  = i: lib.mod i (builtins.length screens); 
+    getScreen       = i: builtins.elemAt screens (getScreenIndex i);
+  in
+    builtins.genList (i:
+      let
+        idx = if i > 0 then i - 1 else 0;
+      in {
+        workspace = builtins.toString i;
+        output    = getScreen idx;
+      }
+    ) 10;
+
   modes = {
     resize = {
       "h" = "resize shrink width 5 px or 5 ppt";
