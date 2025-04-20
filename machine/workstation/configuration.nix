@@ -66,6 +66,10 @@
       nvidia.enable = true;
     };
 
+    environment.systemPackages = with pkgs; [
+      libratbag
+    ];
+
     home-manager.users.dan = {
       home.file = {
         ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
