@@ -25,6 +25,7 @@
     i3 = {
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
+      screen = [ "eDP-1" ];
     };
     nix.enable = true;
     ollama.enable = false;
