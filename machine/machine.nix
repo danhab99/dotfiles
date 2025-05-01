@@ -1,5 +1,5 @@
 { hostName }:
-{ ... }: 
+{ pkgs, ... }: 
 
 {
   networking = {
@@ -11,9 +11,44 @@
 
   services.dbus.enable = true;
 
-  services.nixos-cli = { enable = true; };
+  # services.nixos-cli = { enable = true; };
 
   boot.tmp.cleanOnBoot = true;
+
+  stylix = {
+    enable = true;
+    # autoEnable = false;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml"; # https://tinted-theming.github.io/tinted-gallery/
+    polarity = "dark";
+
+    # targets = {
+    #   fcitx5.enable = false;
+    # };
+
+    fonts = {
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+
+      monospace = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans Mono";
+      };
+
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+  };
+
+  home-manager.backupFileExtension = "backup";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

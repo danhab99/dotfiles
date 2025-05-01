@@ -4,6 +4,7 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs_for_nixos_cli.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
+    stylix.url = "github:danth/stylix";
 
     nixos-cli = {
       url = "github:water-sucks/nixos";
@@ -11,7 +12,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixos-cli, ... }@inputs:
+  outputs = { 
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    nixos-cli,
+    stylix,
+    ...
+  }@inputs:
     let
       inherit (self) outputs;
       systems = [ "x86_64-linux" "aarch64-linux" ];
@@ -26,7 +35,8 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            nixos-cli.nixosModules.nixos-cli
+            stylix.nixosModules.stylix
+            # nixos-cli.nixosModules.nixos-cli
             (import ./machine/machine.nix { inherit hostName; })
             ./machine/${hostName}/configuration.nix
             ./machine/${hostName}/hardware-configuration.nix
