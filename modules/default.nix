@@ -1,8 +1,8 @@
 { ... }:
 
 {
-  # home.stateVersion = "24.05";
   imports = [
+    ./packages.nix
     ./appimage
     ./docker
     ./font
@@ -14,8 +14,8 @@
     ./neovim
     ./nix
     ./nvidia
+    ./obs
     ./ollama
-    ./packages.nix
     ./pipewire
     ./printing
     ./ranger
@@ -30,6 +30,7 @@
     ./threedtools
     ./timezone
     ./urxvt
+    ./vbox
     ./vim
     ./xorg
     ./zoxide

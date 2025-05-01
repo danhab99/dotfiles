@@ -38,7 +38,7 @@ cat <<EOF > default.nix
 
 {
   imports = [
-  ./packages.nix
+    ./packages.nix
 EOF
 
 # Loop through each directory in ./modules and add it as an import
