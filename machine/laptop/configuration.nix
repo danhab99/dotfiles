@@ -54,6 +54,7 @@
     thinkpad.enable = true;
     vim.enable = true;
     ranger.enable = true;
+    obs.enable = true;
   };
 
   config.home-manager.users.dan = {
