@@ -38,7 +38,7 @@
           "deepseek-r1" 
           "nomic-embed-text" 
           "qwq" 
-          "lama3.3" 
+          "llama3.3" 
           "mixtral" 
           "command-r-plus" 
           "phi4" 
