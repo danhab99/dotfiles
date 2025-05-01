@@ -28,7 +28,8 @@ import ../module.nix {
       nitrogen
       betterlockscreen
       nemo
-      scrot
+      flameshot
+      oneko
     ];
 
     nixos = {
