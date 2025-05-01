@@ -10,6 +10,7 @@ import ../user.nix {
     "tty"
     "video"
     "plugdev"
+    "vboxusers"
   ];
 
   shell = pkgs: pkgs.zsh;
