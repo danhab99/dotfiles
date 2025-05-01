@@ -11,14 +11,6 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    # minio-client
-    # mongodb-compass
-    # mongodb-tools
-    # neovim
-    # ngrok
-    # pamixer
-    # pkgsi686Linux.gperftools
-    # python312Packages.pip
     acpi
     alsa-utils
     arandr
@@ -26,7 +18,6 @@ in
     argc
     astyle
     autorandr
-    base16-schemes
     bat
     brave
     curl
@@ -35,7 +26,6 @@ in
     entr
     ffmpeg
     file
-    flameshot
     gimp
     glances
     gnumake
@@ -46,20 +36,16 @@ in
     nmap
     nnn
     nodejs
-    obs-studio
     obsidian
-    oneko
     openssl
     pamixer
     s3cmd
     scdl
     seahorse
     sshfs
-    thunderbird
     unzip
     upower
     usbutils
-    vim-full
     vlc
     vscode
     webcamoid
