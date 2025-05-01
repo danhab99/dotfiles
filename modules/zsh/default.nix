@@ -11,7 +11,6 @@ import ../module.nix {
       jq
       ncdu
       neofetch
-      ranger
       rclone
       retry
       ripgrep
