@@ -74,6 +74,8 @@
       ranger.enable = true;
       rtlsdr.enable = true;
       nvidia.enable = true;
+      obs.enable = true;
+      vbox.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
