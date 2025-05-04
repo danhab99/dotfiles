@@ -302,7 +302,7 @@ in
     }
     {
       command =
-        "/home/dan/Documents/rust/logitech-g600-rs/target/release/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml >> ~/.log/g600.log";
+        "/home/dan/Documents/rust/logitech-g600-rs/target/debug/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml >> ~/.log/g600.log";
       always = true;
     }
     {

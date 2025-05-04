@@ -21,6 +21,7 @@ import ../module.nix {
   output = { cfg, pkgs, ... }: {
     packages = with pkgs; [
       aichat
+      openai-whisper
     ];
 
     nixos = {
@@ -37,7 +38,6 @@ import ../module.nix {
         acceleration = if cfg.enableGpu then "cuda" else false;
 
         loadModels = cfg.models;
-        # home = cfg.repoDir;
         models = cfg.repoDir;
 
         host = "0.0.0.0";

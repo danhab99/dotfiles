@@ -7,7 +7,7 @@
 
     nixos-cli = {
       url = "github:water-sucks/nixos";
-      inputs.nixpkgs.follows = "nixpkgs_for_nixos_cli";
+      # inputs.nixpkgs.follows = "nixpkgs_for_nixos_cli";
     };
   };
 
