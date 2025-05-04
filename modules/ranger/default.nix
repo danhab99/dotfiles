@@ -15,7 +15,7 @@ import ../module.nix
         };
       };
 
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
 function ranger-cd {
     local IFS=$'\t\n'
     local tempfile="$(mktemp -t tmp.XXXXXX)"

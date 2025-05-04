@@ -123,7 +123,7 @@ import ../module.nix {
 
         };
 
-        initExtra = builtins.readFile ./extras.sh;
+        initContent = builtins.readFile ./extras.sh;
       };
     };
 

@@ -3,11 +3,11 @@ import ../module.nix {
 
   options = { lib }: with lib; {
     signingKey = mkOption {
-      type = types.string;
+      type = types.str;
       description = "GPG signing key";
     };
     email = mkOption {
-      type = types.string;
+      type = types.str;
       description = "Email";
     };
   };

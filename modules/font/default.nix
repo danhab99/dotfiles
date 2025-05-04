@@ -55,7 +55,6 @@ import ../module.nix {
         monofur
         monoid
         mononoki
-        mplus
         noto
         open-dyslexic
         overpass
