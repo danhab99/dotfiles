@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ../../modules
     ../../users
   ];
@@ -33,15 +33,15 @@
       ollama = {
         enable = true;
         repoDir = "/bucket/ollama";
-        models = [ 
-          "mistral" 
-          "deepseek-r1" 
-          "nomic-embed-text" 
-          "qwq" 
-          "llama3.3" 
-          "mixtral" 
-          "command-r-plus" 
-          "phi4" 
+        models = [
+          "mistral"
+          "deepseek-r1"
+          "nomic-embed-text"
+          "qwq"
+          "llama3.3"
+          "mixtral"
+          "command-r-plus"
+          "phi4"
           "mxbai-embed-large"
           "bge-m3"
         ];
@@ -83,10 +83,10 @@
     ];
 
     environment.variables = {
-      "__EGL_VENDOR_LIBRARY_FILENAMES"="/usr/share/glvnd/egl_vendor.d/50_mesa.json";
-      "WEBKIT_DISABLE_DMABUF_RENDERER"=1;
-      "WEBKIT_FORCE_COMPOSITING_MODE"=1;
-      "WEBKIT_DISABLE_COMPOSITING_MODE"=1;
+      "__EGL_VENDOR_LIBRARY_FILENAMES" = "/usr/share/glvnd/egl_vendor.d/50_mesa.json";
+      "WEBKIT_DISABLE_DMABUF_RENDERER" = 1;
+      "WEBKIT_FORCE_COMPOSITING_MODE" = 1;
+      "WEBKIT_DISABLE_COMPOSITING_MODE" = 1;
     };
 
     home-manager.users.dan = {
@@ -147,10 +147,15 @@
     '';
 
     systemd = {
-      tmpfiles.rules = [
-        "L+ /home/dan/Videos - - - - /bucket/Videos"
-        "L+ /home/dan/Pictures - - - - /bucket/Pictures"
-      ];
+      tmpfiles.rules =
+        let
+          bind = dir: "L+ /home/dan/${dir} - - - - /bucket/${dir}";
+        in
+        [
+          (bind "Videos")
+          (bind "Pictures")
+          (bind "Music")
+        ];
 
       services."backup" = {
         script = ''
