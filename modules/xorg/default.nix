@@ -4,7 +4,7 @@ import ../module.nix {
   options = { lib }: with lib; {
     videoDriver = mkOption { };
     extraConfig = mkOption {
-      type = types.string;
+      type = types.str;
       default = "";
     };
   };
