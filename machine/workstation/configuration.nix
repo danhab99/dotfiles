@@ -82,6 +82,13 @@
       libratbag
     ];
 
+    environment.variables = {
+      "__EGL_VENDOR_LIBRARY_FILENAMES"="/usr/share/glvnd/egl_vendor.d/50_mesa.json";
+      "WEBKIT_DISABLE_DMABUF_RENDERER"=1;
+      "WEBKIT_FORCE_COMPOSITING_MODE"=1;
+      "WEBKIT_DISABLE_COMPOSITING_MODE"=1;
+    };
+
     home-manager.users.dan = {
       home.file = {
         ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
