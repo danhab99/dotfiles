@@ -121,6 +121,7 @@ import ../module.nix {
 
           cai = "aichat -r %functions%";
 
+          cdtemp = "cd $(mktemp -d)";
         };
 
         initContent = builtins.readFile ./extras.sh;

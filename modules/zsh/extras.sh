@@ -28,6 +28,15 @@ function ns() {
     nix develop .#$1
 }
 
+function dev-shell() {
+  shell=${1:-"blank"}
+  nix flake init --template /etc/nixos#$shell
+  cp /etc/nixos/flake.lock .
+}
+
+alias devshell="dev-shell";
+alias nixshell="dev-shell";
+
 if [ -e /tmp/workdir ]
 then
   DIR=$(cat /tmp/workdir)
