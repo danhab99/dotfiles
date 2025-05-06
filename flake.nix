@@ -39,7 +39,6 @@
         };
     in
     {
-
       nixosConfigurations =
         let
           dir = builtins.readDir ./machine;
@@ -72,5 +71,7 @@
           '';
         };
       });
+
+      templates = import ./templates;
     };
 }
