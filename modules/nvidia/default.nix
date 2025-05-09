@@ -9,7 +9,7 @@ import ../module.nix
 
     nixos = {
       hardware.nvidia = {
-        package = config.boot.kernelPackages.nvidiaPackages.latest;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
         open = false;
         forceFullCompositionPipeline = true;
         powerManagement.enable = true;
