@@ -9,13 +9,6 @@
   outputs = { self, nixpkgs, home-manager, flake-utils, nixos-cli, ... }@inputs:
     let
       inherit (self) outputs;
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-      pkgsFor = system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
 
       mkNix = hostName:
         nixpkgs.lib.nixosSystem {
@@ -43,30 +36,30 @@
         in
         builtins.listToAttrs pairs;
 
-
-      devShells = forAllSystems (system: {
-        default = (pkgsFor system).mkShell {
-          NIX_PATH = "nixpkgs=channel:nixos-unstable nil";
-          NVIM_COC_LOG_LEVEL = "debug";
-          NVIM_COC_LOG_FILE = "/tmp/coc.log";
-          VIM_COC_LOG_LEVEL = "debug";
-          VIM_COC_LOG_FILE = "/tmp/coc.log";
-
-          buildInputs = with (pkgsFor system); [
-            git
-            nixpkgs-fmt
-            nixd
-            gnumake
-            containerd
-            oci-cli
-          ];
-
-          shellHook = ''
-            zsh
-          '';
-        };
-      });
-
       templates = import ./templates;
-    };
+    } // (
+      flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          devShell = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              nixpkgs-fmt
+              nixd
+              gnumake
+              containerd
+              oci-cli
+            ];
+
+            shellHook = ''
+              zsh
+            '';
+          };
+        })
+    );
 }
