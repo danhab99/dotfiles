@@ -3,12 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs_for_nixos_cli.url = "github:nixos/nixpkgs/e6cea36f83499eb4e9cd184c8a8e823296b50ad5";
-
-    nixos-cli = {
-      url = "github:water-sucks/nixos";
-      # inputs.nixpkgs.follows = "nixpkgs_for_nixos_cli";
-    };
+    nixos-cli.url = "github:water-sucks/nixos";
   };
 
   outputs = { self, nixpkgs, home-manager, flake-utils, nixos-cli, ... }@inputs:
