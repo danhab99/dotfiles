@@ -1,39 +1,11 @@
 { ... }:
 
 {
-  imports = [
-    ./packages.nix
-    ./appimage
-    ./docker
-    ./font
-    ./fzf
-    ./git
-    ./gnupg
-    ./i18n
-    ./i3
-    ./neovim
-    ./nix
-    ./nvidia
-    ./obs
-    ./ollama
-    ./pipewire
-    ./printing
-    ./ranger
-    ./ratbag
-    ./rofi
-    ./rtlsdr
-    ./sddm
-    ./secrets
-    ./ssh
-    ./steam
-    ./thinkpad
-    ./threedtools
-    ./timezone
-    ./urxvt
-    ./vbox
-    ./vim
-    ./xorg
-    ./zoxide
-    ./zsh
-  ];
+  imports =
+    let
+      dir = builtins.readDir ../modules;
+      names = builtins.attrNames dir;
+      templates = builtins.filter (f: dir.${f} == "directory") names;
+    in
+    map (t: ./${t}) templates;
 }
