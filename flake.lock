@@ -209,29 +209,12 @@
         "type": "github"
       }
     },
-    "nixpkgs_for_nixos_cli": {
-      "locked": {
-        "lastModified": 1718428119,
-        "narHash": "sha256-WdWDpNaq6u1IPtxtYHHWpl5BmabtpmLnMAx0RdJ/vo8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e6cea36f83499eb4e9cd184c8a8e823296b50ad5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e6cea36f83499eb4e9cd184c8a8e823296b50ad5",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixos-cli": "nixos-cli",
-        "nixpkgs": "nixpkgs_4",
-        "nixpkgs_for_nixos_cli": "nixpkgs_for_nixos_cli"
+        "nixpkgs": "nixpkgs_4"
       }
     },
     "rust-overlay": {
