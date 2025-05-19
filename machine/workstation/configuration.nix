@@ -34,16 +34,17 @@
         enable = true;
         repoDir = "/bucket/ollama";
         models = [
-          "mistral"
-          "deepseek-r1"
-          "nomic-embed-text"
-          "qwq"
-          "llama3.3"
-          "mixtral"
-          "command-r-plus"
-          "phi4"
-          "mxbai-embed-large"
           "bge-m3"
+          "command-r-plus"
+          "deepseek-r1"
+          "gemma"
+          "llama3.3"
+          "mistral"
+          "mixtral"
+          "mxbai-embed-large"
+          "nomic-embed-text"
+          "phi4"
+          "qwq"
         ];
         enableGpu = true;
       };
