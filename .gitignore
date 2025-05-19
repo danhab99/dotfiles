@@ -1,1 +1,2 @@
 .env
+modules/wireguard/private.key
