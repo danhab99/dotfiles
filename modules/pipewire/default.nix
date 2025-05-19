@@ -10,8 +10,16 @@ import ../module.nix {
       ];
 
     nixos = {
+      hardware.pulseaudio.enable = true;
+      hardware.pulseaudio.support32Bit = true;
+
+      users.extraUsers.dan.extraGroups = [ "audio" ];
+
+      nixpkgs.config.pulseaudio = true;
+      hardware.pulseaudio.extraConfig = "load-module module-combine-sink";
+
       services.pipewire = {
-        enable = true;
+        enable = false;
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
