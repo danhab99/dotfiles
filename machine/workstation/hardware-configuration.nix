@@ -57,8 +57,6 @@
     enable32Bit = true; # for 32-bit applications
   };
 
-  services.pulseaudio.enable = false;
-
   powerManagement = {
     cpuFreqGovernor = "performance";
     enable = true;
