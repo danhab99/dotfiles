@@ -3,10 +3,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
-    nixos-cli.url = "github:water-sucks/nixos";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixos-cli, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -14,7 +13,6 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            nixos-cli.nixosModules.nixos-cli
             (import ./machine/machine.nix { inherit hostName; })
             ./machine/${hostName}/configuration.nix
             ./machine/${hostName}/hardware-configuration.nix
