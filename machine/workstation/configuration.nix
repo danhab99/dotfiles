@@ -76,6 +76,7 @@
       nvidia.enable = true;
       obs.enable = true;
       vbox.enable = true;
+      wireguard.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
