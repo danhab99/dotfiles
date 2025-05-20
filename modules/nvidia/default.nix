@@ -1,8 +1,8 @@
-import ../module.nix
+import ../module.nix 
 {
   name = "nvidia";
 
-  output = { pkgs, config, ... }: {
+  output = { pkgs, config, lib, ... }: {
     packages = with pkgs; [
       nvtopPackages.full
     ];
@@ -15,10 +15,14 @@ import ../module.nix
         powerManagement.enable = true;
       };
 
+      hardware.graphics = {
+        enable = true;
+        enable32Bit = true; # for 32-bit applications
+      };
+
       module = {
-        xorg.videoDriver = "nvidia";
+        xorg.videoDriver = lib.mkForce "nvidia";
       };
     };
   };
 }
-
