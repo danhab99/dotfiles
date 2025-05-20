@@ -7,5 +7,5 @@
       names = builtins.attrNames dir;
       templates = builtins.filter (f: dir.${f} == "directory") names;
     in
-    map (t: ./${t}) templates;
+    map (t: ./${t}) templates ++ [ ./packages.nix ];
 }
