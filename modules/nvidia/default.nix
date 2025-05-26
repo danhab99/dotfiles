@@ -8,16 +8,26 @@ import ../module.nix
     ];
 
     nixos = {
-      hardware.nvidia = {
-        package = config.boot.kernelPackages.nvidiaPackages.production;
-        open = false;
-        forceFullCompositionPipeline = true;
-        powerManagement.enable = true;
-      };
-
       hardware.graphics = {
         enable = true;
-        enable32Bit = true; # for 32-bit applications
+      };
+
+      hardware.nvidia = {
+        # For proprietary driver (best performance)
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        open = false; # Set to true for open kernel module (less tested)
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+      };
+
+      environment.variables = {
+        # Force Vulkan to use NVIDIA driver
+        VK_ICD_FILENAMES = "/run/opengl-driver/etc/vulkan/icd.d/nvidia_icd.json";
+        VK_LAYER_PATH = "/run/opengl-driver/etc/vulkan/explicit_layer.d";
+        # Optional performance tweaks
+        __GL_THREADED_OPTIMIZATIONS = "1";
+        __GL_SYNC_TO_VBLANK = "0";
       };
 
       module = {

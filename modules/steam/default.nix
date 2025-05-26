@@ -10,6 +10,15 @@ import ../module.nix {
         localNetworkGameTransfers.openFirewall = false; 
 
         protontricks.enable = true;
+
+        package = pkgs.steam.override {
+          extraPkgs = pkgs: with pkgs; [
+            # libvulkan
+            vulkan-loader
+            vulkan-validation-layers
+            mesa
+          ];
+        };
       };
 
       hardware.steam-hardware.enable = true;
