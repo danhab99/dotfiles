@@ -11,10 +11,11 @@ import ../module.nix {
     ];
 
     nixos = {
+      hardware.nvidia-container-toolkit.enable = true;
+
       virtualisation.docker = {
         enable = true;
         enableOnBoot = true;
-        enableNvidia = true;
 
         extraPackages = with pkgs; [
           docker-buildx

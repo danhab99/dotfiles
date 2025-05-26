@@ -62,6 +62,7 @@
       xorg =
         {
           enable = true;
+          videoDriver = "nvidia";
           extraConfig = ''
             urxvt*depth: 32
             urxvt*blurRadius: 10
