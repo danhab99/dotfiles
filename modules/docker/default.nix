@@ -1,7 +1,7 @@
 import ../module.nix {
   name = "docker";
 
-  output = { pkgs, ... }: {
+  output = { pkgs, config, ... }: {
     packages = with pkgs; [
       dive
       lazydocker
@@ -11,7 +11,7 @@ import ../module.nix {
     ];
 
     nixos = {
-      hardware.nvidia-container-toolkit.enable = true;
+      hardware.nvidia-container-toolkit.enable = config.module.nvidia.enabled;
 
       virtualisation.docker = {
         enable = true;
