@@ -11,7 +11,7 @@ import ../module.nix {
     ];
 
     nixos = {
-      hardware.nvidia-container-toolkit.enable = config.module.nvidia.enabled;
+      hardware.nvidia-container-toolkit.enable = config.module.nvidia.enable;
 
       virtualisation.docker = {
         enable = true;
