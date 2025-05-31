@@ -23,7 +23,7 @@
     ollama.enable = false;
     packages.enable = true;
     picom.enable = true;
-    pipewire.enable = true;
+    pipewire.enable = false;
     printing.enable = true;
     ratbag.enable = false;
     rofi.enable = true;

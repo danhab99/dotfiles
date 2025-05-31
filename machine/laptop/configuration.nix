@@ -29,7 +29,7 @@
     };
     nix.enable = true;
     ollama.enable = false;
-    pipewire.enable = true;
+    pipewire.enable = false;
     printing.enable = true;
     ratbag.enable = false;
     rofi.enable = true;
@@ -56,6 +56,11 @@
     vim.enable = true;
     ranger.enable = true;
     obs.enable = true;
+    audio = {
+      enable = true;
+      enableBluetooth = true;
+      enableJACK = true;
+    };
   };
 
   config.home-manager.users.dan = {

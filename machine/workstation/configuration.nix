@@ -48,7 +48,7 @@
         ];
         enableGpu = true;
       };
-      pipewire.enable = true;
+      # pipewire.enable = true;
       printing.enable = true;
       ratbag.enable = true;
       rofi.enable = true;
@@ -79,6 +79,10 @@
       obs.enable = true;
       vbox.enable = true;
       wireguard.enable = true;
+      audio = {
+        enable = true;
+        enableJACK = true;
+      };
     };
 
     environment.systemPackages = with pkgs; [
