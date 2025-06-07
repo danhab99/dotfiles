@@ -37,6 +37,12 @@ import ../module.nix {
         enable = true;
         package = pkgs.i3-rounded;
       };
+
+      security.pam.services.i3lock = {
+        enable = true;
+        allowNullPassword = false;
+        startSession = false;
+      };
     };
 
     homeManager = {

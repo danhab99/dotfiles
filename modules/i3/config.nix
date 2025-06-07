@@ -211,7 +211,7 @@ in
     "${mod}+d" = "exec $HOME/.config/rofi/scripts/launcher_t1";
     "${mod}+Tab" =
       "exec $HOME/.config/rofi/launchers/misc/launch_windows.sh";
-    "${mod}+shift+x" = "exec betterlockscreen --lock";
+    "${mod}+shift+x" = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen --lock -- fork";
     "Caps_L" = "exec --no-startup-id rofi -show drun";
     "Caps_Lock" =
       "exec --no-startup-id exec xdotool key Caps_Lock $HOME/.config/rofi/scripts/launcher_t1";
