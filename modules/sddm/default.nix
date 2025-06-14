@@ -9,7 +9,7 @@ import ../module.nix {
 
     nixos.services.displayManager = {
       sddm.enable = true;
-      defaultSession = "none+i3";
+      # defaultSession = "none+i3";
     };
   };
 }

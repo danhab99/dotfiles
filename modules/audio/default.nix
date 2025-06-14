@@ -18,7 +18,7 @@ import ../module.nix
       services.pipewire.enable = lib.mkForce false;
 
       hardware.bluetooth.enable = cfg.enableBluetooth;
-      hardware.bluetooth.powerOnBoot = true;
+      hardware.bluetooth.powerOnBoot = cfg.enableBluetooth;
       services.blueman.enable = cfg.enableBluetooth;
 
       hardware.pulseaudio = {
