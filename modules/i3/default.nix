@@ -14,7 +14,7 @@ import ../module.nix {
     };
     screen = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
   };
 
@@ -37,6 +37,19 @@ import ../module.nix {
         enable = true;
         package = pkgs.i3-rounded;
       };
+
+      services.xserver = {
+        enable = true;
+        desktopManager = {
+          xterm.enable = false;
+          xfce = {
+            enable = true;
+            noDesktop = true;
+            enableXfwm = false;
+          };
+        };
+      };
+      services.displayManager.defaultSession = "xfce";
 
       security.pam.services.i3lock = {
         enable = true;
