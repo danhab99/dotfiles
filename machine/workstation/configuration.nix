@@ -46,6 +46,8 @@
           "phi4"
           "qwq"
           "linux6200/bge-reranker-v2-m3"
+          "wizardlm2"
+          "deepseek-v3"
         ];
         enableGpu = true;
       };
