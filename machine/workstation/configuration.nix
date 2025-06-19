@@ -73,7 +73,7 @@
         };
       zoxide.enable = true;
       zsh.enable = true;
-      vim.enable = true;
+      neovim.enable = true;
       ranger.enable = true;
       rtlsdr.enable = true;
       nvidia.enable = true;
