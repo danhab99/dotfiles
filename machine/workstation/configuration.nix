@@ -85,6 +85,7 @@
         enable = true;
         enableJACK = true;
       };
+      libreoffice.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
