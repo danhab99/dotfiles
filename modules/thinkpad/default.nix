@@ -4,10 +4,12 @@ import ../module.nix
 
   output = { pkgs, ... }: {
     packages = with pkgs; [
-
+      displaylink
     ];
 
     nixos = {
+        services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
+
         services.udev.packages =
           let
             hwdbText = ''
