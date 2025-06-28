@@ -5,7 +5,8 @@ import ../module.nix {
     repoDir = mkOption {
       type = types.str;
       description = "Directory for the ollama repository";
-      default = "/home/dan/.ollama";
+      # default = "/home/dan/.ollama";
+      default = "/var/lib/ollama";
     };
     models = mkOption {
       type = types.listOf types.str;
@@ -41,7 +42,6 @@ import ../module.nix {
         models = cfg.repoDir;
 
         host = "0.0.0.0";
-
         user = "ollama-user";
 
         environmentVariables = {
@@ -49,6 +49,14 @@ import ../module.nix {
           OLLAMA_HOST = "0.0.0.0";
         };
       };
+
+     #   host = "0.0.0.0";
+
+     #   environmentVariables = {
+     #     OLLAMA_MODELS = cfg.repoDir;
+     #     OLLAMA_HOST = "0.0.0.0";
+     #   };
+     # };
     };
   };
 }
