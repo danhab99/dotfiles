@@ -13,7 +13,6 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            (import ./machine/machine.nix { inherit hostName; })
             ./machine/${hostName}/configuration.nix
             ./machine/${hostName}/hardware-configuration.nix
             home-manager.nixosModules.home-manager
