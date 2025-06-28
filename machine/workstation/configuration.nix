@@ -81,7 +81,6 @@
       nvidia.enable = true;
       obs.enable = true;
       vbox.enable = true;
-      wireguard.enable = true;
       audio = {
         enable = true;
         enableJACK = true;
