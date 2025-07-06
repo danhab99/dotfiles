@@ -26,6 +26,7 @@ in
     entr
     ffmpeg
     file
+    playerctl
     gimp
     glances
     gnumake
