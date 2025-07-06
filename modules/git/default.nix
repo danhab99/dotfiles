@@ -15,6 +15,7 @@ import ../module.nix {
   output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
       lazygit
+      dvc
     ];
 
     nixos = { };
