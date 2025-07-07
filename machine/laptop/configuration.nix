@@ -29,7 +29,6 @@
     };
     nix.enable = true;
     ollama.enable = false;
-    pipewire.enable = false;
     printing.enable = true;
     ratbag.enable = false;
     rofi.enable = true;
@@ -53,7 +52,7 @@
     zoxide.enable = true;
     zsh.enable = true;
     thinkpad.enable = true;
-    vim.enable = true;
+    neovim.enable = true;
     ranger.enable = true;
     obs.enable = true;
     audio = {
