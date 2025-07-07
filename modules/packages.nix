@@ -12,7 +12,6 @@ in
 {
   environment.systemPackages = with pkgs; [
     acpi
-    alsa-utils
     arandr
     archivemount
     argc
@@ -39,7 +38,6 @@ in
     nodejs
     obsidian
     openssl
-    pamixer
     s3cmd
     scdl
     seahorse

@@ -9,7 +9,8 @@ import ../module.nix
 
   output = { pkgs, cfg, lib, ... }: {
     packages = with pkgs; [
-
+      alsa-utils
+      pamixer
     ];
 
     homeManager = { };
