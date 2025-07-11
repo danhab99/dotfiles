@@ -10,7 +10,6 @@ import ../module.nix {
     i3blocksConfig = mkOption {
       type = types.path;
       description = "Machine specific i3blocks config file";
-      default = ./i3blocks.conf;
     };
     screen = mkOption {
       type = types.listOf types.str;
@@ -100,7 +99,7 @@ import ../module.nix {
           recursive = true;
         };
 
-        # ".config/i3blocks.conf" = { source = ./i3blocks.conf; };
+        ".config/i3blocks.conf" = { source = cfg.i3blocksConfig; };
       };
     };
   };

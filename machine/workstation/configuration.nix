@@ -21,7 +21,7 @@ import ../machine.nix
     i3 = {
       enable = true;
       configFile = ./i3/config;
-      # i3BlocksConfig = ./i3blocks.conf;
+      i3blocksConfig = ./i3blocks.conf;
       screen = [ "DP-5" "DP-1" "HDMI-0" ];
     };
     nix.enable = true;
