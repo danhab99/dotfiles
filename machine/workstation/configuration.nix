@@ -81,6 +81,7 @@ import ../machine.nix
       enableJACK = true;
     };
     libreoffice.enable = true;
+    gestures.enable = true;
   };
 
   packages = pkgs: with pkgs; [
