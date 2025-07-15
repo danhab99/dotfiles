@@ -33,16 +33,16 @@ import ../machine.nix
         "command-r-plus"
         "deepseek-r1"
         "gemma"
-        "llama3.3"
-        "mistral"
-        "mixtral"
+        "dolphin-mistral"
+        "dolphin-mixtral"
         "mxbai-embed-large"
         "nomic-embed-text"
         "phi4"
         "qwq"
         "linux6200/bge-reranker-v2-m3"
-        "wizardlm2"
+        "wizardlm-uncensored"
         "deepseek-v3"
+        "llama2-uncensored"
       ];
       enableGpu = true;
     };
