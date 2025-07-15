@@ -1,6 +1,5 @@
 # CUSTOM CONFIG
 
-exec --no-startup-id libinput-gestures-setup start
 exec xpad
 exec_always ( killall oneko || true ) && oneko -tofocus -position +30+0
 exec_always --no-startup-id python3 ~/Documents/install/center-mouse/i3-center-mouse.py -a

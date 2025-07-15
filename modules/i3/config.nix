@@ -276,14 +276,9 @@ in
       always = true;
     }
     {
-      command = "libinput-gestures-setup restart";
-      always = true;
-    }
-    {
       command = "setxkbmap -option caps:none";
       always = true;
     }
-    { command = "libinput-gestures-setup start"; }
     { command = "xpad"; }
     {
       command =
