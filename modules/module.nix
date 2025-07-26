@@ -5,8 +5,8 @@ let
   out = output { inherit lib config pkgs cfg; };
 
   enabledNixos = if out ? nixos then out.nixos else { };
-  enabledPackages = if (out ? packages) then out.packages else [ ];
-  enabledHomemanager = if (out ? homeManager) then out.homeManager else { };
+  enabledPackages = if out ? packages then out.packages else [ ];
+  enabledHomemanager = if out ? homeManager then out.homeManager else { };
 
   enabledHomemanagerForUses =
     let
