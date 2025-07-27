@@ -22,10 +22,15 @@ import ../module.nix {
   output = { cfg, pkgs, ... }: {
     packages = with pkgs; [
       aichat
-      openai-whisper
+      whisperx
     ];
 
     nixos = {
+      nixpkgs.config = {
+        cudaSupport = cfg.enableGpu;
+        cudaVersion = "12";
+      };
+
       services.open-webui = {
         enable = true;
         environment = {
@@ -49,14 +54,6 @@ import ../module.nix {
           OLLAMA_HOST = "0.0.0.0";
         };
       };
-
-     #   host = "0.0.0.0";
-
-     #   environmentVariables = {
-     #     OLLAMA_MODELS = cfg.repoDir;
-     #     OLLAMA_HOST = "0.0.0.0";
-     #   };
-     # };
     };
   };
 }
