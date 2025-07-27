@@ -82,6 +82,7 @@ import ../machine.nix
     };
     libreoffice.enable = true;
     gestures.enable = true;
+    watchdog.enable = true;
   };
 
   packages = pkgs: with pkgs; [
