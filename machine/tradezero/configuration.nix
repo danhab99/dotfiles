@@ -72,6 +72,7 @@
         enableBluetooth = true;
       };
       obs.enable = true;
+      watchdog.enable = true;
     };
 
     home-manager.users.dan = {

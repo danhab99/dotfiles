@@ -56,6 +56,7 @@ import ../machine.nix
       enableBluetooth = true;
       enableJACK = true;
     };
+    watchdog.enable = true;
   };
 
   i3Config = { mod }: {
