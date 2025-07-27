@@ -1,16 +1,12 @@
-{ ... }:
-
+import ../machine.nix
 {
-  imports = [ 
-    ../../modules
-    ../../users
-  ];
+  hostName = "laptop";
 
-  config.users = {
+  users = {
     dan.enable = true;
   };
 
-  config.module = {
+  module = {
     appimage.enable = true;
     docker.enable = true;
     font.enable = true;
@@ -62,14 +58,9 @@
     };
   };
 
-  config.home-manager.users.dan = {
-    xsession.windowManager.i3.config.keybindings = {
+  i3Config = { mod }: {
+    keybindings = {
       "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
-    };
-
-    programs.zsh.shellAliases = {
-      pull = "rsync -avz \"desktop:$(pwd)/$1\" .";
-      push = "rsync -avz \"$1\" \"desktop:$(pwd)/\"";
     };
   };
 }
