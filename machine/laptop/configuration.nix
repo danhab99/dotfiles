@@ -64,4 +64,17 @@ import ../machine.nix
       "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
     };
   };
+
+  jobs = { pkgs }: [
+    {
+      name = "ssh-desktop-channel";
+      schedule = "*-*-*";
+      script = ''
+        rm -f /tmp/ssh-master-desktop.sock
+        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" desktop &
+      '';
+      packages = [ pkgs.openssh ];
+      user = "dan";
+    }
+  ];
 }
