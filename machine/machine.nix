@@ -2,39 +2,62 @@
 , module
 , hostName
 , environmentVariables ? { }
-, packages ? pkgs: [ ]
+, packages ? (pkgs: [ ])
 , files ? { }
 , i3Config ? { mod }: { }
 , xserver ? ""
 , bind ? [ ]
-, jobs ? { pkgs }: [ ]
+, jobs ? (args: [ ])
 }:
 let
-  mkJob = { name, script, schedule, packages }: {
-    services."${name}" = {
-      script = script;
+  strLen = builtins.stringLength;
 
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
+  mkJob =
+    { name
+    , script
+    , schedule ? ""
+    , packages ? [ ]
+    , user ? "root"
+    , timer ? ""
+    }:
+    let
+      baseService = {
+        services."${name}" = {
+          script = script;
+          serviceConfig = {
+            Type = "oneshot";
+            User = user;
+            Restart = "on-failure"; # Restart only when the service fails
+            RestartSec = 5; # Wait 5 seconds before restarting
+          };
+          path = packages;
+        };
       };
-
-      path = packages;
-    };
-
-    timers."${name}" = {
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = schedule;
-        Persistent = true;
-      };
-    };
-  };
+      withTimer =
+        if (strLen schedule > 0) || (strLen timer > 0) then
+          let
+            mkAddAttr = { key, val }: if strLen val > 0 then { "${key}" = val; } else { };
+          in
+          {
+            timers."${name}" = (
+              {
+                wantedBy = [ "timers.target" ];
+                timerConfig = {
+                  OnUnitActiveSec = "10min";
+                  Persistent = true;
+                }
+                // mkAddAttr { key = "OnCalendar"; val = schedule; }
+                // mkAddAttr { key = "OnTimer"; val = timer; };
+              }
+            );
+          }
+        else { };
+    in
+    baseService // withTimer;
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
 in
 { pkgs, ... }:
-
 {
   imports = [
     ../modules
@@ -49,18 +72,15 @@ in
 
     home-manager.users.dan = {
       home.file = files;
-      xsession.windowManager.i3.config = i3Config {
-        mod = "Mod4";
-      };
+      xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
     };
 
     services.xserver.config = xserver;
 
-    systemd = {
-      tmpfiles.rules = map mkBind bind;
-    } // builtins.foldl' (a: b: a // b) { } (map mkJob (jobs {
-      inherit pkgs;
-    }));
+    systemd = (
+      { tmpfiles.rules = map mkBind bind; }
+      // builtins.foldl' (a: b: a // b) { } (map mkJob (jobs { inherit pkgs; }))
+    );
 
     networking = {
       networkmanager.enable = true;
@@ -70,7 +90,6 @@ in
     environment.localBinInPath = true;
 
     services.dbus.enable = true;
-
     services.flatpak.enable = true;
     xdg.portal.enable = true;
 
