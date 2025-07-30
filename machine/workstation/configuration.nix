@@ -155,8 +155,8 @@ import ../machine.nix
   jobs = { pkgs }: [
     {
       name = "backup";
-      schedule = "";
       packages = pkgs: with pkgs; [ gnutar gzip findutils ];
+      schedule = "*-*-* 04:00:00";
 
       script = ''
         set -eu
