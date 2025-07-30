@@ -9,14 +9,14 @@ import ../module.nix {
     };
   };
 
-  output = { pkgs, cfg, ... }: {
+  output = { pkgs, cfg, nixpkgs_for_xpad, ... }: {
     packages = with pkgs; [
       xclip
       xdotool
       xorg.xbacklight
       xorg.xev
       xorg.xf86inputevdev
-      xpad
+      nixpkgs_for_xpad.xpad
       xsel
     ];
 
