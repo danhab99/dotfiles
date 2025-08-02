@@ -10,6 +10,7 @@ import ../module.nix {
         allowSFTP = true;
         authorizedKeysInHomedir = true;
         settings.PasswordAuthentication = false;
+        forwardX11 = true;
       };
 
       networking = {
