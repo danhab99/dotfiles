@@ -27,7 +27,7 @@ import ../machine.nix
     nix.enable = true;
     ollama = {
       enable = true;
-      repoDir = "/bucket/ollama";
+      repoDir = "/ollama";
       models = [
         "bge-m3"
         "command-r-plus"
@@ -43,6 +43,7 @@ import ../machine.nix
         "wizardlm-uncensored"
         "deepseek-v3"
         "llama2-uncensored"
+        "llama3.3:70b"
       ];
       enableGpu = true;
     };
