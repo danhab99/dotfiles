@@ -15,7 +15,9 @@ import ../module.nix
 
         coc = {
           enable = true;
-
+          settings = {
+            "inlayHint.enable" = false;
+          };
         };
 
         plugins = with pkgs.vimPlugins; [
