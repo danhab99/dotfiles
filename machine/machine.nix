@@ -25,7 +25,7 @@ let
         services."${name}" = {
           script = script;
           serviceConfig = {
-            Type = "oneshot";
+            Type = "simple";
             User = user;
             Restart = "on-failure"; # Restart only when the service fails
             RestartSec = 5; # Wait 5 seconds before restarting
