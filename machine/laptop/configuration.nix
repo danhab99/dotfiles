@@ -61,7 +61,7 @@ import ../machine.nix
 
   i3Config = { mod }: {
     keybindings = {
-      "Mod4+Shift+Return" = "exec urxvt -e ssh desktop";
+      "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
     };
   };
 
