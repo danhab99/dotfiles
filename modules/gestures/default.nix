@@ -2,7 +2,13 @@ import ../module.nix
 {
   name = "gestures";
 
-  output = { pkgs, ... }: {
+  options = { lib }: with lib; {
+    devicePath = mkOption {
+      type = types.str;
+    };
+  };
+
+  output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
       libinput
       libinput-gestures
@@ -13,12 +19,17 @@ import ../module.nix
     homeManager = {
       xsession.windowManager.i3.config.startup = [
         {
-          command = "libinput‑gestures -c ~/.config/libinput-gestures.conf";
+          command = "libinput-gestures --device \"${cfg.devicePath}\"";
+          always = true;
         }
       ];
 
       home.file.".config/libinput-gestures.conf".source = pkgs.writeText "libinput-gestures.conf" ''
+
+
+
         gesture swipe up 3 i3-msg fullscreen enable
+
         gesture swipe down 3 i3-msg fullscreen disable
         gesture pinch clockwise xdotool key "Super_L+Shift+x"
         gesture pinch anticlockwise xdotool key "Super_L+Shift+x"
