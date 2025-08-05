@@ -4,7 +4,7 @@ import ../module.nix {
   output = { pkgs, ... }: {
     packages = with pkgs;
       [
-        # ...
+        libratbag
       ];
 
     nixos.services.ratbagd = { enable = true; };

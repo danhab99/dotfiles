@@ -86,10 +86,6 @@ import ../machine.nix
     watchdog.enable = true;
   };
 
-  packages = pkgs: with pkgs; [
-    libratbag
-  ];
-
   files = {
     ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
     ".config/g600" = {
