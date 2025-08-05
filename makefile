@@ -19,3 +19,6 @@ switch: nix
 
 clean:
 	sudo nix-collect-garbage --delete-older-than 20d
+
+android:
+	nix-on-droid switch --flake .#default
