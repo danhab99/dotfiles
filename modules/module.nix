@@ -4,9 +4,9 @@ let
   cfg = config.module.${name};
   out = output (inputs // { inherit cfg; });
 
-  enabledNixos = if out ? nixos then out.nixos else { };
-  enabledPackages = if out ? packages then out.packages else [ ];
-  enabledHomemanager = if out ? homeManager then out.homeManager else { };
+  enabledNixos = out.nixos or { };
+  enabledPackages = out.packages or [ ];
+  enabledHomemanager = out.homeManager or { } ;
 
   enabledHomemanagerForUses =
     let
