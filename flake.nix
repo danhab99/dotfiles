@@ -3,16 +3,25 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs_for_xpad.url =  "github:nixos/nixpkgs/910796cabe436259a29a72e8d3f5e180fc6dfacc"; 
+    nixpkgs_for_xpad.url = "github:nixos/nixpkgs/910796cabe436259a29a72e8d3f5e180fc6dfacc";
+    nix-on-droid.url = "github:nix-community/nix-on-droid/release-24.05";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, nixpkgs_for_xpad, ... }@inputs:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , home-manager
+    , flake-utils
+    , nixpkgs_for_xpad
+    , nix-on-droid
+    , ...
+    }:
     let
       inherit (self) outputs;
 
       mkNix = hostName:
         nixpkgs.lib.nixosSystem {
-          specialArgs = { 
+          specialArgs = {
             inherit inputs outputs;
             nixpkgs_for_xpad = import nixpkgs_for_xpad { system = "x86_64-linux"; };
           };
@@ -40,27 +49,34 @@
       templates = import ./templates;
     } // (
       flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        in
-        {
-          devShell = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              nixpkgs-fmt
-              nixd
-              gnumake
-              containerd
-              oci-cli
-            ];
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in
+      {
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            git
+            nixpkgs-fmt
+            nixd
+            gnumake
+            containerd
+            oci-cli
+          ];
 
-            shellHook = ''
-              zsh
-            '';
-          };
-        })
+          shellHook = ''
+            zsh
+          '';
+        };
+
+        nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+          modules = [
+            ./nix-on-droid.nix
+            ./modules
+          ];
+        };
+      })
     );
 }
