@@ -71,7 +71,7 @@ import ../machine.nix
       schedule = "*-*-*";
       script = ''
         rm -f /tmp/ssh-master-desktop.sock
-        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" desktop &
+        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
       '';
       packages = [ pkgs.openssh ];
       user = "dan";
