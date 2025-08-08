@@ -416,7 +416,7 @@ handle_mime() {
             exit 5;;
 
         ## Text
-        text/* | */xml)
+        text/* | */xml | application/*)
             ## Syntax highlight
             if [[ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]]; then
                 exit 2
@@ -470,6 +470,7 @@ handle_mime() {
 }
 
 handle_fallback() {
+    echo ${FILE_PATH}
     echo '----- File Type Classification -----' && file --dereference --brief -- "${FILE_PATH}" && exit 5
 }
 
