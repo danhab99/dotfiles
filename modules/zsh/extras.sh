@@ -51,3 +51,5 @@ then
   shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
   nix develop $flake_path#$shell_name
 fi
+
+setopt NO_BEEP
