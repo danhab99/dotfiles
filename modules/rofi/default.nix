@@ -3,27 +3,21 @@ import ../module.nix {
 
   options = { lib }: with lib; {
     theme = mkOption {
-      name = "theme";
       default = "onedark";
     };
     font = mkOption {
-      name = "font";
       default = "Fira Code 12";
     };
     icon_theme = mkOption {
-      name = "icon";
       default = "Papirus";
     };
     modi = mkOption {
-      name = "modi";
       default = "drun,run";
     };
     show_icons = mkOption {
-      name = "show";
       default = true;
     };
     drun_display_format = mkOption {
-      name = "drun";
       default = "{name}";
     };
   };
