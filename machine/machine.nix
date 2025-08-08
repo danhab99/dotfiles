@@ -8,6 +8,7 @@
 , xserver ? ""
 , bind ? [ ]
 , jobs ? (args: [ ])
+, nixos ? { }
 }:
 let
   strLen = builtins.stringLength;
@@ -75,7 +76,11 @@ in
       xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
     };
 
-    services.xserver.config = xserver;
+    services = {
+      xserver.config = xserver;
+      dbus.enable = true;
+      flatpak.enable = true;
+    } // (nixos.services or {});
 
     systemd = (
       { tmpfiles.rules = map mkBind bind; }
@@ -89,8 +94,6 @@ in
 
     environment.localBinInPath = true;
 
-    services.dbus.enable = true;
-    services.flatpak.enable = true;
     xdg.portal.enable = true;
 
     boot.tmp.cleanOnBoot = true;
