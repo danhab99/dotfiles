@@ -11,12 +11,12 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    audacity
     acpi
     arandr
     archivemount
     argc
     astyle
+    audacity
     autorandr
     bat
     brave
@@ -26,23 +26,28 @@ in
     entr
     ffmpeg
     file
-    playerctl
+    firefox
     gimp
     glances
     gnumake
     gnutar
     gparted
     gzip
+    jq
+    kubectl
     lm_sensors
     nmap
     nnn
     nodejs
     obsidian
     openssl
+    playerctl
+    postgresql
     s3cmd
     scdl
     seahorse
     sshfs
+    unixODBCDrivers.msodbcsql17
     unzip
     upower
     usbutils
