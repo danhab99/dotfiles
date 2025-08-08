@@ -3,6 +3,10 @@ import ../module.nix
   name = "neovim";
 
   output = { pkgs, ... }: {
+    packages = with pkgs; [
+      ctags
+    ];
+
     homeManager = {
       home.file.".config/nvim/lua" = {
         source = ./lua;
@@ -16,6 +20,15 @@ import ../module.nix
         coc = {
           enable = true;
           settings = {
+            "languageserver" = {
+              "csharp-ls" = {
+                "command" = "csharp-ls";
+                # "args" = [ "--stdio" ];
+                "filetypes" = [ "cs" ];
+                "rootPatterns" = [ "*.csproj" ];
+                "trace.server" = "verbose";
+              };
+            };
             "inlayHint.enable" = false;
           };
         };
@@ -73,4 +86,3 @@ import ../module.nix
     };
   };
 }
-
