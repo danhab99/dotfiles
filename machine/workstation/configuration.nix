@@ -29,21 +29,15 @@ import ../machine.nix
       enable = true;
       repoDir = "/ollama";
       models = [
-        "bge-m3"
-        "command-r-plus"
+        "nomic-embed-text"
+        "gemma3n"
         "deepseek-r1"
-        "gemma"
         "dolphin-mistral"
         "dolphin-mixtral"
-        "mxbai-embed-large"
-        "nomic-embed-text"
         "phi4"
-        "qwq"
-        "linux6200/bge-reranker-v2-m3"
-        "wizardlm-uncensored"
-        "deepseek-v3"
-        "llama2-uncensored"
-        "llama3.3:70b"
+        "codellama"
+        "mistral"
+        "llama3.3:latest"
       ];
       enableGpu = true;
     };
@@ -82,7 +76,10 @@ import ../machine.nix
       enableJACK = true;
     };
     libreoffice.enable = true;
-    gestures.enable = true;
+    gestures = {
+      enable = true;
+      devicePath = "";
+    };
     watchdog.enable = true;
   };
 
