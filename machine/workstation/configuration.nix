@@ -78,7 +78,7 @@ import ../machine.nix
     libreoffice.enable = true;
     gestures = {
       enable = true;
-      devicePath = "";
+      devicePath = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:4.4.3:1.0-event-mouse";
     };
     watchdog.enable = true;
   };
