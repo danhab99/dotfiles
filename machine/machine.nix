@@ -58,10 +58,10 @@ let
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
 in
-{ pkgs, ... }:
+inputs@{ pkgs, ... }:
 {
   imports = [
-    ../modules
+    (import ../modules/nixos.nix inputs)
     ../users
   ];
 

@@ -22,9 +22,8 @@
       mkNix = hostName:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs;
             nixpkgs_for_xpad = import nixpkgs_for_xpad { system = "x86_64-linux"; };
-          };
+          } // inputs;
           modules = [
             ./machine/${hostName}/configuration.nix
             ./machine/${hostName}/hardware-configuration.nix
@@ -47,6 +46,26 @@
         builtins.listToAttrs pairs;
 
       templates = import ./templates;
+
+      nixOnDroidConfigurations.default =
+        let
+          system = "aarch64-linux";
+        in
+        nix-on-droid.lib.nixOnDroidConfiguration {
+          extraSpecialArgs = inputs // {
+            nixpkgs_for_xpad = import nixpkgs_for_xpad { inherit system; };
+          };
+
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          modules = [
+            ./nix-on-droid.nix
+          ];
+        };
+
     } // (
       flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
       let
@@ -71,12 +90,6 @@
           '';
         };
 
-        nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-          modules = [
-            ./nix-on-droid.nix
-            ./modules
-          ];
-        };
       })
     );
 }
