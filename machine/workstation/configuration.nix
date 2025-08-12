@@ -34,10 +34,11 @@ import ../machine.nix
         "deepseek-r1"
         "dolphin-mistral"
         "dolphin-mixtral"
-        "phi4"
+        "dolphin-phi"
         "codellama"
         "mistral"
         "llama3.3:latest"
+        "gpt-oss"
       ];
       enableGpu = true;
     };
