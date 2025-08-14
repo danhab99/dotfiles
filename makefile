@@ -9,6 +9,9 @@ flake:
 	nix flake update
 	$(MAKE) switch
 
+hard-nix:
+	sudo nixos-rebuild switch --max-jobs 1 --flake .#$(name)
+
 nix:
 	sudo nixos-rebuild switch --flake .#$(name)
 
@@ -18,7 +21,7 @@ switch: nix
 	gpgconf --launch gpg-agent
 
 clean:
-	sudo nix-collect-garbage --delete-older-than 20d
+	sudo nix-collect-garbage --delete-older-than 10d
 
 android:
 	nix-on-droid switch --flake .#default
