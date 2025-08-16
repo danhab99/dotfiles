@@ -63,6 +63,7 @@
 
           modules = [
             ./nix-on-droid.nix
+            ./modules/droid.nix
           ];
         };
 
