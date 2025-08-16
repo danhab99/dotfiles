@@ -172,7 +172,9 @@ import ../machine.nix
         }
 
         cleanup_old_backups
+
         backup home /home/dan &
+        backup open-webui /var/lib/open-webui &
 
         wait
       '';

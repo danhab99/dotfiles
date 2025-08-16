@@ -37,7 +37,6 @@ import ../module.nix {
           "OLLAMA_BASE_URL" = "http://localhost:11434";
         };
         port = 20080;
-        stateDir = "/home/dan/.open-webui";
       };
 
       services.ollama = {
