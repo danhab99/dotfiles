@@ -68,6 +68,8 @@ inputs@{ pkgs, ... }:
   config = {
     inherit users module;
 
+    packages.nixos.enable = true;
+
     environment.variables = environmentVariables;
     environment.systemPackages = packages pkgs;
 
@@ -80,7 +82,7 @@ inputs@{ pkgs, ... }:
       xserver.config = xserver;
       dbus.enable = true;
       flatpak.enable = true;
-    } // (nixos.services or {});
+    } // (nixos.services or { });
 
     systemd = (
       { tmpfiles.rules = map mkBind bind; }

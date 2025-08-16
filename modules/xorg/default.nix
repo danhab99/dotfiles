@@ -18,6 +18,7 @@ import ../module.nix {
       xorg.xf86inputevdev
       (import nixpkgs_for_xpad { system = "x86_64-linux"; }).xpad
       xsel
+      arandr
     ];
 
     nixos = {
