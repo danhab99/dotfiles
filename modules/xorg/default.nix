@@ -16,7 +16,7 @@ import ../module.nix {
       xorg.xbacklight
       xorg.xev
       xorg.xf86inputevdev
-      nixpkgs_for_xpad.xpad
+      (import nixpkgs_for_xpad { system = "x86_64-linux"; }).xpad
       xsel
     ];
 
