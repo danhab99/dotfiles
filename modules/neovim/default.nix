@@ -5,6 +5,7 @@ import ../module.nix
   output = { pkgs, ... }: {
     packages = with pkgs; [
       ctags
+      astyle
     ];
 
     homeManager = {

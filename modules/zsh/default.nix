@@ -3,6 +3,7 @@ import ../module.nix {
 
   output = { pkgs, ... }: {
     packages = with pkgs; [ 
+      bat
       zsh 
       oh-my-zsh 
       htop-vim
