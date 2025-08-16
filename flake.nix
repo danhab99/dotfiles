@@ -63,10 +63,8 @@
 
           modules = [
             ./nix-on-droid.nix
-            ./modules/droid.nix
           ];
         };
-
     } // (
       flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
       let
@@ -90,7 +88,6 @@
             zsh
           '';
         };
-
       })
     );
 }
