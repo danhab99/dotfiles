@@ -16,7 +16,6 @@ let
       archivemount
       argc
       curl
-      customBusybox
       entr
       ffmpeg
       file
@@ -44,6 +43,7 @@ let
       audacity
       brave
       dbeaver-bin
+      customBusybox
       firefox
       gimp
       gparted
@@ -61,7 +61,7 @@ let
     ];
 
     "droid" = [
-
+      openssh
     ];
   };
 
@@ -84,5 +84,5 @@ in
       groups
   );
 
-  config.environment.systemPackages = builtins.foldl' (x: y: x ++ y) [ ] (builtins.attrValues enabledPackages);
+  config.environment.packages = builtins.foldl' (x: y: x ++ y) [ ] (builtins.attrValues enabledPackages);
 }

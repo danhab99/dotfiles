@@ -24,4 +24,4 @@ clean:
 	sudo nix-collect-garbage --delete-older-than 10d
 
 android:
-	nix-on-droid switch --flake .#default
+	nix-on-droid switch --max-jobs 1 --flake .#default

@@ -4,7 +4,18 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs_for_xpad.url = "github:nixos/nixpkgs/910796cabe436259a29a72e8d3f5e180fc6dfacc";
-    nix-on-droid.url = "github:nix-community/nix-on-droid/release-24.05";
+    
+    droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    droid-home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows ="droid-nixpkgs";
+    };
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "droid-nixpkgs";
+      inputs.home-manager.follows = "droid-home-manager";
+    };
   };
 
   outputs =
@@ -14,6 +25,7 @@
     , flake-utils
     , nixpkgs_for_xpad
     , nix-on-droid
+    , droid-nixpkgs
     , ...
     }:
     let
@@ -50,16 +62,18 @@
       nixOnDroidConfigurations.default =
         let
           system = "aarch64-linux";
-        in
-        nix-on-droid.lib.nixOnDroidConfiguration {
-          extraSpecialArgs = inputs // {
-            nixpkgs_for_xpad = import nixpkgs_for_xpad { inherit system; };
-          };
-
-          pkgs = import nixpkgs {
+          droidPkgs = import droid-nixpkgs {
             inherit system;
             config.allowUnfree = true;
           };
+        in
+        nix-on-droid.lib.nixOnDroidConfiguration {
+          extraSpecialArgs = {
+          #  nixpkgs_for_xpad = import# nixpkgs_for_xpad { inherit system; };
+            pkgs = droidPkgs;
+          } // inputs;
+
+          pkgs = droidPkgs;
 
           modules = [
             ./nix-on-droid.nix

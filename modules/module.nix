@@ -59,8 +59,8 @@ in
   droidModule = mkDevice {
     module = { cfg, lib, nixos, homeManager, packages }:
       {
-        home-manager.config = lib.mkIf cfg.enable {
-          packages = packages;
+        config = lib.mkIf cfg.enable {
+          environment.packages = packages;
           home-manager.config = homeManager;
         };
       };
