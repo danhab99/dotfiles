@@ -1,1 +1,1 @@
-import ./select.nix "droidModule";
+import ./select.nix "droidModule"
