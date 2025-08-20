@@ -61,6 +61,9 @@ import ../machine.nix
       enable = true;
       devicePath = "/dev/input/by-path/platform-i8042-serio-1-event-mouse";
     };
+
+    all-packages.enable = true;
+    nixos-packages.enable = true;
   };
 
   i3Config = { mod }: {

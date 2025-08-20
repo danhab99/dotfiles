@@ -1,0 +1,39 @@
+import ../module.nix
+{
+  name = "nixos-packages";
+
+  output = { pkgs, ... }:
+    let
+      customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: rec {
+        postInstall = ''
+          ${oldAttrs.postInstall or ""}
+          # Remove the reboot symlink if it exists
+          rm -f $out/bin/reboot
+          rm -f $out/bin/host*
+        '';
+      });
+    in
+    {
+      packages = with pkgs; [
+        acpi
+        audacity
+        brave
+        dbeaver-bin
+        customBusybox
+        firefox
+        gimp
+        gparted
+        kubectl
+        lm_sensors
+        obsidian
+        postgresql
+        seahorse
+        unixODBCDrivers.msodbcsql17
+        upower
+        usbutils
+        vlc
+        vscode
+        webcamoid
+      ];
+    };
+}
