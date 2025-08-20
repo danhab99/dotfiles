@@ -6,8 +6,6 @@
   ];
 
   config = {
-    packages.droid.enable = true;
-    
     home-manager.useGlobalPkgs = true;
     #home-manager.useUserPackage = true;
   
@@ -25,6 +23,8 @@
       secrets.enable = true;
       zoxide.enable = true;
       zsh.enable = true;
+      all-packages.enable = true;
+      droid-packages.enable = true;
     };
     
     # This value determines the Home Manager release that your configuration is

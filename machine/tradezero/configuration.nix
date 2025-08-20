@@ -67,6 +67,9 @@ import ../machine.nix {
     obs.enable = true;
     neovim.enable = true;
     watchdog.enable = true;
+
+    all-packages.enable = true;
+    nixos-packages.enable = true;
   };
 
   hostName = "tradezero";

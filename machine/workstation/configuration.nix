@@ -82,6 +82,9 @@ import ../machine.nix
       devicePath = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:4.4.3:1.0-event-mouse";
     };
     watchdog.enable = true;
+
+    all-packages.enable = true;
+    nixos-packages.enable = true;
   };
 
   files = {

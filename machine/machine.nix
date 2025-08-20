@@ -68,8 +68,6 @@ inputs@{ pkgs, ... }:
   config = {
     inherit users module;
 
-    packages.nixos.enable = true;
-
     environment.variables = environmentVariables;
     environment.systemPackages = packages pkgs;
 

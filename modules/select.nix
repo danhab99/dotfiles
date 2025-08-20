@@ -22,6 +22,5 @@ inputs@{ ... }:
       selectCorrectModule = name: builtins.getAttr select (getModuleSet name);
       selectedModules = map selectCorrectModule templates;
     in
-    (map (m: m inputs) selectedModules) ++ [ ./packages.nix ];
-    #(map (m: m (builtins.abort (builtins.toJSON (builtins.attrNames inputs)))) selectedModules) ++ [ ./packages.nix ];
+    (map (m: m inputs) selectedModules);
 }
