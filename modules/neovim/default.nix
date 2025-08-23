@@ -59,7 +59,7 @@ import ../module.nix
           lightline-vim
           neoformat
           nerdtree
-          nvim-surround
+          vim-surround
           onedark-nvim
           onedarkpro-nvim
           tagbar
