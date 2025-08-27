@@ -26,6 +26,7 @@ import ../module.nix
         kubectl
         libreoffice
         lm_sensors
+        nettools
         obsidian
         postgresql
         seahorse
