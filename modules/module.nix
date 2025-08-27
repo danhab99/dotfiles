@@ -20,7 +20,9 @@ let
       options.module.${name} = moduleOptions // deviceOptions // {
         enable = lib.mkEnableOption name;
       };
-    } // (module { inherit cfg lib nixos packages homeManager; });
+
+      config = lib.mkIf cfg.enable (module { inherit cfg lib nixos packages homeManager; });
+    };
 in
 {
 
@@ -45,24 +47,18 @@ in
           in
           builtins.listToAttrs pairs;
       in
+      nixos //
       {
-        config = lib.mkIf cfg.enable (
-          nixos //
-          {
-            environment.systemPackages = packages;
-            home-manager.users = homeManagerForUses;
-          }
-        );
+        environment.systemPackages = packages;
+        home-manager.users = homeManagerForUses;
       };
   };
 
   droidModule = mkDevice {
     module = { cfg, lib, nixos, homeManager, packages }:
       {
-        config = lib.mkIf cfg.enable {
-          environment.packages = packages;
-          home-manager.config = homeManager;
-        };
+        environment.packages = packages;
+        home-manager.config = homeManager;
       };
   };
 }
