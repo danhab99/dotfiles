@@ -18,8 +18,6 @@ import ../module.nix {
       dvc
     ];
 
-    nixos = { };
-
     homeManager = {
       programs.git = {
         enable = true;
@@ -84,6 +82,8 @@ import ../module.nix {
           "storybook-static/"
           "*.aidoc.md"
         ];
+
+        lfs.enable = true;
       };
 
       programs.gh = {
