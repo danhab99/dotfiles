@@ -1,5 +1,4 @@
-import ../module.nix {
-  name = "git";
+import ../module.nix { name = "git";
 
   options = { lib }: with lib; {
     signingKey = mkOption {

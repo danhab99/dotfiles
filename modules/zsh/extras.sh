@@ -50,7 +50,7 @@ then
   echo "Restoring nix shell"
   flake_path=$(cat /tmp/nixshell | head -n 1 | tail -n 1)
   shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
-  nix develop $flake_path#$shell_name
+  nix develop path:$flake_path#$shell_name
 fi
 
 setopt NO_BEEP

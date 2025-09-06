@@ -54,6 +54,14 @@ import ../module.nix {
           OLLAMA_HOST = "0.0.0.0";
         };
       };
+
+     #   host = "0.0.0.0";
+
+     #   environmentVariables = {
+     #     OLLAMA_MODELS = cfg.repoDir;
+     #     OLLAMA_HOST = "0.0.0.0";
+     #   };
+     # };
     };
   };
 }
