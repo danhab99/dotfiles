@@ -48,13 +48,9 @@ import ../module.nix
       hardware.pulseaudio.extraConfig = ''
         load-module module-combine-sink
         load-module module-null-sink sink_name=recording sink_properties=device.description=Recording
-        load-module module-combine-sink sink_name=combined sink_properties=device.description=Combined slaves=recording,<YOUR_SINK_NAME>
-        load-module module-loopback source=<YOUR_MIC_NAME> sink=recording latency_msec=1
+        load-module module-combine-sink sink_name=combined sink_properties=device.description=Combined slaves=recording,alsa_output.pci-0000_00_1f.3.analog-stereo
+        load-module module-loopback source=alsa_input.usb-046d_0825_9476ED00-02.mono-fallback sink=recording latency_msec=1
         set-default-sink combined
-        # (Optional) Prevent auto-switching sinks on new device connect
-        .nofail
-        unload-module module-switch-on-connect
-        unload-module module-switch-on-port-available      
       '';
     };
   };

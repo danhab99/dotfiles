@@ -73,6 +73,7 @@ import ../module.nix
           vim-gitgutter
           vim-move
           vim-polyglot
+          coc-spell-checker
         ];
 
         viAlias = true;
