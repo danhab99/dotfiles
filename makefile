@@ -7,8 +7,10 @@ endif
 
 ifeq ($(device),nixos)
 	switch_command = "sudo nixos-rebuild"
+	clean_command = "sudo nix-collect-garbage"
 else ifeq ($(device),droid)
 	switch_command = "nix-on-droid"
+	clean_command = "nix-collect-garbage"
 endif
 
 update:
@@ -19,4 +21,4 @@ switch:
 	$(switch_command) switch --max-jobs $(max_jobs) --flake .#$(name)
 
 clean:
-   sudo nix-collect-garbage --delete-older-than $(keep_garbage)
+  $(clean_command) --delete-older-than $(keep_garbage)
