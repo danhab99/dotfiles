@@ -5,23 +5,18 @@ ifneq ("$(wildcard .env)","")
   export
 endif
 
-flake:
+ifeq ($(device),nixos)
+	switch_command = "sudo nixos-rebuild"
+else ifeq ($(device),droid)
+	switch_command = "nix-on-droid"
+endif
+
+update:
 	nix flake update
-	$(MAKE) switch
+	$(MAKE) switch max_jobs=1
 
-hard-nix:
-	sudo nixos-rebuild switch --max-jobs 1 --flake .#$(name)
-
-nix:
-	sudo nixos-rebuild switch --flake .#$(name)
-
-switch: nix
-	i3-msg restart
-	gpgconf --kill gpg-agent
-	gpgconf --launch gpg-agent
+switch:
+	$(switch_command) switch --max-jobs $(max_jobs) --flake .#$(name)
 
 clean:
-	sudo nix-collect-garbage --delete-older-than 10d
-
-android:
-	nix-on-droid switch --max-jobs 1 --flake .#default
+   sudo nix-collect-garbage --delete-older-than $(keep_garbage)

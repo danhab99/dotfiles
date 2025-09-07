@@ -18,21 +18,3 @@ EOF
 cp -r blank/files $1/
 
 echo "Module generated at $1"
-
-# # Start the default.nix file
-# cat <<EOF > default.nix
-# [
-# EOF
-
-# # Loop through each directory in ./modules and add it as an import
-# for dir in ./*/; do
-#   name=$(basename "$dir")
-#   echo "  ( import ./$name )" >> default.nix
-# done
-
-# # Close the imports block
-# cat <<EOF >> default.nix
-# ];
-# EOF
-
-# echo "default.nix generated successfully."
