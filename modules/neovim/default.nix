@@ -49,6 +49,7 @@ import ../module.nix
           coc-pyright
           coc-rust-analyzer
           coc-sh
+          coc-spell-checker
           coc-tailwindcss
           coc-toml
           coc-tsserver
@@ -59,7 +60,6 @@ import ../module.nix
           lightline-vim
           neoformat
           nerdtree
-          vim-surround
           onedark-nvim
           onedarkpro-nvim
           tagbar
@@ -73,7 +73,7 @@ import ../module.nix
           vim-gitgutter
           vim-move
           vim-polyglot
-          coc-spell-checker
+          vim-surround
         ];
 
         viAlias = true;
