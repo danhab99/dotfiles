@@ -79,10 +79,25 @@ import ../machine.nix
       schedule = "*-*-*";
       script = ''
         rm -f /tmp/ssh-master-desktop.sock
-        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
+        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 -L 11434:localhost:11434 desktop
       '';
       packages = [ pkgs.openssh ];
       user = "dan";
     }
   ];
+
+  nixos = {
+    nix.settings = {
+      substituters = [
+        "ssh://desktop"
+        "https://cache.nixos.org/"
+      ];
+
+      trusted-substituters = [
+        "ssh://desktop"
+      ];
+
+      trusted-users = [ "root" "@wheel" "dan" ];
+    };
+  };
 }
