@@ -5,9 +5,15 @@ import ../module.nix
   output = { pkgs, config, lib, ... }: {
     packages = with pkgs; [
       nvtopPackages.full
+      cudatoolkit
     ];
 
     nixos = {
+      nixpkgs.config = {
+        cudaSupport = true;
+        cudaVersion = "12";
+      };
+
       hardware.graphics = {
         enable = true;
       };
@@ -28,11 +34,10 @@ import ../module.nix
         # Optional performance tweaks
         __GL_THREADED_OPTIMIZATIONS = "1";
         __GL_SYNC_TO_VBLANK = "0";
+        LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib:${pkgs.cudnn}/lib";
       };
 
-      module = {
-        xorg.videoDriver = lib.mkForce "nvidia";
-      };
+      module.xorg.videoDriver = lib.mkForce "nvidia";
     };
   };
 }
