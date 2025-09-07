@@ -5,7 +5,6 @@ import ../module.nix
   output = { pkgs, ... }: {
     packages = with pkgs; [
       archivemount
-      argc
       curl
       entr
       ffmpeg
