@@ -3,7 +3,7 @@ import ../module.nix {
 
   options = { lib }: with lib; {
     enableFail2Ban = mkEnableOption {
-      type = types.str;
+      name = "enableFail2Ban";
     };
   };
 
