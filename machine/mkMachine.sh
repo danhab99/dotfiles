@@ -9,15 +9,11 @@ mkdir -p "$1"
 
 # Start the configuration.nix file
 cat <<EOF > "$1/configuration.nix"
-{ ... }:
-
+import ../machine.nix
 {
-  imports = [ 
-    ../../modules
-    ../../users
-  ];
+  hostName = "$1";
 
-  config.users = {
+  users = {
 EOF
 
 # List all directories in ../users and add them as <name>.enable = true;
@@ -29,7 +25,7 @@ done
 cat << EOF >> "$1/configuration.nix"
   };
 
-  config.module = {
+  module = {
 EOF
 
 # List all directories in ../modules and add them as <name>.enable = true;
