@@ -34,7 +34,7 @@ in
       };
     };
 
-    module = { cfg, lib, nixos, packages, homeManager }:
+    module = { cfg, nixos, packages, homeManager, ... }:
       let
         homeManagerForUses =
           let
@@ -55,7 +55,7 @@ in
   };
 
   droidModule = mkDevice {
-    module = { cfg, lib, nixos, homeManager, packages }:
+    module = { homeManager, packages, ... }:
       {
         environment.packages = packages;
         home-manager.config = homeManager;
