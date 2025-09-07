@@ -29,16 +29,27 @@ import ../machine.nix
       enable = true;
       repoDir = "/ollama";
       models = [
+        "bge-large:latest"
+        "codegemma:2b-code-v1.1-fp16"
+        "codegemma:7b-code-q6_K"
+        "codegemma:7b-instruct"
+        "codellama:7b-code-q8_0"
+        "codellama:7b-instruct-q8_0"
+        "codellama:7b-python-q8_0"
+        "codeqwen:7b-code-v1.5-q8_0"
+        "codestral:22b-v0.1-q3_K_L"
+        "command-r7b:7b-12-2024-q8_0"
+        "deepseek-r1:14b"
+        "gemma3:12b"
+        "gemma3:12b-it-qat"
+        "llama3.1:8b"
+        "llama3.1:8b-instruct-q8_0"
+        "llama3.2:3b-instruct-fp16"
+        "mistral:7b-instruct-v0.3-q8_0"
+        "mistral:text"
         "nomic-embed-text"
-        "gemma3n"
-        "deepseek-r1"
-        "dolphin-mistral"
-        "dolphin-mixtral"
-        "dolphin-phi"
-        "codellama"
-        "mistral"
-        "llama3.3:latest"
-        "gpt-oss"
+        "qwen3:4b-instruct-2507-fp16"
+        "qwen3:4b-thinking-2507-fp16"
       ];
       enableGpu = true;
     };
@@ -48,7 +59,10 @@ import ../machine.nix
     rofi.enable = true;
     sddm.enable = true;
     secrets.enable = true;
-    ssh.enable = true;
+    ssh = {
+      enable = true;
+      enableFail2Ban = true;
+    };
     steam.enable = true;
     threedtools.enable = true;
     timezone.enable = true;
@@ -104,37 +118,37 @@ import ../machine.nix
 
   xserver = ''
     Section "Device"
-    Identifier "GPU0"
-    Driver "nvidia"
-    Option "AllowFlipping" "True"
-    Option "TripleBuffer" "True"
-    Option "ForceFullCompositionPipeline" "True"
+        Identifier "GPU0"
+        Driver "nvidia"
+        Option "AllowFlipping" "True"
+        Option "TripleBuffer" "True"
+        Option "ForceFullCompositionPipeline" "True"
     EndSection
 
-      Section "Monitor"
-          Identifier "HDMI-0"
-          Option "PreferredMode" "1920x1080"
-      EndSection
+    Section "Monitor"
+        Identifier "HDMI-0"
+        Option "PreferredMode" "1920x1080"
+    EndSection
 
-      Section "Monitor"
-          Identifier "DP-5"
-          Option "PreferredMode" "1920x1080"
-          Option "RightOf" "HDMI-0"
-      EndSection
+    Section "Monitor"
+        Identifier "DP-5"
+        Option "PreferredMode" "1920x1080"
+        Option "RightOf" "HDMI-0"
+    EndSection
 
-      Section "Monitor"
-          Identifier "DP-1"
-          Option "PreferredMode" "1920x1080"
-          Option "RightOf" "DP-5"
-      EndSection
+    Section "Monitor"
+        Identifier "DP-1"
+        Option "PreferredMode" "1920x1080"
+        Option "RightOf" "DP-5"
+    EndSection
 
-      Section "Screen"
-          Identifier "Screen0"
-          Device "GPU0"
-          Option "metamodes" "HDMI-0: 1920x1080 +0+0, DP-5: 1920x1080 +1920+0, DP-1: 1920x1080 +3840+0"
-          Option "AllowIndirectGLXProtocol" "True"
-          Option "TripleBuffer" "True"
-      EndSection
+    Section "Screen"
+        Identifier "Screen0"
+        Device "GPU0"
+        Option "metamodes" "HDMI-0: 1920x1080 +0+0, DP-5: 1920x1080 +1920+0, DP-1: 1920x1080 +3840+0"
+        Option "AllowIndirectGLXProtocol" "True"
+        Option "TripleBuffer" "True"
+    EndSection
   '';
 
   bind =
