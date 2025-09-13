@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./modules/droid.nix
+    (import ../modules/select.nix "droidModule")
   ];
 
   config = {

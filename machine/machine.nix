@@ -61,7 +61,7 @@ in
 inputs@{ pkgs, ... }:
 {
   imports = [
-    (import ../modules/nixos.nix inputs)
+    (import ../modules/select.nix "nixosModule" inputs)
     ../users
   ];
 
