@@ -17,7 +17,7 @@ import ../module.nix {
       packages = [
         pkgs.freecad
         pkgs.blender
-        pkgs.bambu-studio
+        # pkgs.bambu-studio
       ];
     };
 }
