@@ -27,8 +27,8 @@ import ../module.nix {
       services.fail2ban = {
         enable = cfg.enableFail2Ban;
 
-        maxretry = 2;
-        bantime = "1000h";
+        maxretry = 10;
+        bantime = "10h";
       };
     };
   };
