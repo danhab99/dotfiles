@@ -28,7 +28,7 @@ map("n", "-a", ":call SyntaxAttr()<CR>", opts)
 map("n", "<C-t>", ":tab sp<CR>", opts)
 map("n", "<C-q>", "mq:wqa<CR>", opts)
 map("n", "<C-r>", ":source ~/.vimrc<CR>:CocRestart<CR>", opts)
-map("n", "<C-s>", ":Rg<CR>", opts)
+map("n", "<C-s>", ":FzfLua grep<CR>", opts)
 map("n", "<C-h>", "<C-^>", opts)
 
 -- Yank / move

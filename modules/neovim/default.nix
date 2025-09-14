@@ -6,6 +6,8 @@ import ../module.nix
     packages = with pkgs; [
       ctags
       astyle
+      xclip
+      xsel
     ];
 
     homeManager = {
