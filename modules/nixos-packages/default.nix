@@ -32,7 +32,6 @@ import ../module.nix
         upower
         usbutils
         vlc
-        vscode
         webcamoid
       ];
     };
