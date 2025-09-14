@@ -40,6 +40,7 @@ import ../machine.nix
         "codestral:22b-v0.1-q3_K_L"
         "command-r7b:7b-12-2024-q8_0"
         "deepseek-r1:14b"
+        "embeddinggemma"
         "gemma3:12b"
         "gemma3:12b-it-qat"
         "llama3.1:8b"
