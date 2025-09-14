@@ -25,13 +25,13 @@ import ../machine.nix {
     ollama = {
       enable = true;
       models = [
-        "deepseek-r1"
-        "gemma3n"
         "nomic-embed-text"
-        "phi3"
-        "qwq"
-        "tinyllama"
-        "linux6200/bge-reranker-v2-m3"
+        "codegemma:2b-code-v1.1-fp16"
+        "embeddinggemma"
+        "gemma3:7b"
+        "mistral:text"
+        "qwen3:4b-instruct-2507-fp16"
+        "qwen3:4b-thinking-2507-fp16"
       ];
     };
     pipewire.enable = true;
@@ -67,6 +67,7 @@ import ../machine.nix {
     obs.enable = true;
     neovim.enable = true;
     watchdog.enable = true;
+    vscode.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
