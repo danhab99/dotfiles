@@ -18,12 +18,13 @@ import ../module.nix
         acpi
         audacity
         brave
-        dbeaver-bin
         customBusybox
+        dbeaver-bin
         firefox
         gimp
         gparted
         kubectl
+        libreoffice
         lm_sensors
         obsidian
         postgresql
