@@ -94,7 +94,7 @@ EndSection
       name = "transcribe-eod";
       script = "/home/dan/Videos/run-transcribe.sh";
       schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
-      packages = with pkgs; [ openai-whisper ffmpeg_6-full curl wget jq ];
+      packages = with pkgs; [ whisperx ffmpeg_6-full curl wget jq ];
     }
   ];
 
