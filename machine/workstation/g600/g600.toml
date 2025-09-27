@@ -43,3 +43,10 @@ G9_UP="xdotool key 1"
 G11_DOWN="xdotool key 3"
 G11_UP="xdotool key 1"
 G12_DOWN="xdotool key q"
+
+[startrucker]
+ON_ACTIVATE="/home/dan/.config/g600/onchange.sh 42a4ff"
+G9_DOWN="xdotool key z"
+G11_DOWN="xdotool key c"
+G10_DOWN="xdotool key m"
+
