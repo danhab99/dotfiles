@@ -98,6 +98,7 @@ import ../machine.nix
     };
     watchdog.enable = true;
     vscode.enable = true;
+    qmk.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
