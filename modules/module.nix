@@ -11,6 +11,7 @@ let
       nixos = out.nixos or { };
       packages = out.packages or [ ];
       homeManager = out.homeManager or { };
+      droid = out.droid or { };
 
       getOpt = f: f { inherit lib; };
       moduleOptions = getOpt options;
@@ -21,7 +22,7 @@ let
         enable = lib.mkEnableOption name;
       };
 
-      config = lib.mkIf cfg.enable (module { inherit cfg lib nixos packages homeManager; });
+      config = lib.mkIf cfg.enable (module { inherit cfg lib nixos packages homeManager droid; });
     };
 in
 {
@@ -55,7 +56,8 @@ in
   };
 
   droidModule = mkDevice {
-    module = { homeManager, packages, ... }:
+    module = { cfg, lib, nixos, homeManager, packages, droid }:
+      droid // 
       {
         environment.packages = packages;
         home-manager.config = homeManager;
