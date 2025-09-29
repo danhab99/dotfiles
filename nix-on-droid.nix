@@ -2,7 +2,7 @@
 
 {
   imports = [
-    (import ../modules/select.nix "droidModule")
+    (import ./modules/select.nix "droidModule")
   ];
 
   config = {
@@ -32,6 +32,13 @@
         experimental-features = nix-command flakes
       '';
     };
+    
+    android-integration.termux-open.enable = true;
+    android-integration.termux-open-url.enable = true;
+    android-integration.termux-reload-settings.enable = true;
+    android-integration.termux-setup-storage.enable = true;
+    android-integration.xdg-open.enable = true;
+    
     
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
