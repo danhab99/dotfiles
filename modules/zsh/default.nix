@@ -24,6 +24,8 @@ import ../module.nix {
         VI_MODE_SET_CURSOR = "true";
         VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
       };
+      
+      home.shell.enableZshIntegration = true;
 
       programs.zsh = {
         enable = true;
@@ -131,6 +133,11 @@ import ../module.nix {
 
     nixos = {
       programs.zsh.enable = true;
+    };
+    
+    droid = {
+      # programs.zsh.enable = true;
+      #home.shell.enableZshIntegration = true;
     };
   };
 }
