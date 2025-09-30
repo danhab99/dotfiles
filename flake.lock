@@ -23,16 +23,16 @@
     },
     "droid-nixpkgs": {
       "locked": {
-        "lastModified": 1757810152,
-        "narHash": "sha256-Vp9K5ol6h0J90jG7Rm4RWZsCB3x7v5VPx588TQ1dkfs=",
+        "lastModified": 1759250113,
+        "narHash": "sha256-apF3ww4pPkxHI5c424Z6VYdImge1iZSP6TOH45lIqxU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9a094440e02a699be5c57453a092a8baf569bdad",
+        "rev": "f579c51fd27e9f66c8236b26a47ed78b315f785d",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-25.05",
+        "ref": "nixos-25.05-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -121,6 +121,22 @@
         "owner": "nix-community",
         "ref": "release-24.05",
         "repo": "nix-on-droid",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1758663926,
+        "narHash": "sha256-6CFdj7Xs616t1W4jLDH7IohAAvl5Dyib3qEv/Uqw1rk=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "170ff93c860b2a9868ed1e1102d4e52cb3d934e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
         "type": "github"
       }
     },
@@ -265,6 +281,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-on-droid": "nix-on-droid",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs_for_xpad": "nixpkgs_for_xpad"
       }
