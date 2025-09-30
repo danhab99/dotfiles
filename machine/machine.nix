@@ -24,6 +24,7 @@ let
     let
       baseService = {
         services."${name}" = {
+          enable = true;
           script = script;
           serviceConfig = {
             Type = "oneshot";
@@ -40,17 +41,16 @@ let
             mkAddAttr = { key, val }: if strLen val > 0 then { "${key}" = val; } else { };
           in
           {
-            timers."${name}" = (
-              {
-                wantedBy = [ "timers.target" ];
-                timerConfig = {
-                  OnUnitActiveSec = "10min";
-                  Persistent = true;
-                }
-                // mkAddAttr { key = "OnCalendar"; val = schedule; }
-                // mkAddAttr { key = "OnTimer"; val = timer; };
+            timers."${name}" = {
+              enable = true;
+              wantedBy = [ "timers.target" ];
+              timerConfig = {
+                OnUnitActiveSec = "10min";
+                Persistent = true;
               }
-            );
+              // mkAddAttr { key = "OnCalendar"; val = schedule; }
+              // mkAddAttr { key = "OnTimer"; val = timer; };
+            };
           }
         else { };
     in
@@ -58,7 +58,7 @@ let
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
 in
-inputs@{ pkgs, ... }:
+inputs@{ pkgs, lib, ... }:
 {
   imports = [
     (import ../modules/select.nix "nixosModule" inputs)
@@ -82,10 +82,25 @@ inputs@{ pkgs, ... }:
       flatpak.enable = true;
     } // (nixos.services or { });
 
-    systemd = (
-      { tmpfiles.rules = map mkBind bind; }
-      // builtins.foldl' (a: b: a // b) { } (map mkJob (jobs { inherit pkgs; }))
-    );
+    systemd =
+      let
+        defs = jobs { inherit pkgs; };
+        serviceTimers = map mkJob defs;
+        services = map (x: x.services) serviceTimers;
+        timers = map (x: x.timers) serviceTimers;
+
+        merge = builtins.foldl' (a: b: a // b) { };
+
+        allServices = merge services;
+        allTimers = merge timers;
+
+        finishedJobs = { services = allServices; } //
+          { timers = allTimers; };
+      in
+      (
+        { tmpfiles.rules = map mkBind bind; } //
+        (finishedJobs)
+      );
 
     networking = {
       networkmanager.enable = true;

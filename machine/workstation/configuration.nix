@@ -169,8 +169,8 @@ import ../machine.nix
 
   jobs = { pkgs }: [
     {
-      name = "backup";
-      packages = pkgs: with pkgs; [ gnutar gzip findutils ];
+      name = "full-system-backup";
+      packages = with pkgs; [ gnutar gzip findutils ];
       schedule = "*-*-* 04:00:00";
 
       script = ''
