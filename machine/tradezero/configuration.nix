@@ -34,7 +34,6 @@ import ../machine.nix {
         "qwen3:4b-thinking-2507-fp16"
       ];
     };
-    pipewire.enable = true;
     printing.enable = true;
     ratbag.enable = false;
     rofi.enable = true;
