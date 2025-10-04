@@ -24,7 +24,6 @@ import ../module.nix
         gimp
         gparted
         kubectl
-        libreoffice
         lm_sensors
         nettools
         obsidian
@@ -35,6 +34,7 @@ import ../module.nix
         usbutils
         vlc
         webcamoid
+        tree
       ];
     };
 }
