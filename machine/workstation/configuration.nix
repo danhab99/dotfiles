@@ -54,7 +54,6 @@ import ../machine.nix
       ];
       enableGpu = true;
     };
-    # pipewire.enable = true;
     printing.enable = true;
     ratbag.enable = true;
     rofi.enable = true;
