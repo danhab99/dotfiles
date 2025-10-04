@@ -22,3 +22,8 @@ switch:
 
 clean:
 	$(clean_command) --delete-older-than $(keep_garbage)
+
+firmware:
+	fwupdmgr refresh --force
+	fwupdmgr get-updates
+	fwupdmgr update
