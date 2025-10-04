@@ -16,42 +16,23 @@ import ../module.nix
     homeManager = { };
 
     nixos = {
-      services.pipewire.enable = lib.mkForce false;
-
-      hardware.bluetooth.enable = cfg.enableBluetooth;
-      hardware.bluetooth.powerOnBoot = cfg.enableBluetooth;
-      services.blueman.enable = cfg.enableBluetooth;
-
-      hardware.pulseaudio = {
+      services.pipewire = {
         enable = true;
-        package = pkgs.pulseaudioFull;
-      };
-
-      services.jack = {
-        jackd.enable = cfg.enableJACK;
-        # support ALSA only programs via ALSA JACK PCM plugin
-        alsa.enable = false;
-        # support ALSA only programs via loopback device (supports programs like Steam)
-        loopback = {
-          enable = true;
-          # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
-          #dmixConfig = ''
-          #  period_size 2048
-          #'';
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;    # pipewire-pulse (Pulse clients talk to PipeWire)
+        jack.enable = true;     # optional: let pipewire provide JACK
+        extraConfig.pipewire = {
+          "99-disable-bell" = {
+            "context.properties" = { "module.x11.bell" = false; };
+          };
         };
       };
 
-      users.extraUsers.dan.extraGroups = [ "jackaudio" ];
+      hardware.pulseaudio.enable = false;
+      nixpkgs.config.pulseaudio = false;
 
-      nixpkgs.config.pulseaudio = true;
-
-      hardware.pulseaudio.extraConfig = ''
-        load-module module-combine-sink
-        load-module module-null-sink sink_name=recording sink_properties=device.description=Recording
-        load-module module-combine-sink sink_name=combined sink_properties=device.description=Combined slaves=recording,alsa_output.pci-0000_00_1f.3.analog-stereo
-        load-module module-loopback source=alsa_input.usb-046d_0825_9476ED00-02.mono-fallback sink=recording latency_msec=1
-        set-default-sink combined
-      '';
     };
+
   };
 }
