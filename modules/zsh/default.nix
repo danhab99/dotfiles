@@ -122,9 +122,10 @@ import ../module.nix {
           vhome = "z /etc/nixos && vim home.nix";
           znix = "z /etc/nixos";
 
-          cai = "aichat -r %functions%";
-
           cdtemp = "cd $(mktemp -d)";
+
+          tools = "aichat -r tools";
+          coder = "aichat -r coder";
         };
 
         initContent = builtins.readFile ./extras.sh;
