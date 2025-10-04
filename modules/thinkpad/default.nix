@@ -47,6 +47,10 @@ import ../module.nix
           CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
         };
       };
+
+      services.hardware.bolt.enable = true;
+
+      boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
     };
   };
 }
