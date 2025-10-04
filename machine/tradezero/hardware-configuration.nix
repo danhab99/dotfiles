@@ -7,13 +7,23 @@
   imports =
     [ 
       (modulesPath + "/installer/scan/not-detected.nix")
-      nixos-hardware.nixosModules.lenovo-thinkpad-l14-intel
+      # nixos-hardware.nixosModules.lenovo-thinkpad-l14-intel
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  boot.kernelParams = [
+    "i915.enable_dp_mst=0"
+    "i915.enable_psr=0"
+    "i915.enable_dc=0"
+  ];
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  services.fwupd.enable = true;
 
   boot.loader.systemd-boot.enable = true;
 
