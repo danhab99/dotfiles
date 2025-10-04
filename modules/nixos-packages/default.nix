@@ -36,5 +36,15 @@ import ../module.nix
         webcamoid
         tree
       ];
+
+      nixos = {
+        nixpkgs.overlays = [
+          (final: prev: {
+            cfn-lint = prev.cfn-lint.overrideAttrs (old: {
+              doCheck = false;
+            });
+          })
+        ];
+      };
     };
 }
