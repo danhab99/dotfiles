@@ -88,7 +88,6 @@ import ../machine.nix
     vbox.enable = true;
     audio = {
       enable = true;
-      enableJACK = true;
     };
     libreoffice.enable = true;
     gestures = {
