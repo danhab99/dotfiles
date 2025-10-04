@@ -65,7 +65,7 @@ import ../machine.nix {
     };
     obs.enable = true;
     neovim.enable = true;
-    watchdog.enable = true;
+    watchdog.enable = false;
     vscode.enable = true;
 
     all-packages.enable = true;
