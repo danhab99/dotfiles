@@ -46,7 +46,7 @@ import ../machine.nix {
     urxvt.enable = true;
     xorg = {
       enable = true;
-      videoDriver = "modesetting";
+      videoDrivers = [ "displaylink" "modesetting" ];
       extraConfig = ''
         urxvt*depth: 32
         urxvt*blurRadius: 0

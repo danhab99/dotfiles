@@ -50,7 +50,7 @@ import ../module.nix
 
       services.hardware.bolt.enable = true;
 
-      boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
+      # boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
     };
   };
 }

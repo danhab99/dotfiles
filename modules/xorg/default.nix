@@ -2,7 +2,7 @@ import ../module.nix {
   name = "xorg";
 
   options = { lib }: with lib; {
-    videoDriver = mkOption { };
+    videoDrivers = mkOption { };
     extraConfig = mkOption {
       type = types.str;
       default = "";
@@ -25,7 +25,7 @@ import ../module.nix {
       services.xserver = {
         enable = true;
         displayManager.startx.enable = true; # Optional if using startx
-        videoDrivers = [ cfg.videoDriver ];
+        videoDrivers = cfg.videoDrivers;
 
         xautolock.enable = false;
         desktopManager.xterm.enable = false;

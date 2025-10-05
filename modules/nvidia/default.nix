@@ -36,8 +36,6 @@ import ../module.nix
         __GL_SYNC_TO_VBLANK = "0";
         LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib:${pkgs.cudnn}/lib";
       };
-
-      module.xorg.videoDriver = lib.mkForce "nvidia";
     };
   };
 }

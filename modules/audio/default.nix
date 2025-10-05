@@ -23,7 +23,7 @@ import ../module.nix
       hardware.bluetooth.powerOnBoot = cfg.enableBluetooth;
       services.blueman.enable = cfg.enableBluetooth;
 
-      nixpkgs.config.pulseaudio = true;
+      # nixpkgs.config.pulseaudio = true;
 
       security.rtkit.enable = true;
 
