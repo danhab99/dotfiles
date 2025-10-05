@@ -17,6 +17,8 @@
 
   boot.loader.systemd-boot.enable = true;
 
+  services.fwupd.enable = true;
+
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/8d3bdd54-e8c6-47c9-b1f9-662eae68b57a";
