@@ -339,7 +339,7 @@ in
       always = true;
     }
     {
-      command = "~/.screenlayout/3screen.sh";
+      command = "~/.screenlayout/${cfg.defaultLayoutScript}";
       always = true;
     }
     {

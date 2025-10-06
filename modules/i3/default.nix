@@ -15,6 +15,9 @@ import ../module.nix {
       type = types.listOf types.str;
       default = [ ];
     };
+    defaultLayoutScript = mkOption {
+      type = types.str;
+    };
   };
 
   output = { pkgs, config, cfg, lib, ... }: {
