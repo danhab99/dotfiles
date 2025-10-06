@@ -20,6 +20,7 @@ import ../machine.nix {
       i3blocksConfig = ./i3blocks.conf;
       # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
       screen = [ "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # home desk
+      defaultLayoutScript = "home-desk.sh";
     };
     nix.enable = true;
     ollama = {
