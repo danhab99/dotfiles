@@ -5,27 +5,32 @@
 
 {
   imports =
-    [ 
+    [
       (modulesPath + "/installer/scan/not-detected.nix")
       nixos-hardware.nixosModules.lenovo-thinkpad-l14-intel
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+    kernelParams = [ "usbcore.autosuspend=-1" ];
+  };
 
   boot.loader.systemd-boot.enable = true;
 
   services.fwupd.enable = true;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/574c7895-b099-4df3-afe8-024e4a68e4ac";
+    {
+      device = "/dev/disk/by-uuid/574c7895-b099-4df3-afe8-024e4a68e4ac";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/69E5-48AA";
+    {
+      device = "/dev/disk/by-uuid/69E5-48AA";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
