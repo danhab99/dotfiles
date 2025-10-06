@@ -19,36 +19,22 @@ import ../module.nix
     homeManager = { };
 
     nixos = {
-      hardware.bluetooth.enable = cfg.enableBluetooth;
-      hardware.bluetooth.powerOnBoot = cfg.enableBluetooth;
-      services.blueman.enable = cfg.enableBluetooth;
-
-      # nixpkgs.config.pulseaudio = true;
+      hardware = {
+        alsa.enable = true;
+        alsa.enablePersistence = true;
+        bluetooth.enable = cfg.enableBluetooth;
+        bluetooth.powerOnBoot = cfg.enableBluetooth;
+      };
 
       security.rtkit.enable = true;
-
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-
-        extraConfig.pipewire = {
-          "99-disable-bell" = {
-            "context.properties" = { "module.x11.bell" = false; };
-          };
-        };
-
-        wireplumber = {
-          enable = true;
-          extraConfig.bluetooth = {
-            "monitor.bluez.properties" = {
-              "bluez5.enable-sbc-xq" = true;
-              "bluez5.enable-msbc" = true; # wideband speech for headset mics
-              "bluez5.enable-hw-volume" = true; # lets volume keys sync properly
-            };
-          };
-        };
+      
+      services = {
+        services.blueman.enable = cfg.enableBluetooth;
+        services.pipewire.enable = lib.mkForce false;
+        services.pipewire.wireplumber.enable = lib.mkForce false;
+        services.pulseaudio.enable = lib.mkForce true; # current option
+        services.pulseaudio.package = pkgs.pulseaudioFull; # codecs, BT
+        services.pulseaudio.support32Bit = true; # Steam/Wine
       };
     };
   };
