@@ -19,6 +19,9 @@ update:
 
 switch:
 	$(switch_command) switch --max-jobs $(max_jobs) --flake .#$(name)
+	-i3-msg restart
+	-udevadm control --reload
+	-udevadm trigger
 
 clean:
 	$(clean_command) --delete-older-than $(keep_garbage)
