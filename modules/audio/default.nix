@@ -27,14 +27,14 @@ import ../module.nix
       };
 
       security.rtkit.enable = true;
-      
+
       services = {
-        services.blueman.enable = cfg.enableBluetooth;
-        services.pipewire.enable = lib.mkForce false;
-        services.pipewire.wireplumber.enable = lib.mkForce false;
-        services.pulseaudio.enable = lib.mkForce true; # current option
-        services.pulseaudio.package = pkgs.pulseaudioFull; # codecs, BT
-        services.pulseaudio.support32Bit = true; # Steam/Wine
+        blueman.enable = cfg.enableBluetooth;
+        pipewire.enable = lib.mkForce false;
+        pipewire.wireplumber.enable = lib.mkForce false;
+        pulseaudio.enable = lib.mkForce true; # current option
+        pulseaudio.package = pkgs.pulseaudioFull; # codecs, BT
+        pulseaudio.support32Bit = true; # Steam/Wine
       };
     };
   };
