@@ -9,9 +9,12 @@
   boot = {
     extraModulePackages = [ ];
 
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    initrd.kernelModules = [ ];
-    initrd.systemd.dbus.enable = true;
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+      kernelModules = [ ];
+      systemd.dbus.enable = false;
+      systemd.enable = false;
+    };
 
     kernelModules = [ "kvm-intel" ];
 
