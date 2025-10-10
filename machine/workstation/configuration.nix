@@ -192,6 +192,8 @@ import ../machine.nix
 
         backup home /home/dan &
         backup open-webui /var/lib/open-webui &
+        backup etc /etc &
+        backup usr /usr &
 
         wait
       '';
