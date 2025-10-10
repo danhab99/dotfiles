@@ -19,11 +19,11 @@ import ../module.nix
       };
 
       hardware.nvidia = {
-        # For proprietary driver (best performance)
         modesetting.enable = true;
-        powerManagement.enable = false;
-        open = false; # Set to true for open kernel module (less tested)
+        powerManagement.enable = true;
+        open = false; # use proprietary driver (not open kernel module)
         nvidiaSettings = true;
+
         package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
 
