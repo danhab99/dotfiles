@@ -83,10 +83,10 @@ import ../machine.nix {
   };
 
   xserver = ''
-Section "InputClass"
-Identifier "keyboard-all"
-Option "XkbOptions" "terminate:ctrl_alt_bksp"
-EndSection
+    Section "InputClass"
+    Identifier "keyboard-all"
+    Option "XkbOptions" "terminate:ctrl_alt_bksp"
+    EndSection
   '';
 
   jobs = { pkgs }: [
@@ -98,8 +98,16 @@ EndSection
     }
   ];
 
-  nixos = {
-    services.twingate.enable = true;
-    services.blueman.enable = true;
+  nixos.services = {
+    twingate.enable = true;
+    blueman.enable = true;
+
+    udev.extraRules = ''
+      # Disable autosuspend for Logitech webcam (046d:0825)
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="0825", TEST=="power/control", ATTR{power/control}="on"
+
+      # Disable autosuspend for GenesysLogic hub (05e3:0610)
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", ATTR{idProduct}=="0610", TEST=="power/control", ATTR{power/control}="on"
+    '';
   };
 }
