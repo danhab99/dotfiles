@@ -22,7 +22,7 @@ import ../machine.nix
       enable = true;
       configFile = ./i3/config;
       i3blocksConfig = ./i3blocks.conf;
-      screen = [ "DP-5" "DP-1" "HDMI-0" ];
+      screen = [ "DP-4" "DP-0" "HDMI-0" ];
     };
     nix.enable = true;
     ollama = {
@@ -128,25 +128,24 @@ import ../machine.nix
 
     Section "Monitor"
         Identifier "HDMI-0"
-        Option "PreferredMode" "1920x1080"
+        Option "PreferredMode" "2560x1440"
     EndSection
 
     Section "Monitor"
-        Identifier "DP-5"
-        Option "PreferredMode" "1920x1080"
-        Option "RightOf" "HDMI-0"
+        Identifier "DP-0"
+        Option "PreferredMode" "2560x1440"
+        Option "LeftOf" "HDMI-0"
     EndSection
 
     Section "Monitor"
-        Identifier "DP-1"
-        Option "PreferredMode" "1920x1080"
-        Option "RightOf" "DP-5"
+        Identifier "DP-4"
+        Option "PreferredMode" "2560x1440"
+        Option "LeftOf" "DP-1"
     EndSection
 
     Section "Screen"
         Identifier "Screen0"
         Device "GPU0"
-        Option "metamodes" "HDMI-0: 1920x1080 +0+0, DP-5: 1920x1080 +1920+0, DP-1: 1920x1080 +3840+0"
         Option "AllowIndirectGLXProtocol" "True"
         Option "TripleBuffer" "True"
     EndSection
