@@ -10,6 +10,7 @@ import ../module.nix
           # Remove the reboot symlink if it exists
           rm -f $out/bin/reboot
           rm -f $out/bin/host*
+          rm -f $out/bin/lspci
         '';
       });
     in
@@ -35,16 +36,8 @@ import ../module.nix
         vlc
         webcamoid
         tree
+        parted
+        pciutils
       ];
-
-      nixos = {
-        nixpkgs.overlays = [
-          (final: prev: {
-            cfn-lint = prev.cfn-lint.overrideAttrs (old: {
-              doCheck = false;
-            });
-          })
-        ];
-      };
     };
 }
