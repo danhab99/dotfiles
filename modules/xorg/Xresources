@@ -56,7 +56,8 @@
 
 ! PERL Extensions
 .perl-ext-common: default,matcher
-urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed
+urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed,keyboard-select
+URxvt.keysym.M-s: perl:keyboard-select:activate
 
 ! Clickable URLs
 *.url-launcher: brave

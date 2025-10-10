@@ -33,6 +33,7 @@ import ../module.nix {
 
         oh-my-zsh = {
           enable = true;
+
           plugins = [
             "git"
             "docker"
@@ -129,6 +130,11 @@ import ../module.nix {
         };
 
         initContent = builtins.readFile ./extras.sh;
+
+        autosuggestion = {
+          enable = true;
+          strategy = [ "history" "completion" ];
+        };
       };
     };
 
