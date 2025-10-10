@@ -1,11 +1,11 @@
 ! Font to Fira Code Retina, 16px
-*.font: xft:FiraCode Nerd Font Mono:style=Regular:pixelsize=16
+*.font: xft:FiraCode Nerd Font Mono:style=Regular:pixelsize=19
 
 ! Set Bold Font to Fira Code Bold, 16px
-*.boldFont: xft:FiraCode Nerd Font Mono:style=Bold:pixelsize:16
+*.boldFont: xft:FiraCode Nerd Font Mono:style=Bold:pixelsize:19
 
 ! Set Italics Font to Fira Code Light, 16px
-*.italicFont: xft:FiraCode Nerd Font Mono:style=Light:pixelsize:16
+*.italicFont: xft:FiraCode Nerd Font Mono:style=Light:pixelsize:19
 
 *.renderFont: true
 
@@ -76,7 +76,7 @@ URxvt.keysym.M-s: perl:keyboard-select:activate
 *.iso14755: false
 *.iso14755_52: false
 
-rofi.font: InconsolataForPowerline Nerd Font 11
+rofi.font: InconsolataForPowerline Nerd Font 16
 
 URxvt.keysym.C-minus:     resize-font:smaller
 URxvt.keysym.C-plus:      resize-font:bigger
