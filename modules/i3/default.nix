@@ -68,7 +68,7 @@ import ../module.nix {
         config = (import ./config.nix { inherit pkgs cfg lib; });
 
         extraConfig = ''
-          border_radius 8
+          border_radius 12
           ${if cfg.configFile == null then "" else (builtins.readFile cfg.configFile)}
         '';
       };
