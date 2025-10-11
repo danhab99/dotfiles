@@ -6,7 +6,7 @@ ifneq ("$(wildcard .env)","")
 endif
 
 ifeq ($(device),nixos)
-	switch_command := sudo nixos-rebuild
+	switch_command := sudo -E nixos-rebuild
 	clean_command := sudo nix-collect-garbage
 else ifeq ($(device),droid)
 	switch_command := nix-on-droid
@@ -18,7 +18,11 @@ update:
 	$(MAKE) switch max_jobs=1
 
 switch:
-	$(switch_command) switch --max-jobs $(max_jobs) --flake .#$(name)
+	$(switch_command) switch \
+		--option substitute true \
+		--max-jobs $(max_jobs) \
+		--flake .#$(name)
+	
 	-i3-msg restart
 	-udevadm control --reload
 	-udevadm trigger
