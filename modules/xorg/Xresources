@@ -86,3 +86,6 @@ URxvt.keysym.C-question:  resize-font:show
 URxvt*bellCommand: true
 URxvt*visualBell: true
 
+URxvt.perl-ext-common: default,searchable-scrollback
+URxvt.keysym.M-s: perl:searchable-scrollback:start
+
