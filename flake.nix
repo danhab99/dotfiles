@@ -40,6 +40,7 @@
           modules = [
             ./machine/${hostName}/configuration.nix
             ./machine/${hostName}/hardware-configuration.nix
+            ./cachix.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -97,6 +98,7 @@
             gnumake
             containerd
             oci-cli
+            cachix
           ];
 
           shellHook = ''
