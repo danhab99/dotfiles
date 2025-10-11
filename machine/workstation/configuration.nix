@@ -23,6 +23,7 @@ import ../machine.nix
       configFile = ./i3/config;
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "DP-4" "DP-0" "HDMI-0" ];
+      defaultLayoutScript = "3screen.sh";
     };
     nix.enable = true;
     ollama = {
@@ -70,7 +71,8 @@ import ../machine.nix
     xorg =
       {
         enable = true;
-        videoDriver = "nvidia";
+        videoDrivers = [ "nvidia" ];
+        # defaultScreenScript = "3screen.sh";
         extraConfig = ''
           urxvt*depth: 32
           urxvt*blurRadius: 10
