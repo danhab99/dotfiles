@@ -1,13 +1,14 @@
 { pkgs, cfg, lib }:
 let
   mod = "Mod4";
+  fontSize = 14.0;
 in
 {
   modifier = mod;
 
   fonts = {
     names = [ "monospace" ];
-    size = 12.0;
+    size = fontSize;
   };
 
   floating = {
@@ -86,7 +87,7 @@ in
 
     fonts = {
       names = [ "monospace" ];
-      size = 12.0;
+      size = fontSize;
     };
 
     colors = {
