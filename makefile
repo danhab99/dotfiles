@@ -6,7 +6,7 @@ ifneq ("$(wildcard .env)","")
 endif
 
 ifeq ($(device),nixos)
-	switch_command := sudo -E nixos-rebuild
+	switch_command := sudo nixos-rebuild
 	clean_command := sudo nix-collect-garbage
 	clean_command := sudo nix-env --delete-generations +3 --profile /nix/var/nix/profiles/system
 else ifeq ($(device),droid)
@@ -18,17 +18,20 @@ update:
 	nix flake update
 	$(MAKE) switch max_jobs=1
 
+rollback:
+	git checkout $(shell git rev-list -n 2 HEAD -- flake.lock | tail -n 1) -- flake.lock
+
 switch:
 	$(switch_command) switch \
 		--option substitute true \
-		--option download-buffer-size 1000 \
+		--option download-buffer-size 10000 \
 		--max-jobs $(max_jobs) \
 		--keep-going \
 		--flake .#$(name)
 	
 	-i3-msg restart
-	-udevadm control --reload
-	-udevadm trigger
+	-sudo udevadm control --reload
+	-sudo udevadm trigger
 
 clean:
 	$(clean_command) --delete-older-than $(keep_garbage)
