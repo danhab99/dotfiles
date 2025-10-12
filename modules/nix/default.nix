@@ -9,7 +9,11 @@ import ../module.nix {
       ];
 
     nixos = {
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        allowed-users = [ "dan" ];
+        require-sigs = true;
+      };
 
       nixpkgs.config.allowUnfree = true;
 
