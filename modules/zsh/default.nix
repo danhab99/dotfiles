@@ -1,11 +1,18 @@
 import ../module.nix {
   name = "zsh";
 
-  output = { pkgs, ... }: {
-    packages = with pkgs; [ 
+  options = { lib }: with lib; {
+    extras = mkOption {
+      type = types.str;
+      default = "";
+    };
+  };
+
+  output = { pkgs, cfg, ... }: {
+    packages = with pkgs; [
       bat
-      zsh 
-      oh-my-zsh 
+      zsh
+      oh-my-zsh
       htop-vim
       iftop
       iotop
@@ -17,6 +24,7 @@ import ../module.nix {
       ripgrep
       rsync
       screen
+      xclip
     ];
 
     homeManager = {
@@ -24,7 +32,7 @@ import ../module.nix {
         VI_MODE_SET_CURSOR = "true";
         VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
       };
-      
+
       home.shell.enableZshIntegration = true;
 
       programs.zsh = {
@@ -129,7 +137,7 @@ import ../module.nix {
           coder = "aichat -r coder";
         };
 
-        initContent = builtins.readFile ./extras.sh;
+        initContent = builtins.readFile ./extras.sh + cfg.extras;
 
         autosuggestion = {
           enable = true;
@@ -141,7 +149,7 @@ import ../module.nix {
     nixos = {
       programs.zsh.enable = true;
     };
-    
+
     droid = {
       # programs.zsh.enable = true;
       #home.shell.enableZshIntegration = true;

@@ -68,6 +68,7 @@ import ../machine.nix {
     neovim.enable = true;
     watchdog.enable = false;
     vscode.enable = true;
+    tmux.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
