@@ -100,6 +100,10 @@ import ../machine.nix
     vscode.enable = true;
     qmk.enable = true;
     tmux.enable = true;
+    cli-notes = {
+      enable = true;
+      source-path = "~/Documents/bash/notes";
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;

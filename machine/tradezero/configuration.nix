@@ -69,6 +69,10 @@ import ../machine.nix {
     watchdog.enable = false;
     vscode.enable = true;
     tmux.enable = true;
+    cli-notes = {
+      enable = true;
+      source-path = "~/Documents/bash/notes";
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;
