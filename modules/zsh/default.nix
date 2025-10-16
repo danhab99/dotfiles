@@ -124,17 +124,21 @@ import ../module.nix {
           tfi = "terraform init";
 
           zadd = "zoxide add";
+          za = "zoxide add .";
           r = "ranger-cd";
           npmi = "npm install";
           npmr = "npm run";
-          vcon = "z /etc/nixos && vim configuration.nix";
-          vhome = "z /etc/nixos && vim home.nix";
           znix = "z /etc/nixos";
 
           cdtemp = "cd $(mktemp -d)";
 
           tools = "aichat -r tools";
           coder = "aichat -r coder";
+
+          note = "note.sh";
+          notes = "note.sh";
+          n = "note.sh";
+          wtf = "analyze.sh";
         };
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
