@@ -22,22 +22,23 @@ import ../module.nix
         customBusybox
         dbeaver-bin
         firefox
+        gh-copilot
         gimp
         gparted
         kubectl
         lm_sensors
         nettools
         obsidian
+        parted
+        pciutils
         postgresql
         seahorse
+        tree
         unixODBCDrivers.msodbcsql17
         upower
         usbutils
         vlc
         webcamoid
-        tree
-        parted
-        pciutils
       ];
     };
 }
