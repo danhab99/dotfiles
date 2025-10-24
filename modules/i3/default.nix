@@ -19,7 +19,7 @@ import ../module.nix {
       type = types.str;
     };
     fontSize = mkOption {
-      type = types.int;
+      type = types.float;
     };
   };
 
