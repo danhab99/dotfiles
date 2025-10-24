@@ -131,13 +131,13 @@
 83=""
 
 # 4, 5
-105=""
+105="playerctl previous"
 
 # 5, 5
-106=""
+106="playerctl play-pause"
 
 # 6, 5
-103=""
+103="playerctl next"
 
 # 7, 5
 108="xdotool key Super_L+Enter"
