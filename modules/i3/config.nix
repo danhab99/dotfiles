@@ -1,7 +1,7 @@
 { pkgs, cfg, lib }:
 let
   mod = "Mod4";
-  fontSize = 14.0;
+  fontSize = cfg.fontSize;
 in
 {
   modifier = mod;

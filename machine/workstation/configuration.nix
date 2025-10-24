@@ -24,6 +24,7 @@ import ../machine.nix
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "DP-4" "DP-0" "HDMI-0" ];
       defaultLayoutScript = "3screen.sh";
+      fontSize = 20;
     };
     nix.enable = true;
     ollama = {
