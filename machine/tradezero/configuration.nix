@@ -21,6 +21,7 @@ import ../machine.nix {
       # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
       screen = [ "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # home desk
       defaultLayoutScript = "home-desk.sh";
+      fontSize = 12;
     };
     nix.enable = true;
     ollama = {

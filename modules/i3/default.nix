@@ -18,6 +18,9 @@ import ../module.nix {
     defaultLayoutScript = mkOption {
       type = types.str;
     };
+    fontSize = mkOption {
+      type = types.int;
+    };
   };
 
   output = { pkgs, config, cfg, lib, ... }: {
