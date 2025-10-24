@@ -22,7 +22,7 @@ import ../machine.nix
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "eDP-1" ];
-      fontSize = 12;
+      fontSize = 9.0;
     };
     nix.enable = true;
     ollama.enable = false;
