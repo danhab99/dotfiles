@@ -16,7 +16,9 @@ import ../module.nix {
         allowSFTP = true;
         authorizedKeysInHomedir = true;
         settings.PasswordAuthentication = false;
-        forwardX11 = true;
+        settings = {
+          X11Forwarding = true;
+        };
       };
 
       networking.firewall  = {

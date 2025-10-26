@@ -23,11 +23,11 @@ import ../module.nix
 
       boot.kernelModules = [ "iTCO_wdt" ]; # Intel boards
 
-      systemd.watchdog = {
-        device = "/dev/watchdog"; # path to hardware watchdog
-        runtimeTime = "${ts timeout}s"; # system should ping at least this often
-        rebootTime = "${ts ( timeout * 2 ) }s"; # if unresponsive for this much time, reboot
-        kexecTime = null; # optional: time to wait during kexec
+      systemd.settings.Manager = {
+        KExecWatchdogSec = null;
+        RebootWatchdogSec = "${ts ( timeout * 2 ) }s"; # if unresponsive for this much time, reboot
+        RuntimeWatchdogSec = "${ts timeout}s"; # system should ping at least this often
+        WatchdogDevice = "/dev/watchdog"; # path to hardware watchdog
       };
 
       boot.crashDump.enable = true;
