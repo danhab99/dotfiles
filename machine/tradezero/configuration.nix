@@ -72,7 +72,7 @@ import ../machine.nix {
     tmux.enable = true;
     cli-notes = {
       enable = true;
-      source-path = "~/Documents/bash/notes";
+      source-path = "~/Documents/cli-notes";
     };
     xdg.enable = true;
 
