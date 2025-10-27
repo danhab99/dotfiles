@@ -23,7 +23,7 @@ import ../module.nix {
     packages = with pkgs; [
       aichat
       argc
-      # whisperx
+      whisperx
     ];
 
     nixos = {
