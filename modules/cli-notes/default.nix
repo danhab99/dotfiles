@@ -14,10 +14,11 @@ import ../module.nix
     homeManager = {
       programs.zsh = {
         shellAliases = {
+          huh = "analyze.sh";
+          n = "note.sh";
           note = "note.sh";
           notes = "note.sh";
-          n = "note.sh";
-          wtf = "analyze.sh";
+          wtf = "rag.sh";
         };
 
         initContent = "PATH=$PATH:${cfg.source-path}";

@@ -135,11 +135,6 @@ import ../module.nix {
 
           tools = "aichat -r tools";
           coder = "aichat -r coder";
-
-          note = "note.sh";
-          notes = "note.sh";
-          n = "note.sh";
-          wtf = "analyze.sh";
         };
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
