@@ -19,6 +19,7 @@ import ../module.nix
           note = "note.sh";
           notes = "note.sh";
           wtf = "rag.sh";
+          s = "scratch.sh";
         };
 
         initContent = "PATH=$PATH:${cfg.source-path}";
