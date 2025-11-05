@@ -16,7 +16,7 @@ import ../user.nix {
   shell = pkgs: pkgs.zsh;
 
   sessionVariables = pkgs: with pkgs; {
-    BROWSER = firefox + "/bin/firefox";
+    BROWSER = brave + "/bin/brave";
     GIT_PAGER = bat + "/bin/bat";
   };
 }
