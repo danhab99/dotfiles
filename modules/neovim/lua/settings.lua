@@ -26,4 +26,7 @@ opt.updatetime = 1000
 opt.breakindent = true
 opt.smartindent = true
 opt.termguicolors = true  
-opt.mouse = "a"     
+opt.mouse = "a"
+
+-- Disable vim-move default mappings to prevent Esc+j/k issues
+vim.g.move_map_keys = 0
