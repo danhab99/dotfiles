@@ -5,13 +5,21 @@ import ../module.nix
   output = { pkgs, config, lib, ... }: {
     packages = with pkgs; [
       nvtopPackages.full
-      cudatoolkit
+      cudaPackages.cudatoolkit
+      cudaPackages.cuda_nvcc
+      cudaPackages.cuda_cudart
+      cudaPackages.libcublas
+      cudaPackages.libcufft
+      cudaPackages.libcurand
+      cudaPackages.libcusparse
+      cudaPackages.libcusolver
+      cudaPackages.cudnn
     ];
 
     nixos = {
       nixpkgs.config = {
-        cudaSupport = true;
-        cudaVersion = "12";
+        cudaSupport = false;  # Disable global CUDA support to avoid build issues
+        allowUnfree = true;
       };
 
       hardware.graphics = {
@@ -27,6 +35,13 @@ import ../module.nix
         package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
 
+      environment.systemPackages = with pkgs; [
+        # Add CUDA packages to system for apps that need them
+        cudaPackages.cudatoolkit
+        cudaPackages.cuda_nvcc
+        cudaPackages.cuda_cudart
+      ];
+
       environment.variables = {
         # Force Vulkan to use NVIDIA driver
         VK_ICD_FILENAMES = "/run/opengl-driver/etc/vulkan/icd.d/nvidia_icd.json";
@@ -34,7 +49,9 @@ import ../module.nix
         # Optional performance tweaks
         __GL_THREADED_OPTIMIZATIONS = "1";
         __GL_SYNC_TO_VBLANK = "0";
-        LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib:${pkgs.cudnn}/lib";
+        # CUDA library paths
+        CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
+        LD_LIBRARY_PATH = "${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.cudaPackages.cuda_cudart}/lib";
       };
     };
   };
