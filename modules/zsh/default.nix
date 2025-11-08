@@ -144,10 +144,10 @@ import ../module.nix {
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
 
-        autosuggestion = {
-          enable = true;
-          strategy = [ "history" "completion" ];
-        };
+        # autosuggestion = {
+        #   enable = true;
+        #   strategy = [ "history" "completion" ];
+        # };
       };
     };
 
