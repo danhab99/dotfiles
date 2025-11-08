@@ -81,6 +81,9 @@
             ./nix-on-droid.nix
           ];
         };
+      
+      homeManagerModules.default = import ./modules/select.nix "homeManagerModule" inputs;
+
     } // (
       flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
       let

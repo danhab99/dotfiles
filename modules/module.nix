@@ -56,11 +56,18 @@ in
   };
 
   droidModule = mkDevice {
-    module = { cfg, lib, nixos, homeManager, packages, droid }:
+    module = { homeManager, packages, droid, ... }:
       droid // 
       {
         environment.packages = packages;
         home-manager.config = homeManager;
+      };
+  };
+
+  homeManagerModule = mkDevice {
+    module = { homeManager, packages, ... }:
+      homeManager // {
+        home.packages = packages;
       };
   };
 }
