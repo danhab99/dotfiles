@@ -21,7 +21,6 @@ import ../module.nix
         brave
         customBusybox
         dbeaver-bin
-        firefox
         gh-copilot
         gimp
         gparted
