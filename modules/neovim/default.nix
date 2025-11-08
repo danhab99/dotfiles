@@ -73,7 +73,6 @@ import ../module.nix
           vim-css-color
           vim-fugitive
           vim-gitgutter
-          vim-move
           vim-polyglot
           vim-surround
         ];
