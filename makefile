@@ -8,7 +8,6 @@ endif
 ifeq ($(device),nixos)
 	switch_command := sudo nixos-rebuild
 	clean_command := sudo nix-collect-garbage
-	clean_command := sudo nix-env --delete-generations +3 --profile /nix/var/nix/profiles/system
 else ifeq ($(device),droid)
 	switch_command := nix-on-droid
 	clean_command := nix-collect-garbage
@@ -24,7 +23,7 @@ rollback:
 switch:
 	$(switch_command) switch \
 		--option substitute true \
-		--option download-buffer-size 10000 \
+		--option download-buffer-size 10000000000 \
 		--max-jobs $(max_jobs) \
 		--keep-going \
 		--flake .#$(name)
