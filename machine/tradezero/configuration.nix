@@ -74,6 +74,7 @@ import ../machine.nix {
       enable = true;
       source-path = "~/Documents/bash/notes";
     };
+    xdg.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

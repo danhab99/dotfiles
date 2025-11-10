@@ -64,6 +64,7 @@ import ../machine.nix
     };
     vscode.enable = true;
     tmux.enable = true;
+    xdg.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
