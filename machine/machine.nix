@@ -71,6 +71,8 @@ inputs@{ pkgs, lib, ... }:
     environment.variables = environmentVariables;
     environment.systemPackages = packages pkgs;
 
+    home-manager.backupFileExtension = "hm-backup";
+
     home-manager.users.dan = {
       home.file = files;
       xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
