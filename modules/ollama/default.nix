@@ -38,6 +38,12 @@ import ../module.nix {
               doCheck = false;
               pytestCheckPhase = "echo 'skipping tests for rapidocr-onnxruntime'";
             });
+
+            pyannote-audio = pyPrev.pyannote-audio.overridePythonAttrs (old: {
+              propagatedBuildInputs =
+                (old.propagatedBuildInputs or []) ++ [ pyPrev.omegaconf ];
+            });
+
           });
         })
       ];
