@@ -107,6 +107,7 @@ import ../machine.nix
       source-path = "~/Documents/bash/notes";
     };
     xdg.enable = true;
+    redshift.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
