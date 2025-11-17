@@ -33,6 +33,11 @@ import ../module.nix
               };
             };
             "inlayHint.enable" = false;
+            "cargo" = {
+              "cfgs" = {
+                "some_cfg" = true;
+              };
+            };
           };
         };
 
