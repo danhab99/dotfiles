@@ -75,6 +75,7 @@ import ../machine.nix {
       source-path = "~/Documents/cli-notes";
     };
     xdg.enable = true;
+    redshift.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
