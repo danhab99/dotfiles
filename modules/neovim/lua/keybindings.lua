@@ -32,7 +32,11 @@ map("n", "<C-s>", ":FzfLua grep<CR>", opts)
 map("n", "<C-h>", "<C-^>", opts)
 
 -- Yank / move
-map("n", "yc", "yygccp", opts)
+vim.keymap.set("n", "yc", function()
+  vim.cmd("normal! yy")
+  vim.cmd("normal gcc")
+  vim.cmd("normal! p")
+end, opts)
 map("n", "gg", "mggg", opts)
 map("n", "G", "mgG", opts)
 map("n", "gm", "<C-w>wj<CR>", opts)
