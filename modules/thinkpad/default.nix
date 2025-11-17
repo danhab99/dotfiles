@@ -53,12 +53,14 @@ import ../module.nix
       # boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
 
       services.upower.enable = true;
-      services.power-profiles-daemon.enable = true;
+      # services.power-profiles-daemon.enable = true;
 
-      services.logind.extraConfig = ''
-        IdleAction=suspend
-        IdleActionSec=15min
-      '';
+      services.logind.settings = {
+        Login = {
+          IdleAction = "suspend";
+          IdleActionSec = "15min";
+        };
+      };
 
       services.tlp.enable = true;
       services.tlp.settings = {

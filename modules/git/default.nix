@@ -63,10 +63,10 @@ import ../module.nix {
             "remain" = "!sh -c 'git fetch origin main && git rebase origin/main'";
             "rebase-main" = "!git fetch origin main && git rebase origin/main";
           };
-
-          userEmail = cfg.email;
-          userName = "Dan Habot";
         };
+        
+        userEmail = cfg.email;
+        userName = "Dan Habot";
 
         signing = {
           key = cfg.signingKey;
