@@ -24,7 +24,7 @@ import ../machine.nix
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "DP-4" "DP-0" "HDMI-0" ];
       defaultLayoutScript = "3screen.sh";
-      fontSize = 14.0;
+      fontSize = 16.0;
     };
     nix.enable = true;
     ollama = {
@@ -80,6 +80,7 @@ import ../machine.nix
           urxvt*transparent: true
           urxvt*tintColor: #525252
         '';
+        fontSize = 22;
       };
     zoxide.enable = true;
     zsh.enable = true;

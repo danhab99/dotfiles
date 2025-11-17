@@ -7,6 +7,9 @@ import ../module.nix {
       type = types.str;
       default = "";
     };
+    fontSize = mkOption {
+      type = types.int;
+    };
   };
 
   output = { pkgs, cfg, nixpkgs_for_xpad, ... }: {
@@ -51,12 +54,15 @@ import ../module.nix {
       };
     };
 
-    homeManager = {
-      xresources.extraConfig = builtins.concatStringsSep "\n" [
+    homeManager = let
+      content = builtins.concatStringsSep "\n" [
         (builtins.readFile ./Xresources)
         (builtins.readFile ./Xdefaults)
         cfg.extraConfig
       ];
+      
+    in {
+      xresources.extraConfig = builtins.replaceStrings [ "FONT_SIZE" ] [ (builtins.toString cfg.fontSize) ] content;
     };
   };
 }
