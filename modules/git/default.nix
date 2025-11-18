@@ -23,16 +23,14 @@ import ../module.nix {
         enable = true;
 
         settings = {
-          extraConfig = {
-            pull.rebase = true;
-            init.defaultBranch = "main";
-            color = {
-              ui = "auto";
-              diff = "auto";
-            };
+          pull.rebase = true;
+          init.defaultBranch = "main";
+          color = {
+            ui = "auto";
+            diff = "auto";
           };
 
-          aliases = {
+          alias = {
             "unstage" = "reset HEAD --";
             "nicelog" = "log --graph --oneline";
             "nl" = "log --graph --oneline";
