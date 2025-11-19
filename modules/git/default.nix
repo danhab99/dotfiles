@@ -12,10 +12,39 @@ import ../module.nix {
     };
   };
 
-  output = { pkgs, cfg, ... }: {
+  output = { pkgs, cfg, ... }: let
+    gitDiffBlame = pkgs.stdenv.mkDerivation {
+      pname = "git-diff-blame";
+      version = "unstable";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "dmnd";
+        repo = "git-diff-blame";
+        rev = "master";
+        sha256 = "sha256-hmk7wNI+KifACS220yAiRRon1LhL3RS/HeI93kCkcig=";
+      };
+
+      # perl needs to be in the runtime closure
+      buildInputs = [ pkgs.perl ];
+
+      dontBuild = true;
+
+      installPhase = ''
+        mkdir -p $out/bin
+        cp git-diff-blame $out/bin/git-diff-blame
+
+        # fix shebang from /usr/bin/perl -> Nix perl
+        substituteInPlace $out/bin/git-diff-blame \
+          --replace '#!/usr/bin/perl' "#!${pkgs.perl}/bin/perl"
+
+        chmod +x $out/bin/git-diff-blame
+      '';
+    };
+  in {
     packages = with pkgs; [
       lazygit
       dvc
+      gitDiffBlame
     ];
 
     homeManager = {
