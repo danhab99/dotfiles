@@ -82,6 +82,7 @@ import ../machine.nix {
   };
 
   hostName = "tradezero";
+  system = "x86-64_linux";
 
   i3Config = { mod }: {
     keybindings = {
