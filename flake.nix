@@ -32,22 +32,7 @@
     let
       inherit (self) outputs;
 
-      mkNix = hostName:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            nixpkgs_for_xpad = import nixpkgs_for_xpad { system = "x86_64-linux"; };
-          } // inputs;
-          modules = [
-            ./machine/${hostName}/configuration.nix
-            ./machine/${hostName}/hardware-configuration.nix
-            ./cachix.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
-          ];
-        };
+      mkNix = hostName: (import ./machine/${hostName}/configuration.nix) inputs;
     in
     {
       nixosConfigurations =

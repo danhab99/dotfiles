@@ -1,6 +1,7 @@
 import ../machine.nix
 {
   hostName = "laptop";
+  system = "x86-64_linux";
 
   users = {
     dan.enable = true;

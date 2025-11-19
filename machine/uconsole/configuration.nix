@@ -1,6 +1,7 @@
 import ../machine.nix
 {
   hostName = "uconsole";
+  system = "aarch64-linux";
 
   users = {
     dan.enable = true;

@@ -1,6 +1,7 @@
 { users
 , module
 , hostName
+, system
 , environmentVariables ? { }
 , packages ? (pkgs: [ ])
 , files ? { }
@@ -57,74 +58,90 @@ let
     baseService // withTimer;
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
+
+  nixosModule = inputs@{ pkgs, lib, ... }:
+    {
+      imports = [
+        (import ../modules/select.nix "nixosModule" inputs)
+        ../users
+      ];
+
+      config = {
+        inherit users module;
+
+        environment.variables = environmentVariables;
+        environment.systemPackages = packages pkgs;
+
+        home-manager.backupFileExtension = "hm-backup";
+
+        home-manager.users.dan = {
+          home.file = files;
+          xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
+        };
+
+        services = {
+          xserver.config = xserver;
+          dbus.enable = true;
+          flatpak.enable = true;
+        } // (nixos.services or { });
+
+        systemd =
+          let
+            defs = jobs { inherit pkgs; };
+            serviceTimers = map mkJob defs;
+            services = map (x: x.services) serviceTimers;
+            timers = map (x: x.timers) serviceTimers;
+
+            merge = builtins.foldl' (a: b: a // b) { };
+
+            allServices = merge services;
+            allTimers = merge timers;
+
+            finishedJobs = { services = allServices; } //
+              { timers = allTimers; };
+          in
+          (
+            { tmpfiles.rules = map mkBind bind; } //
+            (finishedJobs)
+          );
+
+        networking = {
+          networkmanager.enable = true;
+          inherit hostName;
+        };
+
+        environment.localBinInPath = true;
+
+        xdg.portal.enable = true;
+
+        boot.tmp.cleanOnBoot = true;
+
+        # This value determines the NixOS release from which the default
+        # settings for stateful data, like file locations and database versions
+        # on your system were taken. It‘s perfectly fine and recommended to leave
+        # this value at the release version of the first install of this system.
+        # Before changing this value read the documentation for this option
+        # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+        system.stateVersion = "24.05"; # Please read the comment before changing.
+
+        nixpkgs.config.permittedInsecurePackages = [
+          "libsoup-2.74.3"
+        ];
+      };
+    };
 in
-inputs@{ pkgs, lib, ... }:
-{
-  imports = [
-    (import ../modules/select.nix "nixosModule" inputs)
-    ../users
+inputs@{ nixpkgs, home-manager, nixpkgs_for_xpad, ... }: nixpkgs.lib.nixosSystem {
+  specialArgs = {
+    nixpkgs_for_xpad = import nixpkgs_for_xpad { inherit system; };
+  } // inputs;
+  modules = [
+    nixosModule
+    ./${hostName}/hardware-configuration.nix
+    ../cachix.nix
+    home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+    }
   ];
-
-  config = {
-    inherit users module;
-
-    environment.variables = environmentVariables;
-    environment.systemPackages = packages pkgs;
-
-    home-manager.backupFileExtension = "hm-backup";
-
-    home-manager.users.dan = {
-      home.file = files;
-      xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
-    };
-
-    services = {
-      xserver.config = xserver;
-      dbus.enable = true;
-      flatpak.enable = true;
-    } // (nixos.services or { });
-
-    systemd =
-      let
-        defs = jobs { inherit pkgs; };
-        serviceTimers = map mkJob defs;
-        services = map (x: x.services) serviceTimers;
-        timers = map (x: x.timers) serviceTimers;
-
-        merge = builtins.foldl' (a: b: a // b) { };
-
-        allServices = merge services;
-        allTimers = merge timers;
-
-        finishedJobs = { services = allServices; } //
-          { timers = allTimers; };
-      in
-      (
-        { tmpfiles.rules = map mkBind bind; } //
-        (finishedJobs)
-      );
-
-    networking = {
-      networkmanager.enable = true;
-      inherit hostName;
-    };
-
-    environment.localBinInPath = true;
-
-    xdg.portal.enable = true;
-
-    boot.tmp.cleanOnBoot = true;
-
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "24.05"; # Please read the comment before changing.
-
-    nixpkgs.config.permittedInsecurePackages = [
-      "libsoup-2.74.3"
-    ];
-  };
 }
