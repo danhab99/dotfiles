@@ -126,7 +126,9 @@ let
       };
     };
 in
-inputs@{ nixpkgs, home-manager, nixpkgs_for_xpad, ... }: nixpkgs.lib.nixosSystem {
+inputs@{ nixpkgs, home-manager, nixpkgs_for_xpad, ... }: 
+nixpkgs.lib.nixosSystem {
+  inherit system;
   specialArgs = {
     nixpkgs_for_xpad = import nixpkgs_for_xpad { inherit system; };
   } // inputs;
@@ -139,5 +141,6 @@ inputs@{ nixpkgs, home-manager, nixpkgs_for_xpad, ... }: nixpkgs.lib.nixosSystem
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
     }
+    nixos
   ];
 }

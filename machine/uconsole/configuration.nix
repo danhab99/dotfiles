@@ -11,18 +11,25 @@ import ../machine.nix
     all-packages.enable = true;
     appimage.enable = true;
     audio.enable = true;
-    cli-notes.enable = true;
-    displaycal.enable = false;
     docker.enable = true;
     droid-packages.enable = false;
     font.enable = true;
     fzf.enable = true;
     gestures.enable = false;
-    git.enable = true;
+    git = {
+      enable = true;
+      signingKey = "";
+      email = "dan.habot@gmail.com";
+    };
     gnupg.enable = true;
     i18n.enable = true;
-    i3.enable = true;
-    kde.enable = false;
+    i3 = {
+      enable = true;
+      i3blocksConfig = ./i3blocks.conf;
+      screen = [ "eDP-1" ]; 
+      defaultLayoutScript = "";
+      fontSize = 12.0;
+    };
     libreoffice.enable = false;
     metis.enable = false;
     neovim.enable = true;
@@ -48,13 +55,60 @@ import ../machine.nix
     tmux.enable = true;
     urxvt.enable = true;
     vbox.enable = false;
-    vim.enable = true;
+    vim.enable = false;
     vscode.enable = true;
     watchdog.enable = false;
     wireguard.enable = false;
     xdg.enable = true;
-    xorg.enable = true;
+    xorg = {
+      enable = true;
+      videoDrivers = [ "modesetting" ];
+      extraConfig = ''
+        urxvt*depth: 32
+        urxvt*blurRadius: 0
+        urxvt*transparent: true
+        urxvt*tintColor: #525252
+      '';
+      fontSize = 12;
+    };
     zoxide.enable = true;
     zsh.enable = true;
+  };
+
+  nixos = {
+    # Basic bootloader for ARM
+    boot.loader.grub.enable = false;
+    boot.loader.generic-extlinux-compatible.enable = true;
+    
+    # Enable firmware
+    hardware.enableRedistributableFirmware = true;
+
+    # # Required for CM4/uConsole display + dt overlays
+    # hardware.deviceTree.enable = true;
+    # hardware.deviceTree.filter = "bcm2711-*";
+
+    # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    # boot.initrd.kernelModules = [
+    #   "i2c_bcm2835"
+    #   "i2c_dev"
+    # ];
+
+    # boot.kernelModules = [
+    #   "vc4"
+    #   "bcm2835_dma"
+    #   "drm"
+    #   "drm_kms_helper"
+    #   "panel-simple"
+    #   "usbhid"
+    # ];
+
+    # # Serial console for debugging
+    # boot.kernelParams = [
+    #   "console=ttyAMA0,115200"
+    #   "console=tty1"
+    #   # Adjust resolution depending on panel variant
+    #   "video=DSI-1:800x480@60"
+    # ];
   };
 }
