@@ -21,7 +21,7 @@ import ../module.nix
         temperature = {
           # day = 5500;
           day = 4000;
-          night = 3700;
+          night = 3000;
         };
       };
     };
