@@ -5,6 +5,7 @@
 * `make update`: Updates the flake.lock to the latest
 * `make switch`: Builds nix and applies the new version
 * `make clean`: cleans the nix store
+* `make disk name=<machine>`: Builds an SD card image for ARM-based machines (e.g., uconsole)
 
 ##### .env file
 
@@ -12,8 +13,28 @@
 name=..
 device=nixos|droid
 keep_garbage=10d
-max_jobs=100
+max_jobs=auto
 ```
+
+### Building SD Card Images
+
+For ARM-based machines like the ClockworkPi uConsole, you can build bootable SD card images:
+
+```bash
+make disk name=uconsole
+```
+
+This will:
+1. Build a complete NixOS system for the target architecture (aarch64-linux)
+2. Create an SD card image with proper partitioning and bootloader
+3. Output the image to `result/sd-image/*.img`
+
+To flash the image to an SD card:
+```bash
+sudo dd if=result/sd-image/*.img of=/dev/sdX bs=4M status=progress conv=fsync
+```
+
+Replace `/dev/sdX` with your actual SD card device. **Warning:** This will erase all data on the target device!
 
 ## Creating a new machine
 
