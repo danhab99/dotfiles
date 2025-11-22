@@ -11,41 +11,14 @@ in
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  hardware.enableRedistributableFirmware = true;
-
-
-  # Required for CM4/uConsole display + dt overlays
-  hardware.deviceTree.enable = true;
-  hardware.deviceTree.filter = "bcm2711-*";
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.initrd.kernelModules = [
-    "i2c_bcm2835"
-    "i2c_dev"
-  ];
-
-  boot.kernelModules = [
-    "vc4"
-    "bcm2835_dma"
-    "drm"
-    "drm_kms_helper"
-    "panel-simple"
-    "usbhid"
-  ];
-
-  # Serial console for debugging
-  boot.kernelParams = [
-    "console=ttyAMA0,115200"
-    "console=tty1"
-    # Adjust resolution depending on panel variant
-    "video=DSI-1:800x480@60"
-  ];
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp49s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault system;
-  nixpkgs.config.allowUnsupportedSystem = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.config.allowUnsupportedSystem = false;
+  
+  # ARM-specific settings - no Intel microcode on ARM!
+  # hardware.cpu.intel.updateMicrocode is not applicable for ARM
 }
+

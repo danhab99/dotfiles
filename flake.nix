@@ -5,6 +5,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs_for_xpad.url = "github:nixos/nixpkgs/910796cabe436259a29a72e8d3f5e180fc6dfacc";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-uconsole.url = "github:jacbart/nixos-uconsole";
     
     droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05-small";
     droid-home-manager = {
