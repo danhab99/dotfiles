@@ -35,6 +35,10 @@ function dev-shell() {
   cp /etc/nixos/flake.lock .
 }
 
+function update-betterlockscreen() {
+  betterlockscreen -u "$(cat ~/.config/nitrogen/bg-saved.cfg | grep file= | cut -d '=' -f2)"
+}
+
 alias devshell="dev-shell";
 alias nixshell="dev-shell";
 
