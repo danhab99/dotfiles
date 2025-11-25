@@ -140,41 +140,6 @@
         "type": "github"
       }
     },
-    "nixos-hardware_2": {
-      "locked": {
-        "lastModified": 1756245047,
-        "narHash": "sha256-9bHzrVbjAudbO8q4vYFBWlEkDam31fsz0J7GB8k4AsI=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "a65b650d6981e23edd1afa1f01eb942f19cdcbb7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
-    "nixos-uconsole": {
-      "inputs": {
-        "nixos-hardware": "nixos-hardware_2",
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1756613602,
-        "narHash": "sha256-MZjDyxgcMhOSguuBiz5/s3ae1KSJXR29gFKVfLZj7zQ=",
-        "owner": "jacbart",
-        "repo": "nixos-uconsole",
-        "rev": "6ebd6871b9b4d068e92d17e9598756ef084475ba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jacbart",
-        "repo": "nixos-uconsole",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1762111121,
@@ -224,21 +189,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1756536218,
-        "narHash": "sha256-ynQxPVN2FIPheUgTFhv01gYLbaiSOS7NgWJPm9LF9D0=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a918bb3594dd243c2f8534b3be01b3cb4ed35fd1",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixpkgs-unstable",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1762363567,
         "narHash": "sha256-YRqMDEtSMbitIMj+JLpheSz0pwEr0Rmy5mC7myl17xs=",
@@ -332,8 +282,7 @@
         "home-manager": "home-manager",
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
-        "nixos-uconsole": "nixos-uconsole",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs_for_xpad": "nixpkgs_for_xpad"
       }
     },
