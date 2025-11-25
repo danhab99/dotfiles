@@ -5,9 +5,6 @@ ifneq ("$(wildcard .env)","")
   export
 endif
 
-# Default values
-max_jobs ?= auto
-
 ifeq ($(device),nixos)
 	switch_command := sudo nixos-rebuild
 	clean_command := sudo nix-collect-garbage
@@ -42,17 +39,3 @@ firmware:
 	fwupdmgr refresh --force
 	fwupdmgr get-updates
 	fwupdmgr update
-
-disk:
-	@echo "Building SD card image for $(name)..."
-	export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
-	nix build \
-		--option substitute true \
-		--option download-buffer-size 10000000000 \
-		--max-jobs $(max_jobs) \
-		--keep-going \
-		--system aarch64-linux \
-		--impure \
-		.#nixosConfigurations.$(name).config.system.build.sdImage
-	@echo "SD card image built successfully!"
-	@echo "Image location: $$(readlink -f result)/sd-image/*.img"

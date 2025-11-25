@@ -76,16 +76,39 @@ import ../machine.nix
   };
 
   nixos = {
-    # Basic bootloader for ARM - using generic extlinux for compatibility
+    # Basic bootloader for ARM
     boot.loader.grub.enable = false;
     boot.loader.generic-extlinux-compatible.enable = true;
     
     # Enable firmware
     hardware.enableRedistributableFirmware = true;
-  };
 
-  extraNixosModules = { nixos-uconsole, ... }: [
-    nixos-uconsole.nixosModules.default
-    nixos-uconsole.nixosModules."kernel-6.1-potatomania"
-  ];
+    # # Required for CM4/uConsole display + dt overlays
+    # hardware.deviceTree.enable = true;
+    # hardware.deviceTree.filter = "bcm2711-*";
+
+    # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+    # boot.initrd.kernelModules = [
+    #   "i2c_bcm2835"
+    #   "i2c_dev"
+    # ];
+
+    # boot.kernelModules = [
+    #   "vc4"
+    #   "bcm2835_dma"
+    #   "drm"
+    #   "drm_kms_helper"
+    #   "panel-simple"
+    #   "usbhid"
+    # ];
+
+    # # Serial console for debugging
+    # boot.kernelParams = [
+    #   "console=ttyAMA0,115200"
+    #   "console=tty1"
+    #   # Adjust resolution depending on panel variant
+    #   "video=DSI-1:800x480@60"
+    # ];
+  };
 }
