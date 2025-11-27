@@ -36,23 +36,23 @@ import ../module.nix
         cpuFreqGovernor = "performance";
       };
 
-      # services.tlp = {
-      #   enable = true;
-      #   settings = {
-      #     CPU_BOOST_ON_AC = 1;
-      #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      #     CPU_BOOST_ON_BAT = 1;
-      #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      #     CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-      #   };
-      # };
+      services.tlp = {
+        enable = true;
+        settings = {
+          CPU_BOOST_ON_AC = 1;
+          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+          CPU_BOOST_ON_BAT = 1;
+          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+        };
+      };
 
       services.hardware.bolt.enable = true;
 
       # boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
 
-      services.upower.enable = true;
+      # services.upower.enable = true;
       # services.power-profiles-daemon.enable = true;
 
       services.logind.settings = {
@@ -62,22 +62,22 @@ import ../module.nix
         };
       };
 
-      services.tlp.enable = true;
-      services.tlp.settings = {
-        # Battery vs AC profiles
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      # services.tlp.enable = true;
+      # services.tlp.settings = {
+      #   # Battery vs AC profiles
+      #   CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-        # Sleep configuration
-        SUSPEND_MODULES = "snd_hda_intel"; # optional, speeds up suspend/resume
+      #   # Sleep configuration
+      #   SUSPEND_MODULES = "snd_hda_intel"; # optional, speeds up suspend/resume
 
-        # ThinkPad battery thresholds (if supported)
-        START_CHARGE_THRESH_BAT0 = 20;
-        STOP_CHARGE_THRESH_BAT0 = 95;
+      #   # ThinkPad battery thresholds (if supported)
+      #   START_CHARGE_THRESH_BAT0 = 20;
+      #   STOP_CHARGE_THRESH_BAT0 = 95;
 
-        # Enable autosuspend for USB devices when on battery
-        USB_AUTOSUSPEND = 1;
-      };
+      #   # Enable autosuspend for USB devices when on battery
+      #   USB_AUTOSUSPEND = 1;
+      # };
     };
   };
 }
