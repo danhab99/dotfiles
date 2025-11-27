@@ -18,10 +18,18 @@ import ../module.nix
           day = "1";
           night = "0.8";
         };
+
         temperature = {
           # day = 5500;
           day = 4000;
           night = 3000;
+        };
+
+        settings = {
+          redshift = {
+            adjustment-method = "randr";
+          };
+          randr = { };
         };
       };
     };
