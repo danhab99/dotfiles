@@ -39,7 +39,7 @@ import ../machine.nix
     urxvt.enable = true;
     xorg = {
       enable = true;
-      videoDriver = "modesetting";
+      videoDrivers = [ "modesetting" ];
       extraConfig = ''
         urxvt*depth: 0
         urxvt*blurRadius: 0
@@ -56,7 +56,6 @@ import ../machine.nix
     audio = {
       enable = true;
       enableBluetooth = true;
-      enableJACK = true;
     };
     watchdog.enable = true;
     gestures = {

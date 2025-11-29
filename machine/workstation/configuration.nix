@@ -1,7 +1,7 @@
 import ../machine.nix
 {
   hostName = "workstation";
-  system = "x86-64_linux";
+  system = "x86_64-linux";
 
   users = {
     dan.enable = true;
@@ -112,6 +112,11 @@ import ../machine.nix
 
     all-packages.enable = true;
     nixos-packages.enable = true;
+  };
+
+  nixos = {
+    # Enable binfmt emulation for building ARM images
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   files = {
