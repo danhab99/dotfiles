@@ -41,10 +41,4 @@ firmware:
 	fwupdmgr update
 
 build-image:
-	@echo "Building SD image for $(target)..."
-	nix build .#images.$(target)-sd \
-		--option substitute true \
-		--keep-going
-	@echo "Image built successfully!"
-	@echo "Find the image in: result/sd-image/"
-	@ls -lh result/sd-image/*.img*
+	nix build .#nixosConfigurations.$(target).config.system.build.isoImage
