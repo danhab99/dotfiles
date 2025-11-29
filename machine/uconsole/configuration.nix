@@ -1,5 +1,4 @@
-import ../machine.nix
-{
+import ../machine.nix rec {
   hostName = "uconsole";
   system = "aarch64-linux";
 
@@ -8,9 +7,9 @@ import ../machine.nix
   };
 
   module = {
-    all-packages.enable = true;
+    all-packages.enable = true;  # Disable for SD image build
     appimage.enable = true;
-    audio.enable = true;
+    audio.enable = false;
     docker.enable = true;
     droid-packages.enable = false;
     font.enable = true;
@@ -18,25 +17,25 @@ import ../machine.nix
     gestures.enable = false;
     git = {
       enable = true;
-      signingKey = "";
       email = "dan.habot@gmail.com";
+      signingKey = "";
     };
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
       enable = true;
-      i3blocksConfig = ./i3blocks.conf;
-      screen = [ "eDP-1" ]; 
+      screen = [ "" ];
       defaultLayoutScript = "";
-      fontSize = 12.0;
+      fontSize = 14.0;
+      i3blocksConfig = ../workstation/i3blocks.conf;
     };
     libreoffice.enable = false;
     metis.enable = false;
     neovim.enable = true;
-    nix.enable = true;
+    nix.enable = true;  # Keep nix tools
     nixos-packages.enable = true;
     nvidia.enable = false;
-    obs.enable = true;
+    obs.enable = false;
     ollama.enable = false;
     printing.enable = false;
     qmk.enable = false;
@@ -44,10 +43,10 @@ import ../machine.nix
     ratbag.enable = false;
     redshift.enable = false;
     rofi.enable = true;
-    rtlsdr.enable = true;
+    rtlsdr.enable = false;
     sddm.enable = true;
     secrets.enable = true;
-    ssh.enable = true;
+    ssh.enable = true;  # Keep SSH for remote access
     steam.enable = false;
     thinkpad.enable = false;
     threedtools.enable = false;
@@ -56,59 +55,16 @@ import ../machine.nix
     urxvt.enable = true;
     vbox.enable = false;
     vim.enable = false;
-    vscode.enable = true;
+    vscode.enable = false;
     watchdog.enable = false;
     wireguard.enable = false;
     xdg.enable = true;
     xorg = {
       enable = true;
       videoDrivers = [ "modesetting" ];
-      extraConfig = ''
-        urxvt*depth: 32
-        urxvt*blurRadius: 0
-        urxvt*transparent: true
-        urxvt*tintColor: #525252
-      '';
       fontSize = 12;
     };
     zoxide.enable = true;
     zsh.enable = true;
-  };
-
-  nixos = {
-    # Basic bootloader for ARM
-    boot.loader.grub.enable = false;
-    boot.loader.generic-extlinux-compatible.enable = true;
-    
-    # Enable firmware
-    hardware.enableRedistributableFirmware = true;
-
-    # # Required for CM4/uConsole display + dt overlays
-    # hardware.deviceTree.enable = true;
-    # hardware.deviceTree.filter = "bcm2711-*";
-
-    # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    # boot.initrd.kernelModules = [
-    #   "i2c_bcm2835"
-    #   "i2c_dev"
-    # ];
-
-    # boot.kernelModules = [
-    #   "vc4"
-    #   "bcm2835_dma"
-    #   "drm"
-    #   "drm_kms_helper"
-    #   "panel-simple"
-    #   "usbhid"
-    # ];
-
-    # # Serial console for debugging
-    # boot.kernelParams = [
-    #   "console=ttyAMA0,115200"
-    #   "console=tty1"
-    #   # Adjust resolution depending on panel variant
-    #   "video=DSI-1:800x480@60"
-    # ];
   };
 }
