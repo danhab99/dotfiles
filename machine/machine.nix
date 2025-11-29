@@ -83,7 +83,7 @@ let
           xserver.config = xserver;
           dbus.enable = true;
           flatpak.enable = true;
-        } // (nixos.services or { });
+        };
 
         systemd =
           let
@@ -141,6 +141,7 @@ nixpkgs.lib.nixosSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
     }
-    nixos
+    # Handle nixos as either a function or an attr set
+    (if builtins.isFunction nixos then nixos else (_: nixos))
   ];
 }
