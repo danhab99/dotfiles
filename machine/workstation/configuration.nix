@@ -217,7 +217,7 @@ import ../machine.nix
     }
     {
       script = "/home/dan/Music/download.sh";
-      packages = with pkgs; [ gnutar gzip findutils scdl ffmpeg_6-full ];
+      packages = with pkgs; [ gnutar gzip findutils scdl ffmpeg_6-full yt-dlp ];
       name = "download-music";
       schedule = "*-*-* 02:00:00";
     }
