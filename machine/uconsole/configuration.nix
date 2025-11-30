@@ -24,7 +24,7 @@ import ../machine.nix rec {
     i18n.enable = true;
     i3 = {
       enable = true;
-      screen = [ "" ];
+      screen = [ "eDP-1" ];
       defaultLayoutScript = "";
       fontSize = 14.0;
       i3blocksConfig = ../workstation/i3blocks.conf;

@@ -50,6 +50,7 @@ in
   nixpkgs.config.allowUnsupportedSystem = true;
   # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  boot.supportedFilesystems = [ "ext4" "btrfs" ];
+  # Disable ZFS for SD image build
+  boot.supportedFilesystems = lib.mkForce [ "ext4" "btrfs" ];
 
 }

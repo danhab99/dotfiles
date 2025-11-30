@@ -22,11 +22,12 @@ import ../module.nix {
       # services.nixos-cli = { enable = true; };
 
       programs.nix-ld.enable = true;
-      programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
+      # programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
+      programs.nix-ld.libraries = with pkgs; [ gtk3 glibc freetype ];
 
-      environment.variables = with pkgs; {
-        LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
-      };
+      # environment.variables = with pkgs; {
+      #   LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
+      # };
     };
 
     homeManager = { };
