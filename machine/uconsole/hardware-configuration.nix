@@ -9,7 +9,7 @@ in
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+      (nixpkgs + "/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix")
     ];
 
   hardware.enableRedistributableFirmware = true;
@@ -48,5 +48,8 @@ in
 
   nixpkgs.hostPlatform = lib.mkDefault system;
   nixpkgs.config.allowUnsupportedSystem = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  boot.supportedFilesystems = [ "ext4" "btrfs" ];
+
 }
