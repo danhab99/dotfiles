@@ -41,4 +41,7 @@ firmware:
 	fwupdmgr update
 
 build-image:
-	nix build .#nixosConfigurations.$(target).config.system.build.isoImage
+	nix build .#nixosConfigurations.$(target).config.system.build.sdImage \
+		--keep-going
+
+
