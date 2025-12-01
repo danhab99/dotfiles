@@ -23,6 +23,7 @@ import ../module.nix
         dbeaver-bin
         gh-copilot
         gimp
+        github-copilot-cli
         gparted
         kubectl
         lm_sensors
