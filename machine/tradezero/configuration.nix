@@ -55,7 +55,7 @@ import ../machine.nix {
         urxvt*transparent: true
         urxvt*tintColor: #525252
       '';
-      fontSize = 12;
+      fontSize = 16;
     };
     zoxide.enable = true;
     zsh.enable = true;
