@@ -26,7 +26,6 @@
             echo "FlexLayout React Demo Environment"
             echo "Run 'make install' to install dependencies"
             echo "Run 'make dev' to start the development server"
-            zsh
             '';
           };
         };
