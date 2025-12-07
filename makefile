@@ -45,4 +45,4 @@ build-image:
 		--keep-going
 
 install: build-image
-	zstd -dc ./result/sd-image/*.img.zst | dd status=progress of=/dev/$(device)
+	sudo dd status=progress if=./result/sd-image/*.img of=/dev/$(device)
