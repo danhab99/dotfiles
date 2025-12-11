@@ -19,6 +19,7 @@ import ../module.nix
       nodejs
       openssl
       playerctl
+      python3
       s3cmd
       scdl
       sshfs
