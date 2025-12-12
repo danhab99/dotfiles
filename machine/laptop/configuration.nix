@@ -23,7 +23,8 @@ import ../machine.nix
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "eDP-1" ];
-      fontSize = 9.0;
+      fontSize = 12.0;
+      defaultLayoutScript = "";
     };
     nix.enable = true;
     ollama.enable = false;
@@ -40,6 +41,7 @@ import ../machine.nix
     xorg = {
       enable = true;
       videoDrivers = [ "modesetting" ];
+      fontSize = 16;
       extraConfig = ''
         urxvt*depth: 0
         urxvt*blurRadius: 0
