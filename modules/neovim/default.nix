@@ -30,6 +30,11 @@ import ../module.nix
                 "filetypes" = [ "cs" ];
                 "rootPatterns" = [ "*.csproj" ];
                 "trace.server" = "verbose";
+              }; 
+              "go" = {
+                "command" = "gopls";
+                "rootPatterns" = ["go.mod"];
+                "filetypes" = ["go"];
               };
             };
             "inlayHint.enable" = false;
