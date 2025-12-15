@@ -12,14 +12,14 @@ import ../module.nix {
     };
   };
 
-  output = { pkgs, cfg, nixpkgs_for_xpad, ... }: {
+  output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
       xclip
       xdotool
       xorg.xbacklight
       xorg.xev
       xorg.xf86inputevdev
-      (import nixpkgs_for_xpad { system = "x86_64-linux"; }).xpad
+      xpad
       xsel
       arandr
       xorg.xrandr

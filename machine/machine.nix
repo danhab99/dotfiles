@@ -126,12 +126,10 @@ let
       };
     };
 in
-inputs@{ nixpkgs, home-manager, nixpkgs_for_xpad, ... }: 
+inputs@{ nixpkgs, home-manager, ... }:
 nixpkgs.lib.nixosSystem {
   inherit system;
-  specialArgs = {
-    nixpkgs_for_xpad = import nixpkgs_for_xpad { inherit system; };
-  } // inputs;
+  specialArgs = { } // inputs;
   modules = [
     nixosModule
     ./${hostName}/hardware-configuration.nix
