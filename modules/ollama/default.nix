@@ -58,8 +58,8 @@ import ../module.nix {
 
       services.ollama = {
         enable = true;
-        acceleration = if cfg.enableGpu then "cuda" else false;
-
+        package = if cfg.enableGpu then pkgs.ollama-cuda else pkgs.ollama-cpu;
+        
         loadModels = cfg.models;
         models = cfg.repoDir;
 
