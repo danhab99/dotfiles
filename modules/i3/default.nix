@@ -54,7 +54,7 @@ import ../module.nix {
           };
         };
       };
-      services.displayManager.defaultSession = "xfce";
+      services.displayManager.defaultSession = "xfce+i3";
 
       security.pam.services.i3lock = {
         enable = true;

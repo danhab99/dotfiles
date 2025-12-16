@@ -19,8 +19,10 @@ import ../machine.nix {
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
       # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
-      screen = [ "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # home desk
-      defaultLayoutScript = "home-desk.sh";
+      # screen = [ "eDP-1" "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # laptop + home desk
+      # screen = [ "DVI-I-2-2" "eDP-1" "DVI-I-1-1" ];
+      screen = [ "DP-3-3-1" "DP-3-1" "DP-3-2" ];
+      defaultLayoutScript = "auto.sh";
       fontSize = 12.0;
     };
     nix.enable = true;
