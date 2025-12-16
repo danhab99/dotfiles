@@ -34,6 +34,14 @@ import ../module.nix {
 
         xautolock.enable = false;
         desktopManager.xterm.enable = false;
+        
+        # Disable DPMS and screen blanking at X server level
+        serverFlagsSection = ''
+          Option "BlankTime" "0"
+          Option "StandbyTime" "0"
+          Option "SuspendTime" "0"
+          Option "OffTime" "0"
+        '';
 
         desktopManager.xfce = {
           enable = true;
@@ -52,6 +60,9 @@ import ../module.nix {
       services.libinput = {
         enable = true;
       };
+      
+      # Disable XFCE power manager to prevent it from managing DPMS
+      services.xserver.desktopManager.xfce.enableScreensaver = false;
     };
 
     homeManager = let

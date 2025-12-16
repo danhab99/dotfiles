@@ -265,6 +265,10 @@ in
       always = true;
     }
     {
+      command = "while true; do sleep 10; xset -dpms; xset s off; xset s noblank; done &";
+      always = true;
+    }
+    {
       command = "ssh-add ~/.ssh/id_rsa";
       always = true;
     }
@@ -337,10 +341,6 @@ in
     {
       command = ''
         xinput | grep -Po "(?<=Logitech Gaming Mouse G600 Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable'';
-      always = true;
-    }
-    {
-      command = "~/.screenlayout/${cfg.defaultLayoutScript}";
       always = true;
     }
     {
