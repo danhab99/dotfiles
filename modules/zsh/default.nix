@@ -136,6 +136,8 @@ import ../module.nix {
 
           tools = "aichat -r tools";
           coder = "aichat -r coder";
+
+          fix-redshift = "systemctl --user restart redshift";
         };
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
