@@ -4,11 +4,11 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    
+
     droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05-small";
     droid-home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows ="droid-nixpkgs";
+      inputs.nixpkgs.follows = "droid-nixpkgs";
     };
 
     nix-on-droid = {
@@ -63,11 +63,11 @@
             ./nix-on-droid.nix
           ];
         };
-      
+
       homeManagerModules.default = import ./modules/select.nix "homeManagerModule" inputs;
 
     } // (
-      flake-utils.lib.eachSystem flake-utils.lib.allSystems (system:
+      flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -75,21 +75,10 @@
         };
       in
       {
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            git
-            nixpkgs-fmt
-            nixd
-            gnumake
-            containerd
-            oci-cli
-            cachix
-          ];
-
-          shellHook = ''
-            zsh
-          '';
-        };
+        devShells = import ./devshells (inputs // { 
+          inherit pkgs;
+          lib = pkgs.lib;
+        });
       })
     );
 }
