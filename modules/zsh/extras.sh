@@ -22,11 +22,29 @@ function vacay {
     rm /tmp/nixshell
 }
 
+NS_STATE_FILE="/tmp/nixshell-${USER}"
+
 function ns() {
-  local cwd=$(realpath .)
-  echo "$cwd" > /tmp/nixshell
-  echo "$1" >> /tmp/nixshell
-  nix develop "$cwd#$1" -c zsh
+  local shell_name="${1:-default}"
+  local flake_dir
+
+  if [[ -f "./flake.nix" ]]; then
+    flake_dir="$(realpath .)"
+  else
+    flake_dir="/etc/nixos"
+  fi
+
+  {
+    echo "$flake_dir"
+    echo "$shell_name"
+  } >| "$NS_STATE_FILE"
+
+  # If we're in a nix shell already, replace it (avoid nesting)
+  if [[ -n "$IN_NIX_SHELL" ]]; then
+    exec nix develop "path:${flake_dir}#${shell_name}" -c zsh
+  else
+    nix develop "path:${flake_dir}#${shell_name}" -c zsh
+  fi
 }
 
 function dev-shell() {
@@ -59,12 +77,13 @@ then
   cd $DIR
 fi
 
-if [ -e /tmp/nixshell ] && [ -z "$IN_NIX_SHELL" ]
-then
-  echo "Restoring nix shell"
-  flake_path=$(cat /tmp/nixshell | head -n 1 | tail -n 1)
-  shell_name=$(cat /tmp/nixshell | head -n 2 | tail -n 1)
-  nix develop path:$flake_path#$shell_name -c zsh
-fi
-
 setopt NO_BEEP
+
+if [[ -f "$NS_STATE_FILE" && -z "$IN_NIX_SHELL" ]]; then
+  echo "Restoring nix shell"
+
+  flake_path="$(sed -n '1p' "$NS_STATE_FILE")"
+  shell_name="$(sed -n '2p' "$NS_STATE_FILE")"
+
+  nix develop "path:${flake_path}#${shell_name}" -c zsh
+fi

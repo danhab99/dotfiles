@@ -9,12 +9,16 @@ mkdir -p "$1"
 
 # Generate the Nix template and write it to the file
 cat <<EOF > "$1/default.nix"
-{
-  description = "$1";
-  path = ./files;
+{ pkgs, ... } : {
+  name = "$1";
+
+  buildInputs = with pkgs; [
+    # ...
+  ];
+
+  shellHook = ''
+  '';
 }
 EOF
 
-cp -r blank/files $1/
-
-echo "Template generated at $1"
+echo "Devshell generated at $1"
