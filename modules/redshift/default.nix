@@ -16,7 +16,7 @@ import ../module.nix
         brightness = {
           # Note the string values below.
           day = "1";
-          night = "0.8";
+          night = "1";
         };
 
         temperature = {
