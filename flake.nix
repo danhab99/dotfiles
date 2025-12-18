@@ -4,11 +4,12 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05-small";
+    
+    droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     droid-home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "droid-nixpkgs";
+      # url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows ="droid-nixpkgs";
     };
 
     nix-on-droid = {
