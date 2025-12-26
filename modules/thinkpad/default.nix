@@ -5,6 +5,9 @@ import ../module.nix
   output = { pkgs, ... }: {
     packages = with pkgs; [
       displaylink
+      thinkfan
+      fancontrol-gui
+      lm_sensors
     ];
 
     homeManager = {
@@ -32,7 +35,7 @@ import ../module.nix
       systemd.user.services.dpms-killer = {
         Unit = {
           Description = "Continuously disable DPMS to prevent screens from turning off";
-          After = [ "graphical-session.target" ];
+          Afte = [ "graphical-session.target" ];
         };
 
         Service = {
@@ -108,6 +111,40 @@ import ../module.nix
       };
 
       services.hardware.bolt.enable = true;
+
+      services.thinkfan = {
+        enable = true;
+
+        sensors = [
+          {
+            type = "hwmon";
+            query = "/sys/class/hwmon/hwmon*/temp*_input";
+          }
+        ];
+
+        fans = [
+          {
+            type = "tpacpi";
+            query = "/proc/acpi/ibm/fan";
+          }
+        ];
+
+        levels = [
+          [ 0  0   55 ]
+          [ 1  50  60 ]
+          [ 2  55  65 ]
+          [ 3  60  70 ]
+          [ 4  65  75 ]
+          [ 5  70  80 ]
+          [ 6  75  85 ]
+          [ 7  80  90 ]
+          [ 127 85  32767 ] # # disengaged
+        ];
+      };
+
+      boot.extraModprobeConfig = ''
+        options thinkpad_acpi fan_control=1
+      '';
 
       # boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
 
