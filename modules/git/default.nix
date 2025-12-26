@@ -45,6 +45,8 @@ import ../module.nix {
       lazygit
       dvc
       gitDiffBlame
+      git-ignore
+      git-extras
     ];
 
     homeManager = {
