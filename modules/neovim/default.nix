@@ -23,13 +23,21 @@ import ../module.nix
         coc = {
           enable = true;
           settings = {
+            "suggest.noselect" = false;
+            "suggest.enablePreselect" = true;
+            "suggest.triggerAfterInsertEnter" = true;
+            "suggest.timeout" = 5000;
+            "suggest.enablePreview" = true;
+            "suggest.floatEnable" = true;
+            "diagnostic.errorSign" = "✗";
+            "diagnostic.warningSign" = "⚠";
+            "diagnostic.infoSign" = "ℹ";
+            "diagnostic.hintSign" = "➤";
             "languageserver" = {
               "csharp-ls" = {
                 "command" = "csharp-ls";
-                # "args" = [ "--stdio" ];
                 "filetypes" = [ "cs" ];
                 "rootPatterns" = [ "*.csproj" ];
-                "trace.server" = "verbose";
               }; 
               "go" = {
                 "command" = "gopls";
@@ -37,12 +45,8 @@ import ../module.nix
                 "filetypes" = ["go"];
               };
             };
+            "rust-analyzer.server.path" = "rust-analyzer";
             "inlayHint.enable" = false;
-            "cargo" = {
-              "cfgs" = {
-                "some_cfg" = true;
-              };
-            };
           };
         };
 
@@ -66,6 +70,7 @@ import ../module.nix
           coc-toml
           coc-tsserver
           coc-yaml
+          CopilotChat-nvim
           ctrlp-vim
           fzf-lua
           goyo-vim

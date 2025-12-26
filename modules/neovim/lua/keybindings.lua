@@ -84,3 +84,6 @@ map("n", "<leader>d", ":CocDiagnostic<CR>", opts)
 
 -- Go rename
 map("n", "<leader>r", ":GoRename<CR>", opts)
+
+map("i", "<leader>c", ":CopilotChatToggle<CR>", opts) 
+map("n", "<leader>c", ":CopilotChatToggle<CR>", opts) 
