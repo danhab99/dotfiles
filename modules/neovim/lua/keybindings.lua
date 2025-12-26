@@ -87,3 +87,6 @@ map("n", "<leader>r", ":GoRename<CR>", opts)
 
 map("i", "<leader>c", ":CopilotChatToggle<CR>", opts) 
 map("n", "<leader>c", ":CopilotChatToggle<CR>", opts) 
+copilot_script = "y:CopilotChatOpen<CR>i<CR><CR>#buffer<CR><CR>fix this<CR><CR><ESC>p<CR><CR>"
+map("n", "<leader>f", copilot_script)
+map("v", "<leader>f", copilot_script)
