@@ -47,6 +47,9 @@ import ../module.nix
             };
             "rust-analyzer.server.path" = "rust-analyzer";
             "inlayHint.enable" = false;
+            "cSpell.userWords" = [
+              "hasher"
+            ];
           };
         };
 
