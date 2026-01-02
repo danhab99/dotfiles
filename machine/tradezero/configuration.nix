@@ -84,6 +84,10 @@ import ../machine.nix {
     nixos-packages.enable = true;
   };
 
+  packages = pkgs: with pkgs; [
+    twingate
+  ];
+
   hostName = "tradezero";
   system = "x86-64_linux";
 
@@ -111,7 +115,9 @@ import ../machine.nix {
   ];
 
   nixos.services = {
-    twingate.enable = true;
+    twingate = {
+      enable = true;
+    };
     blueman.enable = true;
 
     udev.extraRules = ''
