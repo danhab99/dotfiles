@@ -49,6 +49,8 @@ import ../module.nix
             "inlayHint.enable" = false;
             "cSpell.userWords" = [
               "hasher"
+              "msgpack"
+              "unmarshal"
             ];
           };
         };
