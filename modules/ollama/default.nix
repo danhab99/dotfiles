@@ -53,6 +53,7 @@ import ../module.nix {
         environment = {
           "OLLAMA_BASE_URL" = "http://localhost:11434";
         };
+        host = "0.0.0.0";
         port = 20080;
       };
 

@@ -109,6 +109,7 @@ import ../machine.nix
     };
     xdg.enable = true;
     redshift.enable = true;
+    wireguard.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
