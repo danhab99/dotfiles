@@ -112,8 +112,6 @@ let
 
         environment.localBinInPath = true;
 
-        xdg.portal.enable = true;
-
         boot.tmp.cleanOnBoot = true;
 
         # This value determines the NixOS release from which the default

@@ -4,7 +4,10 @@ import ../module.nix
 
   output = { pkgs, ... }: {
     packages = with pkgs; [
-
+      xdg-utils
+      xdg-user-dirs
+      xdg-user-dirs-gtk
+      desktop-file-utils
     ];
 
     homeManager = {
@@ -19,22 +22,38 @@ import ../module.nix
         mimeApps = {
           enable = true;
 
-          defaultApplications = {
-            # "text/plain" = [ "helix.desktop" ];           # Or "code.desktop"
-            "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
-            "image/png" = [ "org.gnome.eog.desktop" ];
-            "application/pdf" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/http" = [ "brave-browser.desktop" ];
-            "x-scheme-handler/https" = [ "brave-browser.desktop" ];
-          };
+          defaultApplications =
+            let
+              default_browser = "brave-browser.desktop";
+            in
+            {
+              "application/pdf" = [ default_browser ];
+              "image/png" = [ "org.gnome.eog.desktop" ];
+              "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
+              "text/html" = default_browser;
+              "x-scheme-handler/about" = default_browser;
+              "x-scheme-handler/http" = default_browser;
+              "x-scheme-handler/https" = default_browser;
+              "x-scheme-handler/unknown" = default_browser;
+            };
         };
       };
     };
 
     nixos = {
-      programs.dconf.enable = true;    # important for GSettings-based apps
-      services.dbus.enable = true;     # usually already enabled, but ensure it is
+      programs.chromium.enable = true;
+      programs.dconf.enable = true; # important for GSettings-based apps
+      services.dbus.enable = true; # usually already enabled, but ensure it is
+
+      xdg.portal = {
+        enable = true;
+
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+        ];
+
+        config.common.default = "*";
+      };
     };
   };
 }
-
