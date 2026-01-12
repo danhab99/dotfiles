@@ -112,6 +112,7 @@ import ../module.nix {
           ".env"
           "storybook-static/"
           "*.aidoc.md"
+          "result/"
         ];
 
         lfs.enable = true;

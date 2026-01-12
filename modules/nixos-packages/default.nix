@@ -33,6 +33,7 @@ import ../module.nix
         pciutils
         postgresql
         seahorse
+        totp-cli
         tree
         unixODBCDrivers.msodbcsql17
         upower
