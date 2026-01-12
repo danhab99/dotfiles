@@ -53,6 +53,7 @@ import ../module.nix
               "unmarshal"
               "sqlite"
               "chans"
+              "watchlist"
             ];
           };
         };
