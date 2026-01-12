@@ -127,16 +127,11 @@ in
     "${mod}+e" = "exec nemo";
     "${mod}+plus" = "gaps inner all minus 2";
     "${mod}+minus" = "gaps inner all plus 2";
-    "${mod}+period" =
-      "exec pacmd set-default-sink alsa_output.usb-SAVITECH_Bravo-X_USB_Audio-01.analog-stereo";
-    "${mod}+comma" =
-      "exec pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo";
     "XF86AudioPlay" = "exec playerctl play-pause";
     "XF86AudioNext" = "exec playerctl next";
     "XF86AudioPrev" = "exec playerctl previous";
     "XF86AudioStop" = "exec playerctl stop";
     "${mod}+question" = "exec i3help";
-    "${mod}+ctrl+V" = "exec ~/Documents/dotfiles/vgrep.x11.sh";
     "${mod}+s" = ''exec sleep 0.1 && xdotool type "¯\_(ツ)_/¯"'';
     "${mod}+Mod1+h" = "exec xdotool mousemove_relative -p 270 10";
     "${mod}+Mod1+l" = "exec xdotool mousemove_relative -p 90 10";
@@ -252,18 +247,6 @@ in
 
   startup = [
     {
-      command = "xset -dpms";
-      always = true;
-    }
-    {
-      command = "xset s noblank";
-      always = true;
-    }
-    {
-      command = "xset s off";
-      always = true;
-    }
-    {
       command = "while true; do sleep 10; xset -dpms; xset s off; xset s noblank; done &";
       always = true;
     }
@@ -289,19 +272,15 @@ in
         "( killall oneko || true ) && oneko -tofocus -position +30+0";
       always = true;
     }
+    # Machine-specific: workstation only
     {
       command =
-        "python3 ~/Documents/install/center-mouse/i3-center-mouse.py -a";
+        "$HOME/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd >> ~/.log/ev-cmd.log";
       always = true;
     }
     {
       command =
-        "/home/dan/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd >> ~/.log/ev-cmd.log";
-      always = true;
-    }
-    {
-      command =
-        "/home/dan/Documents/rust/logitech-g600-rs/target/debug/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path /home/dan/.config/g600/g600.toml >> ~/.log/g600.log";
+        "$HOME/Documents/rust/logitech-g600-rs/target/debug/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path $HOME/.config/g600/g600.toml >> ~/.log/g600.log";
       always = true;
     }
     {
@@ -348,7 +327,13 @@ in
     }
   ];
 
-  focus.followMouse = true;
+
+  focus = {
+    wrapping = "force";
+    followMouse = true;
+    mouseWarping = true;
+  };
+  
 
   assigns = {
     "2" = [
