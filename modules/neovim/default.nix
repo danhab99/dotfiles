@@ -51,6 +51,8 @@ import ../module.nix
               "hasher"
               "msgpack"
               "unmarshal"
+              "sqlite"
+              "chans"
             ];
           };
         };
