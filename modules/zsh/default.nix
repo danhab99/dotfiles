@@ -138,6 +138,7 @@ import ../module.nix {
           coder = "aichat -r coder";
 
           fix-redshift = "systemctl --user restart redshift";
+          update-readme = "copilot -p \"Analyze this project and update the readme, if there is no readme then create a new one\"";
         };
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
