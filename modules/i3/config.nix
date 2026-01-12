@@ -116,6 +116,7 @@ in
     lockScreenExe = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen --lock -- fork";
   in {
     "Pause" = lockScreenExe;
+    "Print" = "exec flameshot gui";
     "XF86AudioLowerVolume" = "exec amixer sset Master 5%-";
     "XF86AudioRaiseVolume" = "exec amixer sset Master 5%+";
     "XF86AudioMute" = "exec amixer sset Master toggle";
