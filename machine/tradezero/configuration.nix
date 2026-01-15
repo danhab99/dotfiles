@@ -146,4 +146,8 @@ import ../machine.nix {
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", ATTR{idProduct}=="0610", TEST=="power/control", ATTR{power/control}="on"
     '';
   };
+
+  aliases = pkgs: {
+    restart-display = "sudo systemctl restart display-manager.service";
+  };
 }
