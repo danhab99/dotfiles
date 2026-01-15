@@ -1,16 +1,16 @@
-{
-  users,
-  module,
-  hostName,
-  system,
-  environmentVariables ? { },
-  packages ? (pkgs: [ ]),
-  files ? { },
-  i3Config ? { mod }: { },
-  xserver ? "",
-  bind ? [ ],
-  jobs ? (args: [ ]),
-  nixos ? { },
+{ users
+, module
+, hostName
+, system
+, environmentVariables ? { }
+, packages ? (pkgs: [ ])
+, files ? { }
+, i3Config ? { mod }: { }
+, xserver ? ""
+, bind ? [ ]
+, jobs ? (args: [ ])
+, nixos ? { }
+, aliases ? (pkgs: {})
 }:
 let
   strLen = builtins.stringLength;
@@ -124,6 +124,8 @@ let
         environment.localBinInPath = true;
 
         boot.tmp.cleanOnBoot = true;
+
+        programs.zsh.shellAliases = (aliases pkgs);
 
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
