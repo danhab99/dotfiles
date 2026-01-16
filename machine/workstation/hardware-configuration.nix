@@ -25,12 +25,12 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d3fc72e4-c1e0-4a08-a2ca-b6541297d7ff";
+    device = "/dev/disk/by-uuid/48d6e801-07b3-4034-9cfe-4eb4e8ba10a6";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2CAD-F462";
+    device = "/dev/disk/by-uuid/B770-7B4F";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
@@ -70,4 +70,6 @@
     cpuFreqGovernor = "performance";
     enable = true;
   };
+
+  boot.plymouth.enable = false;
 }
