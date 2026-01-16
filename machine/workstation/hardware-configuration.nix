@@ -47,7 +47,7 @@
     options = [ "noatime" ];
   };
 
-  fileSystems."/ollama" = {
+  fileSystems."/data" = {
     device = "/dev/disk/by-uuid/f240624a-177f-4da0-834b-5fb2c0de63a8";
     fsType = "ext4";
     options = [ "noatime" ];

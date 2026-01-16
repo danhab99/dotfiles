@@ -30,7 +30,7 @@ import ../machine.nix
     nix.enable = true;
     ollama = {
       enable = true;
-      repoDir = "/ollama";
+      repoDir = "/data/ollama";
       models = [
         "bge-large:latest"
         "codegemma:2b-code-v1.1-fp16"
