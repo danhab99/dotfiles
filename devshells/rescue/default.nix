@@ -85,6 +85,7 @@ in {
     vim
     neovim
     copilot
+    smartmontools
   ];
 
   shellHook = ''
