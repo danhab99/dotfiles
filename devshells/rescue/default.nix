@@ -82,6 +82,9 @@ in {
     zsh
     downloadNixos
     writeBootDrive
+    vim
+    neovim
+    copilot
   ];
 
   shellHook = ''
