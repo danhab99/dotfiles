@@ -12,7 +12,7 @@ let
       in
         lib.attrsets.mapAttrs'
           (version: shell: {
-            name = "${t}-${version}";
+            name = if version == "" then t else "${t}-${version}";
             value = shell;
           })
           shells
