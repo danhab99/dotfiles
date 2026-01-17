@@ -65,7 +65,7 @@ import ../module.nix {
         models = cfg.repoDir;
 
         host = "0.0.0.0";
-        user = "ollama-user";
+        user = "ollama";
 
         environmentVariables = {
           OLLAMA_MODELS = cfg.repoDir;
