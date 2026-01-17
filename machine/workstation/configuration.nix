@@ -208,7 +208,8 @@ import ../machine.nix
 
         cleanup_old_backups
 
-        backup home /home/dan &
+        backup Documents /home/dan/Documents &
+        backup Downloads /home/dan/Downloads &
         backup open-webui /var/lib/open-webui &
         backup etc /etc &
         backup usr /usr &
