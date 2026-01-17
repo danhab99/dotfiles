@@ -9,7 +9,10 @@ import ../machine.nix
 
   module = {
     appimage.enable = true;
-    docker.enable = true;
+    docker = {
+      enable = true;
+      dataRoot = "/data/docker";
+    };
     font.enable = true;
     fzf.enable = true;
     git = {
