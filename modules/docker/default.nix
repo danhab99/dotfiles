@@ -1,7 +1,14 @@
 import ../module.nix {
   name = "docker";
 
-  output = { pkgs, config, ... }: {
+  options = { lib }: with lib; {
+    dataRoot = mkOption {
+      type = types.str;
+      default = "/var/lib/docker";
+    };
+  };
+
+  output = { pkgs, config, cfg, ... }: {
     packages = with pkgs; [
       dive
       lazydocker
@@ -16,6 +23,10 @@ import ../module.nix {
       virtualisation.docker = {
         enable = true;
         enableOnBoot = true;
+
+        daemon.settings = {
+          data-root = cfg.dataRoot;
+        };
 
         extraPackages = with pkgs; [
           docker-buildx
