@@ -9,15 +9,25 @@ mkdir -p "$1"
 
 # Generate the Nix template and write it to the file
 cat <<EOF > "$1/default.nix"
-{ pkgs, ... } : {
+
+import ../devshell.nix
+{
   name = "$1";
 
-  buildInputs = with pkgs; [
-    # ...
-  ];
+  versions = { pkgs, ... }: {
+    "" = {
+      packages = with pkgs; [
+        # ...
+      ];
 
-  shellHook = ''
-  '';
+      env = {
+        # ...
+      };
+
+      shellHook ''
+      '';
+    };
+  };
 }
 EOF
 
