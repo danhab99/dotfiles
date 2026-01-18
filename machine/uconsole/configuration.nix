@@ -7,7 +7,7 @@ import ../machine.nix rec {
   };
 
   module = {
-    all-packages.enable = true;  # Disable for SD image build
+    all-packages.enable = true; # Disable for SD image build
     appimage.enable = true;
     audio.enable = false;
     docker.enable = true;
@@ -32,7 +32,7 @@ import ../machine.nix rec {
     libreoffice.enable = false;
     metis.enable = false;
     neovim.enable = true;
-    nix.enable = true;  # Keep nix tools
+    nix.enable = true; # Keep nix tools
     nixos-packages.enable = true;
     nvidia.enable = false;
     obs.enable = false;
@@ -46,7 +46,7 @@ import ../machine.nix rec {
     rtlsdr.enable = false;
     sddm.enable = true;
     secrets.enable = true;
-    ssh.enable = true;  # Keep SSH for remote access
+    ssh.enable = true; # Keep SSH for remote access
     steam.enable = false;
     thinkpad.enable = false;
     threedtools.enable = false;

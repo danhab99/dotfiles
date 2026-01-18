@@ -1,10 +1,9 @@
-import ../module.nix
-{
+import ../module.nix {
   name = "metis";
 
-  output = { pkgs, lib, ... }:
+  output =
+    { pkgs, lib, ... }:
     let
-
 
       metis = pkgs.stdenv.mkDerivation rec {
         name = "metis-driver";

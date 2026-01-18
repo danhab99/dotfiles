@@ -1,9 +1,15 @@
-{ name, options ? { ... }: { }, output }:
+{
+  name,
+  options ? { ... }: { },
+  output,
+}:
 let
   mkDevice =
-    { deviceSpecificOptions ? { lib }: { }
-    , module # ? { cfg, lib, nixos, packages, homeManager }: {}
-    }: inputs@{ lib, config, ... }:
+    {
+      deviceSpecificOptions ? { lib }: { },
+      module, # ? { cfg, lib, nixos, packages, homeManager }: {}
+    }:
+    inputs@{ lib, config, ... }:
     let
       cfg = config.module.${name};
       out = output (inputs // { inherit cfg; });
@@ -18,55 +24,83 @@ let
       deviceOptions = getOpt deviceSpecificOptions;
     in
     {
-      options.module.${name} = moduleOptions // deviceOptions // {
-        enable = lib.mkEnableOption name;
-      };
+      options.module.${name} =
+        moduleOptions
+        // deviceOptions
+        // {
+          enable = lib.mkEnableOption name;
+        };
 
-      config = lib.mkIf cfg.enable (module { inherit cfg lib nixos packages homeManager droid; });
+      config = lib.mkIf cfg.enable (module {
+        inherit
+          cfg
+          lib
+          nixos
+          packages
+          homeManager
+          droid
+          ;
+      });
     };
 in
 {
 
   nixosModule = mkDevice {
-    deviceSpecificOptions = { lib }: with lib; {
-      forUsers = mkOption {
-        type = types.listOf types.str;
-        default = [ "dan" ];
+    deviceSpecificOptions =
+      { lib }:
+      with lib;
+      {
+        forUsers = mkOption {
+          type = types.listOf types.str;
+          default = [ "dan" ];
+        };
       };
-    };
 
-    module = { cfg, nixos, packages, homeManager, ... }:
+    module =
+      {
+        cfg,
+        nixos,
+        packages,
+        homeManager,
+        ...
+      }:
       let
         homeManagerForUses =
           let
-            pairs = builtins.map
-              (user: {
-                name = user;
-                value = homeManager;
-              })
-              cfg.forUsers;
+            pairs = builtins.map (user: {
+              name = user;
+              value = homeManager;
+            }) cfg.forUsers;
           in
           builtins.listToAttrs pairs;
       in
-      nixos //
-      {
+      nixos
+      // {
         environment.systemPackages = packages;
         home-manager.users = homeManagerForUses;
       };
   };
 
   droidModule = mkDevice {
-    module = { homeManager, packages, droid, ... }:
-      droid // 
+    module =
       {
+        homeManager,
+        packages,
+        droid,
+        ...
+      }:
+      droid
+      // {
         environment.packages = packages;
         home-manager.config = homeManager;
       };
   };
 
   homeManagerModule = mkDevice {
-    module = { homeManager, packages, ... }:
-      homeManager // {
+    module =
+      { homeManager, packages, ... }:
+      homeManager
+      // {
         home.packages = packages;
       };
   };

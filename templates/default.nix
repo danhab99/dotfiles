@@ -8,4 +8,4 @@ let
     value = import ./${t};
   }) templates;
 in
-  builtins.listToAttrs pairs
+builtins.listToAttrs pairs

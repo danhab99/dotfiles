@@ -1,5 +1,4 @@
-import ../machine.nix
-{
+import ../machine.nix {
   hostName = "workstation";
   system = "x86_64-linux";
 
@@ -26,7 +25,11 @@ import ../machine.nix
       enable = true;
       configFile = ./i3/config;
       i3blocksConfig = ./i3blocks.conf;
-      screen = [ "DP-4" "DP-0" "HDMI-0" ];
+      screen = [
+        "DP-4"
+        "DP-0"
+        "HDMI-0"
+      ];
       defaultLayoutScript = "3screen.sh";
       fontSize = 14.0;
     };
@@ -73,19 +76,18 @@ import ../machine.nix
     threedtools.enable = true;
     timezone.enable = true;
     urxvt.enable = true;
-    xorg =
-      {
-        enable = true;
-        videoDrivers = [ "nvidia" ];
-        # defaultScreenScript = "3screen.sh";
-        extraConfig = ''
-          urxvt*depth: 32
-          urxvt*blurRadius: 10
-          urxvt*transparent: true
-          urxvt*tintColor: #525252
-        '';
-        fontSize = 21;
-      };
+    xorg = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      # defaultScreenScript = "3screen.sh";
+      extraConfig = ''
+        urxvt*depth: 32
+        urxvt*blurRadius: 10
+        urxvt*transparent: true
+        urxvt*tintColor: #525252
+      '';
+      fontSize = 21;
+    };
     zoxide.enable = true;
     zsh.enable = true;
     neovim.enable = true;
@@ -124,19 +126,23 @@ import ../machine.nix
   };
 
   files = {
-    ".config/ev-cmd.toml" = { source = ./ev-cmd/ev-cmd.toml; };
+    ".config/ev-cmd.toml" = {
+      source = ./ev-cmd/ev-cmd.toml;
+    };
     ".config/g600" = {
       source = ./g600;
       recursive = true;
     };
   };
 
-  i3Config = { mod }: {
-    keybindings = {
-      "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-      # "${mod}+w" = "exec brave";
+  i3Config =
+    { mod }:
+    {
+      keybindings = {
+        "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
+        # "${mod}+w" = "exec brave";
+      };
     };
-  };
 
   xserver = ''
     Section "Device"
@@ -185,46 +191,59 @@ import ../machine.nix
       (bucket "Pictures")
     ];
 
-  jobs = { pkgs }: [
-    {
-      name = "full-system-backup";
-      packages = with pkgs; [ gnutar gzip findutils ];
-      schedule = "*-*-* 04:00:00";
+  jobs =
+    { pkgs }:
+    [
+      {
+        name = "full-system-backup";
+        packages = with pkgs; [
+          gnutar
+          gzip
+          findutils
+        ];
+        schedule = "*-*-* 04:00:00";
 
-      script = ''
-        set -eu
+        script = ''
+          set -eu
 
-        function cleanup_old_backups() {
-          ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +7 -delete
-        }
+          function cleanup_old_backups() {
+            ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +7 -delete
+          }
 
-        function backup() {
-          ${pkgs.gnutar}/bin/tar -cz \
-          --exclude-caches \
-          --exclude="**/node_modules" \
-          --exclude="**/*[Cc]ache*" \
-          --exclude="/home/dan/Videos" \
-          --exclude="/home/dan/Pictures" \
-          --seek \
-          -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
-        }
+          function backup() {
+            ${pkgs.gnutar}/bin/tar -cz \
+            --exclude-caches \
+            --exclude="**/node_modules" \
+            --exclude="**/*[Cc]ache*" \
+            --exclude="/home/dan/Videos" \
+            --exclude="/home/dan/Pictures" \
+            --seek \
+            -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
+          }
 
-        cleanup_old_backups
+          cleanup_old_backups
 
-        backup Documents /home/dan/Documents &
-        backup Downloads /home/dan/Downloads &
-        backup open-webui /var/lib/open-webui &
-        backup etc /etc &
-        backup usr /usr &
+          backup Documents /home/dan/Documents &
+          backup Downloads /home/dan/Downloads &
+          backup open-webui /var/lib/open-webui &
+          backup etc /etc &
+          backup usr /usr &
 
-        wait
-      '';
-    }
-    {
-      script = "/home/dan/Music/download.sh";
-      packages = with pkgs; [ gnutar gzip findutils scdl ffmpeg_6-full yt-dlp ];
-      name = "download-music";
-      schedule = "*-*-* 02:00:00";
-    }
-  ];
+          wait
+        '';
+      }
+      {
+        script = "/home/dan/Music/download.sh";
+        packages = with pkgs; [
+          gnutar
+          gzip
+          findutils
+          scdl
+          ffmpeg_6-full
+          yt-dlp
+        ];
+        name = "download-music";
+        schedule = "*-*-* 02:00:00";
+      }
+    ];
 }

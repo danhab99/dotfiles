@@ -21,7 +21,11 @@ import ../machine.nix {
       # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
       # screen = [ "eDP-1" "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # laptop + home desk
       # screen = [ "DVI-I-2-2" "eDP-1" "DVI-I-1-1" ];
-      screen = [ "DP-3-3-1" "DP-3-1" "DP-3-2" ];
+      screen = [
+        "DP-3-3-1"
+        "DP-3-1"
+        "DP-3-2"
+      ];
       defaultLayoutScript = "auto.sh";
       fontSize = 12.0;
     };
@@ -50,7 +54,10 @@ import ../machine.nix {
     urxvt.enable = true;
     xorg = {
       enable = true;
-      videoDrivers = [ "displaylink" "modesetting" ];
+      videoDrivers = [
+        "displaylink"
+        "modesetting"
+      ];
       extraConfig = ''
         urxvt*depth: 32
         urxvt*blurRadius: 0
@@ -84,19 +91,22 @@ import ../machine.nix {
     nixos-packages.enable = true;
   };
 
-  packages = pkgs: with pkgs; [
-    twingate
-  ];
+  packages =
+    pkgs: with pkgs; [
+      twingate
+    ];
 
   hostName = "tradezero";
   system = "x86-64_linux";
 
-  i3Config = { mod }: {
-    keybindings = {
-      "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-      "${mod}+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
+  i3Config =
+    { mod }:
+    {
+      keybindings = {
+        "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
+        "${mod}+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
+      };
     };
-  };
 
   xserver = ''
     Section "InputClass"
@@ -105,14 +115,22 @@ import ../machine.nix {
     EndSection
   '';
 
-  jobs = { pkgs }: [
-    {
-      name = "transcribe-eod";
-      script = "/home/dan/Videos/run-transcribe.sh";
-      schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
-      packages = with pkgs; [ whisperx ffmpeg_6-full curl wget jq ];
-    }
-  ];
+  jobs =
+    { pkgs }:
+    [
+      {
+        name = "transcribe-eod";
+        script = "/home/dan/Videos/run-transcribe.sh";
+        schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
+        packages = with pkgs; [
+          whisperx
+          ffmpeg_6-full
+          curl
+          wget
+          jq
+        ];
+      }
+    ];
 
   nixos.services = {
     twingate = {

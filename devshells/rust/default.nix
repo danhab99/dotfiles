@@ -1,11 +1,15 @@
-import ../devshell.nix
-{
+import ../devshell.nix {
   name = "rust";
 
-  versions = { pkgs, ... }:
+  versions =
+    { pkgs, ... }:
     let
       rustToolchain = pkgs.rust-bin.beta.latest.default.override {
-        extensions = [ "rust-src" "rustfmt" "clippy" ];
+        extensions = [
+          "rust-src"
+          "rustfmt"
+          "clippy"
+        ];
       };
     in
     {

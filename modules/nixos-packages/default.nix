@@ -1,8 +1,8 @@
-import ../module.nix
-{
+import ../module.nix {
   name = "nixos-packages";
 
-  output = { pkgs, ... }:
+  output =
+    { pkgs, ... }:
     let
       customBusybox = pkgs.busybox.overrideAttrs (oldAttrs: rec {
         postInstall = ''

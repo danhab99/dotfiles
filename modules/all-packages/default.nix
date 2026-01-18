@@ -1,35 +1,35 @@
-import ../module.nix
-{
+import ../module.nix {
   name = "all-packages";
 
-  output = { pkgs, task-pipeline, ... }: {
-    packages = with pkgs; [
-      archivemount
-      cachix
-      curl
-      entr
-      ffmpeg
-      file
-      glances
-      gnumake
-      gnutar
-      gzip
-      jq
-      nmap
-      nodejs
-      openssl
-      playerctl
-      python3
-      s3cmd
-      scdl
-      sshfs
-      unzip
-      wget
-      yai
-      yt-dlp
-      zip
-      task-pipeline.packages.x86_64-linux.default
-    ];
-  };
+  output =
+    { pkgs, task-pipeline, ... }:
+    {
+      packages = with pkgs; [
+        archivemount
+        cachix
+        curl
+        entr
+        ffmpeg
+        file
+        glances
+        gnumake
+        gnutar
+        gzip
+        jq
+        nmap
+        nodejs
+        openssl
+        playerctl
+        python3
+        s3cmd
+        scdl
+        sshfs
+        unzip
+        wget
+        yai
+        yt-dlp
+        zip
+        task-pipeline.packages.x86_64-linux.default
+      ];
+    };
 }
-

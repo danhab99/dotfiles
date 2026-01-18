@@ -11,7 +11,7 @@
     droid-home-manager = {
       # url = "github:nix-community/home-manager/release-24.05";
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows ="droid-nixpkgs";
+      inputs.nixpkgs.follows = "droid-nixpkgs";
     };
 
     nix-on-droid = {
@@ -22,13 +22,14 @@
   };
 
   outputs =
-    inputs@{ self
-    , nixpkgs
-    , home-manager
-    , flake-utils
-    , nix-on-droid
-    , droid-nixpkgs
-    , ...
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      flake-utils,
+      nix-on-droid,
+      droid-nixpkgs,
+      ...
     }:
     let
       inherit (self) outputs;
@@ -41,7 +42,10 @@
           dir = builtins.readDir ./machine;
           names = builtins.attrNames dir;
           machines = builtins.filter (f: dir.${f} == "directory") names;
-          pairs = builtins.map (machineName: { name = machineName; value = mkNix machineName; }) machines;
+          pairs = builtins.map (machineName: {
+            name = machineName;
+            value = mkNix machineName;
+          }) machines;
         in
         builtins.listToAttrs pairs;
 
@@ -58,7 +62,8 @@
         nix-on-droid.lib.nixOnDroidConfiguration {
           extraSpecialArgs = {
             pkgs = droidPkgs;
-          } // inputs;
+          }
+          // inputs;
 
           pkgs = droidPkgs;
 
@@ -69,8 +74,9 @@
 
       homeManagerModules.default = import ./modules/select.nix "homeManagerModule" inputs;
 
-    } // (
-      flake-utils.lib.eachDefaultSystem (system:
+    }
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -78,10 +84,13 @@
         };
       in
       {
-        devShells = import ./devshells (inputs // { 
-          inherit pkgs;
-          lib = pkgs.lib;
-        });
-      })
-    );
+        devShells = import ./devshells (
+          inputs
+          // {
+            inherit pkgs;
+            lib = pkgs.lib;
+          }
+        );
+      }
+    ));
 }

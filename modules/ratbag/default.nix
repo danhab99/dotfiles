@@ -1,12 +1,15 @@
 import ../module.nix {
   name = "ratbag";
 
-  output = { pkgs, ... }: {
-    packages = with pkgs;
-      [
+  output =
+    { pkgs, ... }:
+    {
+      packages = with pkgs; [
         libratbag
       ];
 
-    nixos.services.ratbagd = { enable = true; };
-  };
+      nixos.services.ratbagd = {
+        enable = true;
+      };
+    };
 }

@@ -1,7 +1,8 @@
 import ../module.nix {
   name = "threedtools";
 
-  output = { pkgs, ... }:
+  output =
+    { pkgs, ... }:
     let
       # bambu-studio = pkgs.bambu-studio.overrideAttrs (oldAttrs: {
       #   version = "01.00.01.50";
