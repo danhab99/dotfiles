@@ -1,7 +1,8 @@
 import ../devshell.nix {
   name = "rescue";
 
-  versions = { pkgs, ... }:
+  versions =
+    { pkgs, ... }:
     let
       downloadNixos = pkgs.writeShellScriptBin "download-nixos" ''
         set -euo pipefail

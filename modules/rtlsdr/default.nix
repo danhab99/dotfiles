@@ -1,16 +1,16 @@
-import ../module.nix
-{
+import ../module.nix {
   name = "rtlsdr";
 
-  output = { pkgs, ... }: {
-    packages = with pkgs; [
-      gqrx
-      audacity
-    ];
+  output =
+    { pkgs, ... }:
+    {
+      packages = with pkgs; [
+        gqrx
+        audacity
+      ];
 
-    nixos = {
-      hardware.rtl-sdr.enable = true;
+      nixos = {
+        hardware.rtl-sdr.enable = true;
+      };
     };
-  };
 }
-

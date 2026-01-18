@@ -1,5 +1,4 @@
-import ../machine.nix
-{
+import ../machine.nix {
   hostName = "laptop";
   system = "x86_64-linux";
 
@@ -73,22 +72,26 @@ import ../machine.nix
     nixos-packages.enable = true;
   };
 
-  i3Config = { mod }: {
-    keybindings = {
-      "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
-    };
-  };
-
-  jobs = { pkgs }: [
+  i3Config =
+    { mod }:
     {
-      name = "ssh-desktop-channel";
-      schedule = "*-*-*";
-      script = ''
-        rm -f /tmp/ssh-master-desktop.sock
-        ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
-      '';
-      packages = [ pkgs.openssh ];
-      user = "dan";
-    }
-  ];
+      keybindings = {
+        "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
+      };
+    };
+
+  jobs =
+    { pkgs }:
+    [
+      {
+        name = "ssh-desktop-channel";
+        schedule = "*-*-*";
+        script = ''
+          rm -f /tmp/ssh-master-desktop.sock
+          ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
+        '';
+        packages = [ pkgs.openssh ];
+        user = "dan";
+      }
+    ];
 }

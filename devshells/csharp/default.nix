@@ -1,8 +1,8 @@
-import ../devshell.nix
-{
+import ../devshell.nix {
   name = "csharp";
 
-  versions = { pkgs, ... }:
+  versions =
+    { pkgs, ... }:
     let
       shared = with pkgs; [
         csharp-ls
@@ -11,18 +11,22 @@ import ../devshell.nix
     in
     {
       "6" = {
-        packages = (with pkgs; [
-          dotnet-sdk_6
-        ]) ++ shared;
+        packages =
+          (with pkgs; [
+            dotnet-sdk_6
+          ])
+          ++ shared;
       };
       "8" = {
-        packages = (with pkgs; [
-          csharp-ls
-          python3
-          dotnetCorePackages.dotnet_8.sdk
-          dotnetCorePackages.dotnet_8.aspnetcore
-          dotnetPackages.Nuget
-        ]) ++ shared;
+        packages =
+          (with pkgs; [
+            csharp-ls
+            python3
+            dotnetCorePackages.dotnet_8.sdk
+            dotnetCorePackages.dotnet_8.aspnetcore
+            dotnetPackages.Nuget
+          ])
+          ++ shared;
       };
     };
 }

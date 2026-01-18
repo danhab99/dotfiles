@@ -3,25 +3,27 @@ import ../module.nix {
 
   # output.packages = with pkgs; [ pass ];
 
-  output = { pkgs, ... }: {
-    nixos = { };
+  output =
+    { pkgs, ... }:
+    {
+      nixos = { };
 
-    homeManager = {
-      programs.gpg = {
-        enable = true;
-        mutableKeys = true;
-      };
+      homeManager = {
+        programs.gpg = {
+          enable = true;
+          mutableKeys = true;
+        };
 
-      services.gpg-agent = {
-        enable = true;
-        enableSshSupport = true;
-        defaultCacheTtl = 10000000;
-        maxCacheTtl = 10000000;
+        services.gpg-agent = {
+          enable = true;
+          enableSshSupport = true;
+          defaultCacheTtl = 10000000;
+          maxCacheTtl = 10000000;
 
-        pinentry.package = pkgs.pinentry-curses;
+          pinentry.package = pkgs.pinentry-curses;
 
-        enableZshIntegration = true;
+          enableZshIntegration = true;
+        };
       };
     };
-  };
 }

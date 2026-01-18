@@ -1,26 +1,28 @@
-{ users
-, module
-, hostName
-, system
-, environmentVariables ? { }
-, packages ? (pkgs: [ ])
-, files ? { }
-, i3Config ? { mod }: { }
-, xserver ? ""
-, bind ? [ ]
-, jobs ? (args: [ ])
-, nixos ? { }
+{
+  users,
+  module,
+  hostName,
+  system,
+  environmentVariables ? { },
+  packages ? (pkgs: [ ]),
+  files ? { },
+  i3Config ? { mod }: { },
+  xserver ? "",
+  bind ? [ ],
+  jobs ? (args: [ ]),
+  nixos ? { },
 }:
 let
   strLen = builtins.stringLength;
 
   mkJob =
-    { name
-    , script
-    , schedule ? ""
-    , packages ? [ ]
-    , user ? "root"
-    , timer ? ""
+    {
+      name,
+      script,
+      schedule ? "",
+      packages ? [ ],
+      user ? "root",
+      timer ? "",
     }:
     let
       baseService = {
@@ -49,17 +51,25 @@ let
                 OnUnitActiveSec = "10min";
                 Persistent = true;
               }
-              // mkAddAttr { key = "OnCalendar"; val = schedule; }
-              // mkAddAttr { key = "OnTimer"; val = timer; };
+              // mkAddAttr {
+                key = "OnCalendar";
+                val = schedule;
+              }
+              // mkAddAttr {
+                key = "OnTimer";
+                val = timer;
+              };
             };
           }
-        else { };
+        else
+          { };
     in
     baseService // withTimer;
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
 
-  nixosModule = inputs@{ pkgs, lib, ... }:
+  nixosModule =
+    inputs@{ pkgs, lib, ... }:
     {
       imports = [
         (import ../modules/select.nix "nixosModule" inputs)
@@ -97,13 +107,14 @@ let
             allServices = merge services;
             allTimers = merge timers;
 
-            finishedJobs = { services = allServices; } //
-              { timers = allTimers; };
+            finishedJobs = {
+              services = allServices;
+            }
+            // {
+              timers = allTimers;
+            };
           in
-          (
-            { tmpfiles.rules = map mkBind bind; } //
-            (finishedJobs)
-          );
+          ({ tmpfiles.rules = map mkBind bind; } // (finishedJobs));
 
         networking = {
           networkmanager.enable = true;

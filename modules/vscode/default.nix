@@ -1,22 +1,22 @@
-import ../module.nix
-{
+import ../module.nix {
   name = "vscode";
 
-  output = { pkgs, ... }: {
-    packages = with pkgs; [
+  output =
+    { pkgs, ... }:
+    {
+      packages = with pkgs; [
 
-    ];
+      ];
 
-    homeManager = {
-      programs.vscode = {
-        enable = true;
-        package = pkgs.vscode-fhs; # or pkgs.vscodium
+      homeManager = {
+        programs.vscode = {
+          enable = true;
+          package = pkgs.vscode-fhs; # or pkgs.vscodium
+        };
+      };
+
+      nixos = {
+
       };
     };
-
-    nixos = {
-
-    };
-  };
 }
-

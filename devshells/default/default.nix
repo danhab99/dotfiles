@@ -1,18 +1,19 @@
-import ../devshell.nix
-{
+import ../devshell.nix {
   name = "default";
 
-  versions = { pkgs, ... }: {
-    "" = {
-      packages = with pkgs; [
-        git
-        nixpkgs-fmt
-        nixd
-        gnumake
-        containerd
-        oci-cli
-        cachix
-      ];
+  versions =
+    { pkgs, ... }:
+    {
+      "" = {
+        packages = with pkgs; [
+          git
+          nixpkgs-fmt
+          nixd
+          gnumake
+          containerd
+          oci-cli
+          cachix
+        ];
+      };
     };
-  };
 }

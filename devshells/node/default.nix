@@ -1,7 +1,8 @@
 import ../devshell.nix {
   name = "node";
 
-  versions = { pkgs, ... }:
+  versions =
+    { pkgs, ... }:
     let
       packages = with pkgs; [
         gnumake
