@@ -266,8 +266,9 @@ import ../module.nix {
     nixos = {
       module.zsh.extras = ''
 fan() {
-  echo \"level $1\" | sudo tee /proc/acpi/ibm/fan
+  echo "level $1" | sudo tee /proc/acpi/ibm/fan
 }
+alias fan-max="fan disengaged"
       '';
 
       services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
@@ -313,7 +314,7 @@ fan() {
       services.hardware.bolt.enable = true;
 
       services.thinkfan = {
-        enable = true;
+        enable = false;
 
         sensors = [
           {
