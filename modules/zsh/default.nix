@@ -1,13 +1,38 @@
 import ../module.nix {
   name = "zsh";
 
-  options =
-    { lib }:
-    with lib;
-    {
-      extras = mkOption {
-        type = types.str;
-        default = "";
+  options = { lib }: with lib; {
+    extras = mkOption {
+      type = types.str;
+      default = "";
+    };
+  };
+
+  output = { pkgs, cfg, ... }: {
+    packages = with pkgs; [
+      bat
+      zsh
+      oh-my-zsh
+      htop-vim
+      iftop
+      iotop
+      jq
+      ncdu
+      neofetch
+      rclone
+      retry
+      ripgrep
+      rsync
+      screen
+      xclip
+    ];
+
+    homeManager = {
+      home.sessionVariables = {
+        VI_MODE_SET_CURSOR = "true";
+        VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
+        BROWSER = pkgs.brave + "/bin/brave";
+        DIRENV_LOG_FORMAT = "";
       };
     };
 
@@ -32,12 +57,38 @@ import ../module.nix {
         xclip
       ];
 
-      homeManager = {
-        home.sessionVariables = {
-          VI_MODE_SET_CURSOR = "true";
-          VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
-          BROWSER = pkgs.brave + "/bin/brave";
-          GOPATH = "/home/dan/Documents/go";
+      home.file.".config/direnv/direnv.toml".text = ''
+        [global]
+        warn_timeout = 0
+        hide_env_diff = true
+      '';
+
+      programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+
+        oh-my-zsh = {
+          enable = true;
+
+          plugins = [
+            "git"
+            "docker"
+            "github"
+            "lol"
+            "node"
+            "pip"
+            "python"
+            "screen"
+            "sudo"
+            "vscode"
+            "brew"
+            "colorize"
+            "docker-compose"
+            "fzf"
+            "qrcode"
+            "vi-mode"
+          ];
+          theme = "dstufft";
         };
 
         home.shell.enableZshIntegration = true;
@@ -227,10 +278,32 @@ import ../module.nix {
         };
 
         initContent = builtins.readFile ./extras.sh + cfg.extras;
-
-      droid = {
-        # programs.zsh.enable = true;
-        #home.shell.enableZshIntegration = true;
       };
     };
+
+    nixos = {
+      programs.direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+        loadInNixShell = false;
+        silent = true;
+
+        settings = {
+          global = {
+            warn_timeout = 0;
+            log_format = "-";
+            hide_env_diff = true;
+          };
+        };
+      };
+
+      programs.zsh.enable = true;
+    };
+
+    droid = {
+      # programs.zsh.enable = true;
+      #home.shell.enableZshIntegration = true;
+    };
+  };
 }

@@ -29,8 +29,20 @@ import ../module.nix {
           sha256 = "sha256-hmk7wNI+KifACS220yAiRRon1LhL3RS/HeI93kCkcig=";
         };
 
-        # perl needs to be in the runtime closure
-        buildInputs = [ pkgs.perl ];
+        ignores = [
+          ".vim"
+          "tags"
+          "notes/"
+          "__debug_bin*"
+          "makefile"
+          "*out"
+          ".env"
+          "storybook-static/"
+          "*.aidoc.md"
+          "result/"
+          ".direnv"
+          ".envrc"
+        ];
 
         dontBuild = true;
 
