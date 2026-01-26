@@ -1,14 +1,60 @@
 import ../module.nix {
   name = "xorg";
 
-  options =
-    { lib }:
-    with lib;
-    {
-      videoDrivers = mkOption { };
-      extraConfig = mkOption {
-        type = types.str;
-        default = "";
+  options = { lib }: with lib; {
+    videoDrivers = mkOption { };
+    extraConfig = mkOption {
+      type = types.str;
+      default = "";
+    };
+    fontSize = mkOption {
+      type = types.int;
+    };
+  };
+
+  output = { pkgs, cfg, ... }: {
+    packages = with pkgs; [
+      xclip
+      xdotool
+      xorg.xbacklight
+      xorg.xev
+      xorg.xf86inputevdev
+      # xpad
+      xsel
+      arandr
+      xorg.xrandr
+      xorg.xorgserver
+    ];
+
+    nixos = {
+      services.xserver = {
+        enable = true;
+        displayManager.startx.enable = true; # Optional if using startx
+        videoDrivers = cfg.videoDrivers;
+
+        xautolock.enable = false;
+        desktopManager.xterm.enable = false;
+        
+        # Disable DPMS and screen blanking at X server level
+        serverFlagsSection = ''
+          Option "BlankTime" "0"
+          Option "StandbyTime" "0"
+          Option "SuspendTime" "0"
+          Option "OffTime" "0"
+        '';
+
+        desktopManager.xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+
+        # Keyboard settings
+        xkb = {
+          model = "thinkpad";
+          layout = "us";
+          variant = "";
+        };
       };
       fontSize = mkOption {
         type = types.int;
