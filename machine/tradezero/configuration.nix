@@ -139,11 +139,11 @@ import ../machine.nix {
     blueman.enable = true;
 
     udev.extraRules = ''
-      # Disable autosuspend for Logitech webcam (046d:0825)
-      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="0825", TEST=="power/control", ATTR{power/control}="on"
-
-      # Disable autosuspend for GenesysLogic hub (05e3:0610)
-      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", ATTR{idProduct}=="0610", TEST=="power/control", ATTR{power/control}="on"
+      # Disable autosuspend for ALL USB hubs (prevents KVM/display disconnects)
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
+      
+      # Disable autosuspend for USB network adapters
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="02", TEST=="power/control", ATTR{power/control}="on"
     '';
   };
 
