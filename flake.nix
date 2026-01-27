@@ -5,8 +5,6 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    task-pipeline.url = "path:/home/dan/Documents/go/src/task-pipeline";
-
     droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     droid-home-manager = {
       # url = "github:nix-community/home-manager/release-24.05";
