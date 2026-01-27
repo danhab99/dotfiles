@@ -2,7 +2,7 @@ import ../module.nix {
   name = "all-packages";
 
   output =
-    { pkgs, task-pipeline, ... }:
+    { pkgs, ... }:
     {
       packages = with pkgs; [
         archivemount
@@ -29,7 +29,6 @@ import ../module.nix {
         yai
         yt-dlp
         zip
-        task-pipeline.packages.x86_64-linux.default
       ];
     };
 }
