@@ -118,7 +118,6 @@ import ../module.nix {
             rmr = "rm -r";
             tn = "textnote";
             edithosts = "sudo vim /etc/hosts";
-            c = "cat";
             d = "docker";
             lg = "lazygit";
             tfa = "terraform apply";
@@ -142,6 +141,7 @@ import ../module.nix {
 
             fix-redshift = "systemctl --user restart redshift";
             update-readme = "copilot -p \"Analyze this project and update the readme, if there is no readme then create a new one\"";
+            c = "copilot";
           };
 
           initContent = builtins.readFile ./extras.sh + cfg.extras;
