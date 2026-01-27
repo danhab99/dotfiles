@@ -1,19 +1,16 @@
 import ../module.nix {
   name = "xorg";
 
-  options =
-    { lib }:
-    with lib;
-    {
-      videoDrivers = mkOption { };
-      extraConfig = mkOption {
-        type = types.str;
-        default = "";
-      };
-      fontSize = mkOption {
-        type = types.int;
-      };
+  options = { lib }: with lib; {
+    videoDrivers = mkOption { };
+    extraConfig = mkOption {
+      type = types.str;
+      default = "";
     };
+    fontSize = mkOption {
+      type = types.int;
+    };
+  };
 
   output =
     { pkgs, cfg, ... }:
@@ -24,7 +21,7 @@ import ../module.nix {
         xorg.xbacklight
         xorg.xev
         xorg.xf86inputevdev
-        xpad
+        # xpad
         xsel
         arandr
         xorg.xrandr
