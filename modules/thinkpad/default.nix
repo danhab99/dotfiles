@@ -1,8 +1,53 @@
-import ../module.nix {
+import ../module.nix
+{
   name = "thinkpad";
 
-  output =
-    { pkgs, ... }:
+  options = { lib }: with lib; {
+    enableLoudFan = mkEnableOption { };
+  };
+
+  output = { pkgs, lib, cfg, ... }:
+    let
+      # Fan control algorithm parameters
+      fanConfig = {
+        startTemp = 45; # Temperature where fan starts
+        fullSpeedTemp = 90; # Temperature for full speed (disengaged)
+        tempStep = 5; # Temperature step between levels
+        hysteresis = 5; # Temperature drop before降级 to lower level
+        minFanLevel = 2; # Minimum fan level when active (skip 0-1)
+        maxFanLevel = 7; # Maximum normal fan level
+        enableDisengaged = cfg.enableLoudFan; # Enable full speed (127) mode - very loud!
+      };
+
+      # Generate fan levels algorithmically
+      generateFanLevels = config:
+        let
+          inherit (config) startTemp fullSpeedTemp tempStep hysteresis minFanLevel maxFanLevel enableDisengaged;
+
+          # Generate intermediate levels
+          numLevels = maxFanLevel - minFanLevel + 1;
+
+          makeLevelEntry = idx:
+            let
+              fanLevel = minFanLevel + idx;
+              upperTemp = startTemp + (idx * tempStep);
+              lowerTemp = upperTemp - hysteresis;
+            in
+            [ fanLevel lowerTemp upperTemp ];
+
+          intermediateLevels = lib.genList makeLevelEntry numLevels;
+
+          # Special levels: off and disengaged
+          offLevel = [ 0 0 startTemp ];
+          disengagedLevel = [ 127 fullSpeedTemp 32767 ];
+
+          # Final level stays at max normal level if disengaged is disabled
+          finalLevel = if enableDisengaged then disengagedLevel else [ maxFanLevel (startTemp + ((numLevels - 1) * tempStep) - hysteresis) 32767 ];
+        in
+        [ offLevel ] ++ intermediateLevels ++ [ finalLevel ];
+
+      fanLevels = generateFanLevels fanConfig;
+    in
     {
       packages = with pkgs; [
         displaylink
@@ -12,6 +57,10 @@ import ../module.nix {
       ];
 
       homeManager = {
+        programs.zsh.shellAliases = {
+          fan-max = "fan disengaged";
+        };
+
         home.file = {
           ".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml" = {
             text = ''
@@ -186,32 +235,11 @@ import ../module.nix {
           options thinkpad_acpi fan_control=1
         '';
 
-        # boot.extraModulePackages = with pkgs; [ linuxPackages.r8152 linuxPackages.ax88179_178a ];
-
-        # services.upower.enable = true;
-        # services.power-profiles-daemon.enable = true;
-
-        # services.logind.settings = {
-        #   IdleAction = "ignore";
-        #   IdleActionSec = "0";
-        # };
-
-        # services.tlp.enable = true;
-        # services.tlp.settings = {
-        #   # Battery vs AC profiles
-        #   CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        #   CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-        #   # Sleep configuration
-        #   SUSPEND_MODULES = "snd_hda_intel"; # optional, speeds up suspend/resume
-
-        #   # ThinkPad battery thresholds (if supported)
-        #   START_CHARGE_THRESH_BAT0 = 20;
-        #   STOP_CHARGE_THRESH_BAT0 = 95;
-
-        #   # Enable autosuspend for USB devices when on battery
-        #   USB_AUTOSUSPEND = 1;
-        # };
+        module.zsh.extras = ''
+          fan() {
+            echo \"level $1\" | sudo tee /proc/acpi/ibm/fan
+          }
+        '';
       };
     };
 }
