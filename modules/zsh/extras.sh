@@ -22,28 +22,57 @@ function vacay {
     rm /tmp/nixshell
 }
 
+export DIRENV_WARN_TIMEOUT=0 
 NS_STATE_FILE="/tmp/nixshell-${USER}"
 
 function ns() {
   local shell_name="${1:-default}"
   local flake_dir
+  local git_root
 
-  if [[ -f "./flake.nix" ]]; then
-    flake_dir="$(realpath .)"
+  # Find git repository root
+  git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  
+  if [[ -z "$git_root" ]]; then
+    echo "Not in a git repository. Use direnv manually or run from a git repo."
+    return 1
+  fi
+
+  # Determine flake location
+  if [[ -f "$git_root/flake.nix" ]]; then
+    flake_dir="$git_root"
   else
     flake_dir="/etc/nixos"
   fi
 
-  {
-    echo "$flake_dir"
-    echo "$shell_name"
-  } >| "$NS_STATE_FILE"
-
-  # If we're in a nix shell already, replace it (avoid nesting)
-  if [[ -n "$IN_NIX_SHELL" ]]; then
-    exec nix develop "path:${flake_dir}#${shell_name}" -c zsh
+  # Create .envrc content
+  local envrc_content
+  if [[ "$flake_dir" == "$git_root" ]]; then
+    envrc_content="use flake .#${shell_name}"
   else
-    nix develop "path:${flake_dir}#${shell_name}" -c zsh
+    envrc_content="use flake ${flake_dir}#${shell_name}"
+  fi
+
+  # Check if .envrc already exists with the same config
+  if [[ -f "$git_root/.envrc" ]] && grep -qF "$envrc_content" "$git_root/.envrc"; then
+    echo "Devshell '${shell_name}' is already configured for ${git_root}"
+    direnv allow "$git_root"
+    exec zsh
+    return
+  fi
+
+  # Ask when ns is manually called with a different shell or for new setup
+  echo "Set ${git_root} to always use devshell '${shell_name}'? (y/n)"
+  read -r response
+  if [[ "$response" =~ ^[Yy]$ ]]; then
+    echo "$envrc_content" > "$git_root/.envrc"
+    echo "Created $git_root/.envrc"
+    direnv allow "$git_root"
+    echo "Devshell will activate on next directory entry. Reloading now..."
+    exec zsh
+  else
+    # One-time use without persisting
+    nix develop "path:${flake_dir}#${shell_name}"
   fi
 }
 
@@ -79,11 +108,11 @@ fi
 
 setopt NO_BEEP
 
-if [[ -f "$NS_STATE_FILE" && -z "$IN_NIX_SHELL" ]]; then
-  echo "Restoring nix shell"
+export DIRENV_LOG_FORMAT=""
 
-  flake_path="$(sed -n '1p' "$NS_STATE_FILE")"
-  shell_name="$(sed -n '2p' "$NS_STATE_FILE")"
-
-  nix develop "path:${flake_path}#${shell_name}" -c zsh
+if [ -n "$IN_NIX_SHELL" ]; then
+  echo "You are inside a Nix shell."
+else
+  eval "$(direnv hook zsh)"
 fi
+

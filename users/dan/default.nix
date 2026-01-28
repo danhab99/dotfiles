@@ -13,7 +13,7 @@ import ../user.nix {
     "vboxusers"
   ];
 
-  shell = pkgs: pkgs.zsh;
+  shell = pkgs: "${pkgs.zsh}/bin/zsh";
 
   sessionVariables =
     pkgs: with pkgs; {
