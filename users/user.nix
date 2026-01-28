@@ -21,7 +21,7 @@ in
   config = lib.mkIf cfg.enable {
     users.users.${name} = {
       inherit extraGroups;
-      shell = shell pkgs;
+      shell = pkgs.zsh;
       isNormalUser = true;
       description = "dan";
     };
