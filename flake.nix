@@ -4,7 +4,7 @@
     home-manager.url = "github:nix-community/home-manager";
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-uconsole.url = "github:nixos-uconsole/nixos-uconsole";
+    nixos-uconsole.url = "github:nixos-uconsole/nixos-uconsole/v1.0.0";
 
     droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     droid-home-manager = {
