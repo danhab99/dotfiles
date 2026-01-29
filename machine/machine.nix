@@ -10,19 +10,20 @@
 , bind ? [ ]
 , jobs ? (args: [ ])
 , nixos ? { }
-, aliases ? (pkgs: {})
+, aliases ? (pkgs: { })
+, isUconsole ? false
 }:
 let
   strLen = builtins.stringLength;
 
   mkJob =
-    {
-      name,
-      script,
-      schedule ? "",
-      packages ? [ ],
-      user ? "root",
-      timer ? "",
+    { name
+    , script
+    , schedule ? ""
+    , packages ? [ ]
+    , user ? "root"
+    , timer ? ""
+    ,
     }:
     let
       baseService = {
@@ -137,20 +138,34 @@ let
       };
     };
 in
-inputs@{ nixpkgs, home-manager, ... }:
-nixpkgs.lib.nixosSystem {
-  inherit system;
-  specialArgs = { } // inputs;
-  modules = [
-    nixosModule
-    ./${hostName}/hardware-configuration.nix
-    ../cachix.nix
-    home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-    }
-    # Handle nixos as either a function or an attr set
-    (if builtins.isFunction nixos then nixos else (_: nixos))
-  ];
-}
+inputs@{ nixpkgs, home-manager, nixos-uconsole, ... }:
+if isUconsole then
+  (nixos-uconsole.lib.mkUConsoleSystem
+  {
+    modules = [
+      nixosModule
+      # ./${hostName}/hardware-configuration.nix
+      # ../cachix.nix
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ];
+  }) else
+  (nixpkgs.lib.nixosSystem {
+    inherit system;
+    specialArgs = { } // inputs;
+    modules = [
+      nixosModule
+      ./${hostName}/hardware-configuration.nix
+      ../cachix.nix
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+      # Handle nixos as either a function or an attr set
+      (if builtins.isFunction nixos then nixos else (_: nixos))
+    ];
+  })
