@@ -1,4 +1,4 @@
-import ../machine.nix rec {
+import ../uconsole.nix rec {
   hostName = "uconsole";
   system = "aarch64-linux";
 
@@ -67,4 +67,6 @@ import ../machine.nix rec {
     zoxide.enable = true;
     zsh.enable = true;
   };
+
+  systemFunc = { nixos-uconsole, ... }: nixos-uconsole.lib.mkUConsoleSystem;
 }
