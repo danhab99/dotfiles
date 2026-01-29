@@ -231,15 +231,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1768487626,
-        "narHash": "sha256-t3MU6pTAdaxZ4jQzBdYpUsG2PHDQBpuT33LdkNrhfVo=",
+        "lastModified": 1767339708,
+        "narHash": "sha256-VrRwMzvcha/V88ysCHIbpv9cLkgalOdwD8nzC2ACBZI=",
         "owner": "nixos-uconsole",
         "repo": "nixos-uconsole",
-        "rev": "1ba6116e241aa264dcfa8a237bcd71d942679963",
+        "rev": "8950619e6b362b030f98e8a0119cd4b31b75d6aa",
         "type": "github"
       },
       "original": {
         "owner": "nixos-uconsole",
+        "ref": "v1.0.0",
         "repo": "nixos-uconsole",
         "type": "github"
       }
