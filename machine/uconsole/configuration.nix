@@ -7,12 +7,12 @@ import ../machine.nix rec {
   };
 
   module = {
-    all-packages.enable = true; # Disable for SD image build
-    appimage.enable = true;
+    all-packages.enable = false; # Disable for SD image build
+    appimage.enable = false;
     audio.enable = false;
-    docker.enable = true;
+    docker.enable = false;
     droid-packages.enable = false;
-    font.enable = true;
+    font.enable = false;
     fzf.enable = true;
     gestures.enable = false;
     git = {
@@ -23,7 +23,7 @@ import ../machine.nix rec {
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
-      enable = true;
+      enable = false;
       screen = [ "eDP-1" ];
       defaultLayoutScript = "";
       fontSize = 14.0;
@@ -33,7 +33,7 @@ import ../machine.nix rec {
     metis.enable = false;
     neovim.enable = true;
     nix.enable = true; # Keep nix tools
-    nixos-packages.enable = true;
+    nixos-packages.enable = false;
     nvidia.enable = false;
     obs.enable = false;
     ollama.enable = false;
@@ -42,9 +42,9 @@ import ../machine.nix rec {
     ranger.enable = true;
     ratbag.enable = false;
     redshift.enable = false;
-    rofi.enable = true;
+    rofi.enable = false;
     rtlsdr.enable = false;
-    sddm.enable = true;
+    sddm.enable = false;
     secrets.enable = true;
     ssh.enable = true; # Keep SSH for remote access
     steam.enable = false;
@@ -52,7 +52,7 @@ import ../machine.nix rec {
     threedtools.enable = false;
     timezone.enable = true;
     tmux.enable = true;
-    urxvt.enable = true;
+    urxvt.enable = false;
     vbox.enable = false;
     vim.enable = false;
     vscode.enable = false;
@@ -60,7 +60,7 @@ import ../machine.nix rec {
     wireguard.enable = false;
     xdg.enable = true;
     xorg = {
-      enable = true;
+      enable = false;
       videoDrivers = [ "modesetting" ];
       fontSize = 12;
     };
