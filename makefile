@@ -41,7 +41,7 @@ firmware:
 	fwupdmgr update
 
 build-image:
-	nix build .#nixosConfigurations.${machine}.config.system.build.images.iso-installer \
+	nix build .#nixosConfigurations.${machine}.config.system.build.images.sd-card \
 		--keep-going \
 		--option substitute true \
 		--option download-buffer-size 10000000000 \
@@ -51,3 +51,6 @@ write: build-image
 	sudo dd status=progress conv=fsync if=$$(ls ./result/iso/nixos-*-linux.iso) of=/dev/$(device)
 	sync
 	sudo eject /dev/$(device)
+
+dryrun:
+	nix build .#nixosConfigurations.${machine}.config.system.build.toplevel
