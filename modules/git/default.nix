@@ -3,17 +3,17 @@ import ../module.nix {
 
   options =
     { lib }:
-    with lib;
-    {
-      signingKey = mkOption {
-        type = types.str;
-        description = "GPG signing key";
+      with lib;
+      {
+        signingKey = mkOption {
+          type = types.str;
+          description = "GPG signing key";
+        };
+        email = mkOption {
+          type = types.str;
+          description = "Email";
+        };
       };
-      email = mkOption {
-        type = types.str;
-        description = "Email";
-      };
-    };
 
   output =
     { pkgs, cfg, ... }:
@@ -132,6 +132,14 @@ import ../module.nix {
           ];
 
           lfs.enable = true;
+
+          settings = {
+            "safe" = {
+              "directory" = [
+                "/etc/nixos"
+              ];
+            };
+          };
         };
 
         programs.gh = {
