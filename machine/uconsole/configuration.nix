@@ -66,6 +66,7 @@ import ../machine.nix rec {
     };
     zoxide.enable = true;
     zsh.enable = true;
+    essential-packages.enable = true;
   };
 
   isUconsole = true;

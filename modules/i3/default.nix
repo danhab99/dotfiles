@@ -46,6 +46,7 @@ import ../module.nix {
         nemo
         flameshot
         oneko
+        playerctl
       ];
 
       nixos = {

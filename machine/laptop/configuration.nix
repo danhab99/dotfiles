@@ -67,6 +67,7 @@ import ../machine.nix {
     tmux.enable = true;
     xdg.enable = true;
     redshift.enable = true;
+    essential-packages.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
