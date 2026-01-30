@@ -144,8 +144,8 @@ if isUconsole then
   {
     modules = [
       nixosModule
-      # ./${hostName}/hardware-configuration.nix
-      # ../cachix.nix
+      ./${hostName}/hardware-configuration.nix
+      ../cachix.nix
       home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
