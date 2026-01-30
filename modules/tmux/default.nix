@@ -27,6 +27,10 @@ import ../module.nix {
       ];
 
       homeManager = {
+        home.sessionVariables = {
+          TMUX_TMPDIR = lib.mkForce "/tmp";
+        };
+
         programs.tmux = {
           enable = true;
           baseIndex = 1;
