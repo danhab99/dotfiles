@@ -89,6 +89,7 @@ import ../machine.nix {
 
     all-packages.enable = true;
     nixos-packages.enable = true;
+    essential-packages.enable = true;
   };
 
   packages =
