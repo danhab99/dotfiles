@@ -16,6 +16,7 @@ import ../module.nix {
         nettools
         obsidian
         postgresql
+        powershell
         seahorse
         totp-cli
         tree
