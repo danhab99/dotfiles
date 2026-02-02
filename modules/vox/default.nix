@@ -2,6 +2,12 @@ import ../module.nix
 {
   name = "vox";
 
+  options = { lib }: with lib; {
+    inputMic = mkOption {
+      type = types.str;
+    }
+  };
+
   output = { pkgs, ... }:
     let
       whisperModel =
@@ -154,7 +160,7 @@ import ../module.nix
 
         ${pkgs.ffmpeg}/bin/ffmpeg \
           -f pulse \
-          -i alsa_input.usb-046d_0825_9476ED00-02.mono-fallback \
+          -i ${inputMic} \
           -ar 16000 \
           -ac 1 \
           -fflags nobuffer \
