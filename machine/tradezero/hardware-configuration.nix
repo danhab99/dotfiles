@@ -28,7 +28,16 @@
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    kernelParams = [ "usbcore.autosuspend=-1" ];
+    kernelParams = [
+      "usbcore.autosuspend=-1"
+      "usbcore.quirks=05e3:0626:b,0bda:0411:b,0bda:5411:b"  # Disable USB3 LPM for hubs
+    ];
+    
+    # Disable runtime power management for USB via kernel module options
+    extraModprobeConfig = ''
+      options usbcore autosuspend=-1
+      options xhci_hcd quirks=0x800
+    '';
   };
 
   boot.loader.systemd-boot.enable = true;

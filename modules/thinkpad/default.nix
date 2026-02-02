@@ -82,10 +82,29 @@ import ../module.nix
           };
         };
 
+        # Service to continuously enforce USB power settings
+        systemd.user.services.usb-power-enforcer = {
+          Unit = {
+            Description = "Continuously enforce USB power management settings to prevent dock disconnects";
+            After = [ "graphical-session.target" ];
+          };
+
+          Service = {
+            Type = "simple";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do for dev in /sys/bus/usb/devices/*/power/control; do if [ -f \"$dev\" ]; then echo on > \"$dev\" 2>/dev/null || true; fi; done; sleep 30; done'";
+            Restart = "always";
+            RestartSec = "10";
+          };
+
+          Install = {
+            WantedBy = [ "graphical-session.target" ];
+          };
+        };
+
         systemd.user.services.dpms-killer = {
           Unit = {
             Description = "Continuously disable DPMS to prevent screens from turning off";
-            Afte = [ "graphical-session.target" ];
+            After = [ "graphical-session.target" ];
           };
 
           Service = {
@@ -120,6 +139,37 @@ import ../module.nix
       };
 
       nixos = {
+        # System-level service to enforce USB power settings (runs as root)
+        systemd.services.usb-power-management-disable = {
+          description = "Disable USB power management for all devices to prevent dock disconnects";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "systemd-udev-settle.service" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = "${pkgs.bash}/bin/bash -c 'for dev in /sys/bus/usb/devices/*/power/control; do [ -f \"$dev\" ] && echo on > \"$dev\" 2>/dev/null || true; done'";
+            ExecStartPost = "${pkgs.coreutils}/bin/sleep 2";
+          };
+        };
+
+        # Timer to periodically re-enforce USB power settings
+        systemd.timers.usb-power-management-enforce = {
+          description = "Periodically re-enforce USB power management settings";
+          wantedBy = [ "timers.target" ];
+          timerConfig = {
+            OnBootSec = "1min";
+            OnUnitActiveSec = "5min";
+          };
+        };
+
+        systemd.services.usb-power-management-enforce = {
+          description = "Re-enforce USB power management settings";
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'for dev in /sys/bus/usb/devices/*/power/control; do [ -f \"$dev\" ] && echo on > \"$dev\" 2>/dev/null || true; done'";
+          };
+        };
+
         services.xserver.videoDrivers = [
           "displaylink"
           "modesetting"
@@ -160,9 +210,15 @@ import ../module.nix
             CPU_BOOST_ON_BAT = 1;
             CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
             CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+            
+            # Completely disable USB autosuspend to prevent dock disconnects
+            USB_AUTOSUSPEND = 0;
+            # Denylist your specific USB hubs (they will never autosuspend)
+            USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
+            # Disable autosuspend on both AC and battery
+            USB_AUTOSUSPEND_DISABLE_ON_SHUTDOWN = 1;
           };
         };
-
         services.hardware.bolt.enable = true;
 
         services.thinkfan = {
