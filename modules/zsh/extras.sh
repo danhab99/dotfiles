@@ -57,7 +57,8 @@ function ns() {
   if [[ -f "$git_root/.envrc" ]] && grep -qF "$envrc_content" "$git_root/.envrc"; then
     echo "Devshell '${shell_name}' is already configured for ${git_root}"
     direnv allow "$git_root"
-    exec zsh
+    # Trigger direnv reload by changing directory
+    cd "$git_root"
     return
   fi
 
@@ -68,8 +69,9 @@ function ns() {
     echo "$envrc_content" > "$git_root/.envrc"
     echo "Created $git_root/.envrc"
     direnv allow "$git_root"
-    echo "Devshell will activate on next directory entry. Reloading now..."
-    exec zsh
+    echo "Devshell will activate. Triggering direnv..."
+    # Trigger direnv reload by changing directory
+    cd "$git_root"
   else
     # One-time use without persisting
     nix develop "path:${flake_dir}#${shell_name}"
@@ -112,7 +114,7 @@ export DIRENV_LOG_FORMAT=""
 
 if [ -n "$IN_NIX_SHELL" ]; then
   echo "You are inside a Nix shell."
-else
-  eval "$(direnv hook zsh)"
 fi
+
+eval "$(direnv hook zsh)"
 
