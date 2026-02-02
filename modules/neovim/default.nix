@@ -55,6 +55,7 @@ import ../module.nix {
                 "sqlite"
                 "chans"
                 "watchlist"
+                "callout"
               ];
             };
           };
