@@ -15,6 +15,7 @@ import ../module.nix {
         sshfs
         yai
         yt-dlp
+        zip
       ];
     };
 }
