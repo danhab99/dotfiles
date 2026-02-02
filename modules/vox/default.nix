@@ -2,30 +2,155 @@ import ../module.nix
 {
   name = "vox";
 
-  output = { pkgs, ... }: {
-    packages = with pkgs; [
-      voxinput
-    ];
+  output = { pkgs, ... }:
+    let
+      whisperModel =
+        "${pkgs.whisper-cpp}/share/whisper/models/base.en.ggml.bin";
 
-    homeManager = {
-      xsession.windowManager.i3.config = {
-        startup = [
-          {
-            command = "exec OPENAI_BASE_URL=\"http://localhost:11434/v1\" VOXINPUT_BASE_URL=\"http://localhost:11434/v1\" VOXINPUT_REALTIME=false voxinput listen";
-          }
-        ];
+      voxToggle = pkgs.writeShellScriptBin "vox-toggle" ''
+        set -euo pipefail
 
-        keybindings = {
-          "Mod4+Mod1+v" = "voxinput record";
-          "Mod4+Shift+Mod1+v" = "voxinput write";
+        LOGDIR="/home/dan/.log"
+        LOGFILE="$LOGDIR/vox.log"
+
+        mkdir -p "$LOGDIR"
+
+        # Redirect ALL output (stdout + stderr) to the log
+        exec >>"$LOGFILE" 2>&1
+
+        log() {
+          echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+        }
+
+        log "=== vox-toggle invoked ==="
+
+        PIDFILE="/tmp/arecord.pid"
+        AUDIO="/tmp/record.wav"
+        OUTTXT="/tmp/out.txt"
+
+        beep() {
+          freq="$1"
+          duration="$2"
+          log "beep freq=$freq duration=$duration"
+
+          ${pkgs.sox}/bin/sox \
+            -n -r 44100 -c 1 \
+            /tmp/beep.wav \
+            synth "$duration" sine "$freq" \
+            vol 0.1
+
+          ${pkgs.pulseaudio}/bin/paplay /tmp/beep.wav
+          rm -f /tmp/beep.wav
+        }
+
+        # ---------- STOP RECORDING ----------
+        if [ -f "$PIDFILE" ]; then
+          REC_PID="$(cat "$PIDFILE")"
+          log "stop requested, pid=$REC_PID"
+
+          if kill -0 "$REC_PID" 2>/dev/null; then
+            log "sending SIGINT to ffmpeg to finalize WAV"
+            kill -INT "$REC_PID"
+            wait "$REC_PID" 2>/dev/null || true
+          fi
+
+          rm -f "$PIDFILE"
+
+          # Low beep = stop
+          beep 440 0.15
+
+          # Wait a moment for file to be fully written
+          sleep 0.2
+
+          if [ ! -f "$AUDIO" ] || [ ! -s "$AUDIO" ]; then
+            log "ERROR: audio file missing or empty"
+            beep 220 0.5
+            exit 1
+          fi
+
+          MODEL="/home/dan/.local/share/whisper/ggml-base.en.bin"
+          log "using model: $MODEL"
+
+          if [ ! -f "$MODEL" ]; then
+            log "ERROR: model not found"
+            beep 220 0.5
+            exit 1
+          fi
+
+          log "starting transcription"
+          TRANSCRIPTION=$(${pkgs.whisper-cpp}/bin/whisper-cli \
+            -m "$MODEL" \
+            -f "$AUDIO" \
+            -nt \
+            2>&1 | grep -v "^whisper" | grep -v "^main:" | grep -v "^system_info:" | grep -v "^load_backend:" | grep -v "^\[" | grep -v "^$" | sed 's/\x1b\[[0-9;]*m//g')
+          
+          # Trim leading/trailing whitespace
+          TRANSCRIPTION=$(echo "$TRANSCRIPTION" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+          log "transcription finished"
+          log "transcription text: $TRANSCRIPTION"
+
+          if [ -z "$TRANSCRIPTION" ]; then
+            log "ERROR: transcription is empty"
+            beep 220 0.5
+            exit 1
+          fi
+
+          log "typing output"
+          ${pkgs.xdotool}/bin/xdotool type "$TRANSCRIPTION"
+
+          rm -f "$AUDIO"
+          log "cleanup complete, exiting"
+          exit 0
+        fi
+
+        # ---------- START RECORDING ----------
+        log "start recording"
+        beep 800 0.08
+
+        rm -f "$AUDIO"
+
+        ${pkgs.ffmpeg}/bin/ffmpeg \
+          -f pulse \
+          -i alsa_input.usb-046d_0825_9476ED00-02.mono-fallback \
+          -ar 16000 \
+          -ac 1 \
+          -fflags nobuffer \
+          -flags low_delay \
+          -probesize 32 \
+          -y \
+          "$AUDIO" >/dev/null 2>&1 &
+
+        echo $! > "$PIDFILE"
+        log "ffmpeg started, pid=$(cat "$PIDFILE")"
+        
+        # Small delay to ensure ffmpeg has started capturing
+        sleep 0.1
+        beep 880 0.08
+      '';
+    in
+    {
+      packages = with pkgs; [
+        whisper-cpp
+        xdotool
+        pulseaudio
+        sox
+        ffmpeg
+        voxToggle
+      ];
+
+      homeManager = {
+        xsession.windowManager.i3.config = {
+          keybindings = {
+            "Mod4+Mod1+v" = "exec --no-startup-id vox-toggle";
+          };
         };
       };
-    };
 
-    nixos = {
-      services.udev.extraRules = ''
-        KERNEL=="uinput", GROUP="input", MODE="0620", OPTIONS+="static_node=uinput"
-      '';
+      nixos = {
+        services.udev.extraRules = ''
+          KERNEL=="uinput", GROUP="input", MODE="0620", OPTIONS+="static_node=uinput"
+        '';
+      };
     };
-  };
 }
