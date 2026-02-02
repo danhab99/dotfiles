@@ -25,6 +25,7 @@ import ../module.nix {
         docker-compose
         docker-credential-helpers
         pass
+        docker-buildx
       ];
 
       nixos = {
