@@ -10,22 +10,6 @@ import ../module.nix {
 
   output = { pkgs, cfg, ... }: {
     packages = with pkgs; [
-
-      bat
-      zsh
-      oh-my-zsh
-      htop-vim
-      iftop
-      iotop
-      jq
-      ncdu
-      neofetch
-      rclone
-      retry
-      ripgrep
-      rsync
-      screen
-      xclip
       bat
       zsh
       oh-my-zsh
@@ -191,13 +175,31 @@ import ../module.nix {
           c = "copilot";
         };
       };
+    };
 
-      home.sessionVariables = {
-        VI_MODE_SET_CURSOR = "true";
-        VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
-        BROWSER = pkgs.brave + "/bin/brave";
-        DIRENV_LOG_FORMAT = "";
+    nixos = {
+      programs.direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+        loadInNixShell = false;
+        silent = true;
+
+        settings = {
+          global = {
+            warn_timeout = 0;
+            log_format = "-";
+            hide_env_diff = true;
+          };
+        };
       };
+
+      programs.zsh.enable = true;
+    };
+
+    droid = {
+      # programs.zsh.enable = true;
+      #home.shell.enableZshIntegration = true;
     };
   };
 }
