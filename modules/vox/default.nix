@@ -5,10 +5,10 @@ import ../module.nix
   options = { lib }: with lib; {
     inputMic = mkOption {
       type = types.str;
-    }
+    };
   };
 
-  output = { pkgs, ... }:
+  output = { pkgs, cfg, ... }:
     let
       whisperModel =
         "${pkgs.whisper-cpp}/share/whisper/models/base.en.ggml.bin";
@@ -160,7 +160,7 @@ import ../module.nix
 
         ${pkgs.ffmpeg}/bin/ffmpeg \
           -f pulse \
-          -i ${inputMic} \
+          -i "${cfg.inputMic}" \
           -ar 16000 \
           -ac 1 \
           -fflags nobuffer \
