@@ -30,7 +30,8 @@ import ../module.nix
 
         beep() {
           freq="$1"
-          duration="$2"
+          # duration="$2"
+          duration="0.15"
           log "beep freq=$freq duration=$duration"
 
           ${pkgs.sox}/bin/sox \
@@ -57,14 +58,14 @@ import ../module.nix
           rm -f "$PIDFILE"
 
           # Low beep = stop
-          beep 440 0.15
+          beep 500 0.15
 
           # Wait a moment for file to be fully written
           sleep 0.2
 
           if [ ! -f "$AUDIO" ] || [ ! -s "$AUDIO" ]; then
             log "ERROR: audio file missing or empty"
-            beep 220 0.5
+            beep 400 0.5
             exit 1
           fi
 
@@ -73,10 +74,11 @@ import ../module.nix
 
           if [ ! -f "$MODEL" ]; then
             log "ERROR: model not found"
-            beep 220 0.5
+            beep 400 0.5
             exit 1
           fi
 
+          beep 520 0.15
           log "starting transcription"
           TRANSCRIPTION=$(${pkgs.whisper-cpp}/bin/whisper-cli \
             -m "$MODEL" \
@@ -92,10 +94,11 @@ import ../module.nix
 
           if [ -z "$TRANSCRIPTION" ]; then
             log "ERROR: transcription is empty"
-            beep 220 0.5
+            beep 400 0.5
             exit 1
           fi
 
+          beep 540 0.15
           log "typing output"
           ${pkgs.xdotool}/bin/xdotool type "$TRANSCRIPTION"
 
@@ -106,7 +109,7 @@ import ../module.nix
 
         # ---------- START RECORDING ----------
         log "start recording"
-        beep 800 0.08
+        beep 440 0.08
 
         rm -f "$AUDIO"
 
@@ -126,7 +129,7 @@ import ../module.nix
         
         # Small delay to ensure ffmpeg has started capturing
         sleep 0.1
-        beep 880 0.08
+        beep 460 0.08
       '';
     in
     {
