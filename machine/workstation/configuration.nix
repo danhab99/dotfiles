@@ -114,7 +114,7 @@ import ../machine.nix {
     };
     xdg.enable = true;
     redshift.enable = true;
-    wireguard.enable = true;
+    wireguard.enable = false;
     vox.enable = true;
 
     all-packages.enable = true;
