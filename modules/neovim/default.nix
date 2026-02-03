@@ -60,6 +60,7 @@ import ../module.nix {
           };
 
           plugins = with pkgs.vimPlugins; [
+            CopilotChat-nvim
             blamer-nvim
             coc-clangd
             coc-css
@@ -79,7 +80,6 @@ import ../module.nix {
             coc-toml
             coc-tsserver
             coc-yaml
-            CopilotChat-nvim
             ctrlp-vim
             fzf-lua
             goyo-vim
@@ -97,6 +97,7 @@ import ../module.nix {
             vim-css-color
             vim-fugitive
             vim-gitgutter
+            vim-just
             vim-polyglot
             vim-surround
           ];

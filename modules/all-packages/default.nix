@@ -6,6 +6,7 @@ import ../module.nix {
     {
       packages = with pkgs; [
         glances
+        just
         nodejs
         openssl
         python3

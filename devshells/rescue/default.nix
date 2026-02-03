@@ -79,17 +79,18 @@ import ../devshell.nix {
       "all" = {
         packages = with pkgs; [
           busybox
-          curl
-          git
-          tmux
-          wget
-          zsh
-          downloadNixos
-          writeBootDrive
-          vim
-          neovim
           copilot
+          curl
+          downloadNixos
+          git
+          just
+          neovim
           smartmontools
+          tmux
+          vim
+          wget
+          writeBootDrive
+          zsh
         ];
 
         shellHook = ''
