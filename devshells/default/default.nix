@@ -11,7 +11,6 @@ import ../devshell.nix {
           nixd
           gnumake
           containerd
-          oci-cli
           cachix
         ];
       };
