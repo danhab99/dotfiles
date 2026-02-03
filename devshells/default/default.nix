@@ -6,12 +6,13 @@ import ../devshell.nix {
     {
       "" = {
         packages = with pkgs; [
-          git
-          nixpkgs-fmt
-          nixd
-          gnumake
-          containerd
           cachix
+          containerd
+          git
+          gnumake
+          just
+          nixd
+          nixpkgs-fmt
         ];
       };
     };
