@@ -12,6 +12,7 @@ import ../module.nix
 
         LOGDIR="/home/dan/.log"
         LOGFILE="$LOGDIR/vox.log"
+        PLAYER_STATE_FILE="/tmp/vox.player_state"
 
         mkdir -p "$LOGDIR"
 
@@ -44,6 +45,38 @@ import ../module.nix
           rm -f /tmp/beep.wav
         }
 
+        get_player_state() {
+          playerctl status 2>/dev/null || echo "NoPlayer"
+        }
+
+        pause_player_if_playing() {
+          state="$(get_player_state)"
+          log "player state before recording: $state"
+          echo "$state" > "$PLAYER_STATE_FILE"
+
+          if [ "$state" = "Playing" ]; then
+            log "pausing player"
+            playerctl pause || true
+          fi
+        }
+
+        resume_player_if_needed() {
+          if [ ! -f "$PLAYER_STATE_FILE" ]; then
+            log "no saved player state"
+            return
+          fi
+
+          prev_state="$(cat "$PLAYER_STATE_FILE")"
+          log "restoring player state: $prev_state"
+
+          if [ "$prev_state" = "Playing" ]; then
+            log "resuming player"
+            playerctl play || true
+          fi
+
+          rm -f "$PLAYER_STATE_FILE"
+        }
+
         # ---------- STOP RECORDING ----------
         if [ -f "$PIDFILE" ]; then
           REC_PID="$(cat "$PIDFILE")"
@@ -62,6 +95,8 @@ import ../module.nix
 
           # Wait a moment for file to be fully written
           sleep 0.2
+
+          resume_player_if_needed
 
           if [ ! -f "$AUDIO" ] || [ ! -s "$AUDIO" ]; then
             log "ERROR: audio file missing or empty"
@@ -103,12 +138,16 @@ import ../module.nix
           ${pkgs.xdotool}/bin/xdotool type "$TRANSCRIPTION"
 
           rm -f "$AUDIO"
+
           log "cleanup complete, exiting"
           exit 0
         fi
 
         # ---------- START RECORDING ----------
         log "start recording"
+
+        pause_player_if_playing
+
         beep 440 0.08
 
         rm -f "$AUDIO"
