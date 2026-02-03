@@ -1,9 +1,9 @@
 # Default recipe
-default := "switch"
+default: switch
 
 # Load .env
 set dotenv-load := true
-set dotenv-path := ".env"
+set dotenv-override := true
 
 name := env_var_or_default("name", "workstation")
 device := env_var_or_default("device", "nixos")
@@ -28,9 +28,9 @@ switch:
         --keep-going \
         --flake .#{{name}}
 
-    i3-msg restart
-    sudo udevadm control --reload
-    sudo udevadm trigger
+    -i3-msg restart
+    -sudo udevadm control --reload
+    -sudo udevadm trigger
 
 clean:
     {{clean_command}} --delete-older-than {{keep_garbage}}
