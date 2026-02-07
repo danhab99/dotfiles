@@ -20,10 +20,9 @@ import ../module.nix {
           defaultCacheTtl = 10000000;
           maxCacheTtl = 10000000;
 
-          pinentry.package = pkgs.pinentry-curses;
-
-          enableZshIntegration = true;
-        };
+        pinentryPackage = pkgs.pinentry-curses;
+        enableZshIntegration = true;
       };
     };
+  };
 }

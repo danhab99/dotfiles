@@ -71,7 +71,7 @@ import ../module.nix {
         programs.git = {
           enable = true;
 
-          settings = {
+          extraConfig = {
             pull.rebase = true;
             init.defaultBranch = "main";
             color = {
@@ -133,7 +133,7 @@ import ../module.nix {
 
           lfs.enable = true;
 
-          settings = {
+          extraConfig = {
             "safe" = {
               "directory" = [
                 "/etc/nixos"
