@@ -1,18 +1,28 @@
 {
   inputs = {
+    # === NixOS ===
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-uconsole.url = "github:nixos-uconsole/nixos-uconsole/v1.0.0";
 
+    # === uConsole ===
+    nixpkgs_for_uconsole.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixos-uconsole = {
+      url = "github:nixos-uconsole/nixos-uconsole/master";
+      inputs.nixpkgs.follows = "nixpkgs_for_uconsole";
+    };
+
+    # === Droid ===
     droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     droid-home-manager = {
       # url = "github:nix-community/home-manager/release-24.05";
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "droid-nixpkgs";
     };
-
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
       inputs.nixpkgs.follows = "droid-nixpkgs";
