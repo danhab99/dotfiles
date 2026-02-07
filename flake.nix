@@ -13,7 +13,8 @@
     nixpkgs_for_uconsole.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-uconsole = {
       url = "github:nixos-uconsole/nixos-uconsole/master";
-      inputs.nixpkgs.follows = "nixpkgs_for_uconsole";
+      # inputs.nixpkgs.follows = "nixpkgs_for_uconsole";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # === Droid ===
