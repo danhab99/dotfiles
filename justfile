@@ -54,4 +54,4 @@ write device machine max_jobs: (build-image machine max_jobs)
     sudo eject /dev/{{device}}
 
 dryrun machine:
-    nix build .#nixosConfigurations.{{machine}}.config.system.build.toplevel
+    nix build --show-trace .#nixosConfigurations.{{machine}}.config.system.build.toplevel
