@@ -115,7 +115,10 @@ import ../machine.nix {
     xdg.enable = true;
     redshift.enable = true;
     wireguard.enable = false;
-    vox.enable = true;
+    vox = {
+      enable = true;
+      inputMic = "alsa_input.usb-046d_0825_9476ED00-02.mono-fallback";
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;
