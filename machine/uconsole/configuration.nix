@@ -70,5 +70,11 @@ import ../machine.nix rec {
     tty.enable = true;
   };
 
-  isUconsole = true;
+  output = system: inputs@{ home-manager, nixos-uconsole, ... }: modules: (nixos-uconsole.lib.mkUConsoleSystem {
+    inherit modules;
+  });
+
+  # raw = { ... }: {
+  #   config.hardware.uc-4g.enable = false;
+  # };
 }
