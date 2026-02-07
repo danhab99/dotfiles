@@ -15,7 +15,7 @@ clean_command  := if device == "nixos" { "sudo nix-collect-garbage" } else { "ni
 
 update:
     nix flake update
-    just switch max_jobs=1
+    just switch
 
 rollback:
     git checkout $(git rev-list -n 2 HEAD -- flake.lock | tail -n 1) -- flake.lock
@@ -24,7 +24,6 @@ switch:
     {{switch_command}} switch \
         --option substitute true \
         --option download-buffer-size 10000000000 \
-        --max-jobs {{max_jobs}} \
         --keep-going \
         --flake .#{{name}}
 
