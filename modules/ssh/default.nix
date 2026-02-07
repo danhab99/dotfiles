@@ -11,7 +11,7 @@ import ../module.nix {
     };
 
   output =
-    { pkgs, cfg, ... }:
+    { pkgs, cfg, lib, ... }:
     {
       packages = with pkgs; [ openssh ];
 
@@ -20,7 +20,7 @@ import ../module.nix {
           enable = true;
           allowSFTP = true;
           authorizedKeysInHomedir = true;
-          settings.PasswordAuthentication = false;
+          settings.PasswordAuthentication = lib.mkForce false;
           settings = {
             X11Forwarding = true;
           };
