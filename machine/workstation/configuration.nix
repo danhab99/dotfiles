@@ -124,7 +124,7 @@ import ../machine.nix {
     nixos-packages.enable = true;
   };
 
-  nixos = {
+  raw = {
     # Enable binfmt emulation for building ARM images
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };

@@ -9,9 +9,12 @@
 , xserver ? ""
 , bind ? [ ]
 , jobs ? (args: [ ])
-, nixos ? { }
 , aliases ? (pkgs: { })
-, isUconsole ? false
+, output ? (system: inputs@{ nixpkgs, ... }: modules: (nixpkgs.lib.nixosSystem {
+    inherit system modules;
+    specialArgs = { } // inputs;
+  }))
+, raw ? (inputs: { })
 }:
 let
   strLen = builtins.stringLength;
@@ -138,34 +141,49 @@ let
       };
     };
 in
-inputs@{ nixpkgs, home-manager, nixos-uconsole, ... }:
-if isUconsole then
-  (nixos-uconsole.lib.mkUConsoleSystem
-  {
-    modules = [
-      nixosModule
-      ./${hostName}/hardware-configuration.nix
-      ../cachix.nix
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      }
-    ];
-  }) else
-  (nixpkgs.lib.nixosSystem {
-    inherit system;
-    specialArgs = { } // inputs;
-    modules = [
-      nixosModule
-      ./${hostName}/hardware-configuration.nix
-      ../cachix.nix
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      }
-      # Handle nixos as either a function or an attr set
-      (if builtins.isFunction nixos then nixos else (_: nixos))
-    ];
-  })
+inputs@{ home-manager, ... }:
+let
+  modules = [
+    nixosModule
+    ./${hostName}/hardware-configuration.nix
+    ../cachix.nix
+    home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+    }
+    raw
+  ];
+in
+output system inputs modules
+
+# if isUconsole then
+#   (nixos-uconsole.lib.mkUConsoleSystem
+#   {
+#     modules = [
+#       nixosModule
+#       ./${hostName}/hardware-configuration.nix
+#       ../cachix.nix
+#       home-manager.nixosModules.home-manager
+#       {
+#         home-manager.useGlobalPkgs = true;
+#         home-manager.useUserPackages = true;
+#       }
+#     ];
+#   }) else
+#   (nixpkgs.lib.nixosSystem {
+#     inherit system;
+#     specialArgs = { } // inputs;
+#     modules = [
+#       nixosModule
+#       ./${hostName}/hardware-configuration.nix
+#       ../cachix.nix
+#       home-manager.nixosModules.home-manager
+#       {
+#         home-manager.useGlobalPkgs = true;
+#         home-manager.useUserPackages = true;
+#       }
+#       # Handle nixos as either a function or an attr set
+#       (if builtins.isFunction nixos then nixos else (_: nixos))
+#     ];
+#   })
