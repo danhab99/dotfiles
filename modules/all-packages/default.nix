@@ -19,6 +19,7 @@ import ../module.nix {
         yai
         yt-dlp
         zip
+        gnufind
       ];
     };
 }
