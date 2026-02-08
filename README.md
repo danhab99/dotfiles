@@ -1,10 +1,10 @@
 # NixOS config
 
-## Makefile
+## justfile
 
-* `make update`: Updates the flake.lock to the latest
-* `make switch`: Builds nix and applies the new version
-* `make clean`: cleans the nix store
+* `just update`: Updates the flake.lock to the latest
+* `just switch`: Builds nix and applies the new version
+* `just clean`: cleans the nix store
 
 ##### .env file
 
