@@ -33,12 +33,11 @@ import ../module.nix {
         enableZshIntegration = true;
         nix-direnv.enable = true;
         loadInNixShell = false;
-        silent = true;
+        silent = false;
 
         settings = {
           global = {
             warn_timeout = 0;
-            log_format = "-";
             hide_env_diff = true;
           };
         };
