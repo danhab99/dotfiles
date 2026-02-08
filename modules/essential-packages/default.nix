@@ -17,27 +17,22 @@ import ../module.nix {
     {
       packages = with pkgs; [
         acpi
-        archivemount
         cachix
         curl
         customBusybox
         entr
         ffmpeg
         file
-        gnumake
+        makefile
+        just
         gnutar
         gzip
         jq
         nmap
-        unzip
         wget
-        zip
-        gparted
-        lm_sensors
-        parted
-        pciutils
         upower
-        usbutils
+        unzip
+        zip
       ];
     };
 }

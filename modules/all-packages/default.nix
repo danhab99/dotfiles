@@ -15,11 +15,10 @@ import ../module.nix {
         s3cmd
         scdl
         sshfs
-        unzip
         yai
         yt-dlp
-        zip
-        gnufind
+        pciutils 
+        usbutils
       ];
     };
 }

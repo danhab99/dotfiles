@@ -23,8 +23,10 @@
       secrets.enable = true;
       zoxide.enable = true;
       zsh.enable = true;
+      
       all-packages.enable = true;
       droid-packages.enable = true;
+      essential-packages.enable = true;
     };
 
     nix = {
