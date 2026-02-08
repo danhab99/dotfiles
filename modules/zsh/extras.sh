@@ -75,18 +75,15 @@ function ns() {
   fi
 }
 
-function dev-shell() {
-  shell=${1:-"blank"}
-  nix flake init --template /etc/nixos#$shell
+function template() {
+  name=${1:-"blank"}
+  nix flake init --template /etc/nixos#$name
   cp /etc/nixos/flake.lock .
 }
 
 function update-betterlockscreen() {
   betterlockscreen -u "$(cat ~/.config/nitrogen/bg-saved.cfg | grep file= | cut -d '=' -f2)"
 }
-
-alias devshell="dev-shell";
-alias nixshell="dev-shell";
 
 # If not already inside tmux, start a fresh tmux session and never reattach
 if [ -z "$TMUX" ]; then
