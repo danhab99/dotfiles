@@ -36,17 +36,18 @@ import ../module.nix {
     }:
     {
       packages = with pkgs; [
+        betterlockscreen
+        dmenu
+        flameshot
         i3-rounded
         i3blocks
         i3status
-        dmenu
-        picom
-        nitrogen
-        betterlockscreen
         nemo
-        flameshot
+        nitrogen
         oneko
+        picom
         playerctl
+        sysstat
       ];
 
       nixos = {
