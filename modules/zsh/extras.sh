@@ -22,8 +22,7 @@ function vacay {
     rm /tmp/nixshell
 }
 
-export DIRENV_WARN_TIMEOUT=0 
-NS_STATE_FILE="/tmp/nixshell-${USER}"
+export DIRENV_WARN_TIMEOUT=0
 
 function ns() {
   local shell_name="${1:-default}"
@@ -99,6 +98,9 @@ if [ -z "$TMUX" ]; then
   # Note: the `attach` is redundant since new-session attaches, but included for clarity
 fi
 
+# Initialize direnv hook - must come before any cd commands
+eval "$(direnv hook zsh)"
+
 if [ -e /tmp/workdir ]
 then
   DIR=$(cat /tmp/workdir)
@@ -108,11 +110,7 @@ fi
 
 setopt NO_BEEP
 
-export DIRENV_LOG_FORMAT=""
-
 if [ -n "$IN_NIX_SHELL" ]; then
   echo "You are inside a Nix shell."
-else
-  eval "$(direnv hook zsh)"
 fi
 
