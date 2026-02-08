@@ -18,14 +18,12 @@
           config.allowUnfree = true;
         };
         lib = pkgs.lib;
-
-        grit = import ./nix/lib.nix { inherit lib; };
       in
       {
         packages = {
           default = pkgs.buildGoModule {
             pname = "";
-            version = import ./changelog;
+            version = "";
             src = self;
             vendorHash = "";
             subPackages = [ "." ];
