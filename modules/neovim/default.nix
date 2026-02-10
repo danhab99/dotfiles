@@ -56,6 +56,8 @@ import ../module.nix {
                 "chans"
                 "watchlist"
                 "callout"
+                "ollama"
+                "postgres"
               ];
             };
           };
