@@ -1,5 +1,6 @@
 export ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
 export ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+export NIXPKGS_ALLOW_INSECURE=1
 
 function gn() {
     git checkout -b dan/$(date +%Y/%m/%d)/$1;
