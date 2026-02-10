@@ -36,10 +36,9 @@ NAME="$*"
 NAME="${NAME// /_}"
 
 # Count existing changelog files (any files in directory)
-INDEX=$(find . -maxdepth 1 -type f | wc -l | tr -d ' ')
-INDEX=$(printf "%03d" "$INDEX")
+INDEX=$(find . -maxdepth 1 -type f \( -name '*.md' -o -name '*.markdown' \) | wc -l | tr -d ' ')
 
-FILENAME="${INDEX}_${KIND}_${NAME}.md"
+FILENAME="${INDEX}-${KIND}-${NAME}.md"
 
 if [[ -e "$FILENAME" ]]; then
   echo "Error: $FILENAME already exists"
@@ -53,5 +52,7 @@ cat > "$FILENAME" <<EOF
 ${KIND}
 
 EOF
+
+$EDITOR $FILENAME
 
 echo "Created changelog entry: $FILENAME"
