@@ -137,7 +137,7 @@ import ../machine.nix {
       }
     ];
 
-  nixos = { pkgs, ... }: {
+  raw = { pkgs, ... }: {
     services = {
       twingate = {
         enable = true;
