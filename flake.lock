@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "dotnet_8_nixpkgs": {
+      "locked": {
+        "lastModified": 1733236164,
+        "narHash": "sha256-CFPNs0gDkqfmoChpYK55E8Wql6xzN4klZFJCLSZU7Bw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "04f1c8b4eab2d07d390015461d182dc5818f89c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "04f1c8b4eab2d07d390015461d182dc5818f89c4",
+        "type": "github"
+      }
+    },
     "droid-home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -353,6 +369,7 @@
     },
     "root": {
       "inputs": {
+        "dotnet_8_nixpkgs": "dotnet_8_nixpkgs",
         "droid-home-manager": "droid-home-manager",
         "droid-nixpkgs": "droid-nixpkgs",
         "flake-utils": "flake-utils",
