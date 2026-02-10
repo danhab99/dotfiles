@@ -3,4 +3,6 @@ versionStr := `nix eval --raw .#packages.x86_64-linux.default.version`
 latestChangelog := `cd changelog && ls *.md | sort -t '-' -k 1n | tail -n 1`
 
 version:
+  git add ./changelog
+  git commit -m "{{versionStr}}"
   git tag -F ./changelog/{{latestChangelog}} {{versionStr}}
