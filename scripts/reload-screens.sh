@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Detect if running from TTY and find X session user
+if [[ -z "${DISPLAY:-}" ]]; then
+    # Find the X session user and display
+    X_USER=$(who | awk '/\(:0\)/ {print $1; exit}')
+    if [[ -z "$X_USER" ]]; then
+        echo "Error: Could not find user running X session"
+        exit 1
+    fi
+    
+    # Re-execute the entire script as the X user with proper environment
+    echo "Running as X user: $X_USER"
+    exec sudo -u "$X_USER" DISPLAY=:0 XAUTHORITY="/home/$X_USER/.Xauthority" bash "$0" "$@"
+fi
+
 # Abort on Wayland (xrandr won't help there)
 if [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
     echo "Wayland session detected. xrandr cannot force a rescan."
@@ -8,7 +22,7 @@ if [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
     exit 1
 fi
 
-echo "X11 session detected."
+echo "X11 session detected (DISPLAY=$DISPLAY)."
 
 # Get connected outputs
 mapfile -t OUTPUTS < <(xrandr --query | awk '/ connected/ {print $1}')
