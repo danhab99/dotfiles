@@ -33,6 +33,31 @@ import ../machine.nix {
       defaultLayoutScript = "3screen.sh";
       fontSize = 14.0;
     };
+    # sway = {
+    #   enable = false;  # Disabled: NVIDIA proprietary drivers have poor Wayland support
+    #   waybarconfigFile = ./waybar.json;
+    #   screen = [
+    #     "DP-4"
+    #     "DP-0"
+    #     "HDMI-0"
+    #   ];
+    #   defaultLayoutScript = "3screen.sh";
+    #   fontSize = 14.0;
+    #   outputs = {
+    #     "DP-4" = {
+    #       resolution = "2560x1440";
+    #       position = "0,0";
+    #     };
+    #     "DP-0" = {
+    #       resolution = "2560x1440";
+    #       position = "2560,0";
+    #     };
+    #     "HDMI-0" = {
+    #       resolution = "2560x1440";
+    #       position = "5120,0";
+    #     };
+    #   };
+    # };
     nix.enable = true;
     ollama = {
       enable = true;
@@ -79,7 +104,6 @@ import ../machine.nix {
     xorg = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      # defaultScreenScript = "3screen.sh";
       extraConfig = ''
         urxvt*depth: 32
         urxvt*blurRadius: 10
@@ -127,6 +151,21 @@ import ../machine.nix {
   raw = {
     # Enable binfmt emulation for building ARM images
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+    # Wayland/Sway environment variables for NVIDIA
+    environment.sessionVariables = {
+      # Enable Wayland support for NVIDIA
+      WLR_NO_HARDWARE_CURSORS = "1";
+      # Force GBM backend for NVIDIA
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # Enable Wayland apps
+      NIXOS_OZONE_WL = "1";
+      # Additional NVIDIA Wayland variables
+      LIBVA_DRIVER_NAME = "nvidia";
+      XDG_SESSION_TYPE = "wayland";
+      MOZ_ENABLE_WAYLAND = "1";
+    };
   };
 
   files = {

@@ -41,6 +41,11 @@ import ../module.nix {
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
 
+        # Critical for Sway/Wayland with NVIDIA
+        boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+        boot.extraModulePackages = [ config.boot.kernelPackages.nvidiaPackages.stable ];
+        boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+
         environment.systemPackages = with pkgs; [
           # Add CUDA packages to system for apps that need them
           cudaPackages.cudatoolkit
