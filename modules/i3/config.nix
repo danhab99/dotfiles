@@ -284,11 +284,11 @@ in
     }
     # Machine-specific: workstation only
     {
-      command = "$HOME/.local/bin/ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd >> ~/.log/ev-cmd.log";
+      command = "ev-cmd --device-path /dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd >> ~/.log/ev-cmd.log";
       always = true;
     }
     {
-      command = "$HOME/Documents/rust/logitech-g600-rs/target/debug/logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path $HOME/.config/g600/g600.toml >> ~/.log/g600.log";
+      command = "logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path $HOME/.config/g600/g600.toml >> ~/.log/g600.log";
       always = true;
     }
     {
