@@ -23,7 +23,6 @@ import ../module.nix {
         entr
         ffmpeg
         file
-        makefile
         just
         gnutar
         gzip
