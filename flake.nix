@@ -10,6 +10,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
+    ev-cmd.url = "github:danhab99/ev-cmd/main";
+    logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
 
     # === uConsole ===
     nixpkgs_for_uconsole.url = "github:nixos/nixpkgs/nixos-24.11";
