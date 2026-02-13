@@ -90,7 +90,7 @@ import ../machine.nix {
     };
     zoxide.enable = true;
     zsh.enable = true;
-    neovim.enable = true;
+    # neovim.enable = true;
     ranger.enable = true;
     rtlsdr.enable = true;
     nvidia.enable = true;

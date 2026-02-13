@@ -2,13 +2,25 @@ import ../devshell.nix {
   name = "node";
 
   versions =
-    { pkgs, ... }:
+    inputs@{ pkgs, ... }:
     let
+
+      mkNeovim = import ../mkNeovim.nix inputs;
+
+
       packages = with pkgs; [
         gnumake
         nodejs_22
         yarn
         prettierd
+        (mkNeovim {
+          neovimPlugins = with pkgs.vimPlugins; [
+            coc-css
+            coc-html
+            coc-tsserver
+            coc-tailwindcss
+          ];
+        })
       ];
     in
     {

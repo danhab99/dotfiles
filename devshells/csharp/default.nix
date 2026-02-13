@@ -2,13 +2,27 @@ import ../devshell.nix {
   name = "csharp";
 
   versions =
-    { pkgs, dotnet_8_nixpkgs, ... }:
+    inputs@{ pkgs, dotnet_8_nixpkgs, ... }:
     let
       nixpkgs_for_dotnet_8 = import dotnet_8_nixpkgs { system = "x86_64-linux"; };
+
+      mkNeovim = import ../mkNeovim.nix inputs;
 
       shared = with pkgs; [
         csharp-ls
         python3
+        (mkNeovim {
+          plugins = with pkgs.vimPlugins; [
+
+          ];
+          coc = {
+            "csharp-ls" = {
+              "command" = "csharp-ls";
+              "filetypes" = [ "cs" ];
+              "rootPatterns" = [ "*.csproj" ];
+            };
+          };
+        })
       ];
     in
     {

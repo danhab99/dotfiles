@@ -7,8 +7,7 @@ import ../module.nix {
       packages = with pkgs; [
         ctags
         astyle
-        xclip
-        xsel
+        wl-clipboard
       ];
 
       homeManager = {
@@ -46,7 +45,7 @@ import ../module.nix {
                   "filetypes" = [ "go" ];
                 };
               };
-              "rust-analyzer.server.path" = "rust-analyzer";
+              # "rust-analyzer.server.path" = "rust-analyzer";  # Disabled - saves 1GB
               "inlayHint.enable" = false;
               "cSpell.userWords" = [
                 "hasher"
@@ -66,22 +65,22 @@ import ../module.nix {
             CopilotChat-nvim
             blamer-nvim
             coc-clangd
-            coc-css
+            # coc-css
             coc-docker
             coc-git
-            coc-go
-            coc-html
-            coc-java
+            # coc-go
+            # coc-html
+            # coc-java
             coc-json
             coc-lua
             coc-markdownlint
-            coc-pyright
-            coc-rust-analyzer
+            # coc-pyright
+            # coc-rust-analyzer  # Disabled - pulls in rustc (1GB)
             coc-sh
             coc-spell-checker
-            coc-tailwindcss
+            # coc-tailwindcss
             coc-toml
-            coc-tsserver
+            # coc-tsserver
             coc-yaml
             ctrlp-vim
             fzf-lua
@@ -112,7 +111,10 @@ import ../module.nix {
           defaultEditor = true;
 
           # extraConfig = builtins.readFile ./vimrc;
-          extraLuaConfig = builtins.readFile ./lua/neovim.lua;
+          extraLuaConfig = ''
+            -- Load all lua modules from the config directory
+            require("neovim")
+          '';
         };
       };
     };

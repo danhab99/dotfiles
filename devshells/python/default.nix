@@ -2,7 +2,10 @@ import ../devshell.nix {
   name = "python";
 
   versions =
-    { pkgs, ... }:
+    inputs@{ pkgs, ... }:
+    let
+      mkNeovim = import ../mkNeovim.nix inputs;
+    in
     {
       "313" = {
         packages = with pkgs; [
@@ -11,6 +14,12 @@ import ../devshell.nix {
           python313Packages.requests
           python313Packages.pypandoc
           python313Packages.toml
+          (mkNeovim {
+            plugins = with pkgs.vimPlugins; [
+              coc-pyright
+            ];
+            coc = { };
+          })
         ];
       };
     };

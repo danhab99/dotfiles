@@ -17,6 +17,8 @@ import ../module.nix {
           ];
           allowed-users = [ "dan" ];
           require-sigs = true;
+          # Allow the nix-daemon to be used as a remote builder
+          trusted-users = [ "root" "dan" "@wheel" ];
         };
 
         nixpkgs.config.allowUnfree = true;
