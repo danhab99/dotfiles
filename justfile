@@ -22,8 +22,6 @@ rollback:
 
 switch:
     {{switch_command}} switch \
-        --option substitute true \
-        --option download-buffer-size 10000000000 \
         --keep-going \
         --flake .#{{name}}
 
@@ -42,8 +40,6 @@ firmware:
 build-image machine max_jobs:
     nix build .#nixosConfigurations.{{machine}}.config.system.build.images.sd-card \
         --keep-going \
-        --option substitute true \
-        --option download-buffer-size 10000000000 \
         --max-jobs {{max_jobs}}
 
 write device machine max_jobs: (build-image machine max_jobs)
