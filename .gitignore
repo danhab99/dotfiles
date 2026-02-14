@@ -1,2 +1,5 @@
 .env
 modules/wireguard/private.key
+
+*storybook.log
+storybook-static
