@@ -7,6 +7,7 @@ import ../module.nix {
     in
     {
       packages = with pkgs; [
+        aider-chat-full
         audacity
         brave
         dbeaver-bin
