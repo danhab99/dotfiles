@@ -119,6 +119,12 @@ import ../machine.nix {
       enable = true;
       inputMic = "alsa_input.usb-046d_0825_9476ED00-02.mono-fallback";
     };
+    ev-cmd = {
+      enable = true;
+      configPath = ./ev-cmd/ev-cmd.toml;
+      devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
+      deviceName="LingYao ShangHai Thumb Keyboard";
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;
@@ -130,9 +136,6 @@ import ../machine.nix {
   };
 
   files = {
-    ".config/ev-cmd.toml" = {
-      source = ./ev-cmd/ev-cmd.toml;
-    };
     ".config/g600" = {
       source = ./g600;
       recursive = true;
