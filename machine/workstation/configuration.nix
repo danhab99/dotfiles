@@ -39,27 +39,14 @@ import ../machine.nix {
       repoDir = "/data/ollama";
       models = [
         "bge-large:latest"
-        "codegemma:2b-code-v1.1-fp16"
-        "codegemma:7b-code-q6_K"
-        "codegemma:7b-instruct"
-        "codellama:7b-code-q8_0"
-        "codellama:7b-instruct-q8_0"
-        "codellama:7b-python-q8_0"
-        "codeqwen:7b-code-v1.5-q8_0"
-        "codestral:22b-v0.1-q3_K_L"
-        "command-r7b:7b-12-2024-q8_0"
+        "codegemma:2b"
         "deepseek-r1:14b"
         "embeddinggemma"
-        "gemma3:12b"
-        "gemma3:12b-it-qat"
+        "gemma3:latest"
         "llama3.1:8b"
-        "llama3.1:8b-instruct-q8_0"
-        "llama3.2:3b-instruct-fp16"
-        "mistral:7b-instruct-v0.3-q8_0"
         "mistral:text"
-        "nomic-embed-text"
-        "qwen3:4b-instruct-2507-fp16"
-        "qwen3:4b-thinking-2507-fp16"
+        "qwen3-vl:2b-thinking-bf16"
+        "qwen3-vl:4b"
       ];
       enableGpu = true;
     };
