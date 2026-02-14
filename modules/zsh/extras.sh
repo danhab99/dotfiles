@@ -96,9 +96,6 @@ if [ -z "$TMUX" ]; then
   # Note: the `attach` is redundant since new-session attaches, but included for clarity
 fi
 
-# Initialize direnv hook - must come before any cd commands
-eval "$(direnv hook zsh)"
-
 if [ -e /tmp/workdir ]
 then
   DIR=$(cat /tmp/workdir)
@@ -111,4 +108,3 @@ setopt NO_BEEP
 if [ -n "$IN_NIX_SHELL" ]; then
   echo "You are inside a Nix shell."
 fi
-
