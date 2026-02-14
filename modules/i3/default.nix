@@ -32,7 +32,6 @@ import ../module.nix {
       config,
       cfg,
       lib,
-      ev-cmd,
       ...
     }:
     {
@@ -49,7 +48,6 @@ import ../module.nix {
         picom
         playerctl
         sysstat
-        ev-cmd.packages.x86_64-linux.default
       ];
 
       nixos = {
