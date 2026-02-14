@@ -42,6 +42,7 @@ import ../module.nix {
           "result/"
           ".direnv"
           ".envrc"
+          ".aider*"
         ];
 
         dontBuild = true;
