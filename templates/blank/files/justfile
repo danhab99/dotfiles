@@ -1,26 +1,2 @@
 # Default goal
-default: fetch
-
-# Load .env if it exists
-set dotenv-load := true
-
-current_dir := `pwd`
-
-# Variables
-branch := if env_var("branch") == "" { "main" } else { env_var("branch") }
-
-plant name:
-    echo "Planting {{name}} in {{current_dir}}/{{name}}"
-    git -C .repo worktree add {{current_dir}}/{{name}} {{branch}}
-
-uproot name:
-    git -C .repo worktree remove --force {{current_dir}}/{{name}}
-
-fetch:
-    git -C .repo fetch --all
-
-init:
-    rm -rf .repo
-    git clone --bare {{env_var("repo")}} .repo
-    echo {{branch}}
-    just plant main
+default: 
