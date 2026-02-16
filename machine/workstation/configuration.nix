@@ -1,4 +1,5 @@
-import ../machine.nix {
+import ../machine.nix
+{
   hostName = "workstation";
   system = "x86_64-linux";
 
@@ -110,7 +111,7 @@ import ../machine.nix {
       enable = true;
       configPath = ./ev-cmd/ev-cmd.toml;
       devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
-      deviceName="LingYao ShangHai Thumb Keyboard";
+      deviceName = "LingYao ShangHai Thumb Keyboard";
     };
 
     all-packages.enable = true;
