@@ -241,4 +241,14 @@ import ../machine.nix
         schedule = "*-*-* 02:00:00";
       }
     ];
+
+  output = (system: inputs@{ nixpkgs, axelera-driver, ... }: modules: (nixpkgs.lib.nixosSystem {
+    inherit system;
+
+    modules = modules ++ [
+      axelera-driver.nixosModules.default
+    ];
+
+    specialArgs = inputs;
+  }));
 }
