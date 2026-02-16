@@ -4,7 +4,7 @@ import ../module.nix
 
   output = { pkgs, duh, ... }: {
     packages = with pkgs; [
-      duh.packages.x86_64-linux.default
+      duh.packages.x86_64-linux.duh
     ];
 
   };
