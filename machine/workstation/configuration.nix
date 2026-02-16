@@ -116,6 +116,7 @@ import ../machine.nix
 
     all-packages.enable = true;
     nixos-packages.enable = true;
+    my-packages.enable = true;
   };
 
   raw = {
