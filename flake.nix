@@ -13,6 +13,7 @@
     dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
     ev-cmd.url = "github:danhab99/ev-cmd/main";
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
+    axelera-driver.url = "github:danhab99/axelera-driver/copilot/add-nix-flake-package";
     duh.url = "github:danhab99/duh/main";
 
     # === uConsole ===
