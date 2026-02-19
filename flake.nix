@@ -15,6 +15,7 @@
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
     axelera-driver.url = "github:danhab99/axelera-driver/copilot/add-nix-flake-package";
     duh.url = "github:danhab99/duh/main";
+    grit.url = "github:danhab99/grit/main";
 
     # === uConsole ===
     nixpkgs_for_uconsole.url = "github:nixos/nixpkgs/nixos-24.11";
