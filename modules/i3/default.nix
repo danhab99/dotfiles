@@ -24,6 +24,12 @@ import ../module.nix {
       fontSize = mkOption {
         type = types.float;
       };
+
+      modKey = mkOption {
+        type = types.str;
+        default = "Mod4";
+        description = "The modifier key used by i3 (e.g. 'Mod4' or 'Mod1').";
+      };
     };
 
   output =
