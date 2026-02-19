@@ -4,7 +4,7 @@
   lib,
 }:
 let
-  mod = "Mod4";
+  mod = cfg.modKey or "Mod4";
   fontSize = cfg.fontSize;
 in
 {
@@ -16,7 +16,7 @@ in
   };
 
   floating = {
-    modifier = "Mod4";
+    modifier = mod;
     criteria = [
       { title = "Android Emulator"; }
       { window_role = "pop-up"; }
