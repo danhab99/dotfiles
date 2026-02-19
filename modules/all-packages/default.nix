@@ -11,14 +11,15 @@ import ../module.nix {
         nixfmt-tree
         nodejs
         openssl
+        pciutils 
+        powershell
         python3
         s3cmd
         scdl
         sshfs
+        usbutils
         yai
         yt-dlp
-        pciutils 
-        usbutils
       ];
     };
 }
