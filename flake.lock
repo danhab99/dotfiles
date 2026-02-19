@@ -216,6 +216,44 @@
         "type": "github"
       }
     },
+    "flake-utils_5": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "grit": {
+      "inputs": {
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": "nixpkgs_6"
+      },
+      "locked": {
+        "lastModified": 1771136167,
+        "narHash": "sha256-mNhPd4uKP5gPZCD0ghBYRFaFKJQ563vKxi7ecD7CwWs=",
+        "owner": "danhab99",
+        "repo": "grit",
+        "rev": "944d96d62bb4f57f6718db8fc42df58e2ec21ef2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danhab99",
+        "ref": "main",
+        "repo": "grit",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -238,8 +276,8 @@
     },
     "logitech-g600-rs": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_6"
+        "flake-utils": "flake-utils_5",
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1768709440,
@@ -514,6 +552,21 @@
     },
     "nixpkgs_6": {
       "locked": {
+        "lastModified": 1770494572,
+        "narHash": "sha256-2d9ENxyYFkd39z/IMG+uhq1mike4LBwCMhdOErp58TY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d6cbc580ec01a659713e03ae3447070812910eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_7": {
+      "locked": {
         "lastModified": 1745980825,
         "narHash": "sha256-/7JkWD30j07Gzjz7GbpQwFQPTbaxaNAfSeB8spZe2Yc=",
         "owner": "NixOS",
@@ -527,7 +580,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_7": {
+    "nixpkgs_8": {
       "locked": {
         "lastModified": 1770197578,
         "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
@@ -606,12 +659,13 @@
         "duh": "duh",
         "ev-cmd": "ev-cmd",
         "flake-utils": "flake-utils_3",
+        "grit": "grit",
         "home-manager": "home-manager",
         "logitech-g600-rs": "logitech-g600-rs",
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
         "nixos-uconsole": "nixos-uconsole",
-        "nixpkgs": "nixpkgs_7",
+        "nixpkgs": "nixpkgs_8",
         "nixpkgs_for_uconsole": "nixpkgs_for_uconsole"
       }
     },
@@ -713,6 +767,21 @@
       }
     },
     "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
