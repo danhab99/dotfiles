@@ -9,7 +9,7 @@ import ../devshell.nix {
           cachix
           containerd
           git
-          gnumake
+          just
           just
           nixd
           nixpkgs-fmt
