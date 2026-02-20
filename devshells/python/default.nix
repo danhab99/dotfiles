@@ -6,7 +6,7 @@ import ../devshell.nix {
     {
       "313" = {
         packages = with pkgs; [
-          gnumake
+          just
           python313
           python313Packages.requests
           python313Packages.pypandoc

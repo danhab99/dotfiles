@@ -5,7 +5,7 @@ import ../devshell.nix {
     { pkgs, ... }:
     let
       packages = with pkgs; [
-        gnumake
+        just
         nodejs_22
         yarn
         prettierd
