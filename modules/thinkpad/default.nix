@@ -291,7 +291,7 @@ import ../module.nix
 
         module.zsh.extras = ''
           fan() {
-            echo \"level $1\" | sudo tee /proc/acpi/ibm/fan
+            echo "level $1" | sudo tee /proc/acpi/ibm/fan
           }
         '';
       };
