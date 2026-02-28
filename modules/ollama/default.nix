@@ -3,31 +3,30 @@ import ../module.nix {
 
   options =
     { lib }:
-    with lib;
-    {
-      repoDir = mkOption {
-        type = types.str;
-        description = "Directory for the ollama repository";
-        # default = "/home/dan/.ollama";
-        default = "/var/lib/ollama";
+      with lib;
+      {
+        repoDir = mkOption {
+          type = types.str;
+          description = "Directory for the ollama repository";
+          # default = "/home/dan/.ollama";
+          default = "/var/lib/ollama";
+        };
+        models = mkOption {
+          type = types.listOf types.str;
+          description = "Default models to load";
+          default = [ ];
+        };
+        enableGpu = mkOption {
+          type = types.bool;
+          default = false;
+        };
       };
-      models = mkOption {
-        type = types.listOf types.str;
-        description = "Default models to load";
-        default = [ ];
-      };
-      enableGpu = mkOption {
-        type = types.bool;
-        default = false;
-      };
-    };
 
   output =
-    {
-      cfg,
-      pkgs,
-      lib,
-      ...
+    { cfg
+    , pkgs
+    , lib
+    , ...
     }:
     {
       packages = with pkgs; [
@@ -84,55 +83,11 @@ import ../module.nix {
           };
         };
 
-        # # Create the comfyui user and group
-        # users.users.comfyui = {
-        #   isSystemUser = true;
-        #   home = "/var/lib/comfyui";
-        #   createHome = true;
-        #   group = "comfyui";
-        #   shell = pkgs.bash;
-        # };
+        services.n8n = {
+          enable = true;
 
-        # users.groups.comfyui = { };
 
-        # # Create the service
-        # systemd.services.comfyui = {
-        #   description = "ComfyUI Stable Diffusion Web Interface";
-        #   after = [ "network.target" ];
-        #   wantedBy = [ "multi-user.target" ];
-
-        #   serviceConfig = {
-        #     Type = "simple";
-        #     User = "comfyui";
-        #     Group = "comfyui";
-        #     WorkingDirectory = "/var/lib/comfyui/ComfyUI";
-
-        #     # Execute command
-        #     ExecStart = "${pkgs.python3}/bin/python3 /var/lib/comfyui/ComfyUI/main.py --listen 0.0.0.0 --port 8188";
-
-        #     # Restart settings
-        #     Restart = "always";
-        #     RestartSec = 10;
-
-        #     # Security settings
-        #     NoNewPrivileges = true;
-        #     PrivateTmp = true;
-        #     ProtectSystem = "strict";
-        #     ProtectHome = true;
-
-        #     # Logging
-        #     StandardOutput = "journal";
-        #     StandardError = "journal";
-        #   };
-
-        #   # Enable the service
-        #   enable = true;
-        # };
-
-        # # Optional: Copy ComfyUI files to the user directory
-        # environment.etc."comfyui.env".text = ''
-        #   PYTHONPATH=/var/lib/comfyui/ComfyUI
-        # '';
+        };
       };
     };
 }
