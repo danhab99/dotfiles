@@ -141,16 +141,18 @@ let
       };
     };
 in
-inputs@{ home-manager, ... }:
+inputs@{ home-manager, openclaw, ... }:
 let
   modules = [
     nixosModule
     ./${hostName}/hardware-configuration.nix
     ../cachix.nix
+    { nixpkgs.overlays = [ openclaw.overlays.default ]; }
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.sharedModules = [ openclaw.homeManagerModules.openclaw ];
     }
     raw
   ];

@@ -39,15 +39,11 @@ import ../machine.nix
       enable = true;
       repoDir = "/data/ollama";
       models = [
-        "bge-large:latest"
-        "codegemma:2b"
         "deepseek-r1:14b"
         "embeddinggemma"
         "gemma3:latest"
         "llama3.1:8b"
-        "mistral:text"
-        "qwen3-vl:2b-thinking-bf16"
-        "qwen3-vl:4b"
+        "qwen3:latest"
       ];
       enableGpu = true;
     };
@@ -113,6 +109,7 @@ import ../machine.nix
       devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
       deviceName = "LingYao ShangHai Thumb Keyboard";
     };
+    openclaw.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
