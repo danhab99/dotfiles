@@ -50,3 +50,10 @@ G9_DOWN="xdotool key z"
 G11_DOWN="xdotool key c"
 G10_DOWN="xdotool key m"
 
+[satisifactory]
+ON_ACTIVATE="/home/dan/.config/g600/onchange.sh 00ff00"
+G13_DOWN="xdotool mousedown 1"
+G16_DOWN_MOD="xdotool keydown e"
+G14_DOWN="xdotool key Escape"
+G12_DOWN="xdotool key e"
+G16_Down="playerctl toggle"
