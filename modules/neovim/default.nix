@@ -49,15 +49,16 @@ import ../module.nix {
               "rust-analyzer.server.path" = "rust-analyzer";
               "inlayHint.enable" = false;
               "cSpell.userWords" = [
+                "callout"
+                "chans"
                 "hasher"
                 "msgpack"
-                "unmarshal"
-                "sqlite"
-                "chans"
-                "watchlist"
-                "callout"
                 "ollama"
+                "openpgp"
                 "postgres"
+                "sqlite"
+                "unmarshal"
+                "watchlist"
               ];
             };
           };
