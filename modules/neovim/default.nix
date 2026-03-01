@@ -70,7 +70,6 @@ import ../module.nix {
             coc-css
             coc-docker
             coc-git
-            coc-go
             coc-html
             coc-java
             coc-json
@@ -82,7 +81,6 @@ import ../module.nix {
             coc-spell-checker
             coc-tailwindcss
             coc-toml
-            coc-tsserver
             coc-yaml
             ctrlp-vim
             fzf-lua
