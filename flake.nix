@@ -41,19 +41,31 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      flake-utils,
-      nix-on-droid,
-      droid-nixpkgs,
-      ...
+    inputs@{ self
+    , nixpkgs
+    , home-manager
+    , flake-utils
+    , nix-on-droid
+    , droid-nixpkgs
+    , ...
     }:
     let
       inherit (self) outputs;
 
       mkNix = hostName: (import ./machine/${hostName}/configuration.nix) inputs;
+
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+
+      devshells = import ./devshells (
+        inputs
+        // {
+          inherit pkgs;
+          lib = pkgs.lib;
+        }
+      );
     in
     {
       nixosConfigurations =
@@ -61,14 +73,16 @@
           dir = builtins.readDir ./machine;
           names = builtins.attrNames dir;
           machines = builtins.filter (f: dir.${f} == "directory") names;
-          pairs = builtins.map (machineName: {
-            name = machineName;
-            value = mkNix machineName;
-          }) machines;
+          pairs = builtins.map
+            (machineName: {
+              name = machineName;
+              value = mkNix machineName;
+            })
+            machines;
         in
         builtins.listToAttrs pairs;
 
-      templates = import ./templates;
+      templates = (import ./templates) // devshells.templates;
 
       nixOnDroidConfigurations.default =
         let
@@ -103,13 +117,7 @@
         };
       in
       {
-        devShells = import ./devshells (
-          inputs
-          // {
-            inherit pkgs;
-            lib = pkgs.lib;
-          }
-        );
+        devShells = devshells.shells;
       }
     ));
 }
