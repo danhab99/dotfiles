@@ -27,10 +27,6 @@
               just
               # ...
             ];
-
-            shellHook = ''
-              zsh
-            '';
           };
         };
       }
