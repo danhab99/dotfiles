@@ -13,6 +13,10 @@ import ../module.nix
       services.n8n = {
         enable = true;
 
+        environment = {
+          "N8N_SECURE_COOKIE" = "false";
+        };
+
         customNodes =
           let
             mkNode = { version, owner, repo, hash, npmDepsHash }: pkgs.buildNpmPackage (finalAttrs: {
@@ -49,6 +53,8 @@ import ../module.nix
       };
 
       systemd.services.n8n.path = with pkgs; [ python3 nodejs_22 ];
+
+      module.nginx.virtualHosts."n8n.localhost".port = 5678;
 
     };
   };

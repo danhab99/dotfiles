@@ -68,6 +68,7 @@ import ../machine.nix {
     xdg.enable = true;
     redshift.enable = true;
     essential-packages.enable = true;
+    nginx.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

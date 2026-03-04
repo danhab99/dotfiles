@@ -90,6 +90,7 @@ import ../machine.nix {
       enable = true;
       inputMic = "alsa_input.pci-0000_00_1f.3.analog-stereo";
     };
+    nginx.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
