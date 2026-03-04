@@ -110,6 +110,7 @@ import ../machine.nix
       deviceName = "LingYao ShangHai Thumb Keyboard";
     };
     openclaw.enable = true;
+    nginx.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

@@ -30,5 +30,9 @@ import ../module.nix
 
       systemd.user.services.openclaw-gateway.Install.wantedBy = [ "default.target" ];
     };
+
+    nixos = {
+      module.nginx.virtualHosts."openclaw.localhost".port = 18789;
+    };
   };
 }
