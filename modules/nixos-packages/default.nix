@@ -2,14 +2,18 @@ import ../module.nix {
   name = "nixos-packages";
 
   output =
-    { pkgs, ... }:
+    { pkgs, dotnet_8_nixpkgs, ... }:
     let
+      d8p = import dotnet_8_nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
     in
     {
       packages = with pkgs; [
         aider-chat-full
         audacity
-        brave
+        d8p.brave
         dbeaver-bin
         gimp
         github-copilot-cli
