@@ -72,12 +72,17 @@ import ../module.nix {
         programs.git = {
           enable = true;
 
-          extraConfig = {
+          settings = {
             pull.rebase = true;
             init.defaultBranch = "main";
             color = {
               ui = "auto";
               diff = "auto";
+            };
+
+            user = {
+              email = cfg.email;
+              name = "Dan Habot";
             };
 
             alias = {
@@ -109,10 +114,13 @@ import ../module.nix {
               "remain" = "!sh -c 'git fetch origin main && git rebase origin/main'";
               "rebase-main" = "!git fetch origin main && git rebase origin/main";
             };
-          };
 
-          userEmail = cfg.email;
-          userName = "Dan Habot";
+            safe = {
+              directory = [
+                "/etc/nixos"
+              ];
+            };
+          };
 
           signing = {
             key = cfg.signingKey;
@@ -133,14 +141,6 @@ import ../module.nix {
           ];
 
           lfs.enable = true;
-
-          extraConfig = {
-            "safe" = {
-              "directory" = [
-                "/etc/nixos"
-              ];
-            };
-          };
         };
 
         programs.gh = {

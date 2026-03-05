@@ -36,7 +36,7 @@ import ../machine.nix {
         "nomic-embed-text"
         "codegemma:2b-code-v1.1-fp16"
         "embeddinggemma"
-        "gemma3:7b"
+        "gemma3:4b"
         "mistral:text"
         "qwen3:4b-instruct-2507-fp16"
         "qwen3:4b-thinking-2507-fp16"
@@ -85,7 +85,7 @@ import ../machine.nix {
     xdg.enable = true;
     redshift.enable = true;
     vox = {
-      enable = true;
+      enable = false;
       inputMic = "alsa_input.pci-0000_00_1f.3.analog-stereo";
     };
     nginx.enable = true;

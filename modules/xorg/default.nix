@@ -18,14 +18,15 @@ import ../module.nix {
       packages = with pkgs; [
         xclip
         xdotool
-        xorg.xbacklight
-        xorg.xev
-        xorg.xf86inputevdev
+        xbacklight
+        xev
+        xf86-input-evdev
         # xpad
         xsel
         arandr
-        xorg.xrandr
-        xorg.xorgserver
+        xrandr
+        xorg-server
+        displaylink
       ];
 
       nixos = {
