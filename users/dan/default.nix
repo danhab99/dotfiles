@@ -17,7 +17,6 @@ import ../user.nix {
 
   sessionVariables =
     pkgs: with pkgs; {
-      BROWSER = brave + "/bin/brave";
       GIT_PAGER = bat + "/bin/bat";
     };
 }
