@@ -108,7 +108,7 @@ import ../module.nix
 
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'export DISPLAY=:0; while true; do ${pkgs.xorg.xset}/bin/xset -dpms; ${pkgs.xorg.xset}/bin/xset s off; ${pkgs.xorg.xset}/bin/xset s noblank; sleep 5; done'";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'export DISPLAY=:0; while true; do ${pkgs.xset}/bin/xset -dpms; ${pkgs.xset}/bin/xset s off; ${pkgs.xset}/bin/xset s noblank; sleep 5; done'";
             Restart = "always";
             RestartSec = "3";
           };

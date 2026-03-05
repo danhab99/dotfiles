@@ -14,12 +14,6 @@ import ../module.nix {
 
           provider = "geoclue2";
 
-          brightness = {
-            # Note the string values below.
-            day = "1";
-            night = "1";
-          };
-
           temperature = {
             # day = 5500;
             day = 4000;
@@ -29,6 +23,8 @@ import ../module.nix {
           settings = {
             redshift = {
               adjustment-method = "randr";
+              brightness-day = "1";
+              brightness-night = "1";
             };
             randr = { };
           };

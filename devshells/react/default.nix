@@ -16,7 +16,7 @@ import ../devshell.nix {
           atkmm
           at-spi2-atk
           gtk3
-          xorg.libXt
+          libXt
           websocat
         ];
 
@@ -32,7 +32,7 @@ import ../devshell.nix {
               atkmm
               at-spi2-atk
               gtk3
-              xorg.libXt
+              libXt
             ]
           );
 
