@@ -50,7 +50,6 @@ import ../module.nix
     in
     {
       packages = with pkgs; [
-        displaylink
         thinkfan
         fancontrol-gui
         lm_sensors
@@ -171,7 +170,6 @@ import ../module.nix
         };
 
         services.xserver.videoDrivers = [
-          "displaylink"
           "modesetting"
         ];
 
