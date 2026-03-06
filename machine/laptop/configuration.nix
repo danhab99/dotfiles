@@ -29,7 +29,6 @@ import ../machine.nix {
     ollama.enable = false;
     printing.enable = true;
     ratbag.enable = false;
-    rofi.enable = true;
     sddm.enable = true;
     secrets.enable = true;
     ssh.enable = true;

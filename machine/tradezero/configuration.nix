@@ -44,7 +44,6 @@ import ../machine.nix {
     };
     printing.enable = true;
     ratbag.enable = false;
-    rofi.enable = true;
     sddm.enable = true;
     secrets.enable = true;
     ssh.enable = true;

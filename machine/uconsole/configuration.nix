@@ -42,7 +42,6 @@ import ../machine.nix rec {
     ranger.enable = true;
     ratbag.enable = false;
     redshift.enable = false;
-    rofi.enable = false;
     rtlsdr.enable = false;
     sddm.enable = false;
     secrets.enable = true;
