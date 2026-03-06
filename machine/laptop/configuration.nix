@@ -70,6 +70,10 @@ import ../machine.nix {
     essential-packages.enable = true;
     nginx.enable = true;
     kdeconnect.enable = true;
+    vox = {
+      enable = true;
+      inputMic = "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source";
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;
