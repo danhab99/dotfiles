@@ -111,6 +111,7 @@ import ../machine.nix
     };
     openclaw.enable = true;
     nginx.enable = true;
+    kdeconnect.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

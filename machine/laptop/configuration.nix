@@ -69,6 +69,7 @@ import ../machine.nix {
     redshift.enable = true;
     essential-packages.enable = true;
     nginx.enable = true;
+    kdeconnect.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
