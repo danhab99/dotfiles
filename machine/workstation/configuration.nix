@@ -49,7 +49,6 @@ import ../machine.nix
     };
     printing.enable = true;
     ratbag.enable = true;
-    rofi.enable = true;
     sddm.enable = true;
     secrets.enable = true;
     ssh = {
