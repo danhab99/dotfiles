@@ -54,7 +54,6 @@ import ../machine.nix {
     xorg = {
       enable = true;
       videoDrivers = [
-        "displaylink"
         "modesetting"
       ];
       extraConfig = ''
