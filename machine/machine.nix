@@ -141,7 +141,7 @@ let
       };
     };
 in
-inputs@{ home-manager, openclaw, ... }:
+inputs@{ home-manager, openclaw, adirofi, ... }:
 let
   modules = [
     nixosModule
@@ -152,7 +152,10 @@ let
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.sharedModules = [ openclaw.homeManagerModules.openclaw ];
+      home-manager.sharedModules = [ 
+        openclaw.homeManagerModules.openclaw
+        adirofi.homeManagerModules.default
+      ];
     }
     raw
   ];
