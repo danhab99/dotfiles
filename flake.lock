@@ -131,11 +131,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1771108377,
-        "narHash": "sha256-zGawHgJx/KPbM8T5jKXAPOvhbNwzMa8acCgNaIyg1Fs=",
+        "lastModified": 1772981110,
+        "narHash": "sha256-pe6nUSIQDpcD470zqLezKG7BzJoA7aBlCH15HaNotJA=",
         "owner": "danhab99",
         "repo": "ev-cmd",
-        "rev": "484403c04fa5f12c5c0ad79391dc00e176bea3ca",
+        "rev": "810bb7cf924922a9377d74d90531a9f7ca2b429d",
         "type": "github"
       },
       "original": {
