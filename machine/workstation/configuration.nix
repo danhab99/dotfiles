@@ -104,7 +104,11 @@ import ../machine.nix
     };
     ev-cmd = {
       enable = true;
-      configPath = ./ev-cmd/ev-cmd.toml;
+      devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
+      deviceName = "LingYao ShangHai Thumb Keyboard";
+    };
+    g600 = {
+      enable = true;
       devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
       deviceName = "LingYao ShangHai Thumb Keyboard";
     };
@@ -121,13 +125,6 @@ import ../machine.nix
   raw = {
     # Enable binfmt emulation for building ARM images
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  };
-
-  files = {
-    ".config/g600" = {
-      source = ./g600;
-      recursive = true;
-    };
   };
 
   i3Config =

@@ -1,19 +1,19 @@
 import ../module.nix
 {
-  name = "ev-cmd";
+  name = "g600";
 
   options = { lib }: with lib; {
     devicePath = mkOption { };
     deviceName = mkOption { };
   };
 
-  output = { pkgs, ev-cmd, cfg, ... }:
+  output = { pkgs, logitech-g600-rs, cfg, ... }:
     let
-      ev-cmd-pkg = ev-cmd.packages.x86_64-linux.default;
+      logitech-g600-rs-pkg = logitech-g600-rs.packages.x86_64-linux.default;
     in
     {
       packages = with pkgs; [
-        ev-cmd-pkg
+        logitech-g600-rs-pkg
       ];
 
       homeManager = {
@@ -23,10 +23,15 @@ import ../module.nix
             always = true;
           }
           {
-            command = "${ev-cmd-pkg}/bin/ev-cmd --device-path ${cfg.devicePath} --config-path ${./ev-cmd.toml} >> ~/.log/ev-cmd.log";
+            command = "${logitech-g600-rs-pkg}/bin/logitech-g600-rs --device-path ${cfg.devicePath} --config-path ${./g600.toml} >> ~/.log/g600.log";
             always = true;
           }
         ];
+
+        home.file.".config/g600" = {
+          recursive = true;
+          source = ./assets;
+        };
 
       };
 
