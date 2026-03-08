@@ -4,7 +4,7 @@
   lib,
 }:
 let
-  mod = cfg.modKey or "Mod4";
+  mod = "Mod4";
   fontSize = cfg.fontSize;
 in
 {
@@ -16,7 +16,7 @@ in
   };
 
   floating = {
-    modifier = mod;
+    modifier = "Mod4";
     criteria = [
       { title = "Android Emulator"; }
       { window_role = "pop-up"; }
@@ -218,7 +218,8 @@ in
       "${mod}+Shift+e" =
         "exec i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'";
       "${mod}+r" = "mode resize";
-      "${mod}+d" = "exec app-launcher";
+      "${mod}+d" = "exec $HOME/.config/rofi/scripts/launcher_t1";
+      "${mod}+Tab" = "exec $HOME/.config/rofi/launchers/misc/launch_windows.sh";
       "${mod}+shift+x" = lockScreenExe;
     };
 
@@ -282,10 +283,6 @@ in
       always = true;
     }
     # Machine-specific: workstation only
-    {
-      command = "logitech-g600-rs --device-path /dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd --config-path $HOME/.config/g600/g600.toml >> ~/.log/g600.log";
-      always = true;
-    }
     {
       command = "xinput set-prop 10 'libinput Accel Speed' 5";
       always = true;
