@@ -1,74 +1,74 @@
 # 0, 0
-30=""
+30="xdotool type 7"
 
 # 1, 0
-48=""
+48="xdotool type 8"
 
 # 2, 0
-46=""
+46="xdotool type 9"
 
 # 3, 0
-32=""
+32="xdotool type 0"
 
 # 4, 0
-18="xdotool type 7"
+18=""
 
 # 5, 0
-33="xdotool type 8"
+33=""
 
 # 6, 0
-34="xdotool type 9"
+34=""
 
 # 7, 0
-70="xdotool key Enter"
+70=""
 
 # 0, 1
-35=""
+35="xdotool type 4"
 
 # 1, 1
-23=""
+23="xdotool type 5"
 
 # 2, 1
-36=""
+36="xdotool type 6"
 
 # 3, 1
-37=""
+37="xdotool type ."
 
 # 4, 1
-69="xdotool type 4"
+69=""
 
 # 5, 1
-98="xdotool type 5"
+98=""
 
 # 6, 1
-55="xdotool type 6"
+55=""
 
 # 7, 1
-74="xdotool type ."
+74=""
 
 # 0, 2
-38=""
+38="xdotool type 1"
 
 # 1, 2
-50=""
+50="xdotool type 2"
 
 # 2, 2
-49=""
+49="xdotool type 3"
 
 # 3, 2
-24=""
+24="xdotool key Enter"
 
 # 4, 2
-71="xdotool type 1"
+71=""
 
 # 5, 2
-72="xdotool type 2"
+72=""
 
 # 6, 2
-73="xdotool type 3"
+73=""
 
 # 7, 2
-78="xdotool type 0"
+78=""
 
 # 0, 3
 25="/run/current-system/sw/bin/brave http://localhost:3000 && sleep 0.1 && xdotool key Ctrl+Shift+i && xdotool key Ctrl+p && sleep 0.1 && xdotool key Ctrl+Shift+r"
@@ -83,13 +83,13 @@
 31="/run/current-system/sw/bin/brave https://3.basecamp.com/5705326/my/readings"
 
 # 4, 3
-75="xdotool key Super_L+ShiftL+1 && xdotool key Super_L+ShiftL+2 && xdotool key Super_L+ShiftL+3 && xdotool key Super_L+2"
+75="xdotool key Super_L+1 && xdotool key Super_L+2 && xdotool key Super_L+3 && xdotool key Super_L+2"
 
 # 5, 3
-76="xdotool key Super_L+ShiftL+4 && xdotool key Super_L+ShiftL+5 && xdotool key Super_L+ShiftL+6 && xdotool key Super_L+5"
+76="xdotool key Super_L+4 && xdotool key Super_L+5 && xdotool key Super_L+6 && xdotool key Super_L+5"
 
 # 6, 3
-77="xdotool key Super_L+ShiftL+7 && xdotool key Super_L+ShiftL+8 && xdotool key Super_L+ShiftL+9 && xdotool key Super_L+8"
+77="xdotool key Super_L+7 && xdotool key Super_L+8 && xdotool key Super_L+9 && xdotool key Super_L+8"
 
 # 7, 3
 96="brave --profile-directory='Profile 3'"
