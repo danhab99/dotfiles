@@ -51,13 +51,17 @@ import ../module.nix {
               "cSpell.userWords" = [
                 "callout"
                 "chans"
+                "filepath"
                 "hasher"
                 "msgpack"
                 "ollama"
                 "openpgp"
                 "postgres"
                 "sqlite"
+                "tempfile"
                 "unmarshal"
+                "unstage"
+                "vlog"
                 "watchlist"
               ];
             };
