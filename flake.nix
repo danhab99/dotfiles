@@ -1,7 +1,7 @@
 {
   inputs = {
     # === NixOS ===
-    nixpkgs.url = "github:nixos/nixpkgs/0182a361324364ae3f436a63005877674cf45efb";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -9,15 +9,15 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openclaw.url = "github:openclaw/nix-openclaw";
-    dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
 
     # === My flakes ===
+    dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
     ev-cmd.url = "github:danhab99/ev-cmd/main";
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
     axelera-driver.url = "github:danhab99/axelera-driver/copilot/add-nix-flake-package";
     duh.url = "github:danhab99/duh/main";
     grit.url = "github:danhab99/grit/main";
-    adirofi.url = "path:/home/dan/Documents/rofi";
+    adirofi.url = "github:danhab99/rofi";
 
     # === uConsole ===
     nixpkgs_for_uconsole.url = "github:nixos/nixpkgs/nixos-24.11";
