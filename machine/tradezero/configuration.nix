@@ -122,22 +122,22 @@ import ../machine.nix {
     EndSection
   '';
 
-  jobs =
-    { pkgs }:
-    [
-      {
-        name = "transcribe-eod";
-        script = "/home/dan/Videos/run-transcribe.sh";
-        schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
-        packages = with pkgs; [
-          whisperx
-          ffmpeg_6-full
-          curl
-          wget
-          jq
-        ];
-      }
-    ];
+  # jobs =
+  #   { pkgs }:
+  #   [
+  #     {
+  #       name = "transcribe-eod";
+  #       script = "/home/dan/Videos/run-transcribe.sh";
+  #       schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
+  #       packages = with pkgs; [
+  #         whisperx
+  #         ffmpeg_6-full
+  #         curl
+  #         wget
+  #         jq
+  #       ];
+  #     }
+  #   ];
 
   raw = { pkgs, ... }: {
     services = {

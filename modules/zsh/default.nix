@@ -18,7 +18,7 @@ import ../module.nix {
       iotop
       jq
       ncdu
-      neofetch
+      fastfetch
       rclone
       retry
       ripgrep

@@ -189,10 +189,10 @@ import ../module.nix
             '')
           ];
 
-        programs.light = {
-          enable = true;
-          brightnessKeys.enable = true;
-        };
+        # programs.light = {
+        #   enable = true;
+        #   brightnessKeys.enable = true;
+        # };
 
         powerManagement = {
           enable = true;
