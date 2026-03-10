@@ -19,8 +19,8 @@ import ../module.nix
         # ── launcher ────────────────────────────────────────────────────────────
         launcher = {
           commandName = "app-launcher"; # command added to PATH
-          type = 3; # layout family 1–7
-          style = 8; # style variant  1–15
+          type = 7; # layout family 1–7
+          style = 2; # style variant  1–15
           show = "drun"; # rofi -show mode: drun | run | window | filebrowser
         };
 
