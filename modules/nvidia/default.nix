@@ -30,16 +30,23 @@ import ../module.nix {
 
         hardware.graphics = {
           enable = true;
+          extraPackages = with pkgs; [
+            nvidia-vaapi-driver
+            vulkan-validation-layers
+          ];
         };
 
         hardware.nvidia = {
-          modesetting.enable = true;
+          modesetting.enable = true; # sets nvidia-drm.modeset=1 automatically
           powerManagement.enable = true;
           open = false; # use proprietary driver (not open kernel module)
           nvidiaSettings = true;
 
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
+
+        # Load nvidia modules early so DRM is ready before the compositor starts
+        boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
         environment.systemPackages = with pkgs; [
           # Add CUDA packages to system for apps that need them
@@ -58,10 +65,12 @@ import ../module.nix {
           # CUDA library paths
           CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
           LD_LIBRARY_PATH = "${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.cudaPackages.cuda_cudart}/lib";
-          # Wayland + NVIDIA: GBM backend for Wayland compositors
-          GBM_BACKEND = "nvidia-drm";
+          # Wayland + NVIDIA: use Vulkan renderer (required for wlroots/sway)
+          WLR_RENDERER = "vulkan";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
           WLR_NO_HARDWARE_CURSORS = "1";
+          # GBM_BACKEND nvidia-drm is NOT set — it causes crashes with newer drivers;
+          # the Vulkan renderer path is the correct approach for wlroots + NVIDIA.
         };
       };
     };

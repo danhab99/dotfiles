@@ -223,6 +223,8 @@ import ../module.nix {
           NIXOS_OZONE_WL = "1";
           ELECTRON_OZONE_PLATFORM_HINT = "auto";
           WLR_NO_HARDWARE_CURSORS = "1";
+          # Vulkan renderer — needed for NVIDIA proprietary + wlroots; harmless on others
+          WLR_RENDERER = "vulkan";
         };
 
         # Security for swaylock PAM

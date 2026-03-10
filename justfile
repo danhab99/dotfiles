@@ -56,3 +56,7 @@ list-build machine:
 
 build machine variant:
     nix build --show-trace .#nixosConfigurations.{{machine}}.config.system.build.images.{{variant}}
+
+reboot: 
+    just switch
+    reboot
