@@ -21,6 +21,8 @@ rollback:
     git checkout $(git rev-list -n 2 HEAD -- flake.lock | tail -n 1) -- flake.lock
 
 switch:
+    rm /home/dan/.openclaw/openclaw.json.hm-backup
+
     {{switch_command}} switch \
         --keep-going \
         --flake .#{{name}}

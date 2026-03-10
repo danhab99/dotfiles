@@ -23,12 +23,20 @@ import ../module.nix
               id = "qwen3:latest"; 
               name = "qwen3"; 
             }
+            { 
+              id = "deepseek-r1:14b"; 
+              name = "deekseek"; 
+            }
+            { 
+              id = "gemma3:12b"; 
+              name = "gemma"; 
+            }
           ];
         };
         config.agents.defaults.model = "ollama/qwen3:latest";
       };
 
-      systemd.user.services.openclaw-gateway.Install.wantedBy = [ "default.target" ];
+      systemd.user.services.openclaw-gateway.Install.WantedBy = [ "default.target" ];
     };
 
     nixos = {
