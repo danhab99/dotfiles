@@ -9,6 +9,7 @@ import ../module.nix {
         astyle
         xclip
         xsel
+        typescript-language-server
       ];
 
       homeManager = {
@@ -44,6 +45,24 @@ import ../module.nix {
                   "command" = "gopls";
                   "rootPatterns" = [ "go.mod" ];
                   "filetypes" = [ "go" ];
+                };
+                "typescript" = {
+                  "command" = "typescript-language-server";
+                  "args" = [ "--stdio" ];
+                  "filetypes" = [
+                    "javascript"
+                    "javascriptreact"
+                    "javascript.jsx"
+                    "typescript"
+                    "typescriptreact"
+                    "typescript.tsx"
+                  ];
+                  "rootPatterns" = [
+                    "tsconfig.json"
+                    "jsconfig.json"
+                    "package.json"
+                    ".git"
+                  ];
                 };
               };
               "rust-analyzer.server.path" = "rust-analyzer";
