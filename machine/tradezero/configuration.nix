@@ -92,6 +92,7 @@ import ../machine.nix {
     fortivpn = {
       enable = true;
     };
+    rofi.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
