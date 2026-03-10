@@ -94,6 +94,3 @@ map("v", "<leader>f", copilot_script)
 map("x", "<leader>f", copilot_script)
 map("i", "<leader>f", copilot_script)
 
--- Save & quit
-map("n", "<C-Space>", "<ESC><ESC>:wq<CR>", opts)
-map("i", "<C-Space>", "<ESC><ESC>:wq<CR>", opts)
