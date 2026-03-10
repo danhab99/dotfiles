@@ -27,7 +27,7 @@ switch:
         --keep-going \
         --flake .#{{name}}
 
-    -i3-msg restart
+    -swaymsg reload
     -sudo udevadm control --reload
     -sudo udevadm trigger
 

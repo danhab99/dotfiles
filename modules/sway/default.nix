@@ -165,10 +165,12 @@ import ../module.nix {
         nemo
         playerctl
         slurp
-        sway
+        swayfx
         swaybg
         swayidle
         swaylock
+        swww
+        waypaper
         waybar
         wdisplays
         wev
@@ -179,9 +181,10 @@ import ../module.nix {
       ];
 
       nixos = {
-        # Enable sway as a Wayland compositor
+        # Enable swayfx as the Wayland compositor (sway fork with rounded corners + blur)
         programs.sway = {
           enable = true;
+          package = pkgs.swayfx;
           wrapperFeatures.gtk = true;
           extraPackages = with pkgs; [
             swaylock
@@ -197,6 +200,8 @@ import ../module.nix {
             wlr-randr
             brightnessctl
             wtype
+            swww
+            waypaper
           ];
         };
 
@@ -205,7 +210,7 @@ import ../module.nix {
           enable = true;
           settings = {
             default_session = {
-              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'sway --unsupported-gpu'";
+              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd 'swayfx --unsupported-gpu'";
               user = "greeter";
             };
           };
@@ -394,6 +399,7 @@ import ../module.nix {
               "${mod}+Shift+e" = "exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'";
               "${mod}+r" = "mode resize";
               "${mod}+d" = "exec app-launcher";
+              "${mod}+Shift+w" = "exec waypaper";
               "${mod}+shift+x" = "exec ${lockCmd}";
             };
 
@@ -416,8 +422,9 @@ import ../module.nix {
             startup = [
               { command = "ssh-add ~/.ssh/id_rsa"; }
               { command = "${pkgs.mako}/bin/mako"; }
+              { command = "${pkgs.swww}/bin/swww-daemon"; }
             ] ++ (lib.optional (cfg.wallpaper != null) {
-              command = "${pkgs.swaybg}/bin/swaybg -i ${cfg.wallpaper} -m fill";
+              command = "${pkgs.swww}/bin/swww img ${cfg.wallpaper}";
               always = true;
             });
 
@@ -453,6 +460,9 @@ import ../module.nix {
           extraConfig = ''
             # Workspace output assignments
             ${workspaceOutputAssigns}
+
+            # Rounded corners (swayfx)
+            corner_radius 8
 
             # Machine-specific extra config
             ${cfg.extraConfig}
@@ -491,6 +501,17 @@ import ../module.nix {
           hide-when-typing=yes
         '';
 
+        # Waypaper config — point it at swww as the backend
+        home.file.".config/waypaper/config.ini".text = ''
+          [Settings]
+          folder = ~/Pictures
+          backend = swww
+          fill = fill
+          sort = name
+          color = #2f343f
+          subfolders = True
+        '';
+
         # Swayidle: lock on idle, dpms off after longer idle
         services.swayidle = {
           enable = true;
@@ -502,8 +523,8 @@ import ../module.nix {
             { timeout = 900; command = lockCmd; }
             {
               timeout = 1200;
-              command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
-              resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+              command = "${pkgs.swayfx}/bin/swaymsg 'output * dpms off'";
+              resumeCommand = "${pkgs.swayfx}/bin/swaymsg 'output * dpms on'";
             }
           ];
         };

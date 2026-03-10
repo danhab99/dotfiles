@@ -65,8 +65,9 @@ import ../module.nix {
           # CUDA library paths
           CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
           LD_LIBRARY_PATH = "${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.cudaPackages.cuda_cudart}/lib";
-          # Wayland + NVIDIA: use Vulkan renderer (required for wlroots/sway)
-          WLR_RENDERER = "vulkan";
+          # Wayland + NVIDIA: use GLES2 renderer — swayfx's fx_renderer is GLES2-based;
+          # WLR_RENDERER=vulkan bypasses fx_renderer entirely (no corners/blur/shadows).
+          WLR_RENDERER = "gles2";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
           WLR_NO_HARDWARE_CURSORS = "1";
           # GBM_BACKEND nvidia-drm is NOT set — it causes crashes with newer drivers;

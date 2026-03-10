@@ -89,7 +89,7 @@ import ../module.nix
 
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.sway}/bin/swaymsg \"output * dpms on\" 2>/dev/null || true; sleep 30; done'";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.swayfx}/bin/swaymsg \"output * dpms on\" 2>/dev/null || true; sleep 30; done'";
             Restart = "always";
             RestartSec = "3";
           };
@@ -107,8 +107,7 @@ import ../module.nix
 
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.sway}/bin/swaymsg \"output * enable\" 2>/dev/null || true; sleep 5; done'";
-            Restart = "always";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.swayfx}/bin/swaymsg \"output * enable\" 2>/dev/null || true; sleep 5; done'";            Restart = "always";
             RestartSec = "5";
           };
 
