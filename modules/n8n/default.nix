@@ -4,7 +4,7 @@ import ../module.nix
 
   output = { pkgs, ... }: {
     packages = with pkgs; [
-
+      nodejs_24
     ];
 
     homeManager = { };
@@ -15,6 +15,8 @@ import ../module.nix
 
         environment = {
           "N8N_SECURE_COOKIE" = "false";
+          "N8N_RUNNERS_ENABLED" = "true";
+          "N8N_RUNNERS_MODE" = "internal";
         };
 
         customNodes =
@@ -52,7 +54,7 @@ import ../module.nix
           ];
       };
 
-      systemd.services.n8n.path = with pkgs; [ python3 nodejs_22 ];
+      systemd.services.n8n.path = with pkgs; [ python3 nodejs_24 ];
 
       module.nginx.virtualHosts."n8n.localhost".port = 5678;
 
