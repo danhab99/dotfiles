@@ -16,17 +16,23 @@ import ../machine.nix {
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
-      enable = true;
+      enable = false;
       i3blocksConfig = ./i3blocks.conf;
-      # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
-      # screen = [ "eDP-1" "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # laptop + home desk
-      # screen = [ "DVI-I-2-2" "eDP-1" "DVI-I-1-1" ];
       screen = [
         "DP-3-2"
         "DP-3-3-1"
         "DP-3-1"
       ];
       defaultLayoutScript = "auto.sh";
+      fontSize = 12.0;
+    };
+    sway = {
+      enable = true;
+      screen = [
+        "DP-3-2"
+        "DP-3-3-1"
+        "DP-3-1"
+      ];
       fontSize = 12.0;
     };
     nix.enable = true;
@@ -44,16 +50,25 @@ import ../machine.nix {
     };
     printing.enable = true;
     ratbag.enable = false;
-    sddm.enable = true;
+    rofi.enable = true;
+    sddm.enable = false;
     secrets.enable = true;
     ssh.enable = true;
     steam.enable = false;
     threedtools.enable = false;
     timezone.enable = true;
-    urxvt.enable = true;
-    xorg = {
+    urxvt.enable = false;
+    wayland = {
       enable = true;
       videoDrivers = [
+        "displaylink"
+        "modesetting"
+      ];
+    };
+    xorg = {
+      enable = false;
+      videoDrivers = [
+        "displaylink"
         "modesetting"
       ];
       extraConfig = ''
@@ -63,6 +78,11 @@ import ../machine.nix {
         urxvt*tintColor: #525252
       '';
       fontSize = 16;
+    };
+    kvm-resilience = {
+      enable = true;
+      usbHubVendors = [ "0bda" "05e3" "1a40" ];
+      enableThunderboltHotplug = true;
     };
     zoxide.enable = true;
     zsh.enable = true;
@@ -88,7 +108,6 @@ import ../machine.nix {
       enable = true;
       inputMic = "alsa_input.pci-0000_00_1f.3.analog-stereo";
     };
-    nginx.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
@@ -103,21 +122,16 @@ import ../machine.nix {
   hostName = "tradezero";
   system = "x86-64_linux";
 
-  i3Config =
+  swayConfig =
     { mod }:
     {
       keybindings = {
-        "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-        "${mod}+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
+        "${mod}+Ctrl+Return" = "exec rm -f /tmp/workdir && foot";
+        "${mod}+Shift+d" = "exec wlr-randr";
       };
     };
 
-  xserver = ''
-    Section "InputClass"
-    Identifier "keyboard-all"
-    Option "XkbOptions" "terminate:ctrl_alt_bksp"
-    EndSection
-  '';
+  xserver = "";
 
   jobs =
     { pkgs }:
@@ -145,94 +159,13 @@ import ../machine.nix {
 
       # Configure TLP to completely disable USB autosuspend
       tlp.settings = {
-        USB_AUTOSUSPEND = 0; # Completely disable USB autosuspend
-        USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801"; # Your USB hubs
+        USB_AUTOSUSPEND = 0;
+        USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
       };
-
-      udev.extraRules = ''
-        # Disable autosuspend for ALL USB hubs (prevents KVM/display disconnects)
-        # Match on add AND change events to persist settings
-        ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
-
-        # Disable autosuspend for USB network adapters
-        ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="02", TEST=="power/control", ATTR{power/control}="on"
-
-        # Specifically target your GenesysLogic hubs by vendor ID
-        ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", TEST=="power/control", ATTR{power/control}="on"
-
-        # Target Realtek USB hubs (your USB3.2/2.1 hubs)
-        ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", TEST=="power/control", ATTR{power/control}="on"
-
-        # Target VLI hubs
-        ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="1a40", TEST=="power/control", ATTR{power/control}="on"
-
-        # Disable runtime power management for ALL USB devices under your dock path
-        ACTION=="add|change", SUBSYSTEM=="usb", DEVPATH=="*3-1*", TEST=="power/control", ATTR{power/control}="on"
-        ACTION=="add|change", SUBSYSTEM=="usb", DEVPATH=="*2-3*", TEST=="power/control", ATTR{power/control}="on"
-
-        # Re-apply monitor layout on display hotplug/link reset
-        ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr -c"
-      '';
-
-      autorandr.enable = true; # hotplug/sleep integration :contentReference[oaicite:2]{index=2}
-
-      autorandr.profiles =
-        let
-          home = {
-            "DP-3-1" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241902309070783010000e200d5e305c00067030c001400187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d7";
-            "DP-3-2" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241902309070783010000e200d5e305c00067030c001400187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d7";
-            "DP-3-3-1" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241042309070783010000e200d5e305c00067030c001400187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000004";
-          };
-
-          embedded = {
-            "eDP-1" = "00ffffffffffff0009e5d60800000000251d0104a51f1178031ef5965d5b91291c505400000001010101010101010101010101010101c0398018713828403020360035ae1000001a000000000000000000000000000000000000000000fe00424f452043510a202020202020000000fe004e5631343046484d2d4e34550a0011";
-          };
-        in
-        {
-          home = {
-            # EDID match is the robust way; fill in with:
-            #   autorandr --fingerprint
-            fingerprint = home // embedded;
-
-            config = {
-              "eDP-1" = { enable = false; };
-
-              "DP-3-2" = {
-                enable = true;
-                mode = "1920x1080";
-                position = "0x0";
-                rotate = "normal";
-              };
-
-              "DP-3-3-1" = {
-                enable = true;
-                mode = "1920x1080";
-                position = "1920x0";
-                rotate = "normal";
-                primary = true;
-              };
-
-              "DP-3-1" = {
-                enable = true;
-                mode = "1920x1080";
-                position = "3840x0";
-                rotate = "normal";
-              };
-            };
-          };
-
-          mobile = {
-            fingerprint = embedded;
-            config = {
-              "eDP-1" = { enable = true; primary = true; mode = "1920x1080"; position = "0x0"; };
-            };
-          };
-        };
-
     };
   };
 
   aliases = pkgs: {
-    restart-display = "sudo systemctl restart display-manager.service";
+    restart-display = "sudo systemctl restart greetd.service";
   };
 }

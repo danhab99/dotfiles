@@ -17,11 +17,7 @@ import ../module.nix
       ];
 
       homeManager = {
-        xsession.windowManager.i3.config.startup = [
-          {
-            command = "xinput disable $$(xinput list --id-only '${cfg.deviceName}')";
-            always = true;
-          }
+        wayland.windowManager.sway.config.startup = [
           {
             command = "${ev-cmd-pkg}/bin/ev-cmd --device-path ${cfg.devicePath} --config-path ${./ev-cmd.toml} >> ~/.log/ev-cmd.log";
             always = true;

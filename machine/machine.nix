@@ -5,6 +5,7 @@
 , environmentVariables ? { }
 , packages ? (pkgs: [ ])
 , files ? { }
+, swayConfig ? { mod }: { }
 , i3Config ? { mod }: { }
 , xserver ? ""
 , bind ? [ ]
@@ -91,6 +92,7 @@ let
         home-manager.users.dan = {
           home.file = files;
           xsession.windowManager.i3.config = i3Config { mod = "Mod4"; };
+          wayland.windowManager.sway.config = swayConfig { mod = "Mod4"; };
         };
 
         services = {

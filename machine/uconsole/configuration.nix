@@ -29,6 +29,8 @@ import ../machine.nix rec {
       fontSize = 14.0;
       i3blocksConfig = ../workstation/i3blocks.conf;
     };
+    sway.enable = false;
+    kvm-resilience.enable = false;
     libreoffice.enable = false;
     metis.enable = false;
     neovim.enable = true;
@@ -58,6 +60,7 @@ import ../machine.nix rec {
     watchdog.enable = false;
     wireguard.enable = false;
     xdg.enable = true;
+    wayland.enable = false;
     xorg = {
       enable = false;
       videoDrivers = [ "modesetting" ];

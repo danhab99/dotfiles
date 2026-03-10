@@ -16,12 +16,11 @@ import ../module.nix {
       packages = with pkgs; [
         libinput
         libinput-gestures
-        wmctrl # needed for internal window commands
-        xdotool # or ydotool, depending on your workflow
+        wtype # Wayland-native key/text injection
       ];
 
       homeManager = {
-        xsession.windowManager.i3.config.startup = [
+        wayland.windowManager.sway.config.startup = [
           {
             command = "libinput-gestures --device \"${cfg.devicePath}\"";
             always = true;
@@ -29,10 +28,10 @@ import ../module.nix {
         ];
 
         home.file.".config/libinput-gestures.conf".source = pkgs.writeText "libinput-gestures.conf" ''
-          gesture swipe up 3 i3-msg fullscreen enable
-          gesture swipe down 3 i3-msg fullscreen disable
-          gesture pinch clockwise xdotool key "Super_L+Shift+x"
-          gesture pinch anticlockwise xdotool key "Super_L+Shift+x"
+          gesture swipe up 3 swaymsg fullscreen enable
+          gesture swipe down 3 swaymsg fullscreen disable
+          gesture pinch clockwise wtype -M logo -M shift -k x -m shift -m logo
+          gesture pinch anticlockwise wtype -M logo -M shift -k x -m shift -m logo
         '';
       };
 

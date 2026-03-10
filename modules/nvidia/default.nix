@@ -58,6 +58,10 @@ import ../module.nix {
           # CUDA library paths
           CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
           LD_LIBRARY_PATH = "${pkgs.cudaPackages.cudatoolkit}/lib:${pkgs.cudaPackages.cudnn}/lib:${pkgs.cudaPackages.cuda_cudart}/lib";
+          # Wayland + NVIDIA: GBM backend for Wayland compositors
+          GBM_BACKEND = "nvidia-drm";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+          WLR_NO_HARDWARE_CURSORS = "1";
         };
       };
     };

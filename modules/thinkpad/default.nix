@@ -60,26 +60,7 @@ import ../module.nix
           fan-max = "fan disengaged";
         };
 
-        home.file = {
-          ".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml" = {
-            text = ''
-              <?xml version="1.1" encoding="UTF-8"?>
-
-              <channel name="xfce4-power-manager" version="1.0">
-                <property name="xfce4-power-manager" type="empty">
-                  <property name="brightness-switch-restore-on-exit" type="int" value="1"/>
-                  <property name="brightness-switch" type="int" value="0"/>
-                  <property name="show-tray-icon" type="bool" value="true"/>
-                  <property name="critical-power-level" type="uint" value="4"/>
-                  <property name="dpms-on-ac-sleep" type="uint" value="0"/>
-                  <property name="dpms-on-ac-off" type="uint" value="0"/>
-                  <property name="dpms-enabled" type="bool" value="false"/>
-                  <property name="critical-power-action" type="uint" value="4"/>
-                </property>
-              </channel>
-            '';
-          };
-        };
+        home.file = { };
 
         # Service to continuously enforce USB power settings
         systemd.user.services.usb-power-enforcer = {
@@ -102,13 +83,13 @@ import ../module.nix
 
         systemd.user.services.dpms-killer = {
           Unit = {
-            Description = "Continuously disable DPMS to prevent screens from turning off";
+            Description = "Continuously ensure screens stay on (Wayland)";
             After = [ "graphical-session.target" ];
           };
 
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'export DISPLAY=:0; while true; do ${pkgs.xorg.xset}/bin/xset -dpms; ${pkgs.xorg.xset}/bin/xset s off; ${pkgs.xorg.xset}/bin/xset s noblank; sleep 5; done'";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.sway}/bin/swaymsg \"output * dpms on\" 2>/dev/null || true; sleep 30; done'";
             Restart = "always";
             RestartSec = "3";
           };
@@ -120,13 +101,13 @@ import ../module.nix
 
         systemd.user.services.screen-monitor = {
           Unit = {
-            Description = "Monitor and auto-enable screens if they turn off";
+            Description = "Monitor and auto-enable screens if they turn off (Wayland)";
             After = [ "graphical-session.target" ];
           };
 
           Service = {
             Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then sleep 5; if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then xrandr --auto; fi; fi; sleep 2; done'";
+            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do ${pkgs.sway}/bin/swaymsg \"output * enable\" 2>/dev/null || true; sleep 5; done'";
             Restart = "always";
             RestartSec = "5";
           };

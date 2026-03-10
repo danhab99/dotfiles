@@ -23,7 +23,7 @@ import ../machine.nix
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
-      enable = true;
+      enable = false;
       configFile = ./i3/config;
       i3blocksConfig = ./i3blocks.conf;
       screen = [
@@ -32,6 +32,15 @@ import ../machine.nix
         "HDMI-0"
       ];
       defaultLayoutScript = "3screen.sh";
+      fontSize = 14.0;
+    };
+    sway = {
+      enable = true;
+      screen = [
+        "DP-4"
+        "DP-0"
+        "HDMI-0"
+      ];
       fontSize = 14.0;
     };
     nix.enable = true;
@@ -49,7 +58,7 @@ import ../machine.nix
     };
     printing.enable = true;
     ratbag.enable = true;
-    sddm.enable = true;
+    sddm.enable = false;
     secrets.enable = true;
     ssh = {
       enable = true;
@@ -58,11 +67,14 @@ import ../machine.nix
     steam.enable = true;
     threedtools.enable = true;
     timezone.enable = true;
-    urxvt.enable = true;
-    xorg = {
+    urxvt.enable = false;
+    wayland = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      # defaultScreenScript = "3screen.sh";
+    };
+    xorg = {
+      enable = false;
+      videoDrivers = [ "nvidia" ];
       extraConfig = ''
         urxvt*depth: 32
         urxvt*blurRadius: 10
@@ -70,6 +82,11 @@ import ../machine.nix
         urxvt*tintColor: #525252
       '';
       fontSize = 21;
+    };
+    kvm-resilience = {
+      enable = true;
+      usbHubVendors = [ "0bda" "05e3" "1a40" ];
+      enableThunderboltHotplug = false;
     };
     zoxide.enable = true;
     zsh.enable = true;
@@ -127,48 +144,15 @@ import ../machine.nix
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
-  i3Config =
+  swayConfig =
     { mod }:
     {
       keybindings = {
-        "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-        # "${mod}+w" = "exec brave";
+        "${mod}+Ctrl+Return" = "exec rm -f /tmp/workdir && foot";
       };
     };
 
-  xserver = ''
-    Section "Device"
-        Identifier "GPU0"
-        Driver "nvidia"
-        Option "AllowFlipping" "True"
-        Option "TripleBuffer" "True"
-        Option "ForceFullCompositionPipeline" "True"
-    EndSection
-
-    Section "Monitor"
-        Identifier "HDMI-0"
-        Option "PreferredMode" "2560x1440"
-    EndSection
-
-    Section "Monitor"
-        Identifier "DP-0"
-        Option "PreferredMode" "2560x1440"
-        Option "LeftOf" "HDMI-0"
-    EndSection
-
-    Section "Monitor"
-        Identifier "DP-4"
-        Option "PreferredMode" "2560x1440"
-        Option "LeftOf" "DP-1"
-    EndSection
-
-    Section "Screen"
-        Identifier "Screen0"
-        Device "GPU0"
-        Option "AllowIndirectGLXProtocol" "True"
-        Option "TripleBuffer" "True"
-    EndSection
-  '';
+  xserver = "";
 
   bind =
     let

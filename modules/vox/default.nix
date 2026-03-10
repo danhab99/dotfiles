@@ -141,7 +141,7 @@ import ../module.nix
 
           beep 540 0.15
           log "typing output"
-          ${pkgs.xdotool}/bin/xdotool type "$TRANSCRIPTION"
+          ${pkgs.wtype}/bin/wtype "$TRANSCRIPTION"
 
           rm -f "$AUDIO"
 
@@ -180,7 +180,7 @@ import ../module.nix
     {
       packages = with pkgs; [
         whisper-cpp
-        xdotool
+        wtype
         pulseaudio
         sox
         ffmpeg
@@ -188,9 +188,9 @@ import ../module.nix
       ];
 
       homeManager = {
-        xsession.windowManager.i3.config = {
+        wayland.windowManager.sway.config = {
           keybindings = {
-            "Mod4+Mod1+v" = "exec --no-startup-id vox-toggle";
+            "Mod4+Mod1+v" = "exec vox-toggle";
           };
         };
       };

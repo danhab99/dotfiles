@@ -19,25 +19,34 @@ import ../machine.nix {
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
-      enable = true;
+      enable = false;
       i3blocksConfig = ./i3blocks.conf;
       screen = [ "eDP-1" ];
       fontSize = 12.0;
       defaultLayoutScript = "";
     };
+    sway = {
+      enable = true;
+      screen = [ "eDP-1" ];
+      fontSize = 12.0;
+    };
     nix.enable = true;
     ollama.enable = false;
     printing.enable = true;
     ratbag.enable = false;
-    sddm.enable = true;
+    sddm.enable = false;
     secrets.enable = true;
     ssh.enable = true;
     steam.enable = false;
     threedtools.enable = false;
     timezone.enable = true;
-    urxvt.enable = true;
-    xorg = {
+    urxvt.enable = false;
+    wayland = {
       enable = true;
+      videoDrivers = [ "modesetting" ];
+    };
+    xorg = {
+      enable = false;
       videoDrivers = [ "modesetting" ];
       fontSize = 16;
       extraConfig = ''
@@ -47,6 +56,7 @@ import ../machine.nix {
         urxvt*tintColor: #555
       '';
     };
+    kvm-resilience.enable = true;
     zoxide.enable = true;
     zsh.enable = true;
     thinkpad.enable = true;
@@ -78,11 +88,11 @@ import ../machine.nix {
     nixos-packages.enable = true;
   };
 
-  i3Config =
+  swayConfig =
     { mod }:
     {
       keybindings = {
-        "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
+        "Mod4+Shift+Return" = "exec foot -e ssh -S /tmp/ssh-master-desktop.sock desktop";
       };
     };
 

@@ -5,32 +5,26 @@ import ../module.nix {
     { pkgs, ... }:
     {
       packages = with pkgs; [
-        redshift
+        gammastep
       ];
 
       homeManager = {
-        services.redshift = {
+        services.gammastep = {
           enable = true;
 
           provider = "geoclue2";
 
-          brightness = {
-            # Note the string values below.
-            day = "1";
-            night = "1";
-          };
-
           temperature = {
-            # day = 5500;
             day = 4000;
             night = 3000;
           };
 
           settings = {
-            redshift = {
-              adjustment-method = "randr";
+            general = {
+              adjustment-method = "wayland";
+              brightness-day = "1.0";
+              brightness-night = "1.0";
             };
-            randr = { };
           };
         };
       };

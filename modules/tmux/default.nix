@@ -45,7 +45,7 @@ import ../module.nix {
             setw -g mode-keys vi
             bind-key -T copy-mode-vi r send -X rectangle-toggle
             bind-key -T copy-mode-vi v send -X begin-selection
-            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -sel clip -i"
+            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
             bind P paste-buffer
 
             # Enable mouse support

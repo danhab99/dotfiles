@@ -22,15 +22,13 @@ import ../module.nix {
         pamixer
         pavucontrol
         playerctl
-        pulseaudioFull
+        pulseaudioFull # for pactl/paplay CLI compatibility
       ];
 
       homeManager = { };
 
       nixos = {
         hardware = {
-          alsa.enable = true;
-          alsa.enablePersistence = true;
           bluetooth.enable = cfg.enableBluetooth;
           bluetooth.powerOnBoot = cfg.enableBluetooth;
         };
@@ -39,11 +37,17 @@ import ../module.nix {
 
         services = {
           blueman.enable = cfg.enableBluetooth;
-          pipewire.enable = lib.mkForce false;
-          pipewire.wireplumber.enable = lib.mkForce false;
-          pulseaudio.enable = lib.mkForce true; # current option
-          pulseaudio.package = pkgs.pulseaudioFull; # codecs, BT
-          pulseaudio.support32Bit = true; # Steam/Wine
+
+          # PipeWire replaces PulseAudio — required for Wayland audio
+          pulseaudio.enable = lib.mkForce false;
+
+          pipewire = {
+            enable = lib.mkForce true;
+            alsa.enable = true;
+            alsa.support32Bit = true;
+            pulse.enable = true; # PulseAudio compatibility layer
+            wireplumber.enable = true;
+          };
         };
       };
     };

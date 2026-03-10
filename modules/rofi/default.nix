@@ -30,7 +30,7 @@ import ../module.nix
           type = 2; # layout family 1–6
           style = 3; # style variant  1–5
           # set any action to null to remove it from the menu
-          lock = "i3lock -f";
+          lock = "swaylock -f -c 2f343f";
           suspend = "systemctl suspend";
           hibernate = null; # hidden — not shown in the menu
           logout = "loginctl kill-session \"$XDG_SESSION_ID\"";

@@ -24,7 +24,7 @@ import ../module.nix {
       ripgrep
       rsync
       screen
-      xclip
+      wl-clipboard
     ];
 
     nixos = {
@@ -86,14 +86,14 @@ import ../module.nix {
 
           shellAliases = rec {
             cdh = "cd ~";
-            ci3 = "cd ~/.config/i3";
+            ci3 = "cd ~/.config/sway";
             cnix = "cd /etc/nixos";
             browse = "nautilus --browser . &";
             vi = "vim";
             vim = "vim";
             v = "vim";
             vv = "vim .";
-            vi3 = "vim ~/.config/i3/config";
+            vi3 = "vim ~/.config/sway/config";
             valias = "vim ~/.bash_aliases";
             vssh = "vim ~/.ssh/config";
             vfz = "vim $(fzf)";
@@ -126,7 +126,7 @@ import ../module.nix {
 
             dc = "docker-compose";
 
-            clip = "xclip -selection c";
+            clip = "wl-copy";
             cfzf = ''cd "$(dirname $(fzf))"'';
             tf = "terraform";
             rmr = "rm -r";

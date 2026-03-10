@@ -17,11 +17,7 @@ import ../module.nix
       ];
 
       homeManager = {
-        xsession.windowManager.i3.config.startup = [
-          {
-            command = "xinput disable $$(xinput list --id-only '${cfg.deviceName}')";
-            always = true;
-          }
+        wayland.windowManager.sway.config.startup = [
           {
             command = "${logitech-g600-rs-pkg}/bin/logitech-g600-rs --device-path ${cfg.devicePath} --config-path ${./g600.toml} >> ~/.log/g600.log";
             always = true;
