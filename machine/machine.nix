@@ -143,7 +143,7 @@ let
       };
     };
 in
-inputs@{ home-manager, openclaw, adirofi, ... }:
+inputs@{ home-manager, openclaw, adirofi, stylix, ... }:
 let
   modules = [
     nixosModule
@@ -157,8 +157,10 @@ let
       home-manager.sharedModules = [ 
         openclaw.homeManagerModules.openclaw
         adirofi.homeManagerModules.default
+        stylix.homeModules.stylix
       ];
     }
+    stylix.nixosModules.stylix
     raw
   ];
 in

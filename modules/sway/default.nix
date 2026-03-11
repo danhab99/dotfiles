@@ -3,41 +3,40 @@ import ../module.nix {
 
   options =
     { lib }:
-    with lib;
-    {
-      wallpaper = mkOption {
-        type = types.nullOr types.path;
-        description = "Path to wallpaper image";
-        default = null;
+      with lib;
+      {
+        wallpaper = mkOption {
+          type = types.nullOr types.path;
+          description = "Path to wallpaper image";
+          default = null;
+        };
+        extraConfig = mkOption {
+          type = types.lines;
+          default = "";
+          description = "Extra sway config lines appended verbatim";
+        };
+        screen = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = "Ordered list of wlr output names for workspace assignment";
+        };
+        fontSize = mkOption {
+          type = types.float;
+          default = 12.0;
+        };
+        modKey = mkOption {
+          type = types.str;
+          default = "Mod4";
+          description = "The modifier key (e.g. 'Mod4' or 'Mod1')";
+        };
       };
-      extraConfig = mkOption {
-        type = types.lines;
-        default = "";
-        description = "Extra sway config lines appended verbatim";
-      };
-      screen = mkOption {
-        type = types.listOf types.str;
-        default = [ ];
-        description = "Ordered list of wlr output names for workspace assignment";
-      };
-      fontSize = mkOption {
-        type = types.float;
-        default = 12.0;
-      };
-      modKey = mkOption {
-        type = types.str;
-        default = "Mod4";
-        description = "The modifier key (e.g. 'Mod4' or 'Mod1')";
-      };
-    };
 
   output =
-    {
-      pkgs,
-      config,
-      cfg,
-      lib,
-      ...
+    { pkgs
+    , config
+    , cfg
+    , lib
+    , ...
     }:
     let
       mod = cfg.modKey;
@@ -130,14 +129,15 @@ import ../module.nix {
         if nScreens == 0 then ""
         else
           builtins.concatStringsSep "\n" (
-            builtins.genList (
-              i:
-              let
-                ws = builtins.toString (i + 1);
-                screen = builtins.elemAt screens (lib.mod i nScreens);
-              in
-              "workspace ${ws} output ${screen}"
-            ) 10
+            builtins.genList
+              (
+                i:
+                let
+                  ws = builtins.toString (i + 1);
+                  screen = builtins.elemAt screens (lib.mod i nScreens);
+                in
+                "workspace ${ws} output ${screen}"
+              ) 10
           );
 
       kanshiProfiles =
@@ -461,8 +461,11 @@ import ../module.nix {
             # Workspace output assignments
             ${workspaceOutputAssigns}
 
-            # Rounded corners (swayfx)
-            corner_radius 8
+            # Rounded corners + blur (swayfx)
+            corner_radius 16
+            blur enable
+            blur_passes 3
+            blur_radius 5
 
             # Machine-specific extra config
             ${cfg.extraConfig}
@@ -486,29 +489,27 @@ import ../module.nix {
           font=monospace ${builtins.toString (builtins.floor fontSize)}
         '';
 
-        # Foot terminal config
-        home.file.".config/foot/foot.ini".text = ''
-          [main]
-          font=monospace:size=${builtins.toString (builtins.floor fontSize)}
-          pad=8x8
-
-          [colors]
-          alpha=0.85
-          background=2f343f
-          foreground=f3f4f5
-
-          [mouse]
-          hide-when-typing=yes
-        '';
+        # Foot terminal config (use programs.foot so stylix can merge colours)
+        programs.foot = {
+          enable = true;
+          settings = {
+            main = {
+              font = "monospace:size=${builtins.toString (builtins.floor fontSize)}";
+              pad = "16x16";
+            };
+            colors = {
+              alpha = "0.85";
+            };
+          };
+        };
 
         # Waypaper config — point it at swww as the backend
         home.file.".config/waypaper/config.ini".text = ''
           [Settings]
-          folder = ~/Pictures
+          folder = ~/Pictures/wallpaper/3screen
           backend = swww
           fill = fill
           sort = name
-          color = #2f343f
           subfolders = True
         '';
 
@@ -527,6 +528,13 @@ import ../module.nix {
               resumeCommand = "${pkgs.swayfx}/bin/swaymsg 'output * dpms on'";
             }
           ];
+        };
+
+        stylix.targets = {
+          foot.enable = true;
+          sway.enable = true;
+          swaylock.enable = true;
+          waybar.enable = true;
         };
       };
     };

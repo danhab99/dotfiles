@@ -59,36 +59,36 @@ in
     smartBorders = "off";
   };
 
-  colors = {
-    focused = {
-      border = "#2f343f";
-      background = "#2f343f";
-      text = "#f3f4f5";
-      indicator = "#333333";
-      childBorder = "";
-    };
-    unfocused = {
-      border = "#2f343f00";
-      background = "#2f343f00";
-      text = "#676E7D";
-      indicator = "#333333";
-      childBorder = "";
-    };
-    focusedInactive = {
-      border = "#2f343f00";
-      background = "#2f343f00";
-      text = "#676E7D";
-      indicator = "#333333";
-      childBorder = "";
-    };
-    urgent = {
-      border = "#E53935";
-      background = "#E53935";
-      text = "#f3f4f5";
-      indicator = "#333333";
-      childBorder = "";
-    };
-  };
+  # colors = {
+  #   focused = {
+  #     border = "#2f343f";
+  #     background = "#2f343f";
+  #     text = "#f3f4f5";
+  #     indicator = "#333333";
+  #     childBorder = "";
+  #   };
+  #   unfocused = {
+  #     border = "#2f343f00";
+  #     background = "#2f343f00";
+  #     text = "#676E7D";
+  #     indicator = "#333333";
+  #     childBorder = "";
+  #   };
+  #   focusedInactive = {
+  #     border = "#2f343f00";
+  #     background = "#2f343f00";
+  #     text = "#676E7D";
+  #     indicator = "#333333";
+  #     childBorder = "";
+  #   };
+  #   urgent = {
+  #     border = "#E53935";
+  #     background = "#E53935";
+  #     text = "#f3f4f5";
+  #     indicator = "#333333";
+  #     childBorder = "";
+  #   };
+  # };
 
   bars = [
     {

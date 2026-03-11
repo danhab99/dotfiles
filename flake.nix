@@ -2,14 +2,12 @@
   inputs = {
     # === NixOS ===
     nixpkgs.url = "github:nixos/nixpkgs/0182a361324364ae3f436a63005877674cf45efb";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager"; 
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openclaw.url = "github:openclaw/nix-openclaw";
     dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
+    stylix.url = "github:nix-community/stylix";
 
     # === My flakes ===
     ev-cmd.url = "github:danhab99/ev-cmd/main";

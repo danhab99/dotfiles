@@ -68,6 +68,10 @@ import ../module.nix {
           '';
         };
 
+        stylix.targets = {
+          tmux.enable = true;
+        };
+
       };
 
       nixos = {
