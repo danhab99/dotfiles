@@ -28,6 +28,7 @@ import ../machine.nix {
     };
     sway = {
       enable = true;
+      slowMode = true;
       screen = [
         "DP-3-2"
         "DP-3-3-1"

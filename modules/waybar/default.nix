@@ -14,7 +14,7 @@ import ../module.nix
           mainBar = {
             layer = "bottom";
             position = "bottom";
-            height = 20;
+            height = 10;
             output = [
               "eDP-1"
               "HDMI-A-1"
@@ -40,7 +40,7 @@ import ../module.nix
 
             "sway/workspaces" = {
               disable-scroll = true;
-              all-outputs = true;
+              all-outputs = false;
             };
 
             "pulseaudio" = {

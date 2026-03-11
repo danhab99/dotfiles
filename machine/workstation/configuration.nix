@@ -37,9 +37,9 @@ import ../machine.nix
     sway = {
       enable = true;
       screen = [
-        "DP-4"
-        "DP-0"
-        "HDMI-0"
+        "DP-3"
+        "DP-1"
+        "HDMI-A-1"
       ];
       fontSize = 14.0;
     };
