@@ -21,7 +21,7 @@ import ../module.nix
               "DP-1"
               "DP-3"
             ];
-            modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+            modules-left = [ "sway/workspaces" "sway/mode" ];
             modules-center = [ ];
             modules-right = [
               "pulseaudio"
@@ -158,6 +158,12 @@ import ../module.nix
           #workspaces button {
             padding: 0 10px;
             font-weight: 600;
+          }
+
+          #workspaces button.focused,
+          #workspaces button.active {
+            border-bottom: 3px solid white;
+            font-weight: 800;
           }
         '';
       };
