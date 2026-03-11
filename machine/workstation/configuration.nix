@@ -133,6 +133,11 @@ import ../machine.nix
     nginx.enable = true;
     kdeconnect.enable = true;
     rofi.enable = true;
+    waybar.enable = true;
+    foot = {
+      enable = true;
+      fontSize = 14.0;
+    };
 
     all-packages.enable = true;
     nixos-packages.enable = true;
