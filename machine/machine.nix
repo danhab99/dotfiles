@@ -83,6 +83,8 @@ let
       config = {
         inherit users module;
 
+        services.fwupd.enable = true;
+
         environment.variables = environmentVariables;
         environment.systemPackages = packages pkgs;
 
