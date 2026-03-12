@@ -4,14 +4,23 @@ import ../module.nix {
   output =
     { pkgs, ... }:
     {
-      packages = with pkgs; [
-
-      ];
-
       homeManager = {
         programs.vscode = {
           enable = true;
           package = pkgs.vscode-fhs; # or pkgs.vscodium
+
+          mutableExtensionsDir = false;
+
+          profiles.default = {
+            # enableMCPIntergration = true;
+            # enableUpdateCheck = false;
+            extensions = with pkgs.vscode-extensions; [
+              github.copilot
+              jnoortheen.nix-ide
+              ms-python.vscode-pylance
+              vscodevim.vim
+            ];
+          };
         };
       };
 
