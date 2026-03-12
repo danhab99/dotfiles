@@ -82,59 +82,59 @@ import ../module.nix
         };
 
         # Service to continuously enforce USB power settings
-        systemd.user.services.usb-power-enforcer = {
-          Unit = {
-            Description = "Continuously enforce USB power management settings to prevent dock disconnects";
-            After = [ "graphical-session.target" ];
-          };
+        # systemd.user.services.usb-power-enforcer = {
+        #   Unit = {
+        #     Description = "Continuously enforce USB power management settings to prevent dock disconnects";
+        #     After = [ "graphical-session.target" ];
+        #   };
 
-          Service = {
-            Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do for dev in /sys/bus/usb/devices/*/power/control; do if [ -f \"$dev\" ]; then echo on > \"$dev\" 2>/dev/null || true; fi; done; sleep 30; done'";
-            Restart = "always";
-            RestartSec = "10";
-          };
+        #   Service = {
+        #     Type = "simple";
+        #     ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do for dev in /sys/bus/usb/devices/*/power/control; do if [ -f \"$dev\" ]; then echo on > \"$dev\" 2>/dev/null || true; fi; done; sleep 30; done'";
+        #     Restart = "always";
+        #     RestartSec = "10";
+        #   };
 
-          Install = {
-            WantedBy = [ "graphical-session.target" ];
-          };
-        };
+        #   Install = {
+        #     WantedBy = [ "graphical-session.target" ];
+        #   };
+        # };
 
-        systemd.user.services.dpms-killer = {
-          Unit = {
-            Description = "Continuously disable DPMS to prevent screens from turning off";
-            After = [ "graphical-session.target" ];
-          };
+        # systemd.user.services.dpms-killer = {
+        #   Unit = {
+        #     Description = "Continuously disable DPMS to prevent screens from turning off";
+        #     After = [ "graphical-session.target" ];
+        #   };
 
-          Service = {
-            Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'export DISPLAY=:0; while true; do ${pkgs.xset}/bin/xset -dpms; ${pkgs.xset}/bin/xset s off; ${pkgs.xset}/bin/xset s noblank; sleep 5; done'";
-            Restart = "always";
-            RestartSec = "3";
-          };
+        #   Service = {
+        #     Type = "simple";
+        #     ExecStart = "${pkgs.bash}/bin/bash -c 'export DISPLAY=:0; while true; do ${pkgs.xset}/bin/xset -dpms; ${pkgs.xset}/bin/xset s off; ${pkgs.xset}/bin/xset s noblank; sleep 5; done'";
+        #     Restart = "always";
+        #     RestartSec = "3";
+        #   };
 
-          Install = {
-            WantedBy = [ "graphical-session.target" ];
-          };
-        };
+        #   Install = {
+        #     WantedBy = [ "graphical-session.target" ];
+        #   };
+        # };
 
-        systemd.user.services.screen-monitor = {
-          Unit = {
-            Description = "Monitor and auto-enable screens if they turn off";
-            After = [ "graphical-session.target" ];
-          };
+        # systemd.user.services.screen-monitor = {
+        #   Unit = {
+        #     Description = "Monitor and auto-enable screens if they turn off";
+        #     After = [ "graphical-session.target" ];
+        #   };
 
-          Service = {
-            Type = "simple";
-            ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then sleep 5; if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then xrandr --auto; fi; fi; sleep 2; done'";
-            Restart = "always";
-            RestartSec = "5";
-          };
+        #   Service = {
+        #     Type = "simple";
+        #     ExecStart = "${pkgs.bash}/bin/bash -c 'while true; do if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then sleep 5; if xrandr | grep -q \" connected\" && ! xrandr --listactivemonitors | grep -q \"Monitors: [1-9]\"; then xrandr --auto; fi; fi; sleep 2; done'";
+        #     Restart = "always";
+        #     RestartSec = "5";
+        #   };
 
-          Install = {
-            WantedBy = [ "graphical-session.target" ];
-          };
-        };
+        #   Install = {
+        #     WantedBy = [ "graphical-session.target" ];
+        #   };
+        # };
       };
 
       nixos = {
