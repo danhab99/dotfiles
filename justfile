@@ -30,7 +30,7 @@ switch:
     -i3-msg restart
     -sudo udevadm control --reload
     -sudo udevadm trigger
-    -sudo systemctl restart n8n.service
+    # -sudo systemctl restart n8n.service &
 
 clean:
     {{clean_command}} --delete-older-than {{keep_garbage}}

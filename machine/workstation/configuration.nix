@@ -28,8 +28,8 @@ import ../machine.nix
       i3blocksConfig = ./i3blocks.conf;
       screen = [
         "DP-4"
-        "DP-0"
         "HDMI-0"
+        "DP-0"
       ];
       defaultLayoutScript = "3screen.sh";
       fontSize = 14.0;
@@ -109,13 +109,15 @@ import ../machine.nix
     };
     g600 = {
       enable = true;
-      devicePath = "/dev/input/by-id/usb-LingYao_ShangHai_Thumb_Keyboard_081820131130-event-kbd";
-      deviceName = "LingYao ShangHai Thumb Keyboard";
+      devicePath = "/dev/input/by-id/usb-Logitech_Gaming_Mouse_G600_FED1B7EDC0960017-if01-event-kbd";
+      deviceName = "Logitech Gaming Mouse G600 Keyboard";
     };
     openclaw.enable = true;
     nginx.enable = true;
     kdeconnect.enable = true;
     rofi.enable = true;
+    firefox.enable = true;
+    bitwarden.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

@@ -9,6 +9,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     openclaw.url = "github:openclaw/nix-openclaw";
+    nur.url = "github:nix-community/NUR";
 
     # === My flakes ===
     dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";

@@ -149,7 +149,10 @@ let
     nixosModule
     ./${hostName}/hardware-configuration.nix
     ../cachix.nix
-    { nixpkgs.overlays = [ openclaw.overlays.default ]; }
+    { nixpkgs.overlays = [ 
+      openclaw.overlays.default 
+      inputs.nur.overlays.default
+    ]; }
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
