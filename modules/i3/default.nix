@@ -54,6 +54,7 @@ import ../module.nix {
         picom
         playerctl
         sysstat
+        ungoogled-chromium
       ];
 
       nixos = {

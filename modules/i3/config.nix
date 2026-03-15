@@ -139,6 +139,7 @@ in
       "XF86MonBrightnessDown" = "exec xbacklight -dec 10";
       "${mod}+p" = "exec flameshot gui";
       "${mod}+w" = "exec firefox";
+      "${mod}+shift+w" = "exec chromium-browser";
       "${mod}+e" = "exec nemo";
       "${mod}+plus" = "gaps inner all minus 2";
       "${mod}+minus" = "gaps inner all plus 2";
