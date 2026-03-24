@@ -7,6 +7,9 @@ map("n", "<C-o>", ":NERDTreeToggle<CR>", opts)
 map("n", "<C-u>", ":UndotreeToggle<CR>", opts)
 map("n", "<C-f>", ":Neoformat<CR>", opts)
 map("i", "<C-f>", "<Esc>:Neoformat<CR>i", opts)
+-- Prettier formatting via COC
+map("n", "<leader>F", ":CocCommand prettier.forceFormatDocument<CR>", opts)
+map("v", "<leader>F", ":CocCommand prettier.formatSelected<CR>", opts)
 
 -- Editing
 map("n", "O", "O<Esc>o", opts)
