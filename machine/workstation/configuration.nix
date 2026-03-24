@@ -44,6 +44,9 @@ import ../machine.nix
         "gemma3:latest"
         "llama3.1:8b"
         "qwen3:latest"
+        "opencoder:8b"
+        "deepcoder:14b"
+        "qwen3.5:9b"
       ];
       enableGpu = true;
     };
@@ -114,10 +117,12 @@ import ../machine.nix
     };
     openclaw.enable = true;
     nginx.enable = true;
+    n8n.enable = true;
     kdeconnect.enable = true;
     rofi.enable = true;
     firefox.enable = true;
     bitwarden.enable = true;
+    soulseek.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
