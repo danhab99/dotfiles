@@ -3,18 +3,17 @@ import ../module.nix {
 
   options =
     { lib }:
-    with lib;
-    {
-      enableBluetooth = lib.mkEnableOption "enableBluetooth";
-      # enableJACK = lib.mkEnableOption "enableJACK";
-    };
+      with lib;
+      {
+        enableBluetooth = lib.mkEnableOption "enableBluetooth";
+        # enableJACK = lib.mkEnableOption "enableJACK";
+      };
 
   output =
-    {
-      pkgs,
-      cfg,
-      lib,
-      ...
+    { pkgs
+    , cfg
+    , lib
+    , ...
     }:
     {
       packages = with pkgs; [
@@ -41,9 +40,16 @@ import ../module.nix {
           blueman.enable = cfg.enableBluetooth;
           pipewire.enable = lib.mkForce false;
           pipewire.wireplumber.enable = lib.mkForce false;
-          pulseaudio.enable = lib.mkForce true; # current option
-          pulseaudio.package = pkgs.pulseaudioFull; # codecs, BT
-          pulseaudio.support32Bit = true; # Steam/Wine
+          pulseaudio = {
+            enable = lib.mkForce true; # current option
+            package = pkgs.pulseaudioFull; # codecs, BT
+            support32Bit = true; # Steam/Wine
+
+            daemon.config = {
+              default-sample-rate = 48000; # Or 44100
+              alternate-sample-rate = 44100; # Recommended to have both
+            };
+          };
         };
       };
     };
