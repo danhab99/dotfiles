@@ -10,6 +10,7 @@ import ../module.nix {
         xclip
         xsel
         typescript-language-server
+        nodePackages.prettier
       ];
 
       homeManager = {
@@ -67,6 +68,18 @@ import ../module.nix {
               };
               "rust-analyzer.server.path" = "rust-analyzer";
               "inlayHint.enable" = false;
+              "coc.preferences.formatOnSaveFiletypes" = [
+                "javascript"
+                "javascriptreact" 
+                "typescript"
+                "typescriptreact"
+                "json"
+                "html"
+                "css"
+                "scss"
+              ];
+              "prettier.onlyUseLocalVersion" = true;
+              "prettier.requireConfig" = false;
               "cSpell.userWords" = [
                 "callout"
                 "chans"
@@ -105,6 +118,7 @@ import ../module.nix {
             coc-tailwindcss
             coc-toml
             coc-yaml
+            coc-prettier
             ctrlp-vim
             fzf-lua
             goyo-vim
