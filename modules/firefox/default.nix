@@ -24,6 +24,7 @@ import ../_module.nix
             vimium
             pushbullet
             bitwarden
+            ctrl-number-to-switch-tabs
           ];
 
           # 1. Declarative Settings
