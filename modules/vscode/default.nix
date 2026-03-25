@@ -9,7 +9,7 @@ import ../module.nix {
           enable = true;
           package = pkgs.vscode-fhs; # or pkgs.vscodium
 
-          mutableExtensionsDir = false;
+          mutableExtensionsDir = true;
 
           profiles.default = {
             # enableMCPIntergration = true;
