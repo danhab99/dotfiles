@@ -32,7 +32,10 @@ import ../machine.nix rec {
     libreoffice.enable = false;
     metis.enable = false;
     neovim.enable = true;
-    nix.enable = true; # Keep nix tools
+    nix = {
+      enable = true; 
+      remoteBuild = true;
+    }
     nixos-packages.enable = false;
     nvidia.enable = false;
     obs.enable = false;
