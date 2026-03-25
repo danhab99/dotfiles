@@ -25,7 +25,10 @@ import ../machine.nix {
       fontSize = 12.0;
       defaultLayoutScript = "";
     };
-    nix.enable = true;
+    nix = {
+      enable = true;
+      remoteBuild = true;
+    };
     ollama.enable = false;
     printing.enable = true;
     ratbag.enable = false;

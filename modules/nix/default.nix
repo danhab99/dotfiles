@@ -1,8 +1,12 @@
 import ../module.nix {
   name = "nix";
 
+  options = { lib }: with lib; {
+    remoteBuild = mkEnableOption { };
+  };
+
   output =
-    { pkgs, ... }:
+    { pkgs, lib, cfg, ... }:
     {
 
       packages = with pkgs; [
@@ -17,25 +21,29 @@ import ../module.nix {
           ];
           allowed-users = [ "dan" ];
           require-sigs = true;
+
+          buildMachines = lib.mkIf cfg.remoteBuild [
+            {
+              hostName = "desktop"; # IP or SSH alias
+              sshUser = "dan";
+              systems = [ "x86_64-linux" "aarch64-linux" ]; # Architectures it can handle
+              maxJobs = 20;
+              supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+              mandatoryFeatures = [ ];
+              distributedBuilds = true;
+            }
+          ];
         };
 
         nixpkgs.config.allowUnfree = true;
-
         nixpkgs.config.allowBroken = true;
 
-        # services.nixos-cli = { enable = true; };
-
         programs.nix-ld.enable = true;
-        # programs.nix-ld.libraries = with pkgs; [ gtk3 glibc swt freetype ];
         programs.nix-ld.libraries = with pkgs; [
           gtk3
           glibc
           freetype
         ];
-
-        # environment.variables = with pkgs; {
-        #   LD_LIBRARY_PATH = "${swt}/lib:$LD_LIBRARY_PATH";
-        # };
       };
 
       homeManager = { };
