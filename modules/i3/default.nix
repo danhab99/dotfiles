@@ -46,6 +46,7 @@ import ../module.nix {
         dmenu
         flameshot
         i3-rounded
+        firefox
         i3blocks
         i3status
         nemo

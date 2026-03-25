@@ -21,19 +21,19 @@ import ../module.nix {
           ];
           allowed-users = [ "dan" ];
           require-sigs = true;
-
-          buildMachines = lib.mkIf cfg.remoteBuild [
-            {
-              hostName = "desktop"; # IP or SSH alias
-              sshUser = "dan";
-              systems = [ "x86_64-linux" "aarch64-linux" ]; # Architectures it can handle
-              maxJobs = 20;
-              supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-              mandatoryFeatures = [ ];
-              distributedBuilds = true;
-            }
-          ];
         };
+
+        nix.distributedBuilds = cfg.remoteBuild;
+        nix.buildMachines = [
+          {
+            hostName = "desktop"; # IP or SSH alias
+            sshUser = "dan";
+            systems = [ "x86_64-linux" "aarch64-linux" ]; # Architectures it can handle
+            maxJobs = 20;
+            supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+            mandatoryFeatures = [ ];
+          }
+        ];
 
         nixpkgs.config.allowUnfree = true;
         nixpkgs.config.allowBroken = true;
