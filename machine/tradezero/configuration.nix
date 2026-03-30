@@ -141,6 +141,15 @@ import ../machine.nix {
   #   ];
 
   raw = { pkgs, ... }: {
+    # Systemd service for on-demand USB controller reset
+    systemd.services.reset-usb = {
+      description = "Reset xHCI USB controller to recover from stuck devices";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/bin/sh /etc/nixos/scripts/reset-usb.sh";
+      };
+    };
+
     services = {
       twingate = {
         enable = true;
