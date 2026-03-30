@@ -15,6 +15,8 @@ import ../module.nix
       virtualisation.virtualbox = {
         host.enable = true;
       };
+
+      users.extraGroups.vboxusers.members = [ "dan" ];
     };
   };
 }
