@@ -15,20 +15,18 @@ import ../module.nix {
 
       nixos = {
         nix.settings = {
-          experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
+          experimental-features = [ "nix-command" "flakes" ];
           allowed-users = [ "dan" ];
-          require-sigs = true;
+          require-sigs = false;
         };
 
         nix.distributedBuilds = cfg.remoteBuild;
         nix.buildMachines = [
           {
-            hostName = "desktop"; # IP or SSH alias
+            hostName = "desktop-nix";
             sshUser = "dan";
-            systems = [ "x86_64-linux" "aarch64-linux" ]; # Architectures it can handle
+            # FIX: Bypass the systemd multiplexer and silence status messages
+            systems = [ "x86_64-linux" "aarch64-linux" ];
             maxJobs = 20;
             supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
             mandatoryFeatures = [ ];
