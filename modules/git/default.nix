@@ -35,7 +35,7 @@ import ../_module.nix {
           "notes/"
           "__debug_bin*"
           "makefile"
-          "*out"
+          "out"
           ".env"
           "storybook-static/"
           "*.aidoc.md"
