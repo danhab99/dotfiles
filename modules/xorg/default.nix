@@ -62,6 +62,7 @@ import ../module.nix {
 
         services.libinput = {
           enable = true;
+          mouse.middleEmulation = false;
         };
 
         # Disable XFCE power manager to prevent it from managing DPMS
