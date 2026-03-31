@@ -131,6 +131,31 @@
         homeManagerModules.default = {
           imports = builtins.attrValues config.flake.modules.homeManager;
         };
+
+        # Distributable flake-parts module — friends can import this
+        flakeModules.default = { inputs, ... }: let
+          inherit (inputs.nixpkgs) lib;
+        in {
+          options.flake.modules = {
+            nixos = lib.mkOption {
+              type = lib.types.attrsOf lib.types.deferredModule;
+              default = {};
+            };
+            droid = lib.mkOption {
+              type = lib.types.attrsOf lib.types.deferredModule;
+              default = {};
+            };
+            homeManager = lib.mkOption {
+              type = lib.types.attrsOf lib.types.deferredModule;
+              default = {};
+            };
+          };
+          options.flake.templates = lib.mkOption {
+            type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
+            default = {};
+          };
+          imports = [ (import-tree ./modules) ];
+        };
       };
     });
 }
