@@ -1,22 +1,35 @@
-{ users
-, module
-, hostName
-, system
-, environmentVariables ? { }
-, packages ? (pkgs: [ ])
-, files ? { }
-, i3Config ? { mod }: { }
-, xserver ? ""
-, bind ? [ ]
-, jobs ? (args: [ ])
-, aliases ? (pkgs: { })
-, output ? (system: inputs@{ nixpkgs, ... }: modules: (nixpkgs.lib.nixosSystem {
-    inherit system modules;
-    specialArgs = { } // inputs;
-  }))
-, raw ? (inputs: { })
-}:
+# machine.nix — Dendritic host builder
+#
+# Called from flake.nix as:
+#   mkHost = import ./machine/machine.nix { inherit inputs allNixosModules; };
+#   mkHost "laptop"  =>  nixosSystem for laptop
+#
+# Each machine/<hostName>/configuration.nix returns a plain attrset describing the host.
+
+{ inputs, allNixosModules }:
+
+hostName:
 let
+  # Import the machine's configuration.nix which returns a plain attrset
+  hostCfg = import ./${hostName}/configuration.nix;
+
+  # Destructure with defaults
+  system = hostCfg.system or "x86_64-linux";
+  users = hostCfg.users or { };
+  module = hostCfg.module or { };
+  environmentVariables = hostCfg.environmentVariables or { };
+  packages = hostCfg.packages or (pkgs: [ ]);
+  files = hostCfg.files or { };
+  i3Config = hostCfg.i3Config or ({ mod }: { });
+  xserver = hostCfg.xserver or "";
+  bind = hostCfg.bind or [ ];
+  jobs = hostCfg.jobs or (args: [ ]);
+  aliases = hostCfg.aliases or (pkgs: { });
+  raw = hostCfg.raw or { };
+  outputFn = hostCfg.output or null;
+
+  # ── Helpers ──────────────────────────────────────────────────────
+
   strLen = builtins.stringLength;
 
   mkJob =
@@ -36,8 +49,8 @@ let
           serviceConfig = {
             Type = "oneshot";
             User = user;
-            Restart = "on-failure"; # Restart only when the service fails
-            RestartSec = 5; # Wait 5 seconds before restarting
+            Restart = "on-failure";
+            RestartSec = 5;
           };
           path = packages;
         };
@@ -72,11 +85,12 @@ let
 
   mkBind = { dest, dir }: "L+ /home/dan/${dir} - - - - /${dest}/${dir}";
 
-  nixosModule =
-    inputs@{ pkgs, lib, ... }:
+  # ── The NixOS module for this host (base config + machine-specific) ──
+
+  hostModule =
+    { pkgs, lib, ... }:
     {
       imports = [
-        (import ../modules/select.nix "nixosModule" inputs)
         ../users
       ];
 
@@ -124,7 +138,7 @@ let
 
         networking = {
           networkmanager.enable = true;
-          inherit hostName;
+          hostName = hostName;
         };
 
         environment.localBinInPath = true;
@@ -133,36 +147,52 @@ let
 
         programs.zsh.shellAliases = (aliases pkgs);
 
-        # This value determines the NixOS release from which the default
-        # settings for stateful data, like file locations and database versions
-        # on your system were taken. It‘s perfectly fine and recommended to leave
-        # this value at the release version of the first install of this system.
-        # Before changing this value read the documentation for this option
-        # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-        system.stateVersion = "24.05"; # Please read the comment before changing.
+        system.stateVersion = "24.05";
       };
     };
-in
-inputs@{ home-manager, openclaw, adirofi, ... }:
-let
+
+  # ── Compose all modules ──────────────────────────────────────────
+
+  openclaw = inputs.openclaw;
+  adirofi = inputs.adirofi;
+  home-manager = inputs.home-manager;
+
   modules = [
-    nixosModule
+    # All dendritic modules (collected from flake.modules.nixos)
+    { imports = allNixosModules; }
+    # Host-specific module
+    hostModule
+    # Hardware
     ./${hostName}/hardware-configuration.nix
+    # Cachix
     ../cachix.nix
-    { nixpkgs.overlays = [ 
-      openclaw.overlays.default 
-      inputs.nur.overlays.default
-    ]; }
+    # Overlays
+    { nixpkgs.overlays = [
+        openclaw.overlays.default
+        inputs.nur.overlays.default
+      ];
+    }
+    # Home-manager
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.sharedModules = [ 
+      home-manager.sharedModules = [
         openclaw.homeManagerModules.openclaw
         adirofi.homeManagerModules.default
       ];
     }
+    # Machine raw config (escape hatch)
     raw
   ];
+
+  # ── Build the system ─────────────────────────────────────────────
+
+  defaultOutput = inputs.nixpkgs.lib.nixosSystem {
+    inherit system modules;
+    specialArgs = inputs;
+  };
 in
-output system inputs modules
+if outputFn != null
+then outputFn system inputs modules
+else defaultOutput

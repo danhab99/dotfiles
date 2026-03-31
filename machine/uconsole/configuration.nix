@@ -1,4 +1,5 @@
-import ../machine.nix rec {
+# uconsole — plain attrset consumed by machine.nix
+{
   hostName = "uconsole";
   system = "aarch64-linux";
 
@@ -7,7 +8,7 @@ import ../machine.nix rec {
   };
 
   module = {
-    all-packages.enable = false; # Disable for SD image build
+    all-packages.enable = false;
     appimage.enable = false;
     audio.enable = false;
     docker.enable = false;
@@ -30,12 +31,11 @@ import ../machine.nix rec {
       i3blocksConfig = ../workstation/i3blocks.conf;
     };
     libreoffice.enable = false;
-    metis.enable = false;
     neovim.enable = true;
     nix = {
-      enable = true; 
+      enable = true;
       remoteBuild = true;
-    }
+    };
     nixos-packages.enable = false;
     nvidia.enable = false;
     obs.enable = false;
@@ -48,7 +48,7 @@ import ../machine.nix rec {
     rtlsdr.enable = false;
     sddm.enable = false;
     secrets.enable = true;
-    ssh.enable = true; # Keep SSH for remote access
+    ssh.enable = true;
     steam.enable = false;
     thinkpad.enable = false;
     threedtools.enable = false;
@@ -76,8 +76,4 @@ import ../machine.nix rec {
     inherit modules;
     specialArgs = inputs;
   });
-
-  # raw = { ... }: {
-  #   config.hardware.uc-4g.enable = false;
-  # };
 }

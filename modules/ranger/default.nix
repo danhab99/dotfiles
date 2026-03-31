@@ -1,4 +1,4 @@
-import ../module.nix {
+import ../_module.nix {
   name = "ranger";
 
   output =

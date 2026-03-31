@@ -1,4 +1,4 @@
-import ../module.nix {
+import ../_module.nix {
   name = "gnupg";
 
   # output.packages = with pkgs; [ pass ];

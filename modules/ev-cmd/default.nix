@@ -1,6 +1,9 @@
-import ../module.nix
+import ../_module.nix
 {
   name = "ev-cmd";
+  requires = {
+    ev-cmd.url = "github:danhab99/ev-cmd/main";
+  };
 
   options = { lib }: with lib; {
     devicePath = mkOption { };

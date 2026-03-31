@@ -1,5 +1,8 @@
-import ../module.nix {
+import ../_module.nix {
   name = "ratbag";
+  requires = {
+    logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
+  };
 
   output =
     { pkgs, logitech-g600-rs, ... }:

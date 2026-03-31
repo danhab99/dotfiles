@@ -1,4 +1,0 @@
-{
-  description = "nextjs";
-  path = ./files;
-}

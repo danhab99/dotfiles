@@ -1,4 +1,0 @@
-{
-  description = "changelog";
-  path = ./files;
-}

@@ -1,4 +1,4 @@
-import ../module.nix {
+import ../_module.nix {
   name = "i18n";
 
   output =
