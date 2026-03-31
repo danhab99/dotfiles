@@ -1,4 +1,5 @@
-import ../machine.nix {
+# laptop — plain attrset consumed by machine.nix
+{
   hostName = "laptop";
   system = "x86_64-linux";
 

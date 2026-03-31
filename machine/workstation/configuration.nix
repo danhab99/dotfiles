@@ -1,4 +1,4 @@
-import ../machine.nix
+# workstation — plain attrset consumed by machine.nix
 {
   hostName = "workstation";
   system = "x86_64-linux";
@@ -271,7 +271,7 @@ import ../machine.nix
       }
     ];
 
-  output = (system: inputs@{ nixpkgs, axelera-driver, ... }: modules: (nixpkgs.lib.nixosSystem {
+  output = system: inputs@{ nixpkgs, axelera-driver, ... }: modules: (nixpkgs.lib.nixosSystem {
     inherit system;
 
     modules = modules ++ [
@@ -279,5 +279,5 @@ import ../machine.nix
     ];
 
     specialArgs = inputs;
-  }));
+  });
 }

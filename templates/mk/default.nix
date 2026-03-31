@@ -1,4 +1,0 @@
-{
-  description = "mk";
-  path = ./files;
-}

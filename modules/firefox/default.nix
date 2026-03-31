@@ -1,6 +1,9 @@
-import ../module.nix
+import ../_module.nix
 {
   name = "firefox";
+  requires = {
+    nur.url = "github:nix-community/NUR";
+  };
 
   output = { pkgs, nur, ... }: {
     packages = with pkgs; [

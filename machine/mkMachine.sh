@@ -9,7 +9,6 @@ mkdir -p "$1"
 
 # Start the configuration.nix file
 cat <<EOF > "$1/configuration.nix"
-import ../machine.nix
 {
   hostName = "$1";
 

@@ -9,7 +9,7 @@ mkdir -p "$1"
 
 # Generate the Nix template and write it to the file
 cat <<EOF > "$1/default.nix"
-import ../module.nix
+import ../_module.nix
 {
   name = "$1";
 

@@ -1,4 +1,4 @@
-import ../module.nix {
+import ../_module.nix {
   name = "all-packages";
 
   output =

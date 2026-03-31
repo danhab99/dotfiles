@@ -1,5 +1,58 @@
 # NixOS config
 
+Dan's NixOS, nix-on-droid, and home-manager configuration using the [dendritic model](https://github.com/vic/import-tree) with [flake-parts](https://flake.parts).
+
+## Using my modules in your flake
+
+Add this flake as an input and import `flakeModules.default`:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    dans-dotfiles.url = "github:danhab99/dotfiles";
+  };
+
+  outputs = inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.dans-dotfiles.flakeModules.default
+      ];
+
+      # All modules, devshells, and templates are now available.
+      # Enable modules in your NixOS configuration:
+      #   module.neovim.enable = true;
+      #   module.zsh.enable = true;
+      #   module.git.enable = true;
+    };
+}
+```
+
+This gives you:
+
+| Output | Description |
+|---|---|
+| `flake.modules.nixos.*` | NixOS modules (enable with `module.<name>.enable = true`) |
+| `flake.modules.droid.*` | nix-on-droid modules |
+| `flake.modules.homeManager.*` | Standalone home-manager modules |
+| `perSystem.devShells.*` | Development shells (`nix develop .#node-22`, etc.) |
+| `flake.templates.*` | Project templates (`nix flake init -t .#blank`, etc.) |
+
+### Available devshells
+
+```
+nix flake show github:danhab99/dotfiles#devShells
+```
+
+### Available templates
+
+```
+nix flake show github:danhab99/dotfiles#templates
+```
+
+---
+
 ## justfile
 
 * `just update`: Updates the flake.lock to the latest
@@ -35,7 +88,7 @@ max_jobs=100
 
 ## Creating a new workflow template
 
-cd to `./templates` and run `./mkTemplate.sh`. This will copy `blank` into the new workflow.
+cd to `./modules/templates` and run `./mkTemplate.sh`. This will copy `blank` into the new workflow.
 
 ## Creating a user
 

@@ -1,6 +1,9 @@
-import ../module.nix
+import ../_module.nix
 {
   name = "g600";
+  requires = {
+    logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
+  };
 
   options = { lib }: with lib; {
     devicePath = mkOption { };
