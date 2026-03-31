@@ -1,4 +1,4 @@
-import ../module.nix {
+import ../_module.nix {
   name = "zsh";
 
   options = { lib }: with lib; {

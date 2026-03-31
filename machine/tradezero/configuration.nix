@@ -1,4 +1,8 @@
-import ../machine.nix {
+# tradezero — plain attrset consumed by machine.nix
+{
+  hostName = "tradezero";
+  system = "x86_64-linux";
+
   users = {
     dan.enable = true;
   };
@@ -18,9 +22,6 @@ import ../machine.nix {
     i3 = {
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
-      # screen = [ "DP-2-3-1" "DP-2-1" "DP-2-2" ]; # home desk
-      # screen = [ "eDP-1" "DP-3-3-1" "DP-3-1" "DP-3-2" ]; # laptop + home desk
-      # screen = [ "DVI-I-2-2" "eDP-1" "DVI-I-1-1" ];
       screen = [
         "DP-3-2"
         "DP-3-3-1"
@@ -67,7 +68,6 @@ import ../machine.nix {
     zoxide.enable = true;
     zsh.enable = true;
     thinkpad.enable = true;
-    # vim.enable = true;
     ranger.enable = true;
     audio = {
       enable = true;
@@ -104,9 +104,6 @@ import ../machine.nix {
       twingate
     ];
 
-  hostName = "tradezero";
-  system = "x86-64_linux";
-
   i3Config =
     { mod }:
     {
@@ -122,23 +119,6 @@ import ../machine.nix {
     Option "XkbOptions" "terminate:ctrl_alt_bksp"
     EndSection
   '';
-
-  # jobs =
-  #   { pkgs }:
-  #   [
-  #     {
-  #       name = "transcribe-eod";
-  #       script = "/home/dan/Videos/run-transcribe.sh";
-  #       schedule = "Mon,Tue,Wed,Thu *-*-* 22:00:00";
-  #       packages = with pkgs; [
-  #         whisperx
-  #         ffmpeg_6-full
-  #         curl
-  #         wget
-  #         jq
-  #       ];
-  #     }
-  #   ];
 
   raw = { pkgs, ... }: {
     # Systemd service for on-demand USB controller reset
@@ -158,13 +138,12 @@ import ../machine.nix {
 
       # Configure TLP to completely disable USB autosuspend
       tlp.settings = {
-        USB_AUTOSUSPEND = 0; # Completely disable USB autosuspend
-        USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801"; # Your USB hubs
+        USB_AUTOSUSPEND = 0;
+        USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
       };
 
       udev.extraRules = ''
         # Disable autosuspend for ALL USB hubs (prevents KVM/display disconnects)
-        # Match on add AND change events to persist settings
         ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
 
         # Disable autosuspend for USB network adapters
@@ -187,7 +166,7 @@ import ../machine.nix {
         ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr -c"
       '';
 
-      autorandr.enable = true; # hotplug/sleep integration :contentReference[oaicite:2]{index=2}
+      autorandr.enable = true;
 
       autorandr.profiles =
         let
@@ -203,8 +182,6 @@ import ../machine.nix {
         in
         {
           home = {
-            # EDID match is the robust way; fill in with:
-            #   autorandr --fingerprint
             fingerprint = home // embedded;
 
             config = {

@@ -1,10 +1,7 @@
 { ... }:
 
 {
-  imports = [
-    (import ./modules/select.nix "droidModule")
-  ];
-
+  # Droid modules are now injected by flake.nix via allDroidModules
   config = {
     home-manager.useGlobalPkgs = true;
     #home-manager.useUserPackage = true;
