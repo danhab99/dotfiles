@@ -46,33 +46,37 @@
     flake-parts.lib.mkFlake { inherit inputs; } (top@{ config, ... }: {
 
       # ── Declare module storage options ──────────────────────────────
-      options.flake.modules = let
-        inherit (inputs.nixpkgs) lib;
-      in {
-        nixos = lib.mkOption {
-          type = lib.types.attrsOf lib.types.deferredModule;
-          default = {};
-          description = "NixOS deferred modules keyed by aspect name";
+      options.flake.modules =
+        let
+          inherit (inputs.nixpkgs) lib;
+        in
+        {
+          nixos = lib.mkOption {
+            type = lib.types.attrsOf lib.types.deferredModule;
+            default = { };
+            description = "NixOS deferred modules keyed by aspect name";
+          };
+          droid = lib.mkOption {
+            type = lib.types.attrsOf lib.types.deferredModule;
+            default = { };
+            description = "Nix-on-Droid deferred modules keyed by aspect name";
+          };
+          homeManager = lib.mkOption {
+            type = lib.types.attrsOf lib.types.deferredModule;
+            default = { };
+            description = "Home-manager deferred modules keyed by aspect name";
+          };
         };
-        droid = lib.mkOption {
-          type = lib.types.attrsOf lib.types.deferredModule;
-          default = {};
-          description = "Nix-on-Droid deferred modules keyed by aspect name";
-        };
-        homeManager = lib.mkOption {
-          type = lib.types.attrsOf lib.types.deferredModule;
-          default = {};
-          description = "Home-manager deferred modules keyed by aspect name";
-        };
-      };
 
-      options.flake.templates = let
-        inherit (inputs.nixpkgs) lib;
-      in lib.mkOption {
-        type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
-        default = {};
-        description = "Flake templates, mergeable across modules";
-      };
+      options.flake.templates =
+        let
+          inherit (inputs.nixpkgs) lib;
+        in
+        lib.mkOption {
+          type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
+          default = { };
+          description = "Flake templates, mergeable across modules";
+        };
 
       # ── Import all modules via import-tree ──────────────────────────
       imports = [
@@ -97,10 +101,12 @@
             dir = builtins.readDir ./machine;
             names = builtins.attrNames dir;
             machines = builtins.filter (f: dir.${f} == "directory") names;
-            pairs = builtins.map (machineName: {
-              name = machineName;
-              value = mkHost machineName;
-            }) machines;
+            pairs = builtins.map
+              (machineName: {
+                name = machineName;
+                value = mkHost machineName;
+              })
+              machines;
           in
           builtins.listToAttrs pairs;
 
@@ -133,29 +139,33 @@
         };
 
         # Distributable flake-parts module — friends can import this
-        flakeModules.default = { inputs, ... }: let
-          inherit (inputs.nixpkgs) lib;
-        in {
-          options.flake.modules = {
-            nixos = lib.mkOption {
-              type = lib.types.attrsOf lib.types.deferredModule;
-              default = {};
+        flakeModules.default = { inputs, ... }:
+          let
+            inherit (inputs.nixpkgs) lib;
+          in
+          {
+            options.flake.modules = {
+              nixos = lib.mkOption {
+                type = lib.types.attrsOf lib.types.deferredModule;
+                default = { };
+              };
+              droid = lib.mkOption {
+                type = lib.types.attrsOf lib.types.deferredModule;
+                default = { };
+              };
+              homeManager = lib.mkOption {
+                type = lib.types.attrsOf lib.types.deferredModule;
+                default = { };
+              };
             };
-            droid = lib.mkOption {
-              type = lib.types.attrsOf lib.types.deferredModule;
-              default = {};
+            options.flake.templates = lib.mkOption {
+              type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
+              default = { };
             };
-            homeManager = lib.mkOption {
-              type = lib.types.attrsOf lib.types.deferredModule;
-              default = {};
-            };
+            imports = [ (import-tree ./modules) ];
           };
-          options.flake.templates = lib.mkOption {
-            type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
-            default = {};
-          };
-          imports = [ (import-tree ./modules) ];
-        };
+
+        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
       };
     });
 }
