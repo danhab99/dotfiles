@@ -16,6 +16,8 @@ import ../_module.nix {
       nixos = {
         nix.settings = {
           experimental-features = [ "nix-command" "flakes" ];
+          trusted-users = [ "root" "dan" ];
+
           allowed-users = [ "dan" ];
           require-sigs = false;
         };
