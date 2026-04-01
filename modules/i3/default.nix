@@ -30,6 +30,11 @@ import ../_module.nix {
         default = "Mod4";
         description = "The modifier key used by i3 (e.g. 'Mod4' or 'Mod1').";
       };
+      altModKey = mkOption {
+        type = types.str;
+        default = "Mod1";
+        description = "The modifier key used by i3 (e.g. 'Mod4' or 'Mod1').";
+      };
     };
 
   output =
