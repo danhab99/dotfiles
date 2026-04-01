@@ -165,7 +165,7 @@
             imports = [ (import-tree ./modules) ];
           };
 
-        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       };
     });
 }
