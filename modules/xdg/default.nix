@@ -25,7 +25,7 @@ import ../_module.nix {
 
             defaultApplications =
               let
-                default_browser = "firefox-browser.desktop";
+                default_browser = "firefox.desktop";
               in
               {
                 "application/pdf" = [ default_browser ];
