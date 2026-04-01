@@ -25,7 +25,7 @@ import ../_module.nix {
 
             defaultApplications =
               let
-                default_browser = "brave-browser.desktop";
+                default_browser = "firefox-browser.desktop";
               in
               {
                 "application/pdf" = [ default_browser ];
