@@ -4,7 +4,8 @@
   lib,
 }:
 let
-  mod = "Mod4";
+  mod = cfg.modKey;
+  altMod = cfg.altModKey;
   fontSize = cfg.fontSize;
 in
 {
@@ -16,7 +17,7 @@ in
   };
 
   floating = {
-    modifier = "Mod4";
+    modifier = mod;
     criteria = [
       { title = "Android Emulator"; }
       { window_role = "pop-up"; }
@@ -149,15 +150,15 @@ in
       "XF86AudioStop" = "exec playerctl stop";
       "${mod}+question" = "exec i3help";
       "${mod}+s" = ''exec sleep 0.1 && xdotool type "¯\_(ツ)_/¯"'';
-      "${mod}+Mod1+h" = "exec xdotool mousemove_relative -p 270 10";
-      "${mod}+Mod1+l" = "exec xdotool mousemove_relative -p 90 10";
-      "${mod}+Mod1+k" = "exec xdotool mousemove_relative -p 0 10";
-      "${mod}+Mod1+j" = "exec xdotool mousemove_relative -p 180 10";
-      "${mod}+Shift+Mod1+h" = "exec xdotool mousemove_relative -p 270 100";
-      "${mod}+Shift+Mod1+l" = "exec xdotool mousemove_relative -p 90 100";
-      "${mod}+Shift+Mod1+k" = "exec xdotool mousemove_relative -p 0 100";
-      "${mod}+Shift+Mod1+j" = "exec xdotool mousemove_relative -p 180 100";
-      "${mod}+Mod1+c" = "exec xdotool mousedown 1 && xdotool mouseup 1";
+      "${mod}+${altMod}+h" = "exec xdotool mousemove_relative -p 270 10";
+      "${mod}+${altMod}+l" = "exec xdotool mousemove_relative -p 90 10";
+      "${mod}+${altMod}+k" = "exec xdotool mousemove_relative -p 0 10";
+      "${mod}+${altMod}+j" = "exec xdotool mousemove_relative -p 180 10";
+      "${mod}+Shift+${altMod}+h" = "exec xdotool mousemove_relative -p 270 100";
+      "${mod}+Shift+${altMod}+l" = "exec xdotool mousemove_relative -p 90 100";
+      "${mod}+Shift+${altMod}+k" = "exec xdotool mousemove_relative -p 0 100";
+      "${mod}+Shift+${altMod}+j" = "exec xdotool mousemove_relative -p 180 100";
+      "${mod}+${altMod}+c" = "exec xdotool mousedown 1 && xdotool mouseup 1";
       "XF86Display" = "exec arandr";
       "XF86Messenger" = "exec xpad -n";
       "${mod}+n" = "exec xpad -n";

@@ -28,7 +28,9 @@
       screen = [ "eDP-1" ];
       defaultLayoutScript = "";
       fontSize = 14.0;
-      i3blocksConfig = ../workstation/i3blocks.conf;
+      i3blocksConfig = ../laptop/i3blocks.conf;
+      modKey = "Mod1";
+      altModKey = "Mod2";
     };
     libreoffice.enable = false;
     neovim.enable = true;
