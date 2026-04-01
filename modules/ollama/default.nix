@@ -33,7 +33,7 @@ import ../_module.nix {
       packages = with pkgs; [
         aichat
         argc
-        # whisperx
+        whisperx
         opencode
         crewai
       ];
@@ -45,6 +45,14 @@ import ../_module.nix {
 
         nixpkgs.overlays = [
           (final: prev: {
+            # faiss-1.14.1 has a hash mismatch in nixpkgs (upstream source changed);
+            # patch the src hash to what the fetcher actually receives
+            faiss = prev.faiss.overrideAttrs (old: {
+              src = old.src.override {
+                hash = "sha256-p1YncYUUxld9iwFXXZ+lTxYgku8l+/K6dbxZx2EcJ6k=";
+              };
+            });
+
             python3Packages = prev.python3Packages.overrideScope (
               pyFinal: pyPrev: {
                 rapidocr-onnxruntime = pyPrev.rapidocr-onnxruntime.overrideAttrs (old: {
@@ -54,6 +62,23 @@ import ../_module.nix {
 
                 pyannote-audio = pyPrev.pyannote-audio.overridePythonAttrs (old: {
                   propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ pyPrev.omegaconf ];
+                  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pyFinal.pythonRelaxDepsHook ];
+                  pythonRelaxDeps = [ "torch" "torchcodec" ];
+                  doCheck = false;
+                });
+
+                whisperx = pyPrev.whisperx.overridePythonAttrs (old: {
+                  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pyFinal.pythonRelaxDepsHook ];
+                  pythonRelaxDeps = [ "huggingface-hub" "torch" "torchaudio" ];
+                  doCheck = false;
+                });
+
+                # hyperpyyaml 1.2.3 requires ruamel-yaml<0.19.0 but nixpkgs has 0.19.1
+                # which has a genuine API break (max_depth attr missing); skip tests
+                hyperpyyaml = pyPrev.hyperpyyaml.overridePythonAttrs (old: {
+                  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pyFinal.pythonRelaxDepsHook ];
+                  pythonRelaxDeps = [ "ruamel.yaml" ];
+                  doCheck = false;
                 });
 
               }
