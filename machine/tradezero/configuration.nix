@@ -85,7 +85,7 @@
     xdg.enable = true;
     redshift.enable = true;
     vox = {
-      enable = false;
+      enable = true;
       inputMic = "alsa_input.pci-0000_00_1f.3.analog-stereo";
     };
     nginx.enable = true;
