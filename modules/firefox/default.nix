@@ -42,7 +42,7 @@ import ../_module.nix
             # Firefox uses a scale where 1.0 = 100%, so 1.25 = 125%
             "browser.zoom.siteSpecific" = true;
             "toolkit.zoomManager.zoomValues" = ".3,.5,.67,.8,.9,1,1.1,1.2,1.25,1.3,1.5"; # Adds 125 to the scale
-            "layout.css.devPixelsPerPx" = "1.25"; # This zooms the UI and the content
+            "layout.css.devPixelsPerPx" = "1"; # This zooms the UI and the content
 
             # Required for custom CSS to work
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;

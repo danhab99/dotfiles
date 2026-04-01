@@ -93,6 +93,7 @@
       enable = true;
     };
     rofi.enable = true;
+    firefox.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;

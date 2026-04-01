@@ -7,16 +7,16 @@ import ../_module.nix {
   output =
     { pkgs, dotnet_8_nixpkgs, ... }:
     let
-      d8p = import dotnet_8_nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
+      # d8p = import dotnet_8_nixpkgs {
+      #   system = "x86_64-linux";
+      #   config.allowUnfree = true;
+      # };
     in
     {
       packages = with pkgs; [
         aider-chat-full
         audacity
-        d8p.brave
+        # d8p.brave
         dbeaver-bin
         gimp
         github-copilot-cli
