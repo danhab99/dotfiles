@@ -9,22 +9,23 @@
 
   module = {
     all-packages.enable = false;
-    appimage.enable = false;
+    appimage.enable = true;
     audio.enable = false;
     docker.enable = false;
     droid-packages.enable = false;
-    font.enable = false;
+    font.enable = true;
     fzf.enable = true;
     gestures.enable = false;
     git = {
       enable = true;
       email = "dan.habot@gmail.com";
-      signingKey = "";
+      # signingKey = "ed25519/0x92ECE5191F6421F8";
+      signingKey = "0x92ECE5191F6421F8";
     };
     gnupg.enable = true;
     i18n.enable = true;
     i3 = {
-      enable = false;
+      enable = true;
       screen = [ "eDP-1" ];
       defaultLayoutScript = "";
       fontSize = 14.0;
@@ -47,8 +48,8 @@
     ranger.enable = true;
     ratbag.enable = false;
     redshift.enable = false;
-    rtlsdr.enable = false;
-    sddm.enable = false;
+    rtlsdr.enable = true;
+    sddm.enable = true;
     secrets.enable = true;
     ssh.enable = true;
     steam.enable = false;
@@ -56,7 +57,7 @@
     threedtools.enable = false;
     timezone.enable = true;
     tmux.enable = true;
-    urxvt.enable = false;
+    urxvt.enable = true;
     vbox.enable = false;
     vim.enable = false;
     vscode.enable = false;
@@ -64,19 +65,24 @@
     wireguard.enable = false;
     xdg.enable = true;
     xorg = {
-      enable = false;
+      enable = true;
       videoDrivers = [ "modesetting" ];
-      fontSize = 12;
+      fontSize = 16;
     };
     zoxide.enable = true;
     zsh.enable = true;
     essential-packages.enable = true;
     tty.enable = true;
     meshtastic.enable = true;
+    rofi.enable = true;
   };
 
   output = system: inputs@{ home-manager, nixos-uconsole, ... }: modules: (nixos-uconsole.lib.mkUConsoleSystem {
     inherit modules;
     specialArgs = inputs;
   });
+
+  packages = pkgs: with pkgs; [
+    # contact
+  ];
 }
