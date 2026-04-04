@@ -72,6 +72,7 @@
     zsh.enable = true;
     essential-packages.enable = true;
     tty.enable = true;
+    meshtastic.enable = true;
   };
 
   output = system: inputs@{ home-manager, nixos-uconsole, ... }: modules: (nixos-uconsole.lib.mkUConsoleSystem {
