@@ -7,6 +7,7 @@ import ../_module.nix {
       packages = with pkgs; [
         glances
         just
+        gparted
         killall
         nixfmt-tree
         nodejs
