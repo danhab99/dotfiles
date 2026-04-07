@@ -11,7 +11,8 @@
     appimage.enable = true;
     docker = {
       enable = true;
-      dataRoot = "/data/docker";
+      # dataRoot = "/data/docker";
+      dataRoot = "/bucket/docker";
     };
     font.enable = true;
     fzf.enable = true;
@@ -37,7 +38,7 @@
     nix.enable = true;
     ollama = {
       enable = true;
-      repoDir = "/data/ollama";
+      repoDir = "/bucket/ollama";
       models = [
         "deepseek-r1:14b"
         "embeddinggemma"
@@ -137,6 +138,16 @@
     # putting devices into an unrecoverable state (usb_set_interface -110 loop).
     boot.kernelParams = [
       "usbcore.autosuspend=-1"
+      # NVMe resilience: disable power saving states to prevent hangs on a
+      # flaky drive controller, and max out I/O timeout so a slow/dying drive
+      # doesn't trigger a kernel panic or force a reset mid-session.
+      "nvme_core.default_ps_max_latency_x=0"
+      "nvme_core.io_timeout=4294967295"
+      # PCIe resilience: disable AER so errors from a bad device don't cause
+      # machine-check exceptions, and disable ASPM so the PCIe link never
+      # enters a low-power state that a flaky device might not wake from.
+      "pci=noaer"
+      "pcie_aspm=off"
     ];
 
     # Disable runtime power management for USB hubs (prevents KVM/audio disconnects)
