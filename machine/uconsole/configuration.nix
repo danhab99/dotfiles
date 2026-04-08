@@ -28,7 +28,7 @@
       enable = true;
       screen = [ "eDP-1" ];
       defaultLayoutScript = "";
-      fontSize = 14.0;
+      fontSize = 12.0;
       i3blocksConfig = ../laptop/i3blocks.conf;
       modKey = "Mod1";
       altModKey = "Mod2";
