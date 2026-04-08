@@ -39,10 +39,8 @@ import ../_module.nix
 
       };
 
-      nixos = {
-        nixos.services.ratbagd = {
-          enable = true;
-        };
+      nixos.services.ratbagd = {
+        enable = true;
       };
     };
 }
