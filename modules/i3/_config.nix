@@ -148,7 +148,6 @@ in
       "XF86AudioNext" = "exec playerctl next";
       "XF86AudioPrev" = "exec playerctl previous";
       "XF86AudioStop" = "exec playerctl stop";
-      "${mod}+question" = "exec i3help";
       "${mod}+s" = ''exec sleep 0.1 && xdotool type "¯\_(ツ)_/¯"'';
       "${mod}+${altMod}+h" = "exec xdotool mousemove_relative -p 270 10";
       "${mod}+${altMod}+l" = "exec xdotool mousemove_relative -p 90 10";
@@ -160,12 +159,6 @@ in
       "${mod}+Shift+${altMod}+j" = "exec xdotool mousemove_relative -p 180 100";
       "${mod}+${altMod}+c" = "exec xdotool mousedown 1 && xdotool mouseup 1";
       "XF86Display" = "exec arandr";
-      "XF86Messenger" = "exec xpad -n";
-      "${mod}+n" = "exec xpad -n";
-      "${mod}+c" = "exec kcalc";
-      "${mod}+Shift+Ctrl+l" = "exec sleep 0.5 && xdotool type https://www.linkedin.com/in/danhabot/";
-      "${mod}+Ctrl+g" = "exec sleep 0.5 && xdotool type https://github.com/danhab99";
-      "${mod}+Ctrl+e" = "exec sleep 0.5 && xdotool type dan.habot@gmail.com";
       "${mod}+Ctrl+a" = "exec playerctl previous";
       "${mod}+Ctrl+d" = "exec playerctl next";
       "${mod}+Ctrl+w" = "exec amixer sset Master 5%+";
@@ -268,10 +261,6 @@ in
       always = true;
     }
     {
-      command = "picom --config ~/.config/picom.conf";
-      always = true;
-    }
-    {
       command = "nitrogen --restore";
       always = true;
     }
@@ -279,12 +268,10 @@ in
       command = "setxkbmap -option caps:none";
       always = true;
     }
-    { command = "xpad"; }
     {
       command = "( killall oneko || true ) && oneko -tofocus -position +30+0";
       always = true;
     }
-    # Machine-specific: workstation only
     {
       command = "xinput set-prop 10 'libinput Accel Speed' 5";
       always = true;

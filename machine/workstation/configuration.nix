@@ -52,7 +52,6 @@
       enableGpu = true;
     };
     printing.enable = true;
-    ratbag.enable = true;
     sddm.enable = true;
     secrets.enable = true;
     ssh = {
