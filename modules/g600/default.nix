@@ -16,7 +16,8 @@ import ../_module.nix
     in
     {
       packages = with pkgs; [
-        logitech-g600-rs-pkg
+        libratbag
+        logitech-g600-rs.packages.x86_64-linux.default
       ];
 
       homeManager = {
@@ -38,6 +39,10 @@ import ../_module.nix
 
       };
 
-      nixos = { };
+      nixos = {
+        nixos.services.ratbagd = {
+          enable = true;
+        };
+      };
     };
 }
