@@ -7,6 +7,7 @@ import ../_module.nix {
       packages = with pkgs; [
         gqrx
         audacity
+        sdrpp
       ];
 
       nixos = {
