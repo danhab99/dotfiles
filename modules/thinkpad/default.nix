@@ -53,11 +53,17 @@ import ../_module.nix
         thinkfan
         fancontrol-gui
         lm_sensors
+        brightnessctl
       ];
 
       homeManager = {
         programs.zsh.shellAliases = {
           fan-max = "fan disengaged";
+        };
+
+        xsession.windowManager.i3.config.keybindings = {
+          "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
+          "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
         };
 
         home.file = {
@@ -208,7 +214,7 @@ import ../_module.nix
             CPU_BOOST_ON_BAT = 1;
             CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
             CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-            
+
             # Completely disable USB autosuspend to prevent dock disconnects
             USB_AUTOSUSPEND = 0;
             # Denylist your specific USB hubs (they will never autosuspend)
