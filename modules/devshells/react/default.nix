@@ -9,7 +9,6 @@ import ../_devshell.nix {
           nodejs_20
           yarn
           electron
-          nodePackages.prettier
           nss
           libpng
           mesa
