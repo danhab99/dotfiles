@@ -10,7 +10,6 @@ import ../_module.nix {
         xclip
         xsel
         typescript-language-server
-        nodePackages.prettier
       ];
 
       homeManager = {

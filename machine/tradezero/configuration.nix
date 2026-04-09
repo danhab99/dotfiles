@@ -44,7 +44,6 @@
       ];
     };
     printing.enable = true;
-    ratbag.enable = false;
     sddm.enable = true;
     secrets.enable = true;
     ssh.enable = true;
