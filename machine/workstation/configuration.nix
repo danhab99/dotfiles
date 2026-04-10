@@ -241,7 +241,7 @@
           set -eu
 
           function cleanup_old_backups() {
-            ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +7 -delete
+            ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +15 -delete
           }
 
           function backup() {
