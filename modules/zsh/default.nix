@@ -51,6 +51,7 @@ import ../_module.nix {
           VI_MODE_SET_CURSOR = "true";
           VI_MODE_RESET_PROMPT_ON_MODE_CHANGE = "true";
           GOPATH = "/home/dan/Documents/go";
+          BROWSER = "${pkgs.firefox}/bin/firefox";
         };
 
         home.shell.enableZshIntegration = true;
