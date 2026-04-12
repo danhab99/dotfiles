@@ -64,6 +64,7 @@ import ../_module.nix {
 
             # Set environment variable for DISPLAY
             set-environment -g DISPLAY :0
+            set-environment -g BROWSER firefox
 
             # Set session cleanup options
             set-option -g detach-on-destroy on
