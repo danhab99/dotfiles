@@ -10,6 +10,7 @@ import ../_module.nix {
         xclip
         xsel
         typescript-language-server
+        dart
       ];
 
       homeManager = {
@@ -64,12 +65,22 @@ import ../_module.nix {
                     ".git"
                   ];
                 };
+                "dart" = {
+                  "command" = "dart";
+                  "args" = [ "language-server" ];
+                  "filetypes" = [
+                    "dart"
+                  ];
+                  "rootPatterns" = [
+                    "pubspec.yaml"
+                  ];
+                };
               };
               "rust-analyzer.server.path" = "rust-analyzer";
               "inlayHint.enable" = false;
               "coc.preferences.formatOnSaveFiletypes" = [
                 "javascript"
-                "javascriptreact" 
+                "javascriptreact"
                 "typescript"
                 "typescriptreact"
                 "json"
