@@ -77,6 +77,7 @@
       inputMic = "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Mic1__source";
     };
     soulseek.enable = true;
+    rofi.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
