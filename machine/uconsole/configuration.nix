@@ -46,7 +46,6 @@
     printing.enable = false;
     qmk.enable = false;
     ranger.enable = true;
-    ratbag.enable = false;
     redshift.enable = false;
     rtlsdr.enable = true;
     sddm.enable = true;
