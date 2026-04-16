@@ -11,6 +11,7 @@ import ../_module.nix {
         xsel
         typescript-language-server
         dart
+        prettier
       ];
 
       homeManager = {
