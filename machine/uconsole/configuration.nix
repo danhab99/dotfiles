@@ -27,7 +27,7 @@
     i3 = {
       enable = true;
       screen = [ "eDP-1" ];
-      defaultLayoutScript = "";
+      defaultLayoutScript = "normal.sh";
       fontSize = 12.0;
       i3blocksConfig = ../laptop/i3blocks.conf;
       modKey = "Mod1";
@@ -66,7 +66,7 @@
     xorg = {
       enable = true;
       videoDrivers = [ "modesetting" ];
-      fontSize = 16;
+      fontSize = 18;
     };
     zoxide.enable = true;
     zsh.enable = true;
@@ -81,7 +81,4 @@
     specialArgs = inputs;
   });
 
-  packages = pkgs: with pkgs; [
-    # contact
-  ];
 }
