@@ -155,6 +155,7 @@ import ../_module.nix {
 
             fix-redshift = "systemctl --user restart redshift";
             update-readme = "copilot -p \"Analyze this project and update the readme, if there is no readme then create a new one\"";
+            j = "just --choose";
           };
 
           initContent = builtins.readFile ./extras.sh + cfg.extras;
