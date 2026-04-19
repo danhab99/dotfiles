@@ -1,5 +1,11 @@
-if [ "$COPILOT_RUN_APP" -eq "1" ]; then
-  sh
+# Keep automation-friendly shells clean. Copilot sessions and non-interactive
+# shells should not spawn nested shells or terminal managers.
+if [[ "${COPILOT_RUN_APP:-0}" == "1" ]]; then
+  return 0
+fi
+
+if [[ ! -o interactive ]]; then
+  return 0
 fi
 
 export ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
@@ -90,8 +96,8 @@ function update-betterlockscreen() {
   betterlockscreen -u "$(cat ~/.config/nitrogen/bg-saved.cfg | grep file= | cut -d '=' -f2)"
 }
 
-# If not already inside tmux, start a fresh tmux session and never reattach
-if [ -z "$TMUX" ]; then
+# If not already inside tmux, start a fresh tmux session only for real TTYs.
+if [[ -z "${TMUX:-}" ]] && [[ -t 0 ]] && [[ -t 1 ]] && command -v tmux >/dev/null 2>&1; then
   # Use a (unique) session name so it never collides
   tmux new-session -s "term-$$-$(date +%s)" \
     \; set-option -g exit-empty on \
