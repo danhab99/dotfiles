@@ -94,6 +94,7 @@ import ../_module.nix {
               "cSpell.userWords" = [
                 "callout"
                 "chans"
+                "clsx"
                 "filepath"
                 "hasher"
                 "msgpack"
@@ -104,6 +105,7 @@ import ../_module.nix {
                 "tempfile"
                 "unmarshal"
                 "unstage"
+                "userless"
                 "vlog"
                 "watchlist"
               ];
