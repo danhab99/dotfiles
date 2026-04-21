@@ -95,6 +95,7 @@
     rofi.enable = true;
     firefox.enable = true;
     virtualbox.enable = true;
+    slack.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
