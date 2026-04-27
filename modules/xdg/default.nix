@@ -42,7 +42,6 @@ import ../_module.nix {
       };
 
       nixos = {
-        programs.chromium.enable = true;
         programs.dconf.enable = true; # important for GSettings-based apps
         services.dbus.enable = true; # usually already enabled, but ensure it is
 

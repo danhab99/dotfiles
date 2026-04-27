@@ -60,7 +60,7 @@ import ../_module.nix {
         picom
         playerctl
         sysstat
-        ungoogled-chromium
+        brave
       ];
 
       nixos = {
