@@ -67,6 +67,10 @@ import ../_module.nix
             #PersonalToolbar[inFullscreen="true"] {
               visibility: visible !important;
             }
+
+            :root[sizemode="fullscreen"] #PersonalToolbar {
+              visibility: visible !important;
+            }
           '';
         };
       };
