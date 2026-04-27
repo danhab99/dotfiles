@@ -20,6 +20,8 @@ import ../_module.nix {
 
           allowed-users = [ "dan" ];
           require-sigs = false;
+          auto-optimise-store = true;
+          warn-dirty = false;
         };
 
         nix.distributedBuilds = cfg.remoteBuild;
