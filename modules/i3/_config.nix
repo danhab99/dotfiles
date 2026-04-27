@@ -138,7 +138,7 @@ in
       "XF86AudioMicMute" = "exec amixer sset Capture toggle";
       "${mod}+p" = "exec flameshot gui";
       "${mod}+w" = "exec firefox";
-      "${mod}+shift+w" = "exec chromium-browser";
+      "${mod}+shift+w" = "exec brave";
       "${mod}+e" = "exec nemo";
       "${mod}+plus" = "gaps inner all minus 2";
       "${mod}+minus" = "gaps inner all plus 2";
