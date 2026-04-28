@@ -6,7 +6,7 @@
 #
 # Each machine/<hostName>/configuration.nix returns a plain attrset describing the host.
 
-{ inputs, nixosModules }:
+{ inputs, allNixosModules }:
 
 hostName:
 let
@@ -158,12 +158,14 @@ let
   home-manager = inputs.home-manager;
 
   modules = [
-    # All NixOS modules for this machine
-    { imports = nixosModules; }
+    # All dendritic modules (collected from flake.modules.nixos)
+    { imports = allNixosModules; }
     # Host-specific module
     hostModule
     # Hardware
     ./${hostName}/hardware-configuration.nix
+    # Cachix
+    ../cachix.nix
     # Overlays
     { nixpkgs.overlays = [
         openclaw.overlays.default

@@ -8,7 +8,6 @@
   };
 
   module = {
-    cachix.enable = true;
     all-packages.enable = false;
     appimage.enable = true;
     audio.enable = false;

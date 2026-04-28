@@ -8,7 +8,6 @@
   };
 
   module = {
-    cachix.enable = true;
     appimage.enable = true;
     docker.enable = true;
     font.enable = true;
