@@ -20,12 +20,13 @@ import ../_module.nix {
     }:
     {
       packages = with pkgs; [
+        diffoci
         dive
-        lazydocker
+        docker-buildx
         docker-compose
         docker-credential-helpers
+        lazydocker
         pass
-        docker-buildx
       ];
 
       nixos = {
