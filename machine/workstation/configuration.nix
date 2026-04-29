@@ -12,7 +12,7 @@
     docker = {
       enable = true;
       # dataRoot = "/data/docker";
-      dataRoot = "/bucket/docker";
+      dataRoot = "/data/docker";
     };
     font.enable = true;
     fzf.enable = true;
@@ -38,7 +38,7 @@
     nix.enable = true;
     ollama = {
       enable = true;
-      repoDir = "/bucket/ollama";
+      repoDir = "/data/ollama";
       models = [
         "deepseek-r1:14b"
         "embeddinggemma"
