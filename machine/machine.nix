@@ -156,6 +156,7 @@ let
   openclaw = inputs.openclaw;
   adirofi = inputs.adirofi;
   home-manager = inputs.home-manager;
+  nixos-cli = inputs.nixos-cli;
 
   modules = [
     # All dendritic modules (collected from flake.modules.nixos)
@@ -182,6 +183,8 @@ let
         adirofi.homeManagerModules.default
       ];
     }
+    # nixos-cli
+    nixos-cli.nixosModules.nixos-cli
     # Machine raw config (escape hatch)
     raw
   ];
