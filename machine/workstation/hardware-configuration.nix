@@ -63,11 +63,11 @@
     options = [ "noatime" ];
   };
 
-  # fileSystems."/data" = {
-  #   device = "/dev/disk/by-uuid/f240624a-177f-4da0-834b-5fb2c0de63a8";
-  #   fsType = "ext4";
-  #   options = [ "noatime" "nofail" "x-systemd.device-timeout=30" ];
-  # };
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/af5243cb-4e2b-4a3c-b6f0-a205b3e7b38b";
+    fsType = "ext4";
+    options = [ "noatime" "nofail" "x-systemd.device-timeout=30" ];
+  };
 
   swapDevices = [ ];
 
