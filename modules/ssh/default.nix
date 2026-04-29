@@ -5,9 +5,7 @@ import ../_module.nix {
     { lib }:
     with lib;
     {
-      enableFail2Ban = mkEnableOption {
-        name = "enableFail2Ban";
-      };
+      enableFail2Ban = mkEnableOption "fail2ban";
     };
 
   output =

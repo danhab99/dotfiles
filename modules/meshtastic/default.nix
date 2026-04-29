@@ -3,7 +3,7 @@ import ../_module.nix
   name = "meshtastic";
 
   options = { lib, ... }: with lib; {
-    fixRadio = mkEnableOption { };
+    fixRadio = mkEnableOption "radio fix";
   };
 
   output = { pkgs, cfg, ... }: {
