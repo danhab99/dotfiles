@@ -2,7 +2,7 @@ import ../_module.nix {
   name = "nix";
 
   options = { lib }: with lib; {
-    remoteBuild = mkEnableOption { };
+    remoteBuild = mkEnableOption "remote build";
   };
 
   output =

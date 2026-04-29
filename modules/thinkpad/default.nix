@@ -3,7 +3,7 @@ import ../_module.nix
   name = "thinkpad";
 
   options = { lib }: with lib; {
-    enableLoudFan = mkEnableOption { };
+    enableLoudFan = mkEnableOption "loud fan";
   };
 
   output = { pkgs, lib, cfg, ... }:
