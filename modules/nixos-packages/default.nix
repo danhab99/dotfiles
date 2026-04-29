@@ -5,6 +5,7 @@ import ../_module.nix {
   };
 
   output =
+    # { pkgs, dotnet_8_nixpkgs, nixos-cli, ... }:
     { pkgs, dotnet_8_nixpkgs, ... }:
     let
       # d8p = import dotnet_8_nixpkgs {
@@ -32,5 +33,9 @@ import ../_module.nix {
         vlc
         webcamoid
       ];
+
+      nixos = {
+        programs.nixos-cli.enable = true;
+      };
     };
 }
