@@ -40,12 +40,11 @@ firmware:
     fwupdmgr get-updates
     fwupdmgr update
 
-build-image machine max_jobs:
+build-image machine:
     nix build .#nixosConfigurations.{{machine}}.config.system.build.images.sd-card \
-        --keep-going \
-        --max-jobs {{max_jobs}}
+        --keep-going
 
-write device machine max_jobs: (build-image machine max_jobs)
+write device machine: (build-image machine)
     sudo dd status=progress conv=fsync \
       if=$(ls ./result/iso/nixos-*-linux.iso) \
       of=/dev/{{device}}
@@ -59,4 +58,4 @@ build machine variant:
     nix build --show-trace .#nixosConfigurations.{{machine}}.config.system.build.images.{{variant}}
 
 vulcheck:
-    nix-shell -p vulnix --run "vulnix --system -w https://raw.githubusercontent.com/NixOS/nixpkgs/master/nixos/modules/services/security/vulnix-whitelist.toml"
+    nix-shell -p vulnix --run "vulnix --system "
