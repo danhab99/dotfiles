@@ -21,8 +21,8 @@
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
     duh.url = "github:danhab99/duh/main";
     grit.url = "github:danhab99/grit/main";
-    puppy.url = "path:/home/dan/Documents/go/src/puppy";
-    agent-office.url = "path:/home/dan/Documents/agent-office";
+    # puppy.url = "path:/home/dan/Documents/go/src/puppy";
+    # agent-office.url = "path:/home/dan/Documents/agent-office";
 
     # === uConsole ===
     nixos-uconsole = {
