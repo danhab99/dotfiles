@@ -157,7 +157,6 @@ let
   adirofi = inputs.adirofi;
   home-manager = inputs.home-manager;
   nixos-cli = inputs.nixos-cli;
-  puppy = inputs.puppy;
 
   modules = [
     # All dendritic modules (collected from flake.modules.nixos)
@@ -186,8 +185,6 @@ let
     }
     # nixos-cli
     nixos-cli.nixosModules.nixos-cli
-
-    puppy.nixosModules.default
 
     # Machine raw config (escape hatch)
     raw
