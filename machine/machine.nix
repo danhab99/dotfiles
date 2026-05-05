@@ -158,7 +158,6 @@ let
   home-manager = inputs.home-manager;
   nixos-cli = inputs.nixos-cli;
   puppy = inputs.puppy;
-  agent-office = inputs.agent-office;
 
   modules = [
     # All dendritic modules (collected from flake.modules.nixos)
@@ -189,8 +188,6 @@ let
     nixos-cli.nixosModules.nixos-cli
 
     puppy.nixosModules.default
-
-    agent-office.nixosModules.default
 
     # Machine raw config (escape hatch)
     raw
