@@ -123,7 +123,6 @@
     firefox.enable = true;
     bitwarden.enable = true;
     soulseek.enable = true;
-    agent-office.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
