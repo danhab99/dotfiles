@@ -111,7 +111,7 @@ import ../_module.nix {
           environmentVariables = {
             OLLAMA_MODELS = cfg.repoDir;
             OLLAMA_HOST = "0.0.0.0";
-            OLLAMA_CONTEXT_LENGTH = "65536";
+            # OLLAMA_CONTEXT_LENGTH = "65536";
           };
         };
       };
