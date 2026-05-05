@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <username>"
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+  echo "Usage: $0 <username> [endpoint-host-or-ip]"
+  echo "Endpoint can also be set via WG_ENDPOINT env var."
   exit 1
 fi
 
@@ -13,8 +14,28 @@ WG_SERVER_IP="10.100.0.1"
 WG_PORT="51820"
 WG_DIR="/etc/wireguard/users"
 
-SERVER_PUBKEY="$(wg show $WG_IF public-key)"
-SERVER_ENDPOINT="70.23.207.166:$WG_PORT"
+if ! ip link show "$WG_IF" >/dev/null 2>&1; then
+  systemctl restart "wg-quick-$WG_IF.service" >/dev/null 2>&1 || true
+fi
+
+if ! ip link show "$WG_IF" >/dev/null 2>&1; then
+  echo "Error: interface '$WG_IF' is not available."
+  echo "Try: systemctl status wg-quick-$WG_IF --no-pager"
+  exit 1
+fi
+
+SERVER_PUBKEY="$(wg show "$WG_IF" public-key)"
+ENDPOINT_HOST="${2:-${WG_ENDPOINT:-}}"
+if [ -z "$ENDPOINT_HOST" ] && [ -f /etc/wireguard/public-endpoint ]; then
+  ENDPOINT_HOST="$(tr -d '[:space:]' < /etc/wireguard/public-endpoint)"
+fi
+if [ -z "$ENDPOINT_HOST" ]; then
+  echo "Error: endpoint not provided."
+  echo "Pass it as arg 2 or set WG_ENDPOINT, e.g."
+  echo "  $0 alice vpn.example.com"
+  exit 1
+fi
+SERVER_ENDPOINT="${ENDPOINT_HOST}:$WG_PORT"
 
 mkdir -p "$WG_DIR"
 umask 077
@@ -59,7 +80,7 @@ DNS = 1.1.1.1
 [Peer]
 PublicKey = $SERVER_PUBKEY
 Endpoint = $SERVER_ENDPOINT
-AllowedIPs = 10.100.0.0/24
+AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 25
 EOF
 

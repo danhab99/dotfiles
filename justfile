@@ -22,6 +22,8 @@ rollback:
 
 switch:
     -rm /home/dan/.openclaw/openclaw.json.hm-backup
+    -sudo ip link set wg0 down
+    -sudo ip link del wg0
 
     {{switch_command}} switch \
         --keep-going \

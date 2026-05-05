@@ -1,58 +1,101 @@
-import ../_module.nix {
+import ../_module.nix
+{
   name = "wireguard";
 
-  output =
-    { pkgs, config, ... }:
-    {
-      packages = with pkgs; [
-        wireguard-tools
-        qrencode
-      ];
-
-      nixos = {
-        boot.kernel.sysctl = {
-          "net.ipv4.ip_forward" = 1;
-          "net.ipv6.conf.all.forwarding" = 1;
+  # Rule 1: no passwords/keys declared in NixOS — privateKeyFile points to a
+  #         path on disk that must be provisioned out-of-band (e.g. `wg genkey`).
+  # Rule 2: no peers declared in NixOS — peers are added dynamically with
+  #         wg-new-user.sh; saveConfig = true persists them across reboots.
+  options =
+    { lib }:
+      with lib;
+      {
+        interface = mkOption {
+          type = types.str;
+          default = "wg0";
+          description = "WireGuard interface name.";
         };
 
-        networking.nat = {
-          enable = true;
-          externalInterface = "eth0"; # adjust if needed
-          internalInterfaces = [ "wg0" ];
+        listenPort = mkOption {
+          type = types.port;
+          default = 51820;
+          description = "UDP port the WireGuard server listens on.";
         };
 
-        networking.firewall = {
-          allowedUDPPorts = [ 51820 ];
-          checkReversePath = "loose";
+        serverAddress = mkOption {
+          type = types.str;
+          default = "10.100.0.1/24";
+          description = "IP address (with prefix) assigned to the server interface.";
+        };
 
-          interfaces.wg0 = {
-            allowedTCPPorts = [ 20080 ];
-            allowedUDPPorts = [ 20080 ];
-          };
+        publicEndpoint = mkOption {
+          type = types.str;
+          description = "Public DNS name or IP clients should use as endpoint.";
+        };
 
-          extraCommands = ''
-            # DNAT: external:20080 → WG peer
-            iptables -t nat -A PREROUTING -i ${config.networking.nat.externalInterface} \
-              -p tcp --dport 20080 -j DNAT --to-destination 10.100.0.2:20080
-
-            # Forwarding with conntrack (REQUIRED)
-            iptables -A FORWARD -i ${config.networking.nat.externalInterface} -o wg0 \
-              -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
-
-            iptables -A FORWARD -i wg0 -o ${config.networking.nat.externalInterface} \
-              -m state --state ESTABLISHED,RELATED -j ACCEPT
+        privateKeyFile = mkOption {
+          type = types.str;
+          default = "/etc/wireguard/server.key";
+          description = ''
+            Path to the server private key file.
+            Must be provisioned out-of-band — never store the key in your NixOS config.
+            Generate with: install -m 0600 /dev/null /etc/wireguard/server.key && wg genkey > /etc/wireguard/server.key
           '';
         };
 
-        networking.wireguard.enable = true;
+        externalInterface = mkOption {
+          type = types.str;
+          description = "Upstream network interface used for NAT masquerading.";
+        };
 
-        networking.wireguard.interfaces.wg0 = {
-          ips = [ "10.100.0.1/24" ];
-          listenPort = 51820;
-          privateKeyFile = "/etc/wireguard/server_private.key";
+        openFirewall = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Open the WireGuard UDP port in the firewall.";
+        };
 
-          peers = [ ];
+        allowedTCPPorts = mkOption {
+          type = types.listOf types.port;
+          default = [ ];
+          description = "TCP ports reachable from WireGuard clients on the VPN interface.";
+        };
+      };
+
+  output =
+    { pkgs, cfg, lib, ... }:
+    {
+      packages = with pkgs; [
+        wireguard-tools
+        qrencode # used by wg-new-user.sh for QR code output
+      ];
+
+      nixos = {
+        # Enable IP forwarding so VPN clients can reach the LAN / internet.
+        boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
+        environment.etc = lib.mkIf (cfg.publicEndpoint != "") {
+          "wireguard/public-endpoint".text = cfg.publicEndpoint;
+        };
+
+        networking.firewall = {
+          allowedUDPPorts = lib.mkIf cfg.openFirewall [ cfg.listenPort ];
+          trustedInterfaces = [ cfg.interface ];
+          interfaces.${cfg.interface}.allowedTCPPorts = cfg.allowedTCPPorts;
+        };
+
+        # NAT: masquerade VPN traffic out through the upstream interface.
+        networking.nat = {
+          enable = true;
+          internalInterfaces = [ cfg.interface ];
+          externalInterface = cfg.externalInterface;
+        };
+
+        networking.wg-quick.interfaces.${cfg.interface} = {
+          address = [ cfg.serverAddress ];
+          listenPort = cfg.listenPort;
+          privateKeyFile = cfg.privateKeyFile;
         };
       };
     };
 }
+

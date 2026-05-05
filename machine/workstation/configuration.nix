@@ -100,7 +100,13 @@
     };
     xdg.enable = true;
     redshift.enable = true;
-    wireguard.enable = false;
+    wireguard = {
+      enable = true;
+      externalInterface = "enp3s0";
+      serverAddress = "10.100.0.1/24";
+      publicEndpoint = "70.23.207.166";
+      allowedTCPPorts = [ 20080 ];
+    };
     vox = {
       enable = true;
       inputMic = "alsa_input.usb-046d_0825_9476ED00-02.mono-fallback";
