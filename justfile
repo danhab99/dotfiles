@@ -22,13 +22,12 @@ rollback:
 
 switch:
     -rm /home/dan/.openclaw/openclaw.json.hm-backup
-    -sudo ip link set wg0 down
-    -sudo ip link del wg0
 
     {{switch_command}} switch \
         --keep-going \
         --flake .#{{name}}
 
+    -sudo systemctl restart wg-quick-wg0
     -i3-msg restart
     -sudo udevadm control --reload
     -sudo udevadm trigger
