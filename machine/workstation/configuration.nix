@@ -44,10 +44,9 @@
         "embeddinggemma"
         "gemma3:latest"
         "llama3.1:8b"
-        "qwen3:latest"
         "opencoder:8b"
         "deepcoder:14b"
-        "qwen3.5:9b"
+        "qwen3.6:27b"
       ];
       enableGpu = true;
     };
