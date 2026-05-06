@@ -19,7 +19,6 @@
     adirofi.url = "github:danhab99/rofi";
     ev-cmd.url = "github:danhab99/ev-cmd/main";
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
-    duh.url = "github:danhab99/duh/main";
     grit.url = "github:danhab99/grit/main";
 
     # === uConsole ===
