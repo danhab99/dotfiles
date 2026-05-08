@@ -128,6 +128,7 @@
     firefox.enable = true;
     bitwarden.enable = true;
     soulseek.enable = true;
+    jenkins.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
