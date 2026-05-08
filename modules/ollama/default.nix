@@ -33,7 +33,7 @@ import ../_module.nix {
       packages = with pkgs; [
         aichat
         argc
-        whisperx
+        # whisperx
         opencode
         crewai
       ];
@@ -67,11 +67,11 @@ import ../_module.nix {
                   doCheck = false;
                 });
 
-                whisperx = pyPrev.whisperx.overridePythonAttrs (old: {
-                  nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pyFinal.pythonRelaxDepsHook ];
-                  pythonRelaxDeps = [ "huggingface-hub" "torch" "torchaudio" ];
-                  doCheck = false;
-                });
+                # whisperx = pyPrev.whisperx.overridePythonAttrs (old: {
+                #   nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pyFinal.pythonRelaxDepsHook ];
+                #   pythonRelaxDeps = [ "huggingface-hub" "torch" "torchaudio" ];
+                #   doCheck = false;
+                # });
 
                 # hyperpyyaml 1.2.3 requires ruamel-yaml<0.19.0 but nixpkgs has 0.19.1
                 # which has a genuine API break (max_depth attr missing); skip tests

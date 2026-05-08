@@ -179,7 +179,7 @@ import ../_module.nix
     in
     {
       packages = with pkgs; [
-        whisper-cpp
+        # whisper-cpp
         xdotool
         pulseaudio
         sox
