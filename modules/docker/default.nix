@@ -26,6 +26,7 @@ import ../_module.nix {
         docker-compose
         docker-credential-helpers
         lazydocker
+        minikube
         pass
       ];
 
