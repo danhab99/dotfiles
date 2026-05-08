@@ -13,6 +13,7 @@ import ../_module.nix
     homeManager = {
       programs.firefox = {
         enable = true;
+        configPath = ".mozilla/firefox";
 
         profiles.default = {
           id = 0;
@@ -27,6 +28,8 @@ import ../_module.nix
             ctrl-number-to-switch-tabs
           ];
 
+          extensions.force = true;
+
           # 1. Declarative Settings
           settings = {
             "browser.search.region" = "US";
@@ -34,7 +37,7 @@ import ../_module.nix
             "distribution.searchplugins.defaultLocale" = "en-US";
             "general.useragent.locale" = "en-US";
             "browser.bookmarks.restore_default_bookmarks" = false;
-            "extensions.activeAttributes" = true;
+            "extensions.autoDisableScopes" = 0;
 
             # Keep top bar / bookmarks bar visible in fullscreen
             "browser.fullscreen.autohide" = false;
@@ -64,12 +67,9 @@ import ../_module.nix
             }
 
             /* Ensure Bookmark bar stays visible in fullscreen if the setting alone isn't enough */
-            #PersonalToolbar[inFullscreen="true"] {
+            :root[inFullscreen] #PersonalToolbar {
               visibility: visible !important;
-            }
-
-            :root[sizemode="fullscreen"] #PersonalToolbar {
-              visibility: visible !important;
+              display: flex !important;
             }
           '';
         };
