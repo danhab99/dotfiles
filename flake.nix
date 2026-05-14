@@ -20,6 +20,7 @@
     ev-cmd.url = "github:danhab99/ev-cmd/main";
     logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
     grit.url = "github:danhab99/grit/main";
+    duh.url = "github:danhab99/duh/main";
 
     # === uConsole ===
     nixos-uconsole = {

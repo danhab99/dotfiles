@@ -78,6 +78,7 @@
     };
     soulseek.enable = true;
     rofi.enable = true;
+    duh.enable = true;
 
     all-packages.enable = true;
     nixos-packages.enable = true;
