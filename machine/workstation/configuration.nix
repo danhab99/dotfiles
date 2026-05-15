@@ -47,6 +47,9 @@
         "opencoder:8b"
         "deepcoder:14b"
         "qwen3.6:27b"
+        "command-r:35b"
+        "nemotron3:33b"
+        "mistral-small3.2:24b"
       ];
       enableGpu = true;
     };
