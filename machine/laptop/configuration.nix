@@ -22,7 +22,8 @@
     i3 = {
       enable = true;
       i3blocksConfig = ./i3blocks.conf;
-      screen = [ "eDP-1" ];
+      # screen = [ "eDP-1" ];
+      screen = [ "DP-3-2" "DP-3-1" "DP-3-3-1" ];
       fontSize = 12.0;
       defaultLayoutScript = "";
     };
@@ -36,7 +37,7 @@
     secrets.enable = true;
     ssh.enable = true;
     steam.enable = false;
-    threedtools.enable = false;
+    threedtools.enable = true;
     timezone.enable = true;
     urxvt.enable = true;
     xorg = {
@@ -92,18 +93,18 @@
       };
     };
 
-  jobs =
-    { pkgs }:
-    [
-      {
-        name = "ssh-desktop-channel";
-        schedule = "*-*-*";
-        script = ''
-          rm -f /tmp/ssh-master-desktop.sock
-          ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
-        '';
-        packages = [ pkgs.openssh ];
-        user = "dan";
-      }
-    ];
+  # jobs =
+  #   { pkgs }:
+  #   [
+  #     {
+  #       name = "ssh-desktop-channel";
+  #       schedule = "*-*-*";
+  #       script = ''
+  #         rm -f /tmp/ssh-master-desktop.sock
+  #         ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
+  #       '';
+  #       packages = [ pkgs.openssh ];
+  #       user = "dan";
+  #     }
+  #   ];
 }
