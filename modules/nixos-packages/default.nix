@@ -15,13 +15,14 @@ import ../_module.nix {
     in
     {
       packages = with pkgs; [
+        # d8p.brave
         aider-chat-full
         audacity
-        # d8p.brave
         dbeaver-bin
         gimp
         github-copilot-cli
         kubectl
+        lm_sensors
         nettools
         obsidian
         postgresql
