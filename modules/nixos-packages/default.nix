@@ -29,6 +29,7 @@ import ../_module.nix {
         powershell
         seahorse
         totp-cli
+        transmission_4-gtk
         tree
         unixODBCDrivers.msodbcsql17
         vlc
