@@ -28,7 +28,7 @@
       configFile = ./i3/config;
       i3blocksConfig = ./i3blocks.conf;
       screen = [
-        "DP-4"
+        "DP-2"
         "HDMI-0"
         "DP-0"
       ];
