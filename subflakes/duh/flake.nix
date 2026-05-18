@@ -7,11 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
     duh.url = "github:danhab99/duh/main";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       mkModuleSubflake = import ../../_helpers.nix;
     in
