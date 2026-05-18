@@ -7,23 +7,25 @@
 if [ -z "$1" ]; then
   echo "Usage: $0 <module-name>"
   echo ""
-  echo "Creates a new module subflake in subflakes/modules/<module-name>/"
+  echo "Creates a new module subflake in subflakes/<module-name>/"
   echo ""
   echo "Example:"
   echo "  $0 git"
   echo ""
   echo "This will create:"
-  echo "  subflakes/modules/git/flake.nix"
-  echo "  subflakes/modules/git/.gitignore"
+  echo "  subflakes/git/flake.nix"
+  echo "  subflakes/git/.gitignore"
   exit 1
 fi
 
 MODULE_NAME="$1"
-MODULE_DIR="subflakes/modules/$MODULE_NAME"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+MODULE_DIR="$REPO_ROOT/subflakes/$MODULE_NAME"
 
-# Verify we're in the right directory
-if [ ! -f "flake.nix" ] || [ ! -d "subflakes" ]; then
-  echo "Error: This script must be run from the root of your NixOS config repo"
+# Verify script location is inside the expected repo layout
+if [ ! -f "$REPO_ROOT/flake.nix" ] || [ ! -d "$REPO_ROOT/subflakes" ]; then
+  echo "Error: Could not find repository root from script location"
   exit 1
 fi
 
