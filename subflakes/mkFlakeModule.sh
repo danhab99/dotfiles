@@ -37,6 +37,8 @@ fi
 # Create the directory
 mkdir -p "$MODULE_DIR"
 
+cp ../flake.lock "$MODULE_DIR"
+
 # Generate flake.nix with template
 cat > "$MODULE_DIR/flake.nix" <<'FLAKEOF'
 {
@@ -96,3 +98,6 @@ echo "3. Implement 'output' sections (nixos, homeManager, packages)"
 echo ""
 echo "To test the module:"
 echo "  nix flake show $MODULE_DIR"
+
+git add $MODULE_DIR
+cd "$MODULE_DIR" && nix flake show
