@@ -1,5 +1,0 @@
-# Default goal
-default: dev
-
-dev:
-  yarn dev
