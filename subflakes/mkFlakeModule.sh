@@ -14,7 +14,6 @@ if [ -z "$1" ]; then
   echo ""
   echo "This will create:"
   echo "  subflakes/git/flake.nix"
-  echo "  subflakes/git/.gitignore"
   exit 1
 fi
 
@@ -87,11 +86,6 @@ FLAKEOF
 
 # Replace MODULE_NAME placeholder with actual name
 sed -i "s/MODULE_NAME/$MODULE_NAME/g" "$MODULE_DIR/flake.nix"
-
-# Create .gitignore
-cat > "$MODULE_DIR/.gitignore" <<'GITIGNOREOF'
-flake.lock
-GITIGNOREOF
 
 echo "✓ Module subflake created at $MODULE_DIR/flake.nix"
 echo ""
