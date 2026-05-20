@@ -21,6 +21,7 @@ import ../_module.nix {
         usbutils
         yai
         yt-dlp
+        wget
       ];
     };
 }
