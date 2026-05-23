@@ -124,6 +124,7 @@ import ../_module.nix {
             coc-json
             coc-lua
             coc-markdownlint
+            coc-prettier
             coc-pyright
             coc-rust-analyzer
             coc-sh
@@ -131,7 +132,6 @@ import ../_module.nix {
             coc-tailwindcss
             coc-toml
             coc-yaml
-            coc-prettier
             ctrlp-vim
             fzf-lua
             goyo-vim
@@ -144,6 +144,7 @@ import ../_module.nix {
             telescope-nvim
             transparent-nvim
             undotree
+            vim-abolish
             vim-closetag
             vim-commentary
             vim-css-color
