@@ -19,6 +19,7 @@ import ../_module.nix {
         aider-chat-full
         audacity
         dbeaver-bin
+        diff-pdf
         gimp
         github-copilot-cli
         kubectl
