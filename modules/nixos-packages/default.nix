@@ -20,6 +20,7 @@ import ../_module.nix {
         audacity
         dbeaver-bin
         diff-pdf
+        e2fsprogs
         gimp
         github-copilot-cli
         kubectl
