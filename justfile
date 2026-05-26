@@ -59,4 +59,4 @@ build machine variant:
     nix build --show-trace .#nixosConfigurations.{{machine}}.config.system.build.images.{{variant}}
 
 vulcheck:
-    nix-shell -p vulnix --run "vulnix --system "
+    nix-shell -p vulnix --run "vulnix --system -w https://raw.githubusercontent.com/NixOS/nixpkgs/master/nixos/modules/services/security/vulnix-whitelist.toml" 2>&1 | tee vulcheck_$(date +%Y-%m-%d)
