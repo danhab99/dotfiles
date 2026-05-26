@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+###############################################################################
+# fix_it_loop — automated fix loop using opencode
+#
+# 1. Run the test commands you define below.
+# 2. If they pass, exit successfully.
+# 3. If they fail, send the error output to opencode (CLI, auto-approve on)
+#    and ask it to fix the problem.
+# 4. Repeat until the tests pass or max iterations reached.
+###############################################################################
+
+# --- Configuration -----------------------------------------------------------
+
+MAX_ITERATIONS=10
+WORK_DIR="$(pwd)"
+
+# --- Define your test commands below -----------------------------------------
+# Each line is one command. All must exit 0 for the loop to stop.
+# Add or remove lines as needed.
+
+read -r -d '' TEST_COMMANDS << 'TESTS' || true
+# Example tests — replace with your own:
+#   nix build .#my-package
+#   my-test-suite --run
+#   cargo test
+TESTS
+
+# --- Helper functions --------------------------------------------------------
+
+log() {
+  echo "[fix_it_loop] $*" >&2
+}
+
+run_tests() {
+  log "Running tests..."
+  local output
+  output=$(eval "$TEST_COMMANDS" 2>&1) && return 0
+  echo "$output"
+  return 1
+}
+
+ask_opencode_fix() {
+  local error_output="$1"
+  local iteration="$2"
+
+  log "Tests failed (iteration ${iteration}/${MAX_ITERATIONS}). Asking opencode to fix..."
+
+  local prompt="The following commands failed. Fix the underlying problem so they all pass.
+
+Failed commands:
+$(echo "$TEST_COMMANDS")
+
+Error output:
+$(echo "$error_output")
+
+Run the commands again after fixing to verify."
+
+  opencode run \
+    --dir "$WORK_DIR" \
+    --dangerously-skip-permissions \
+    "$prompt"
+}
+
+# --- Main loop ---------------------------------------------------------------
+
+log "Starting fix_it_loop (max ${MAX_ITERATIONS} iterations)"
+
+iteration=0
+while true; do
+  iteration=$((iteration + 1))
+
+  if [ "$iteration" -gt "$MAX_ITERATIONS" ]; then
+    log "Max iterations (${MAX_ITERATIONS}) reached. Giving up."
+    exit 1
+  fi
+
+  error_output=""
+  if ! error_output=$(run_tests); then
+    log "Test failure captured, sending to opencode..."
+    ask_opencode_fix "$error_output" "$iteration"
+    continue
+  fi
+
+  log "All tests passed on iteration ${iteration}!"
+  exit 0
+done
