@@ -27,14 +27,17 @@ import ../_module.nix {
       homeManager = { };
 
       nixos = {
+        hardware.bluetooth.enable = cfg.enableBluetooth;
+        services.blueman.enable = cfg.enableBluetooth;
+
         security.rtkit.enable = true;
 
         services.pipewire = {
           enable = true;
-          audio.enable = true;
           alsa.enable = true;
           alsa.support32Bit = true;
           pulse.enable = true;
+          wireplumber.enable = true;
         };
       };
     };
