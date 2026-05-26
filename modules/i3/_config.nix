@@ -271,34 +271,6 @@ in
       always = true;
     }
     {
-      command = "xinput set-prop 10 'libinput Accel Speed' 5";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 10 309 1";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 10 311 1";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 10 317 1";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 14 284 1";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 15 284 1";
-      always = true;
-    }
-    {
-      command = "xinput set-prop 9 295 0";
-      always = true;
-    }
-    {
       command = ''xinput | grep -Po "(?<=LingYao ShangHai Thumb Keyboard).*" | grep -Po "(?<=id=)\d+" | xargs -L1 xinput disable'';
       always = true;
     }
