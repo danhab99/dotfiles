@@ -29,6 +29,7 @@ import ../_module.nix {
         obsidian
         postgresql
         powershell
+        psmisc
         seahorse
         totp-cli
         transmission_4-gtk
