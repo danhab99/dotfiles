@@ -15,6 +15,7 @@
     changelog.url = "path:../../subflakes/changelog";
     cli-notes.url = "path:../../subflakes/cli-notes";
     csharp.url = "path:../../subflakes/csharp";
+    cursor.url = "path:../../subflakes/cursor";
     default.url = "path:../../subflakes/default";
     docker.url = "path:../../subflakes/docker";
     droid-packages.url = "path:../../subflakes/droid-packages";
