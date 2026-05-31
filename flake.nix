@@ -1,173 +1,127 @@
 {
+  description = "Dotfiles root flake";
+
   inputs = {
-    # === NixOS ===
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/e7c92d67a28b267c85cdeef0ac0752bb9a23f68c";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:vic/import-tree";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    openclaw.url = "github:openclaw/nix-openclaw";
-    nur.url = "github:nix-community/NUR";
-    nixos-cli.url = "github:nix-community/nixos-cli";
+    # === Modules flake (provides all shared inputs) ===
 
-    # === My flakes ===
-    dotnet_8_nixpkgs.url = "github:nixos/nixpkgs/04f1c8b4eab2d07d390015461d182dc5818f89c4";
-    axelera-driver.url = "github:danhab99/axelera-driver/copilot/add-nix-flake-package";
-    adirofi.url = "github:danhab99/rofi";
-    ev-cmd.url = "github:danhab99/ev-cmd/main";
-    logitech-g600-rs.url = "github:danhab99/logitech-g600-rs/main";
-    grit.url = "github:danhab99/grit/main";
-    duh.url = "github:danhab99/duh/main";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # === uConsole ===
-    nixos-uconsole = {
-      url = "github:nixos-uconsole/nixos-uconsole/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # === Droid ===
-    droid-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    droid-home-manager = {
-      # url = "github:nix-community/home-manager/release-24.05";
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "droid-nixpkgs";
-    };
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/master";
-      inputs.nixpkgs.follows = "droid-nixpkgs";
-      inputs.home-manager.follows = "droid-home-manager";
-    };
+    all-packages.url = "path:./subflakes/all-packages";
+    appimage.url = "path:./subflakes/appimage";
+    audio.url = "path:./subflakes/audio";
+    bitwarden.url = "path:./subflakes/bitwarden";
+    blank.url = "path:./subflakes/blank";
+    changelog.url = "path:./subflakes/changelog";
+    cli-notes.url = "path:./subflakes/cli-notes";
+    csharp.url = "path:./subflakes/csharp";
+    default.url = "path:./subflakes/default";
+    docker.url = "path:./subflakes/docker";
+    droid-packages.url = "path:./subflakes/droid-packages";
+    duh.url = "path:./subflakes/duh";
+    essential-packages.url = "path:./subflakes/essential-packages";
+    ev-cmd.url = "path:./subflakes/ev-cmd";
+    firefox.url = "path:./subflakes/firefox";
+    font.url = "path:./subflakes/font";
+    fortivpn.url = "path:./subflakes/fortivpn";
+    fzf.url = "path:./subflakes/fzf";
+    g600.url = "path:./subflakes/g600";
+    gestures.url = "path:./subflakes/gestures";
+    git.url = "path:./subflakes/git";
+    gnupg.url = "path:./subflakes/gnupg";
+    go.url = "path:./subflakes/go";
+    i18n.url = "path:./subflakes/i18n";
+    i3.url = "path:./subflakes/i3";
+    jenkins.url = "path:./subflakes/jenkins";
+    kdeconnect.url = "path:./subflakes/kdeconnect";
+    libreoffice.url = "path:./subflakes/libreoffice";
+    meshtastic.url = "path:./subflakes/meshtastic";
+    mk.url = "path:./subflakes/mk";
+    my-packages.url = "path:./subflakes/my-packages";
+    n8n.url = "path:./subflakes/n8n";
+    neovim.url = "path:./subflakes/neovim";
+    nextjs.url = "path:./subflakes/nextjs";
+    nginx.url = "path:./subflakes/nginx";
+    nix.url = "path:./subflakes/nix";
+    nixos-packages.url = "path:./subflakes/nixos-packages";
+    node.url = "path:./subflakes/node";
+    nvidia.url = "path:./subflakes/nvidia";
+    obs.url = "path:./subflakes/obs";
+    ollama.url = "path:./subflakes/ollama";
+    openclaw.url = "path:./subflakes/openclaw";
+    printing.url = "path:./subflakes/printing";
+    python.url = "path:./subflakes/python";
+    qmk.url = "path:./subflakes/qmk";
+    react.url = "path:./subflakes/react";
+    redshift.url = "path:./subflakes/redshift";
+    rescue.url = "path:./subflakes/rescue";
+    rofi.url = "path:./subflakes/rofi";
+    rtlsdr.url = "path:./subflakes/rtlsdr";
+    rust.url = "path:./subflakes/rust";
+    sddm.url = "path:./subflakes/sddm";
+    secrets.url = "path:./subflakes/secrets";
+    slack.url = "path:./subflakes/slack";
+    soulseek.url = "path:./subflakes/soulseek";
+    ssh.url = "path:./subflakes/ssh";
+    steam.url = "path:./subflakes/steam";
+    thinkpad.url = "path:./subflakes/thinkpad";
+    threedtools.url = "path:./subflakes/threedtools";
+    timezone.url = "path:./subflakes/timezone";
+    tmux.url = "path:./subflakes/tmux";
+    tty.url = "path:./subflakes/tty";
+    urxvt.url = "path:./subflakes/urxvt";
+    vbox.url = "path:./subflakes/vbox";
+    vim.url = "path:./subflakes/vim";
+    virtualbox.url = "path:./subflakes/virtualbox";
+    vox.url = "path:./subflakes/vox";
+    vscode.url = "path:./subflakes/vscode";
+    watchdog.url = "path:./subflakes/watchdog";
+    wireguard.url = "path:./subflakes/wireguard";
+    worktrees.url = "path:./subflakes/worktrees";
+    xdg.url = "path:./subflakes/xdg";
+    xorg.url = "path:./subflakes/xorg";
+    zoxide.url = "path:./subflakes/zoxide";
+    zsh.url = "path:./subflakes/zsh";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, flake-parts, import-tree, home-manager, nix-on-droid, droid-nixpkgs, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (top@{ config, ... }: {
+  outputs = inputs:
+    let
+      lib = inputs.nixpkgs.lib;
 
-      # ── Declare module storage options ──────────────────────────────
-      options.flake.modules =
+      subflakeEntries = builtins.readDir ./subflakes;
+      subflakeNames = builtins.filter (
+        name:
+        subflakeEntries.${name} == "directory"
+        && builtins.pathExists (./subflakes + "/${name}/flake.nix")
+        && builtins.hasAttr name inputs
+      ) (builtins.attrNames subflakeEntries);
+
+      hasPublishedOutput = name:
         let
-          inherit (inputs.nixpkgs) lib;
+          flakeFile = ./subflakes + "/${name}/flake.nix";
+          flakeText = builtins.readFile flakeFile;
+          publishesDevshells = lib.hasInfix "devshells" flakeText;
+          publishesTemplate = lib.hasInfix "template" flakeText;
         in
-        {
-          nixos = lib.mkOption {
-            type = lib.types.attrsOf lib.types.deferredModule;
-            default = { };
-            description = "NixOS deferred modules keyed by aspect name";
-          };
-          droid = lib.mkOption {
-            type = lib.types.attrsOf lib.types.deferredModule;
-            default = { };
-            description = "Nix-on-Droid deferred modules keyed by aspect name";
-          };
-          homeManager = lib.mkOption {
-            type = lib.types.attrsOf lib.types.deferredModule;
-            default = { };
-            description = "Home-manager deferred modules keyed by aspect name";
-          };
-        };
+        publishesDevshells || publishesTemplate;
 
-      options.flake.templates =
-        let
-          inherit (inputs.nixpkgs) lib;
-        in
-        lib.mkOption {
-          type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
-          default = { };
-          description = "Flake templates, mergeable across modules";
-        };
+      outputSubflakes = builtins.filter (
+        name: hasPublishedOutput name
+      ) subflakeNames;
 
-      # ── Import all modules via import-tree ──────────────────────────
-      imports = [
-        (import-tree ./modules)
-      ];
-
-      # ── Systems for perSystem (devshells, etc.) ─────────────────────
-      config.systems = [ "x86_64-linux" "aarch64-linux" ];
-
-      # ── Flake-level outputs ─────────────────────────────────────────
-      config.flake = {
-        # NixOS host configurations - built from dendritic modules
-        nixosConfigurations =
+      # Merge a single output attr (devShells/templates) from every subflake input.
+      collectOutput = outputName:
+        builtins.foldl' (
+          acc: name:
           let
-            # Collect all NixOS deferred modules as a list
-            allNixosModules = builtins.attrValues config.flake.modules.nixos;
-
-            mkHost = import ./machine/machine.nix {
-              inherit inputs allNixosModules;
-            };
-
-            dir = builtins.readDir ./machine;
-            names = builtins.attrNames dir;
-            machines = builtins.filter (f: dir.${f} == "directory") names;
-            pairs = builtins.map
-              (machineName: {
-                name = machineName;
-                value = mkHost machineName;
-              })
-              machines;
+            input = inputs.${name};
           in
-          builtins.listToAttrs pairs;
-
-        # Nix-on-Droid
-        nixOnDroidConfigurations.default =
-          let
-            system = "aarch64-linux";
-            droidPkgs = import droid-nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-            allDroidModules = builtins.attrValues config.flake.modules.droid;
-          in
-          nix-on-droid.lib.nixOnDroidConfiguration {
-            extraSpecialArgs = {
-              pkgs = droidPkgs;
-            } // inputs;
-
-            pkgs = droidPkgs;
-
-            modules = [
-              { imports = allDroidModules; }
-              ./nix-on-droid.nix
-            ];
-          };
-
-        # Home-manager modules export
-        homeManagerModules.default = {
-          imports = builtins.attrValues config.flake.modules.homeManager;
-        };
-
-        # Distributable flake-parts module — friends can import this
-        flakeModules.default = { inputs, ... }:
-          let
-            inherit (inputs.nixpkgs) lib;
-          in
-          {
-            options.flake.modules = {
-              nixos = lib.mkOption {
-                type = lib.types.attrsOf lib.types.deferredModule;
-                default = { };
-              };
-              droid = lib.mkOption {
-                type = lib.types.attrsOf lib.types.deferredModule;
-                default = { };
-              };
-              homeManager = lib.mkOption {
-                type = lib.types.attrsOf lib.types.deferredModule;
-                default = { };
-              };
-            };
-            options.flake.templates = lib.mkOption {
-              type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
-              default = { };
-            };
-            imports = [ (import-tree ./modules) ];
-          };
-
-        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      };
-    });
+          lib.recursiveUpdate acc (
+            if builtins.hasAttr outputName input then builtins.getAttr outputName input else { }
+          )
+        ) { } outputSubflakes;
+    in
+    {
+      devShells = collectOutput "devShells";
+      templates = collectOutput "templates";
+    };
 }
