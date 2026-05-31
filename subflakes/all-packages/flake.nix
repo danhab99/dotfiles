@@ -11,8 +11,8 @@
     output = { pkgs, ... }: {
       packages = with pkgs; [
         glances
-        just
         gparted
+        just
         killall
         nixfmt-tree
         nodejs
@@ -23,10 +23,11 @@
         s3cmd
         scdl
         sshfs
+        unzip
         usbutils
+        wget
         yai
         yt-dlp
-        wget
       ];
     };
   };
