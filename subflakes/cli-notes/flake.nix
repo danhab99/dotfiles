@@ -8,13 +8,6 @@
   outputs = inputs: import ../output.nix inputs {
     name = "cli-notes";
 
-    options =
-      { lib }:
-        with lib;
-        {
-          source-path = mkOption { };
-        };
-
     output =
       { pkgs, cfg, ... }:
       let
@@ -32,7 +25,7 @@
           aichat -m openai:gpt-4-turbo --rag activity-log --prompt "You are a helpful secretary who is really good at remembering what I have done. I will send you my activity log for you to summarize, focus on what I need to do and what is already done. Write lists, list everything that is done, and list everything that still needs to be doing, and list everything that I'm waiting for. The time is $(date +%T)." $(cat $LOG_FILE)
         '';
 
-        notesh = pkgs.writeShellScriptBin "notes.sh" ''
+        noteh = pkgs.writeShellScriptBin "note.sh" ''
           ${getLogFile}
 
           MESSAGE=$*
@@ -66,7 +59,10 @@
       in
       {
         packages = with pkgs; [
-
+          analyzesh
+          noteh
+          ragsh
+          todaysh
         ];
 
         homeManager = {
