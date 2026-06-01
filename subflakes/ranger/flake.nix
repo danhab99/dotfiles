@@ -9,6 +9,10 @@
     name = "ranger";
 
     output = { pkgs, ... }: {
+      packages = with pkgs; [
+        ranger
+      ];
+
       homeManager = {
         home.file = {
           ".config/ranger" = {
