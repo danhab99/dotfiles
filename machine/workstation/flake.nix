@@ -9,6 +9,7 @@
 
     all-packages.url = "path:../../subflakes/all-packages";
     appimage.url = "path:../../subflakes/appimage";
+    atop.url = "path:../../subflakes/atop";
     audio.url = "path:../../subflakes/audio";
     bitwarden.url = "path:../../subflakes/bitwarden";
     blank.url = "path:../../subflakes/blank";
@@ -222,6 +223,7 @@
           bitwarden.enable = true;
           soulseek.enable = true;
           jenkins.enable = true;
+          atop.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
