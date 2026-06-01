@@ -170,7 +170,6 @@
           tmux.enable = true;
           cli-notes = {
             enable = true;
-            source-path = "~/Documents/cli-notes";
           };
           xdg.enable = true;
           redshift.enable = true;
