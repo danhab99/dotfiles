@@ -63,6 +63,7 @@
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
     slack.url = "path:../../subflakes/slack";
+    smartgit.url = "path:../../subflakes/smartgit";
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
@@ -185,6 +186,8 @@
           firefox.enable = true;
           virtualbox.enable = true;
           slack.enable = true;
+          cursor.enable = true;
+          smartgit.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;

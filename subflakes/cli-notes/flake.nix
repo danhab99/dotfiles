@@ -56,6 +56,18 @@
           ${getLogFile}
           bat $LOG_FILE
         '';
+
+        yesterdaysh = pkgs.writeShellScriptBin "today.sh" ''
+          ${getLogFile}
+          bat "/home/$USER/Documents/notes/activity-log/$(date -d 'yesterday' +%Y-%m-%d).log.md"
+          bat "/home/$USER/Documents/notes/activity-log/$(date -d 'yesterday' +%Y-%m-%d).md"
+        '';
+
+        scratchsh = pkgs.writeShellScriptBin "scratch.sh" ''
+          SCRATCH_FILE="/home/$USER/Documents/notes/activity-log/$(date +%Y-%m-%d).md"
+          mkdir -p $(dirname $SCRATCH_FILE)
+          nvim $SCRATCH_FILE
+        '';
       in
       {
         packages = with pkgs; [
@@ -63,6 +75,8 @@
           noteh
           ragsh
           todaysh
+          yesterdaysh
+          scratchsh
         ];
 
         homeManager = {
