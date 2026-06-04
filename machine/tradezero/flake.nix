@@ -114,9 +114,9 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
             screen = [
-              "DP-3-2"
-              "DP-3-1"
-              "DP-3-3-1"
+              "DP-2-2"
+              "DP-2-1"
+              "DP-2-3-1"
             ];
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
