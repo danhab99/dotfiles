@@ -15,7 +15,6 @@
     changelog.url = "path:../../subflakes/changelog";
     cli-notes.url = "path:../../subflakes/cli-notes";
     csharp.url = "path:../../subflakes/csharp";
-    cursor.url = "path:../../subflakes/cursor";
     default.url = "path:../../subflakes/default";
     docker.url = "path:../../subflakes/docker";
     droid-packages.url = "path:../../subflakes/droid-packages";
@@ -50,6 +49,7 @@
     obs.url = "path:../../subflakes/obs";
     ollama.url = "path:../../subflakes/ollama";
     openclaw.url = "path:../../subflakes/openclaw";
+    opencode.url = "path:../../subflakes/opencode";
     printing.url = "path:../../subflakes/printing";
     python.url = "path:../../subflakes/python";
     qmk.url = "path:../../subflakes/qmk";
@@ -63,7 +63,6 @@
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
     slack.url = "path:../../subflakes/slack";
-    smartgit.url = "path:../../subflakes/smartgit";
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
@@ -188,6 +187,7 @@
           slack.enable = true;
           cursor.enable = true;
           smartgit.enable = true;
+          opencode.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;

@@ -39,7 +39,6 @@
         packages = with pkgs; [
           aichat
           argc
-          opencode
           crewai
         ];
 
