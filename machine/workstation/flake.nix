@@ -50,6 +50,7 @@
     obs.url = "path:../../subflakes/obs";
     ollama.url = "path:../../subflakes/ollama";
     openclaw.url = "path:../../subflakes/openclaw";
+    opencode.url = "path:../../subflakes/opencode";
     printing.url = "path:../../subflakes/printing";
     python.url = "path:../../subflakes/python";
     qmk.url = "path:../../subflakes/qmk";
@@ -223,6 +224,7 @@
           soulseek.enable = true;
           jenkins.enable = true;
           atop.enable = true;
+          opencode.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;

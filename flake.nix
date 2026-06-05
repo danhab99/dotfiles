@@ -48,6 +48,7 @@
     obs.url = "path:./subflakes/obs";
     ollama.url = "path:./subflakes/ollama";
     openclaw.url = "path:./subflakes/openclaw";
+    opencode.url = "path:./subflakes/opencode";
     printing.url = "path:./subflakes/printing";
     python.url = "path:./subflakes/python";
     qmk.url = "path:./subflakes/qmk";
