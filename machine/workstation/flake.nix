@@ -189,7 +189,6 @@
           tmux.enable = true;
           cli-notes = {
             enable = true;
-            source-path = "~/Documents/bash/notes";
           };
           xdg.enable = true;
           redshift.enable = true;
