@@ -8,35 +8,65 @@ fi
 mkdir -p "$1"
 
 # Start the configuration.nix file
-cat <<EOF > "$1/configuration.nix"
+cat <<EOF > "$1/flake.nix"
 {
-  hostName = "$1";
+  description = "$1 NixOS configuration";
 
-  users = {
+  inputs = {
+    # === Modules flake (provides all shared inputs) ===
+
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
 EOF
 
 # List all directories in ../users and add them as <name>.enable = true;
-for dir in ../users/*/; do
+for dir in ../subflakes/*/; do
   name=$(basename "$dir")
-  echo "    $name.enable = true;" >> "$1/configuration.nix"
+  echo "    $name.url = "path:../../subflakes/$name";" >> "$1/flake.nix"
 done
 
-cat << EOF >> "$1/configuration.nix"
+cat << EOF >> "$1/flake.nix"
   };
 
-  module = {
+  outputs = inputs: {
+    nixosConfigurations.subflake = import ../output.nix inputs {
+      hardware-configuration = ./hardware-configuration.nix;
+
+      hostCfg = {
+        name = "workstation";
+        system = "x86_64-linux";
+
+        users = {
 EOF
 
 # List all directories in ../modules and add them as <name>.enable = true;
-for dir in ../modules/*/; do
+for dir in ../users/*/; do
   name=$(basename "$dir")
-  echo "    $name.enable = true;" >> "$1/configuration.nix"
+  echo "          $name.enable = true;" >> "$1/flake.nix"
 done
 
 # Close the config block
-cat <<EOF >> "$1/configuration.nix"
+cat <<EOF >> "$1/flake.nix"
+        };
+
+        module = {
+EOF
+
+# List all directories in ../users and add them as <name>.enable = true;
+for dir in ../subflakes/*/; do
+  name=$(basename "$dir")
+  echo "          $name.enable = true;" >> "$1/flake.nix"
+done
+
+# Close the config block
+cat <<EOF >> "$1/flake.nix"
+        };
+      };
+    };
   };
 }
 EOF
 
-echo "Machine configuration generated at $1/configuration.nix"
+cp ../flake.lock $1/flake.lock
+
+echo "Machine configuration generated at $1/flake.nix"
