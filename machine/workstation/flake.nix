@@ -132,16 +132,17 @@
             enable = true;
             repoDir = "/data/ollama";
             models = [
+              "command-r:35b"
+              "deepcoder:14b"
               "deepseek-r1:14b"
               "embeddinggemma"
               "gemma3:latest"
+              "granite4.1:30b-q8_0"
               "llama3.1:8b"
-              "opencoder:8b"
-              "deepcoder:14b"
-              "qwen3.6:27b"
-              "command-r:35b"
+              "mistral-small3.2:24b-instruct-2506-q8_0"
               "nemotron3:33b"
-              "mistral-small3.2:24b"
+              "opencoder:8b"
+              "qwen3.6:27b"
             ];
             enableGpu = true;
           };

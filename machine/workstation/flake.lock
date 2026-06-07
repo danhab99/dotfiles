@@ -3,7 +3,7 @@
     "adirofi": {
       "inputs": {
         "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_66"
+        "nixpkgs": "nixpkgs_67"
       },
       "locked": {
         "lastModified": 1773153936,
@@ -2044,11 +2044,11 @@
     },
     "nixpkgs_66": {
       "locked": {
-        "lastModified": 1770197578,
-        "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
+        "lastModified": 1779560665,
+        "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "00c21e4c93d963c50d4c0c89bfa84ed6e0694df2",
+        "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
         "type": "github"
       },
       "original": {
@@ -2060,11 +2060,11 @@
     },
     "nixpkgs_67": {
       "locked": {
-        "lastModified": 1779560665,
-        "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
+        "lastModified": 1770197578,
+        "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+        "rev": "00c21e4c93d963c50d4c0c89bfa84ed6e0694df2",
         "type": "github"
       },
       "original": {
@@ -2538,6 +2538,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_94": {
+      "locked": {
+        "lastModified": 1779560665,
+        "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "node": {
       "inputs": {
         "nixpkgs": "nixpkgs_52"
@@ -2669,6 +2685,20 @@
         "type": "github"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_59"
+      },
+      "locked": {
+        "path": "../../subflakes/opencode",
+        "type": "path"
+      },
+      "original": {
+        "path": "../../subflakes/opencode",
+        "type": "path"
+      },
+      "parent": []
+    },
     "optnix": {
       "inputs": {
         "flake-compat": [
@@ -2725,7 +2755,7 @@
     },
     "printing": {
       "inputs": {
-        "nixpkgs": "nixpkgs_59"
+        "nixpkgs": "nixpkgs_60"
       },
       "locked": {
         "path": "../../subflakes/printing",
@@ -2739,7 +2769,7 @@
     },
     "python": {
       "inputs": {
-        "nixpkgs": "nixpkgs_60"
+        "nixpkgs": "nixpkgs_61"
       },
       "locked": {
         "path": "../../subflakes/python",
@@ -2781,7 +2811,7 @@
     },
     "qmk": {
       "inputs": {
-        "nixpkgs": "nixpkgs_61"
+        "nixpkgs": "nixpkgs_62"
       },
       "locked": {
         "path": "../../subflakes/qmk",
@@ -2795,7 +2825,7 @@
     },
     "ranger": {
       "inputs": {
-        "nixpkgs": "nixpkgs_62"
+        "nixpkgs": "nixpkgs_63"
       },
       "locked": {
         "path": "../../subflakes/ranger",
@@ -2809,7 +2839,7 @@
     },
     "react": {
       "inputs": {
-        "nixpkgs": "nixpkgs_63"
+        "nixpkgs": "nixpkgs_64"
       },
       "locked": {
         "path": "../../subflakes/react",
@@ -2823,7 +2853,7 @@
     },
     "redshift": {
       "inputs": {
-        "nixpkgs": "nixpkgs_64"
+        "nixpkgs": "nixpkgs_65"
       },
       "locked": {
         "path": "../../subflakes/redshift",
@@ -2837,7 +2867,7 @@
     },
     "rescue": {
       "inputs": {
-        "nixpkgs": "nixpkgs_65"
+        "nixpkgs": "nixpkgs_66"
       },
       "locked": {
         "path": "../../subflakes/rescue",
@@ -2852,7 +2882,7 @@
     "rofi": {
       "inputs": {
         "adirofi": "adirofi",
-        "nixpkgs": "nixpkgs_67"
+        "nixpkgs": "nixpkgs_68"
       },
       "locked": {
         "path": "../../subflakes/rofi",
@@ -2911,6 +2941,7 @@
         "obs": "obs",
         "ollama": "ollama",
         "openclaw": "openclaw",
+        "opencode": "opencode",
         "printing": "printing",
         "python": "python",
         "qmk": "qmk",
@@ -2949,7 +2980,7 @@
     },
     "rtlsdr": {
       "inputs": {
-        "nixpkgs": "nixpkgs_68"
+        "nixpkgs": "nixpkgs_69"
       },
       "locked": {
         "path": "../../subflakes/rtlsdr",
@@ -2963,7 +2994,7 @@
     },
     "rust": {
       "inputs": {
-        "nixpkgs": "nixpkgs_69"
+        "nixpkgs": "nixpkgs_70"
       },
       "locked": {
         "path": "../../subflakes/rust",
@@ -3031,7 +3062,7 @@
     },
     "sddm": {
       "inputs": {
-        "nixpkgs": "nixpkgs_70"
+        "nixpkgs": "nixpkgs_71"
       },
       "locked": {
         "path": "../../subflakes/sddm",
@@ -3045,7 +3076,7 @@
     },
     "secrets": {
       "inputs": {
-        "nixpkgs": "nixpkgs_71"
+        "nixpkgs": "nixpkgs_72"
       },
       "locked": {
         "path": "../../subflakes/secrets",
@@ -3059,7 +3090,7 @@
     },
     "slack": {
       "inputs": {
-        "nixpkgs": "nixpkgs_72"
+        "nixpkgs": "nixpkgs_73"
       },
       "locked": {
         "path": "../../subflakes/slack",
@@ -3073,7 +3104,7 @@
     },
     "soulseek": {
       "inputs": {
-        "nixpkgs": "nixpkgs_73"
+        "nixpkgs": "nixpkgs_74"
       },
       "locked": {
         "path": "../../subflakes/soulseek",
@@ -3087,7 +3118,7 @@
     },
     "ssh": {
       "inputs": {
-        "nixpkgs": "nixpkgs_74"
+        "nixpkgs": "nixpkgs_75"
       },
       "locked": {
         "path": "../../subflakes/ssh",
@@ -3101,7 +3132,7 @@
     },
     "steam": {
       "inputs": {
-        "nixpkgs": "nixpkgs_75"
+        "nixpkgs": "nixpkgs_76"
       },
       "locked": {
         "path": "../../subflakes/steam",
@@ -3205,7 +3236,7 @@
     },
     "thinkpad": {
       "inputs": {
-        "nixpkgs": "nixpkgs_76"
+        "nixpkgs": "nixpkgs_77"
       },
       "locked": {
         "path": "../../subflakes/thinkpad",
@@ -3219,7 +3250,7 @@
     },
     "threedtools": {
       "inputs": {
-        "nixpkgs": "nixpkgs_77"
+        "nixpkgs": "nixpkgs_78"
       },
       "locked": {
         "path": "../../subflakes/threedtools",
@@ -3233,7 +3264,7 @@
     },
     "timezone": {
       "inputs": {
-        "nixpkgs": "nixpkgs_78"
+        "nixpkgs": "nixpkgs_79"
       },
       "locked": {
         "path": "../../subflakes/timezone",
@@ -3247,7 +3278,7 @@
     },
     "tmux": {
       "inputs": {
-        "nixpkgs": "nixpkgs_79"
+        "nixpkgs": "nixpkgs_80"
       },
       "locked": {
         "path": "../../subflakes/tmux",
@@ -3261,7 +3292,7 @@
     },
     "tty": {
       "inputs": {
-        "nixpkgs": "nixpkgs_80"
+        "nixpkgs": "nixpkgs_81"
       },
       "locked": {
         "path": "../../subflakes/tty",
@@ -3275,7 +3306,7 @@
     },
     "urxvt": {
       "inputs": {
-        "nixpkgs": "nixpkgs_81"
+        "nixpkgs": "nixpkgs_82"
       },
       "locked": {
         "path": "../../subflakes/urxvt",
@@ -3289,7 +3320,7 @@
     },
     "vbox": {
       "inputs": {
-        "nixpkgs": "nixpkgs_82"
+        "nixpkgs": "nixpkgs_83"
       },
       "locked": {
         "path": "../../subflakes/vbox",
@@ -3303,7 +3334,7 @@
     },
     "vim": {
       "inputs": {
-        "nixpkgs": "nixpkgs_83"
+        "nixpkgs": "nixpkgs_84"
       },
       "locked": {
         "path": "../../subflakes/vim",
@@ -3317,7 +3348,7 @@
     },
     "virtualbox": {
       "inputs": {
-        "nixpkgs": "nixpkgs_84"
+        "nixpkgs": "nixpkgs_85"
       },
       "locked": {
         "path": "../../subflakes/virtualbox",
@@ -3331,7 +3362,7 @@
     },
     "vox": {
       "inputs": {
-        "nixpkgs": "nixpkgs_85"
+        "nixpkgs": "nixpkgs_86"
       },
       "locked": {
         "path": "../../subflakes/vox",
@@ -3345,7 +3376,7 @@
     },
     "vscode": {
       "inputs": {
-        "nixpkgs": "nixpkgs_86"
+        "nixpkgs": "nixpkgs_87"
       },
       "locked": {
         "path": "../../subflakes/vscode",
@@ -3359,7 +3390,7 @@
     },
     "watchdog": {
       "inputs": {
-        "nixpkgs": "nixpkgs_87"
+        "nixpkgs": "nixpkgs_88"
       },
       "locked": {
         "path": "../../subflakes/watchdog",
@@ -3373,7 +3404,7 @@
     },
     "wireguard": {
       "inputs": {
-        "nixpkgs": "nixpkgs_88"
+        "nixpkgs": "nixpkgs_89"
       },
       "locked": {
         "path": "../../subflakes/wireguard",
@@ -3387,7 +3418,7 @@
     },
     "worktrees": {
       "inputs": {
-        "nixpkgs": "nixpkgs_89"
+        "nixpkgs": "nixpkgs_90"
       },
       "locked": {
         "path": "../../subflakes/worktrees",
@@ -3401,7 +3432,7 @@
     },
     "xdg": {
       "inputs": {
-        "nixpkgs": "nixpkgs_90"
+        "nixpkgs": "nixpkgs_91"
       },
       "locked": {
         "path": "../../subflakes/xdg",
@@ -3415,7 +3446,7 @@
     },
     "xorg": {
       "inputs": {
-        "nixpkgs": "nixpkgs_91"
+        "nixpkgs": "nixpkgs_92"
       },
       "locked": {
         "path": "../../subflakes/xorg",
@@ -3429,7 +3460,7 @@
     },
     "zoxide": {
       "inputs": {
-        "nixpkgs": "nixpkgs_92"
+        "nixpkgs": "nixpkgs_93"
       },
       "locked": {
         "path": "../../subflakes/zoxide",
@@ -3443,7 +3474,7 @@
     },
     "zsh": {
       "inputs": {
-        "nixpkgs": "nixpkgs_93"
+        "nixpkgs": "nixpkgs_94"
       },
       "locked": {
         "path": "../../subflakes/zsh",
