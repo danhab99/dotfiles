@@ -21,6 +21,7 @@
     essential-packages.url = "path:./subflakes/essential-packages";
     ev-cmd.url = "path:./subflakes/ev-cmd";
     firefox.url = "path:./subflakes/firefox";
+    fixit-loop.url = "path:./subflakes/fixit-loop";
     font.url = "path:./subflakes/font";
     fortivpn.url = "path:./subflakes/fortivpn";
     fzf.url = "path:./subflakes/fzf";
