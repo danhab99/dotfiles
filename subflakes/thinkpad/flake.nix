@@ -96,16 +96,8 @@
         };
 
         nixos = {
-          services.logind = {
-            # What to do when the lid is closed and on battery power
-            lidSwitch = "suspend"; 
-            
-            # What to do when the lid is closed and plugged into AC power
-            lidSwitchExternalPower = "ignore"; 
-            
-            # Optional: What to do when the lid is closed and docked (plugged into monitors + power)
-            lidSwitchDocked = "ignore"; 
-          };
+          services.acpid.enable = true;
+          services.acpid.lidEventCommands= "systemctl suspend";
 
           systemd.services.usb-power-management-disable = {
             description = "Disable USB power management for all devices to prevent dock disconnects";
