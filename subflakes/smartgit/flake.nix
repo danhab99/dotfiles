@@ -13,21 +13,17 @@
     };
 
     output = { pkgs, ... }: {
-      packages = with pkgs; [
-        smartgit
+      packages = [
+        (pkgs.smartgit.overrideAttrs (old: rec {
+          version = "24.1.2";
+          src = pkgs.fetchurl {
+            url = "https://www.syntevo.com/downloads/smartgit/smartgit-linux-${
+              builtins.replaceStrings [ "." ] [ "_" ] version
+            }.tar.gz";
+            hash = "sha256-bPiPb/k5f9dRpwm4Wj+c2mhFhH9WOz2hzKeDfQLRLHQ=";
+          };
+        }))
       ];
-
-      nixos = { 
-
-      };
-
-      homeManager = {
-
-      };
-
-      droid = {
-
-      };
     };
   };
 }
