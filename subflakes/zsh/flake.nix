@@ -117,49 +117,49 @@
               vssh = "vim ~/.ssh/config";
               vfz = "vim $(fzf)";
 
-              git-fix = "git submodule sync --recursive; git submodule update --init --recursive";
+              cg = "cd $(git root)";
               ga = "git add";
               gaa = "git add .";
-              gai = "git add -ip";
-              gpl = "git pull";
-              gd = "git diff";
-              gds = "git diff --staged";
-              gc = "git commit --verbose";
-              gcf = "git commit -m 'fix'";
-              gca = "git commit --amend --verbose";
-              gp = "git push --all";
-              gs = "git status";
-              gwt = "git worktree list";
-              gpt = "git push origin $(git rev-parse --abbrev-ref HEAD)";
-              gco = "git checkout --ignore-other-worktrees";
-              gsc = "git submodule sync --recursive; git submodule update --init --recursive";
-              gf = "git fetch-all";
-              cg = "cd $(git root)";
-              grc = "git rebase --continue";
-              vg = "vim +':Git mergetool'";
-              gus = "git restore --staged -- ";
-              gnl = "git nicelog";
               gaagc = "git add . && git commit -a --verbose";
               gaagca = "git add . && git commit --amend -a --verbose";
+              gai = "git add -ip";
+              gc = "git commit --verbose";
+              gca = "git commit --amend --verbose";
+              gcf = "git commit -m 'fix'";
+              gco = "git checkout --ignore-other-worktrees";
+              gd = "git diff";
+              gds = "git diff --staged";
+              gf = "git fetch-all";
+              git-fix = "git submodule sync --recursive; git submodule update --init --recursive";
+              gnl = "git nicelog";
+              gp = "git push --all";
+              gpl = "git pull";
+              gpt = "git push origin $(git rev-parse --abbrev-ref HEAD)";
               gpta = "${gaagca} && ${gpt}";
+              grc = "git rebase --continue";
+              gs = "git status";
+              gsc = "git submodule sync --recursive; git submodule update --init --recursive";
+              gus = "git restore --staged -- ";
+              gwt = "git worktree list";
+              vg = "vim +':Git mergetool'";
 
               dc = "docker-compose";
 
               clip = "xclip -selection c";
               cfzf = ''cd "$(dirname $(fzf))"'';
-              tf = "terraform";
               rmr = "rm -r";
-              tn = "textnote";
               edithosts = "sudo vim /etc/hosts";
-              c = "cat";
-              d = "docker";
+
               lg = "lazygit";
+              ld = "lazydocker";
+
+              tf = "terraform";
               tfa = "terraform apply";
               tfaa = "terraform apply --auto-approve";
               tfd = "terraform destroy";
               tfdd = "terraform destroy --auto-approve";
-              tfp = "terraform plan";
               tfi = "terraform init";
+              tfp = "terraform plan";
 
               zadd = "zoxide add";
               za = "zoxide add .";
@@ -170,13 +170,12 @@
 
               cdtemp = "cd $(mktemp -d)";
 
-              tools = "aichat -r tools";
-              coder = "aichat -r coder";
-
               fix-redshift = "systemctl --user restart redshift";
-              update-readme = "copilot -p \"Analyze this project and update the readme, if there is no readme then create a new one\"";
-
               j = "just --choose";
+              jj = "just default";
+
+              oc = "opencode";
+              c = "clear";
             };
 
             initContent = builtins.readFile ./extras.sh + cfg.extras;
