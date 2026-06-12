@@ -30,15 +30,15 @@
         homeManager = { };
 
         nixos = {
-          boot.loader.raspberryPi = {
-            enable = true;
-            version = cfg.piVersion;
-            firmwareConfig = ''
-              dtparam=spi=on
-              dtoverlay=spi1-1cs
-              dtoverlay=spi0-0cs
-            '';
-          };
+          # boot.loader.raspberryPi = {
+          #   enable = true;
+          #   version = cfg.piVersion;
+          #   firmwareConfig = ''
+          #     dtparam=spi=on
+          #     dtoverlay=spi1-1cs
+          #     dtoverlay=spi0-0cs
+          #   '';
+          # };
 
           boot.kernelModules = [ "gpio-pca953x" "spidev" ];
 
