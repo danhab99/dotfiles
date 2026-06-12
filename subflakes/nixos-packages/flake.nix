@@ -35,6 +35,7 @@
           unixODBCDrivers.msodbcsql17
           vlc
           webcamoid
+          websocat
         ];
 
         nixos = {
