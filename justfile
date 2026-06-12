@@ -66,4 +66,4 @@ vulcheck:
 
 overwrite:
     find . -name "flake.lock" -not -path "./flake.lock" -exec cp ./flake.lock {} \;
-    find . -name "flake.lock" -not -path "./flake.lock" -exec sh -c "cd $(dirname {}) && nix flake show" \;
+    find . -name "flake.lock" -not -path "./flake.lock" -exec sh -c 'dir=$(dirname "$1"); cd "$dir" && nix flake show' _ {} \;
