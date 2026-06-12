@@ -35,6 +35,7 @@
     jenkins.url = "path:../../subflakes/jenkins";
     kdeconnect.url = "path:../../subflakes/kdeconnect";
     libreoffice.url = "path:../../subflakes/libreoffice";
+    gitlab.url = "path:../../subflakes/gitlab";
     meshtastic.url = "path:../../subflakes/meshtastic";
     mk.url = "path:../../subflakes/mk";
     my-packages.url = "path:../../subflakes/my-packages";
@@ -114,9 +115,9 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
             screen = [
-              "DP-2-2"
-              "DP-2-1"
-              "DP-2-3-1"
+              "DP-3-2"
+              "DP-3-1"
+              "DP-3-3-1"
             ];
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
@@ -188,6 +189,7 @@
           cursor.enable = true;
           smartgit.enable = true;
           opencode.enable = true;
+          gitlab.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
