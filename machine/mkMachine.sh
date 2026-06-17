@@ -19,11 +19,7 @@ cat <<EOF > "$1/flake.nix"
 
 EOF
 
-# List all directories in ../users and add them as <name>.enable = true;
-for dir in ../subflakes/*/; do
-  name=$(basename "$dir")
-  echo "    $name.url = "path:../../subflakes/$name";" >> "$1/flake.nix"
-done
+./listinputs.sh >> $1/flake.nix
 
 cat << EOF >> "$1/flake.nix"
   };
