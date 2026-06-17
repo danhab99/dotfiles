@@ -51,18 +51,35 @@
           };
         };
 
+        tlp.settings = {
+          USB_AUTOSUSPEND = 0;
+          USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
+        };
+
+        udev.extraRules = ''
+          # Disable autosuspend for ALL USB hubs (prevents KVM/display disconnects)
+          ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
+
+          # Disable autosuspend for USB network adapters
+          ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="02", TEST=="power/control", ATTR{power/control}="on"
+
+          # Specifically target your GenesysLogic hubs by vendor ID
+          ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", TEST=="power/control", ATTR{power/control}="on"
+
+          # Target Realtek USB hubs (your USB3.2/2.1 hubs)
+          ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", TEST=="power/control", ATTR{power/control}="on"
+
+          # Target VLI hubs
+          ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="1a40", TEST=="power/control", ATTR{power/control}="on"
+
+          # Disable runtime power management for ALL USB devices under your dock path
+          ACTION=="add|change", SUBSYSTEM=="usb", DEVPATH=="*3-1*", TEST=="power/control", ATTR{power/control}="on"
+          ACTION=="add|change", SUBSYSTEM=="usb", DEVPATH=="*2-3*", TEST=="power/control", ATTR{power/control}="on"
+
+          # Re-apply monitor layout on display hotplug/link reset
+          ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr -c"
+        '';
       };
-
-      homeManager = { };
-
-      droid = { };
     };
-
-    devshells = { pkgs, ... }: {
-      default = { };
-    };
-
-    template = ./files;
-    templateWelcome = "";
   };
 }
