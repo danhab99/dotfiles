@@ -8,6 +8,13 @@
     nixos-uconsole = {
       url = "github:nixos-uconsole/nixos-uconsole/master";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixos-raspberrypi.follows = "nixos-raspberrypi";
+    };
+
+    # Align with nixos-uconsole's tested nixos-raspberrypi release.
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/v1.20260517.0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     all-packages.url = "path:../../subflakes/all-packages";
