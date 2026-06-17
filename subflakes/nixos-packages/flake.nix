@@ -18,6 +18,7 @@
           audacity
           dbeaver-bin
           diff-pdf
+          diskus
           e2fsprogs
           gimp
           github-copilot-cli
