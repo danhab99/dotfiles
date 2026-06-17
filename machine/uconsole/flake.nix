@@ -170,7 +170,7 @@
           rofi.enable = true;
         };
 
-        output = system: inputs@{ home-manager, nixos-uconsole, ... }: modules: (nixos-uconsole.lib.mkUConsoleSystem {
+        output = system: inputs@{ nixos-uconsole, ... }: modules: (nixos-uconsole.lib.mkUConsoleSystem {
           inherit modules;
           specialArgs = inputs;
         });
