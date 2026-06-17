@@ -9,12 +9,14 @@
 
     all-packages.url = "path:../../subflakes/all-packages";
     appimage.url = "path:../../subflakes/appimage";
+    atop.url = "path:../../subflakes/atop";
     audio.url = "path:../../subflakes/audio";
     bitwarden.url = "path:../../subflakes/bitwarden";
     blank.url = "path:../../subflakes/blank";
     changelog.url = "path:../../subflakes/changelog";
     cli-notes.url = "path:../../subflakes/cli-notes";
     csharp.url = "path:../../subflakes/csharp";
+    cursor.url = "path:../../subflakes/cursor";
     default.url = "path:../../subflakes/default";
     docker.url = "path:../../subflakes/docker";
     droid-packages.url = "path:../../subflakes/droid-packages";
@@ -22,22 +24,25 @@
     essential-packages.url = "path:../../subflakes/essential-packages";
     ev-cmd.url = "path:../../subflakes/ev-cmd";
     firefox.url = "path:../../subflakes/firefox";
+    fixit-loop.url = "path:../../subflakes/fixit-loop";
     font.url = "path:../../subflakes/font";
     fortivpn.url = "path:../../subflakes/fortivpn";
     fzf.url = "path:../../subflakes/fzf";
     g600.url = "path:../../subflakes/g600";
     gestures.url = "path:../../subflakes/gestures";
     git.url = "path:../../subflakes/git";
+    gitlab.url = "path:../../subflakes/gitlab";
     gnupg.url = "path:../../subflakes/gnupg";
     go.url = "path:../../subflakes/go";
     i18n.url = "path:../../subflakes/i18n";
     i3.url = "path:../../subflakes/i3";
     jenkins.url = "path:../../subflakes/jenkins";
     kdeconnect.url = "path:../../subflakes/kdeconnect";
+    kvm-switch.url = "path:../../subflakes/kvm-switch";
     libreoffice.url = "path:../../subflakes/libreoffice";
-    gitlab.url = "path:../../subflakes/gitlab";
     meshtastic.url = "path:../../subflakes/meshtastic";
     mk.url = "path:../../subflakes/mk";
+    my-nix-flake.url = "path:../../subflakes/my-nix-flake";
     my-packages.url = "path:../../subflakes/my-packages";
     n8n.url = "path:../../subflakes/n8n";
     neovim.url = "path:../../subflakes/neovim";
@@ -64,6 +69,7 @@
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
     slack.url = "path:../../subflakes/slack";
+    smartgit.url = "path:../../subflakes/smartgit";
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
@@ -190,6 +196,7 @@
           smartgit.enable = true;
           opencode.enable = true;
           gitlab.enable = true;
+          kvm-switch.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;

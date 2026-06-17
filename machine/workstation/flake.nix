@@ -16,6 +16,7 @@
     changelog.url = "path:../../subflakes/changelog";
     cli-notes.url = "path:../../subflakes/cli-notes";
     csharp.url = "path:../../subflakes/csharp";
+    cursor.url = "path:../../subflakes/cursor";
     default.url = "path:../../subflakes/default";
     docker.url = "path:../../subflakes/docker";
     droid-packages.url = "path:../../subflakes/droid-packages";
@@ -23,21 +24,25 @@
     essential-packages.url = "path:../../subflakes/essential-packages";
     ev-cmd.url = "path:../../subflakes/ev-cmd";
     firefox.url = "path:../../subflakes/firefox";
+    fixit-loop.url = "path:../../subflakes/fixit-loop";
     font.url = "path:../../subflakes/font";
     fortivpn.url = "path:../../subflakes/fortivpn";
     fzf.url = "path:../../subflakes/fzf";
     g600.url = "path:../../subflakes/g600";
     gestures.url = "path:../../subflakes/gestures";
     git.url = "path:../../subflakes/git";
+    gitlab.url = "path:../../subflakes/gitlab";
     gnupg.url = "path:../../subflakes/gnupg";
     go.url = "path:../../subflakes/go";
     i18n.url = "path:../../subflakes/i18n";
     i3.url = "path:../../subflakes/i3";
     jenkins.url = "path:../../subflakes/jenkins";
     kdeconnect.url = "path:../../subflakes/kdeconnect";
+    kvm-switch.url = "path:../../subflakes/kvm-switch";
     libreoffice.url = "path:../../subflakes/libreoffice";
     meshtastic.url = "path:../../subflakes/meshtastic";
     mk.url = "path:../../subflakes/mk";
+    my-nix-flake.url = "path:../../subflakes/my-nix-flake";
     my-packages.url = "path:../../subflakes/my-packages";
     n8n.url = "path:../../subflakes/n8n";
     neovim.url = "path:../../subflakes/neovim";
@@ -64,6 +69,7 @@
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
     slack.url = "path:../../subflakes/slack";
+    smartgit.url = "path:../../subflakes/smartgit";
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
@@ -226,6 +232,7 @@
           jenkins.enable = true;
           atop.enable = true;
           opencode.enable = true;
+          kvm-switch.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
@@ -236,40 +243,6 @@
           # Enable binfmt emulation for building ARM images
           boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-          # Disable USB autosuspend to prevent KVM switch power interruptions from
-          # putting devices into an unrecoverable state (usb_set_interface -110 loop).
-          boot.kernelParams = [
-            "usbcore.autosuspend=-1"
-            # NVMe resilience: disable power saving states to prevent hangs on a
-            # flaky drive controller, and max out I/O timeout so a slow/dying drive
-            # doesn't trigger a kernel panic or force a reset mid-session.
-            "nvme_core.default_ps_max_latency_x=0"
-            "nvme_core.io_timeout=4294967295"
-            # PCIe resilience: disable AER so errors from a bad device don't cause
-            # machine-check exceptions, and disable ASPM so the PCIe link never
-            # enters a low-power state that a flaky device might not wake from.
-            "pci=noaer"
-            "pcie_aspm=off"
-          ];
-
-          # Disable runtime power management for USB hubs (prevents KVM/audio disconnects)
-          services.udev.extraRules = ''
-            # Disable autosuspend for ALL USB hubs
-            ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
-            # GenesysLogic USB hubs (KVM switch hubs)
-            ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", TEST=="power/control", ATTR{power/control}="on"
-            # Feixiang USB HIFI Audio - disable autosuspend to prevent timeout storms
-            ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="262a", TEST=="power/control", ATTR{power/control}="on"
-          '';
-
-          # Systemd service for on-demand USB controller reset
-          systemd.services.reset-usb = {
-            description = "Reset xHCI USB controller to recover from stuck devices";
-            serviceConfig = {
-              Type = "oneshot";
-              ExecStart = "/bin/sh /etc/nixos/scripts/reset-usb.sh";
-            };
-          };
         };
 
         i3Config =
