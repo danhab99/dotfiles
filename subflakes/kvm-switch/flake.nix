@@ -40,23 +40,7 @@
           ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="05e3", TEST=="power/control", ATTR{power/control}="on"
           # Feixiang USB HIFI Audio - disable autosuspend to prevent timeout storms
           ACTION=="add|change", SUBSYSTEM=="usb", ATTR{idVendor}=="262a", TEST=="power/control", ATTR{power/control}="on"
-        '';
 
-        # Systemd service for on-demand USB controller reset
-        systemd.services.reset-usb = {
-          description = "Reset xHCI USB controller to recover from stuck devices";
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart = "/bin/sh /etc/nixos/scripts/reset-usb.sh";
-          };
-        };
-
-        tlp.settings = {
-          USB_AUTOSUSPEND = 0;
-          USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
-        };
-
-        udev.extraRules = ''
           # Disable autosuspend for ALL USB hubs (prevents KVM/display disconnects)
           ACTION=="add|change", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="09", TEST=="power/control", ATTR{power/control}="on"
 
@@ -79,6 +63,20 @@
           # Re-apply monitor layout on display hotplug/link reset
           ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr -c"
         '';
+
+        # Systemd service for on-demand USB controller reset
+        systemd.services.reset-usb = {
+          description = "Reset xHCI USB controller to recover from stuck devices";
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "/bin/sh /etc/nixos/scripts/reset-usb.sh";
+          };
+        };
+
+        services.tlp.settings = {
+          USB_AUTOSUSPEND = 0;
+          USB_DENYLIST = "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801";
+        };
       };
     };
   };
