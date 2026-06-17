@@ -66,4 +66,7 @@ vulcheck:
 
 overwrite:
     find . -name "flake.lock" -not -path "./flake.lock" -exec cp ./flake.lock {} \;
-    find . -name "flake.lock" -not -path "./flake.lock" -exec sh -c 'dir=$(dirname "$1"); cd "$dir" && nix flake show' _ {} \;
+    find . -name "flake.lock" -not -path "./flake.lock" -exec sh -c "cd $(dirname {}) && nix flake show" \;
+
+fix:
+    nix-store --verifu --fix-broken --repair
