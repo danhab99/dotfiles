@@ -14,6 +14,7 @@
     bitwarden.url = "path:../../subflakes/bitwarden";
     blank.url = "path:../../subflakes/blank";
     changelog.url = "path:../../subflakes/changelog";
+    claude.url = "path:../../subflakes/claude";
     cli-notes.url = "path:../../subflakes/cli-notes";
     csharp.url = "path:../../subflakes/csharp";
     cursor.url = "path:../../subflakes/cursor";
@@ -197,6 +198,7 @@
           opencode.enable = true;
           gitlab.enable = true;
           kvm-switch.enable = true;
+          claude.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
