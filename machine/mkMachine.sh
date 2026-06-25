@@ -19,7 +19,7 @@ cat <<EOF > "$1/flake.nix"
 
 EOF
 
-./listinputs.sh >> $1/flake.nix
+../listinputs.sh "$1" >> "$1/flake.nix"
 
 cat << EOF >> "$1/flake.nix"
   };
