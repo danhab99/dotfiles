@@ -70,3 +70,6 @@ overwrite:
 
 fix:
     nix-store --verifu --fix-broken --repair
+
+list:
+    ./listinputs.sh | xclip -selection c
