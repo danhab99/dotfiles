@@ -49,6 +49,7 @@
     neovim.url = "path:../../subflakes/neovim";
     nextjs.url = "path:../../subflakes/nextjs";
     nginx.url = "path:../../subflakes/nginx";
+    nightshift.url = "path:../../subflakes/nightshift";
     nix.url = "path:../../subflakes/nix";
     nixos-packages.url = "path:../../subflakes/nixos-packages";
     node.url = "path:../../subflakes/node";
@@ -235,6 +236,11 @@
           opencode.enable = true;
           kvm-switch.enable = true;
           claude.enable = true;
+          nightshift = {
+            enable = true;
+            scriptDirectory = "/home/dan/Documents/nightshift";
+            time = "03:00:00";
+          };
 
           all-packages.enable = true;
           nixos-packages.enable = true;
