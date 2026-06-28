@@ -41,8 +41,6 @@
 
             serviceConfig = {
               Type = "oneshot";
-              User = "dan";
-              PAMName = "login";
             };
           };
 
