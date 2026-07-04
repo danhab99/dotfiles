@@ -128,9 +128,9 @@
             # configFile = ./i3/config;
             i3blocksConfig = ./i3blocks.conf;
             screen = [
-              "DP-0"
-              "HDMI-0"
               "DP-4"
+              "HDMI-0"
+              "DP-0"
             ];
             defaultLayoutScript = "3screen.sh";
             fontSize = 14.0;

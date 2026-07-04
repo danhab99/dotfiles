@@ -14,7 +14,14 @@
         homeManager = {
           programs.vscode = {
             enable = true;
-            package = pkgs.vscode-fhs;
+            package = pkgs.symlinkJoin {
+              name = "vscode-fhs-wrapped";
+              paths = [ pkgs.vscode-fhs ];
+              buildInputs = [ pkgs.makeWrapper ];
+              postBuild = ''
+                wrapProgram $out/bin/code --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.xdg-utils ]}
+              '';
+            };
 
             mutableExtensionsDir = true;
 
