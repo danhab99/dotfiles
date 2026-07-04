@@ -19,6 +19,16 @@
         ];
 
         homeManager = {
+          home.sessionVariables = {
+            XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
+          };
+
+          xdg.configFile."xfce4/helpers.rc".text = ''
+            WebBrowserDismissed=true
+
+            WebBrowser=firefox
+          '';
+
           xdg = {
             enable = true;
             configFile."mimeapps.list".force = true;
@@ -35,10 +45,14 @@
                   "image/png" = [ "org.gnome.eog.desktop" ];
                   "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
                   "text/html" = default_browser;
+                  "text/xml" = default_browser;
+                  "application/xhtml+xml" = default_browser;
+                  "application/xml" = default_browser;
                   "x-scheme-handler/about" = default_browser;
                   "x-scheme-handler/http" = default_browser;
                   "x-scheme-handler/https" = default_browser;
                   "x-scheme-handler/unknown" = default_browser;
+                  "x-scheme-handler/mailto" = default_browser;
                 };
             };
           };
