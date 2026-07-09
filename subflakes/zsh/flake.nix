@@ -37,6 +37,7 @@
           rsync
           screen
           xclip
+          (writeShellScriptBin "template" (builtins.readFile ../../scripts/template))
         ];
 
         nixos = {
@@ -178,7 +179,12 @@
               c = "clear";
             };
 
-            initContent = builtins.readFile ./extras.sh + cfg.extras;
+            initContent = ''
+              if [[ -r /etc/nixos/subflakes/zsh/extras.sh ]]; then
+                source /etc/nixos/subflakes/zsh/extras.sh
+              fi
+              ${cfg.extras}
+            '';
           };
         };
       };

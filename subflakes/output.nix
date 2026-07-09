@@ -79,22 +79,6 @@ let
             };
             shellInputs = inputs // { inherit pkgs lib; };
             versionSet = devshells shellInputs;
-
-            serializeEnv =
-              env:
-              lib.concatStringsSep "\n" (
-                lib.mapAttrsToList (
-                  k: v:
-                  "            ${k} = \"${lib.replaceStrings [ "\"" ] [ "\\\"" ] (toString v)}\";"
-                ) env
-              );
-
-            serializeShellHook =
-              hook:
-              if hook == "" then
-                ""
-              else
-                "            shellHook = ''\n${lib.replaceStrings [ "''" ] [ "'''\\'''" ] hook}\n            '';\n";
           in
           lib.attrsets.mapAttrs'
             (version: body: {
@@ -103,17 +87,6 @@ let
                 let
                   packageNames =
                     body.templatePackageNames or (map (pkg: pkg.pname) body.packages);
-                  env = body.env or { };
-                  shellHook = body.shellHook or "";
-                  envBlock =
-                    if env == { } then
-                      ""
-                    else
-                      ''
-                        env = {
-                        ${serializeEnv env}
-                        };
-                      '';
                 in
                 {
                   description = "${mkName version} template";
@@ -140,7 +113,6 @@ let
                                   just
                                   ${builtins.concatStringsSep "\n                                  " packageNames}
                                 ];
-                      ${envBlock}${serializeShellHook shellHook}
                               };
                             }
                           );

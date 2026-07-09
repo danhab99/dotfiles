@@ -88,9 +88,7 @@ function ns() {
 }
 
 function template() {
-  name=${1:-"blank"}
-  nix flake init --template /etc/nixos#$name
-  cp /etc/nixos/flake.lock .
+  /etc/nixos/scripts/template "$@"
 }
 
 function update-betterlockscreen() {

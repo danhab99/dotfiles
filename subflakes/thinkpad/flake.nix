@@ -55,12 +55,69 @@
           [ offLevel ] ++ intermediateLevels ++ [ finalLevel ];
 
         fanLevels = generateFanLevels fanConfig;
+
+        micMuteLed = "/sys/class/leds/platform::micmute/brightness";
+
+        syncMicMuteLed = pkgs.writeShellScript "thinkpad-sync-mic-mute-led" ''
+          set -euo pipefail
+
+          led="${micMuteLed}"
+          [ -e "$led" ] || exit 0
+
+          source=$(${pkgs.pulseaudio}/bin/pactl get-default-source 2>/dev/null || true)
+          [ -n "$source" ] || exit 0
+
+          muted=$(${pkgs.pulseaudio}/bin/pactl get-source-mute "$source" | awk '{print $2}')
+          if [ "$muted" = "yes" ]; then
+            echo 1 > "$led"
+          else
+            echo 0 > "$led"
+          fi
+        '';
+
+        micMuteToggle = pkgs.writeShellScriptBin "thinkpad-mic-mute-toggle" ''
+          set -euo pipefail
+
+          ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle
+          ${syncMicMuteLed}
+        '';
+
+        micMuteLedWatcher = pkgs.writeShellScriptBin "thinkpad-mic-mute-led-watcher" ''
+          set -euo pipefail
+
+          led="${micMuteLed}"
+          [ -e "$led" ] || exit 0
+
+          sync_led() {
+            source=$(${pkgs.pulseaudio}/bin/pactl get-default-source 2>/dev/null || true)
+            [ -n "$source" ] || return 0
+
+            muted=$(${pkgs.pulseaudio}/bin/pactl get-source-mute "$source" | awk '{print $2}')
+            if [ "$muted" = "yes" ]; then
+              echo 1 > "$led"
+            else
+              echo 0 > "$led"
+            fi
+          }
+
+          sync_led
+
+          ${pkgs.pulseaudio}/bin/pactl subscribe | while read -r event; do
+            case "$event" in
+              *" Event 'change' on source"*|*" Event 'new' on source"*|*" Event 'remove' on source"*)
+                sync_led
+                ;;
+            esac
+          done
+        '';
       in
       {
         packages = with pkgs; [
           thinkfan
           lm_sensors
           brightnessctl
+          micMuteToggle
+          micMuteLedWatcher
         ];
 
         homeManager = {
@@ -71,6 +128,21 @@
           xsession.windowManager.i3.config.keybindings = {
             "XF86MonBrightnessUp" = "exec brightnessctl set +10%";
             "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
+          };
+
+          systemd.user.services.thinkpad-mic-mute-led-watcher = {
+            Unit = {
+              Description = "Sync ThinkPad F4 mic mute LED with PipeWire";
+              After = [ "pipewire.service" "wireplumber.service" ];
+            };
+            Service = {
+              Type = "simple";
+              Restart = "on-failure";
+              ExecStart = "${micMuteLedWatcher}/bin/thinkpad-mic-mute-led-watcher";
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
           };
 
           home.file = {
@@ -131,6 +203,10 @@
           services.xserver.videoDrivers = [
             "modesetting"
           ];
+
+          services.udev.extraRules = ''
+            SUBSYSTEM=="leds", KERNEL=="platform::micmute", MODE="0664", GROUP="input"
+          '';
 
           services.udev.packages =
             let

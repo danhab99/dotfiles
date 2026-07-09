@@ -56,6 +56,12 @@
 
                 # Required for custom CSS to work
                 "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+                # Keep runaway tabs from exhausting system RAM
+                "browser.tabs.unloadOnLowMemory" = true;
+                "dom.ipc.processCount" = 8;
+                "dom.ipc.processCount.webIsolated" = 4;
+                "memory.purge_on_minimize" = true;
               };
 
               # 2. Custom CSS to remove the "weird border"

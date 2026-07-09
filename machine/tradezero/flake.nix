@@ -126,6 +126,12 @@
               "DP-2-1"
               "DP-2-3-1"
             ];
+
+            # screen = [
+            #   "DP-3-2"
+            #   "DP-3-3-1"
+            #   "DP-3-1"
+            # ];
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
           };
@@ -199,6 +205,7 @@
           gitlab.enable = true;
           kvm-switch.enable = true;
           claude.enable = true;
+          libreoffice.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;

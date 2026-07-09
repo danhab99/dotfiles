@@ -12,6 +12,20 @@
       { pkgs, lib, ... }:
       {
         "vite" = {
+          templatePackageNames = [
+            "nodejs_20"
+            "yarn"
+            "electron"
+            "nss"
+            "libpng"
+            "mesa"
+            "atkmm"
+            "at-spi2-atk"
+            "gtk3"
+            "libXt"
+            "websocat"
+          ];
+
           packages = with pkgs; [
             nodejs_20
             yarn

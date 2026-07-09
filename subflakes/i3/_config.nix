@@ -135,7 +135,7 @@ in
       "XF86AudioLowerVolume" = "exec amixer sset Master 5%-";
       "XF86AudioRaiseVolume" = "exec amixer sset Master 5%+";
       "XF86AudioMute" = "exec amixer sset Master toggle";
-      "XF86AudioMicMute" = "exec amixer sset Capture toggle";
+      "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
       "${mod}+p" = "exec flameshot gui";
       "${mod}+w" = "exec firefox";
       "${mod}+shift+w" = "exec brave";

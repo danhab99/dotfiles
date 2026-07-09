@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+name="${1:-blank}"
+nix flake init --impure --template "/etc/nixos#$name"
+
+if [[ "$(readlink -f "$PWD")" != "$(readlink -f /etc/nixos)" ]]; then
+  cp /etc/nixos/flake.lock .
+fi
