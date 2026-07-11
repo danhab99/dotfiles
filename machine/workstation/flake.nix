@@ -204,9 +204,7 @@
           redshift.enable = true;
           wireguard = {
             enable = true;
-            externalInterface = "enp3s0";
             serverAddress = "10.100.0.1/24";
-            publicEndpoint = "70.23.207.166";
             allowedTCPPorts = [ 20080 ];
           };
           vox = {
@@ -241,6 +239,7 @@
             scriptDirectory = "/home/dan/Documents/nightshift";
             time = "03:00:00";
           };
+          cursor.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
