@@ -20,7 +20,7 @@
     };
 
     output =
-      { pkgs, cfg, ... }:
+      { pkgs, lib, cfg, ... }:
       {
         packages = with pkgs; [
           xclip
@@ -70,6 +70,12 @@
           };
 
           services.xserver.desktopManager.xfce.enableScreensaver = false;
+
+          # NixOS defines dlm when "displaylink" is in videoDrivers, but does not
+          # start it; without this the USB DisplayLink dock never provides outputs.
+          systemd.services.dlm.wantedBy = lib.mkIf
+            (builtins.elem "displaylink" cfg.videoDrivers)
+            [ "multi-user.target" ];
         };
 
         homeManager =

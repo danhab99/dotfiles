@@ -62,6 +62,7 @@
     xorg = {
       enable = true;
       videoDrivers = [
+        "displaylink"
         "modesetting"
       ];
       extraConfig = ''

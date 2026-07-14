@@ -121,11 +121,18 @@
           i3 = {
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
+
             screen = [
-              "DP-2-2"
-              "DP-2-1"
-              "DP-2-3-1"
+              "DVI-I-1-1"
+              "eDP-1"
+              "DVI-I-2-2"
             ];
+
+            # screen = [
+            #   "DP-2-2"
+            #   "DP-2-1"
+            #   "DP-2-3-1"
+            # ];
 
             # screen = [
             #   "DP-3-2"
@@ -159,6 +166,7 @@
           xorg = {
             enable = true;
             videoDrivers = [
+              "displaylink"
               "modesetting"
             ];
             extraConfig = ''
