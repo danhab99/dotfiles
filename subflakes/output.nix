@@ -79,13 +79,41 @@ let
             };
             shellInputs = inputs // { inherit pkgs lib; };
             versionSet = devshells shellInputs;
+
+            serializeEnv =
+              env:
+              lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (
+                  k: v:
+                  "            ${k} = \"${lib.replaceStrings [ "\"" ] [ "\\\"" ] (toString v)}\";"
+                ) env
+              );
+
+            serializeShellHook =
+              hook:
+              if hook == "" then
+                ""
+              else
+                "            shellHook = ''\n${lib.replaceStrings [ "''" ] [ "'''\\'''" ] hook}\n            '';\n";
           in
           lib.attrsets.mapAttrs'
             (version: body: {
               name = mkName version;
               value =
                 let
-                  packages = map (pkg: pkg.pname) body.packages;
+                  packageNames =
+                    body.templatePackageNames or (map (pkg: pkg.pname) body.packages);
+                  env = body.env or { };
+                  shellHook = body.shellHook or "";
+                  envBlock =
+                    if env == { } then
+                      ""
+                    else
+                      ''
+                        env = {
+                        ${serializeEnv env}
+                        };
+                      '';
                 in
                 {
                   description = "${mkName version} template";
@@ -94,11 +122,12 @@ let
                     inherit version;
                     dontUnpack = true;
                     installPhase = ''
+                      mkdir -p $out
                       cat > $out/flake.nix <<EOF
                       {
                         description = "${mkName version} template";
                         inputs = {
-                          nixpkgs.url = "github:NixOS/nixpkgs";
+                          nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
                           flake-utils.url = "github:numtide/flake-utils";
                         };
                         outputs = { self, nixpkgs, flake-utils }:
@@ -109,8 +138,9 @@ let
                               devShells.default = pkgs.mkShell {
                                 packages = with pkgs; [
                                   just
-                                  ${builtins.concatStringsSep "\n" packages}
+                                  ${builtins.concatStringsSep "\n                                  " packageNames}
                                 ];
+                      ${envBlock}${serializeShellHook shellHook}
                               };
                             }
                           );

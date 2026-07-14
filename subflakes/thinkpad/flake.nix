@@ -106,7 +106,7 @@
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
-              ExecStart = "${pkgs.bash}/bin/bash -c 'for dev in /sys/bus/usb/devices/*/power/control; do [ -f \"$dev\" ] && echo on > \"$dev\" 2>/dev/null || true; done'";
+              ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/scripts/disable-usb-suspend.sh";
               ExecStartPost = "${pkgs.coreutils}/bin/sleep 2";
             };
           };
@@ -115,8 +115,8 @@
             description = "Periodically re-enforce USB power management settings";
             wantedBy = [ "timers.target" ];
             timerConfig = {
-              OnBootSec = "1min";
-              OnUnitActiveSec = "5min";
+              OnBootSec = "30sec";
+              OnUnitActiveSec = "1min";
             };
           };
 
@@ -124,7 +124,7 @@
             description = "Re-enforce USB power management settings";
             serviceConfig = {
               Type = "oneshot";
-              ExecStart = "${pkgs.bash}/bin/bash -c 'for dev in /sys/bus/usb/devices/*/power/control; do [ -f \"$dev\" ] && echo on > \"$dev\" 2>/dev/null || true; done'";
+              ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/scripts/disable-usb-suspend.sh";
             };
           };
 

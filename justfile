@@ -65,7 +65,10 @@ overwrite:
     find . -name "flake.lock" -not -path "./flake.lock" -exec sh -c "cd $(dirname {}) && nix flake show" \;
 
 fix:
-    nix-store --verify --fix-broken --repair
+    nix-store --verifu --fix-broken --repair
 
-list:
-    ./listinputs.sh | xclip -selection c
+usb-status:
+    bash /etc/nixos/scripts/usb-status.sh
+
+usb-watch:
+    bash /etc/nixos/scripts/usb-watch.sh

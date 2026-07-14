@@ -122,9 +122,9 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
             screen = [
-              "DP-3-2"
-              "DP-3-1"
-              "DP-3-3-1"
+              "DP-2-2"
+              "DP-2-1"
+              "DP-2-3-1"
             ];
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
@@ -302,6 +302,8 @@
 
         aliases = pkgs: {
           restart-display = "sudo systemctl restart display-manager.service";
+          usb-status = "bash /etc/nixos/scripts/usb-status.sh";
+          usb-watch = "bash /etc/nixos/scripts/usb-watch.sh";
         };
       };
     };

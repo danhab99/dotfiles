@@ -29,7 +29,8 @@
     extraModulePackages = [ ];
     kernelParams = [
       "usbcore.autosuspend=-1"
-      "usbcore.quirks=05e3:0626:b,0bda:0411:b,0bda:5411:b" # Disable USB3 LPM for hubs
+      # k = USB_QUIRK_NO_LPM; include 05e3:0610 GenesysLogic hub from dock disconnects
+      "usbcore.quirks=05e3:0626:k,05e3:0610:k,0bda:0411:k,0bda:5411:k,1a40:0801:k"
     ];
 
     # Disable runtime power management for USB via kernel module options
