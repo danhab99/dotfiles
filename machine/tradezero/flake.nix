@@ -122,23 +122,25 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
 
-            screen = [
-              "DVI-I-1-1"
-              "eDP-1"
-              "DVI-I-2-2"
-            ];
-
             # screen = [
-            #   "DP-2-2"
-            #   "DP-2-1"
-            #   "DP-2-3-1"
+            #   "DVI-I-1-1"
+            #   "eDP-1"
+            #   "DVI-I-2-2"
             # ];
 
             # screen = [
             #   "DP-3-2"
-            #   "DP-3-3-1"
             #   "DP-3-1"
+            #   "DP-3-3-1"
             # ];
+
+            # Physical left → center → right (confirmed via arandr).
+            screen = [
+              "DP-2-2"
+              "DP-2-1"
+              "DP-2-3"
+            ];
+
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
           };
@@ -241,13 +243,69 @@
           EndSection
         '';
 
-        raw = { pkgs, ... }: {
+        raw = { pkgs, lib, ... }: {
           # Systemd service for on-demand USB controller reset
           systemd.services.reset-usb = {
             description = "Reset xHCI USB controller to recover from stuck devices";
             serviceConfig = {
               Type = "oneshot";
               ExecStart = "/bin/sh /etc/nixos/scripts/reset-usb.sh";
+            };
+          };
+
+          # autorandr's udev rule fires on every DRM "change", including manual
+          # xrandr/arandr rearranges, then --change snaps back to the saved
+          # profile. Keep autorandr for explicit/sleep use only.
+          environment.etc."udev/rules.d/40-monitor-hotplug.rules".text = lib.mkForce ''
+            # Disabled: do not run autorandr on every DRM change.
+          '';
+
+          # XFCE otherwise re-applies displays.xml (AutoEnableProfiles=ALWAYS)
+          # and fights arandr; KVM duplicate EDIDs make that especially bad.
+          home-manager.users.dan.xfconf.settings.displays = {
+            AutoEnableProfiles = 0;
+            Notify = 0;
+          };
+
+          home-manager.users.dan.home.file = {
+            ".config/autostart/autorandr.desktop".text = ''
+              [Desktop Entry]
+              Hidden=true
+            '';
+
+            # Canonical dock layout — used by Mod4+Shift+d / auto.sh.
+            # left=DP-2-2, center=DP-2-1, right=DP-2-3 @ 1080p.
+            ".screenlayout/auto.sh" = {
+              executable = true;
+              text = ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                xrandr --query | awk '/^DP-[0-9]+-[0-9]+ connected/ { print $1 }' | while read -r out; do
+                  xrandr --addmode "$out" 1920x1080 2>/dev/null || true
+                done
+                xrandr \
+                  --output eDP-1 --off \
+                  --output DP-2-2 --mode 1920x1080 --pos 0x0 --rotate normal \
+                  --output DP-2-1 --mode 1920x1080 --pos 1920x0 --rotate normal \
+                  --output DP-2-3 --mode 1920x1080 --pos 3840x0 --rotate normal --primary
+              '';
+            };
+
+            ".screenlayout/3screens.sh" = {
+              executable = true;
+              text = ''
+                #!/usr/bin/env bash
+                exec "$(dirname "$0")/auto.sh"
+              '';
+            };
+
+            ".screenlayout/restart.sh" = {
+              executable = true;
+              text = ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                exec "$(dirname "$0")/auto.sh"
+              '';
             };
           };
 
@@ -260,17 +318,32 @@
             # Configure TLP to completely disable USB autosuspend
 
             autorandr.enable = true;
+            # Do NOT enable matchEdid: the KVM stamps the same EDID serial on
+            # two U240CAs, and autorandr's match-edid keys on serial, so it
+            # swaps DP-*-1 with DP-*-2.
+
+            # KVM EDID on one port omits CTA VIC 16 (1080p). Steal the mode
+            # from a sibling output before autorandr applies the profile.
+            autorandr.hooks.predetect."ensure-1080p" = ''
+              set -eu
+              ${pkgs.xorg.xrandr}/bin/xrandr --query \
+                | ${pkgs.gawk}/bin/awk '/^DP-[0-9]+-[0-9]/ connected/ { print $1 }' \
+                | while read -r out; do
+                    ${pkgs.xorg.xrandr}/bin/xrandr --addmode "$out" 1920x1080 2>/dev/null || true
+                  done
+            '';
 
             autorandr.profiles =
               let
+                # Live KVM-emulated U240CA EDIDs (DP-2-1 lacks VIC 16 / 0x90).
                 home = {
-                  "DP-3-1" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241902309070783010000e200d5e305c00067030c001400187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d7";
-                  "DP-3-2" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241902309070783010000e200d5e305c00067030c001400187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d7";
-                  "DP-3-3-1" = "00ffffffffffff0026130024020000000f23010380351e782b5239ad4e3ca623115054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a2020202020200127020335f241042309070783010000e200d5e305c00067030c001400187867d85dc401788000681a00000101307800e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e00000000000000000000000000000000000000000000000000000000000000000000000000002e";
+                  "DP-2-1" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241002309070783010000e200d5e305c00067030c001000187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006b";
+                  "DP-2-2" = "00ffffffffffff0026130024010000000f23010380351e782aee91a3544c99260f5054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a202020202020013502032cf241902309070783010000e200d5e305c00067030c001000187867d85dc401788000e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000db";
+                  "DP-2-3" = "00ffffffffffff0026130024020000000f23010380351e782b5239ad4e3ca623115054210800010101010101010101010101010101016a5e00a0a0a0295030203500132b2100001a000000fc005532343043410a202020202020000000ff000a202020202020202020202020000000fd0030781eb43c000a2020202020200127020335f241002309070783010000e200d5e305c00067030c001000187867d85dc401788000681a00000101307800e6060501626200567600a0a0a02d5030203500132b2100001ec89d00a0a0a02d5030203500132b2100001e000000000000000000000000000000000000000000000000000000000000000000000000000036";
                 };
 
                 embedded = {
-                  "eDP-1" = "00ffffffffffff0009e5d60800000000251d0104a51f1178031ef5965d5b91291c505400000001010101010101010101010101010101c0398018713828403020360035ae1000001a0000000000000000000000000000000";
+                  "eDP-1" = "00ffffffffffff0009e5d60800000000251d0104a51f1178031ef5965d5b91291c505400000001010101010101010101010101010101c0398018713828403020360035ae1000001a000000000000000000000000000000000000000000fe00424f452043510a202020202020000000fe004e5631343046484d2d4e34550a0011";
                 };
               in
               {
@@ -280,26 +353,27 @@
                   config = {
                     "eDP-1" = { enable = false; };
 
-                    "DP-3-2" = {
+                    # Physical: left=DP-2-2, center=DP-2-1, right=DP-2-3
+                    "DP-2-2" = {
                       enable = true;
                       mode = "1920x1080";
                       position = "0x0";
                       rotate = "normal";
                     };
 
-                    "DP-3-3-1" = {
+                    "DP-2-1" = {
                       enable = true;
                       mode = "1920x1080";
                       position = "1920x0";
                       rotate = "normal";
-                      primary = true;
                     };
 
-                    "DP-3-1" = {
+                    "DP-2-3" = {
                       enable = true;
                       mode = "1920x1080";
                       position = "3840x0";
                       rotate = "normal";
+                      primary = true;
                     };
                   };
                 };
