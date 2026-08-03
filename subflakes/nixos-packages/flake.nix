@@ -16,12 +16,14 @@
         packages = with pkgs; [
           aider-chat-full
           audacity
+          cmatrix
           dbeaver-bin
           diff-pdf
           diskus
           e2fsprogs
           gimp
           github-copilot-cli
+          hollywood
           kubectl
           lm_sensors
           nettools
