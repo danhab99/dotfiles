@@ -8,7 +8,7 @@
   outputs = inputs: import ../output.nix inputs {
     name = "worktrees";
 
-    template = ../../../modules/worktrees/_files;
+    template = ./_files;
 
     templateWelcome = ''
       To get started run `make init repo=[git repo url]`
