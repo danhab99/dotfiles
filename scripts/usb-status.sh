@@ -146,6 +146,33 @@ if systemctl is-active disable-usb-suspend-enforce.timer &>/dev/null; then
 else
   note 'disable-usb-suspend-enforce.timer not active'
 fi
+if systemctl is-enabled usb-power-management-enforce.timer &>/dev/null; then
+  bad 'usb-power-management-enforce.timer still enabled (duplicate; should be masked)'
+else
+  ok 'thinkpad usb-power-management-enforce.timer not enabled'
+fi
+
+section 'Udev storm guards'
+if rg -q 'RUN\+=".*disable-usb-suspend' /etc/udev/rules.d/*.rules /run/current-system/etc/udev/rules.d/*.rules 2>/dev/null; then
+  bad 'USB RUN+=disable-usb-suspend still present (udev feedback loop)'
+else
+  ok 'no USB RUN+=disable-usb-suspend rule'
+fi
+# udev rule may still exist (autorandr package); the unit must be neutralized.
+if systemctl cat autorandr.service 2>/dev/null | rg -q 'ExecStart=.*/bin/true'; then
+  ok 'autorandr.service ExecStart is no-op (DRM hotplug neutralized)'
+elif ! rg -q 'SUBSYSTEM=="drm".*autorandr' /etc/udev/rules.d/40-monitor-hotplug.rules 2>/dev/null; then
+  ok 'autorandr DRM hotplug rule absent'
+else
+  bad 'autorandr still runnable on DRM change (rebuild needed)'
+fi
+# usbcore.quirks sysfs often reads empty even when cmdline applied; trust cmdline.
+quirks_cmdline="$(tr ' ' '\n' </proc/cmdline | rg '^usbcore.quirks=' | tail -1 | cut -d= -f2- || true)"
+if [[ "$quirks_cmdline" == *2109:0817* && "$quirks_cmdline" == *17ef:3082* ]]; then
+  ok 'cmdline usbcore.quirks includes VIA hub + Lenovo dock'
+else
+  bad "cmdline usbcore.quirks missing dock/VIA entries: ${quirks_cmdline:-empty}"
+fi
 
 section 'Recent USB disconnects (kernel log, last 24h)'
 disconnects="$(journalctl -k --since '24 hours ago' --no-pager 2>/dev/null | rg 'USB disconnect' || true)"

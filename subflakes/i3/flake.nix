@@ -42,6 +42,11 @@
           default = "Mod1";
           description = "The modifier key used by i3 (e.g. 'Mod4' or 'Mod1').";
         };
+
+        # Picom + multi-monitor KVM/MST has repeatedly died this machine with
+        # "run of XIDs" / "Failed to present the frame" right when the session
+        # becomes unusable. Keep optional; disable on flaky dock setups.
+        enablePicom = mkEnableOption "picom compositor" // { default = true; };
       };
 
     output =
@@ -64,7 +69,9 @@
           nemo
           nitrogen
           oneko
+        ] ++ lib.optionals cfg.enablePicom [
           picom
+        ] ++ [
           playerctl
           sysstat
           brave
@@ -109,7 +116,7 @@
             '';
           };
 
-          services.picom = {
+          services.picom = lib.mkIf cfg.enablePicom {
             enable = true;
             vSync = true;
             shadow = true;

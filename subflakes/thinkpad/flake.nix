@@ -171,6 +171,9 @@
           services.acpid.enable = true;
           services.acpid.lidEventCommands= "systemctl suspend";
 
+          # Boot-time USB power lock only. Periodic re-enforce lives in
+          # kvm-switch (10min + flock) when that module is enabled — a 1min
+          # timer here doubled writes into power/* and amplified hub storms.
           systemd.services.usb-power-management-disable = {
             description = "Disable USB power management for all devices to prevent dock disconnects";
             wantedBy = [ "multi-user.target" ];
@@ -180,23 +183,6 @@
               RemainAfterExit = true;
               ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/scripts/disable-usb-suspend.sh";
               ExecStartPost = "${pkgs.coreutils}/bin/sleep 2";
-            };
-          };
-
-          systemd.timers.usb-power-management-enforce = {
-            description = "Periodically re-enforce USB power management settings";
-            wantedBy = [ "timers.target" ];
-            timerConfig = {
-              OnBootSec = "30sec";
-              OnUnitActiveSec = "1min";
-            };
-          };
-
-          systemd.services.usb-power-management-enforce = {
-            description = "Re-enforce USB power management settings";
-            serviceConfig = {
-              Type = "oneshot";
-              ExecStart = "${pkgs.bash}/bin/bash /etc/nixos/scripts/disable-usb-suspend.sh";
             };
           };
 

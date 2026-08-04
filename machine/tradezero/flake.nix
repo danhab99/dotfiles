@@ -122,6 +122,10 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
 
+            # Picom repeatedly dies on this KVM/MST dock with "run of XIDs" /
+            # "Failed to present the frame" right as the session dies. Keep off.
+            enablePicom = false;
+
             # screen = [
             #   "DVI-I-1-1"
             #   "eDP-1"
@@ -253,12 +257,45 @@
             };
           };
 
-          # autorandr's udev rule fires on every DRM "change", including manual
-          # xrandr/arandr rearranges, then --change snaps back to the saved
-          # profile. Keep autorandr for explicit/sleep use only.
-          environment.etc."udev/rules.d/40-monitor-hotplug.rules".text = lib.mkForce ''
-            # Disabled: do not run autorandr on every DRM change.
-          '';
+          # autorandr's package installs 40-monitor-hotplug.rules via
+          # services.udev.packages; environment.etc mkForce loses that merge
+          # (verified live after reboot — rule still present). Neutralize the
+          # unit so DRM "change" → systemctl start is a no-op. Manual
+          # `autorandr` CLI and Mod4+Shift+d (.screenlayout) still work.
+          systemd.services.autorandr = {
+            wantedBy = lib.mkForce [ ];
+            serviceConfig = {
+              ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
+            };
+          };
+
+          # thinkpad's 1min USB re-enforce timer is removed; kvm-switch owns
+          # periodic re-enforce. Mask any leftover unit name from older gens.
+          systemd.timers.usb-power-management-enforce.enable = lib.mkForce false;
+          systemd.services.usb-power-management-enforce.enable = lib.mkForce false;
+
+          # Belt-and-suspenders: i3.enablePicom=false should drop the HM service,
+          # but force it off if an older generation left the unit enabled.
+          home-manager.users.dan.services.picom.enable = lib.mkForce false;
+
+          # Minimal compositor for i3bar -t / ARGB only. Avoids picom's XID
+          # exhaustion on this KVM/MST dock. No shadows, no fancy backends.
+          home-manager.users.dan.home.packages = [ pkgs.xcompmgr ];
+          home-manager.users.dan.systemd.user.services.xcompmgr = {
+            Unit = {
+              Description = "xcompmgr (minimal compositor for i3bar transparency)";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              ExecStart = "${pkgs.xcompmgr}/bin/xcompmgr -n";
+              Restart = "on-failure";
+              RestartSec = 2;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
 
           # XFCE otherwise re-applies displays.xml (AutoEnableProfiles=ALWAYS)
           # and fights arandr; KVM duplicate EDIDs make that especially bad.

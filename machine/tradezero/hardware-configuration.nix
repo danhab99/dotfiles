@@ -27,17 +27,10 @@
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
-    kernelParams = [
-      "usbcore.autosuspend=-1"
-      # k = USB_QUIRK_NO_LPM; include 05e3:0610 GenesysLogic hub from dock disconnects
-      "usbcore.quirks=05e3:0626:k,05e3:0610:k,0bda:0411:k,0bda:5411:k,1a40:0801:k"
-    ];
-
-    # Disable runtime power management for USB via kernel module options
-    extraModprobeConfig = ''
-      options usbcore autosuspend=-1
-      options xhci_hcd quirks=0x800
-    '';
+    # usbcore.autosuspend / quirks / xhci live in kvm-switch. A second
+    # usbcore.quirks= here is LAST on the cmdline and was wiping the fuller
+    # dock/VIA/KVM quirk list (sysfs only showed the short set after reboot).
+    kernelParams = [ ];
   };
 
   boot.loader.systemd-boot.enable = true;
