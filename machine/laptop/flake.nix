@@ -50,6 +50,7 @@
     ollama.url = "path:../../subflakes/ollama";
     openclaw.url = "path:../../subflakes/openclaw";
     opencode.url = "path:../../subflakes/opencode";
+    polybar.url = "path:../../subflakes/polybar";
     printing.url = "path:../../subflakes/printing";
     python.url = "path:../../subflakes/python";
     qmk.url = "path:../../subflakes/qmk";
@@ -116,6 +117,10 @@
             screen = [ "eDP-1" ];
             fontSize = 12.0;
             defaultLayoutScript = "";
+          };
+          polybar = {
+            enable = true;
+            polybarConfig = ./polybar.ini;
           };
           nix = {
             enable = true;

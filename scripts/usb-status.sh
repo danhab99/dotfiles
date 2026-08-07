@@ -121,7 +121,7 @@ done < <(
     v="$(cat "$d/idVendor")"
     p="$(cat "$d/idProduct")"
     case "$v:$p" in
-      05e3:*|0bda:*|1a40:*) ;;
+      05e3:*|0bda:*|1a40:*|2109:*|17ef:307f|17ef:3080|17ef:3081|17ef:3082) ;;
       *) continue ;;
     esac
     c="$(cat "$d/power/control" 2>/dev/null || echo '?')"
@@ -130,7 +130,7 @@ done < <(
   done
 )
 if [[ "$hub_found" -eq 0 ]]; then
-  note 'no GenesysLogic / Realtek / VLI hubs currently connected'
+  note 'no GenesysLogic / Realtek / VLI / VIA / Lenovo dock hubs currently connected'
 fi
 
 section 'Background enforcement'

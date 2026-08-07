@@ -29,7 +29,10 @@
               "pcie_aspm=off"
               # Hub/dock USB: disable autosuspend (k). Includes Genesys, Realtek,
               # Terminus, VIA Labs (ThinkPad USB-C hub path), Lenovo TB3 dock.
-              "usbcore.quirks=05e3:0626:k,05e3:0610:k,0bda:0411:k,0bda:5411:k,1a40:0801:k,2109:0817:k,2109:2817:k,2109:8887:k,17ef:307f:k,17ef:3080:k,17ef:3081:k,17ef:3082:k"
+              # k=NO_LPM. Include input devices on the flapping VIA hub path
+              # (Moonlander 3297:1969, Magic Trackpad 05ac:0265) — hub 3-2.2
+              # USB-disconnected multiple times on 2026-08-06.
+              "usbcore.quirks=05e3:0626:k,05e3:0610:k,0bda:0411:k,0bda:5411:k,1a40:0801:k,2109:0817:k,2109:2817:k,2109:8887:k,17ef:307f:k,17ef:3080:k,17ef:3081:k,17ef:3082:k,3297:1969:k,05ac:0265:k"
               # Stop i915 DP link from entering deep display C-states / PSR that
               # flap through KVM EDID emulation (Xorg "link-state is BAD" every ~2s).
               "i915.enable_psr=0"
@@ -54,6 +57,11 @@
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/persist", ATTR{power/persist}="1"
 
+            # xHCI hosts drift back to power/control=auto (TLP/PCI runtime PM).
+            # Pin on add — still re-enforced by disable-usb-suspend.timer.
+            ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/control", ATTR{power/control}="on"
+            ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
+
             # Thunderbolt/USB4: keep runtime PM off on the dock path.
             ACTION=="add", SUBSYSTEM=="thunderbolt", TEST=="power/control", ATTR{power/control}="on"
             ACTION=="add", SUBSYSTEM=="pci", DRIVER=="thunderbolt", TEST=="power/control", ATTR{power/control}="on"
@@ -70,14 +78,15 @@
             };
           };
 
-          # Infrequent re-enforce only. Never on every USB uevent.
+          # Re-enforce often enough that TLP/PCI flipping xHCI back to auto
+          # cannot linger. Never on every USB uevent (that causes storms).
           systemd.timers.disable-usb-suspend-enforce = {
             description = "Periodically re-enforce USB no-suspend settings";
             wantedBy = [ "timers.target" ];
             timerConfig = {
-              OnBootSec = "1min";
-              OnUnitActiveSec = "10min";
-              AccuracySec = "30s";
+              OnBootSec = "30s";
+              OnUnitActiveSec = "2min";
+              AccuracySec = "15s";
             };
           };
 
@@ -101,7 +110,7 @@
             USB_AUTOSUSPEND = 0;
             USB_AUTOSUSPEND_DISABLE_ON_SHUTDOWN = 1;
             # mkForce: thinkpad also sets USB_DENYLIST; keep the KVM/dock set.
-            USB_DENYLIST = lib.mkForce "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801 2109:0817 2109:2817 2109:8887 17ef:307f 17ef:3080 17ef:3081 17ef:3082";
+            USB_DENYLIST = lib.mkForce "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801 2109:0817 2109:2817 2109:8887 17ef:307f 17ef:3080 17ef:3081 17ef:3082 3297:1969 05ac:0265";
             RUNTIME_PM_ON_AC = "on";
             RUNTIME_PM_ON_BAT = "on";
             PCIE_ASPM_ON_AC = "performance";

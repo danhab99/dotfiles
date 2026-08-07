@@ -57,6 +57,7 @@
     ollama.url = "path:../../subflakes/ollama";
     openclaw.url = "path:../../subflakes/openclaw";
     opencode.url = "path:../../subflakes/opencode";
+    polybar.url = "path:../../subflakes/polybar";
     printing.url = "path:../../subflakes/printing";
     python.url = "path:../../subflakes/python";
     qmk.url = "path:../../subflakes/qmk";
@@ -122,9 +123,15 @@
             enable = true;
             i3blocksConfig = ./i3blocks.conf;
 
-            # Picom repeatedly dies on this KVM/MST dock with "run of XIDs" /
-            # "Failed to present the frame" right as the session dies. Keep off.
+            # No picom/i3bar — polybar owns status chrome.
+            # docs/kvm-display-seizure.md (tradezero KVM policy; applied fleet-wide).
             enablePicom = false;
+            enablePicomMinimal = false;
+            enableXcompmgr = false;
+            enableFocusUnderline = true;
+            enableBarWallpaperMatch = false;
+            borderRadius = 12;
+            focusBorderWidth = 0;
 
             # screen = [
             #   "DVI-I-1-1"
@@ -147,6 +154,10 @@
 
             defaultLayoutScript = "auto.sh";
             fontSize = 12.0;
+          };
+          polybar = {
+            enable = true;
+            polybarConfig = ./polybar.ini;
           };
           nix.enable = true;
           ollama = {
@@ -274,34 +285,38 @@
           systemd.timers.usb-power-management-enforce.enable = lib.mkForce false;
           systemd.services.usb-power-management-enforce.enable = lib.mkForce false;
 
-          # Belt-and-suspenders: i3.enablePicom=false should drop the HM service,
-          # but force it off if an older generation left the unit enabled.
-          home-manager.users.dan.services.picom.enable = lib.mkForce false;
-
-          # Minimal compositor for i3bar -t / ARGB only. Avoids picom's XID
-          # exhaustion on this KVM/MST dock. No shadows, no fancy backends.
-          home-manager.users.dan.home.packages = [ pkgs.xcompmgr ];
-          home-manager.users.dan.systemd.user.services.xcompmgr = {
-            Unit = {
-              Description = "xcompmgr (minimal compositor for i3bar transparency)";
-              After = [ "graphical-session-pre.target" ];
-              PartOf = [ "graphical-session.target" ];
-            };
-            Service = {
-              ExecStart = "${pkgs.xcompmgr}/bin/xcompmgr -n";
-              Restart = "on-failure";
-              RestartSec = 2;
-            };
-            Install = {
-              WantedBy = [ "graphical-session.target" ];
-            };
-          };
-
           # XFCE otherwise re-applies displays.xml (AutoEnableProfiles=ALWAYS)
           # and fights arandr; KVM duplicate EDIDs make that especially bad.
           home-manager.users.dan.xfconf.settings.displays = {
             AutoEnableProfiles = 0;
             Notify = 0;
+          };
+
+          # WORK MACHINE: never allow a compositor. Picom after KVM/USB blips
+          # has pegged X at 100% mid-session (calls). docs/kvm-display-seizure.md
+          home-manager.users.dan.systemd.user.services.no-compositor-guard = {
+            Unit = {
+              Description = "Keep X compositor-free (tradezero work / calls)";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "simple";
+              ExecStart = pkgs.writeShellScript "no-compositor-guard" ''
+                set -euo pipefail
+                while true; do
+                  pkill -x picom 2>/dev/null || true
+                  pkill -x xcompmgr 2>/dev/null || true
+                  pkill -x compton 2>/dev/null || true
+                  sleep 3
+                done
+              '';
+              Restart = "always";
+              RestartSec = 1;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
           };
 
           home-manager.users.dan.home.file = {

@@ -60,6 +60,7 @@
     ollama.url = "path:../../subflakes/ollama";
     openclaw.url = "path:../../subflakes/openclaw";
     opencode.url = "path:../../subflakes/opencode";
+    polybar.url = "path:../../subflakes/polybar";
     printing.url = "path:../../subflakes/printing";
     python.url = "path:../../subflakes/python";
     qmk.url = "path:../../subflakes/qmk";
@@ -133,6 +134,10 @@
             i3blocksConfig = ../laptop/i3blocks.conf;
             modKey = "Mod1";
             altModKey = "Mod2";
+          };
+          polybar = {
+            enable = true;
+            polybarConfig = ../laptop/polybar.ini;
           };
           libreoffice.enable = false;
           neovim.enable = true;
