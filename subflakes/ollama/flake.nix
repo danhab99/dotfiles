@@ -102,8 +102,12 @@
             user = "ollama";
 
             environmentVariables = {
-              OLLAMA_MODELS = cfg.repoDir;
+              OLLAMA_CONTEXT_LENGTH = "32768";
+              OLLAMA_FLASH_ATTENTION = "1";
               OLLAMA_HOST = "0.0.0.0";
+              OLLAMA_KEEP_ALIVE = "-1";
+              OLLAMA_KV_CACHE_TYPE = "q8_0";
+              OLLAMA_MODELS = cfg.repoDir;
             };
           };
         };
