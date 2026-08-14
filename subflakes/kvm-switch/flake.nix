@@ -208,6 +208,7 @@
               pkgs.procps
               pkgs.gnugrep
               pkgs.gnused
+              pkgs.gawk
               pkgs.bash
               pkgs.util-linux
               pkgs.systemd
@@ -220,6 +221,7 @@
                   pkgs.procps
                   pkgs.gnugrep
                   pkgs.gnused
+                  pkgs.gawk
                   pkgs.bash
                   pkgs.util-linux
                   pkgs.systemd

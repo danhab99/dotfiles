@@ -137,8 +137,7 @@ while IFS= read -r -d '' permit; do
 done < <(find /sys/devices -name usb3_lpm_permit -print0 2>/dev/null)
 
 if [ "$xhci_bad" -ne 0 ] || [ "$lpm_bad" -ne 0 ] || [ "$failed" -gt 0 ]; then
-  echo "disable-usb-suspend: wrote=$wrote failed_writes=$failed xhci_bad=$xhci_bad lpm_bad=$lpm_bad" >&2
-  exit 1
+  echo "disable-usb-suspend: wrote=$wrote failed_writes=$failed xhci_bad=$xhci_bad lpm_bad=$lpm_bad (continuing; re-enforce timer will retry)" >&2
 fi
 
 exit 0
