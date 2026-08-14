@@ -18,13 +18,24 @@ find_x_pid() {
   pgrep -f '/bin/X(org)?( |$)' 2>/dev/null | head -1 || true
 }
 
+# utime+stime jiffies from /proc/<pid>/stat (fields 14+15). Pure bash.
+proc_cpu_jiffies() {
+  local stat rest
+  stat="$(cat "$1" 2>/dev/null)" || { echo 0; return; }
+  rest="${stat##*)}"
+  # shellcheck disable=SC2086
+  set -- ${rest}
+  # After comm: 1=state … 12=utime 13=stime
+  echo $(( ${12:-0} + ${13:-0} ))
+}
+
 x_cpu_pct() {
   local xpid="$1" sample="${2:-2}" u1 u2 clk
   [ -r "/proc/${xpid}/stat" ] || { echo 0; return; }
-  u1="$(awk '{print $14+$15}' "/proc/${xpid}/stat")"
+  u1="$(proc_cpu_jiffies "/proc/${xpid}/stat")"
   sleep "${sample}"
   [ -r "/proc/${xpid}/stat" ] || { echo 0; return; }
-  u2="$(awk '{print $14+$15}' "/proc/${xpid}/stat")"
+  u2="$(proc_cpu_jiffies "/proc/${xpid}/stat")"
   clk="$(getconf CLK_TCK 2>/dev/null || echo 100)"
   echo "$(( (u2 - u1) * 100 / (clk * sample) ))"
 }
