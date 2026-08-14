@@ -284,6 +284,8 @@
           # periodic re-enforce. Mask any leftover unit name from older gens.
           systemd.timers.usb-power-management-enforce.enable = lib.mkForce false;
           systemd.services.usb-power-management-enforce.enable = lib.mkForce false;
+          # Old thinkpad oneshot still present and fails activation (no flock PATH).
+          systemd.services.usb-power-management-disable.enable = lib.mkForce false;
 
           # XFCE otherwise re-applies displays.xml (AutoEnableProfiles=ALWAYS)
           # and fights arandr; KVM duplicate EDIDs make that especially bad.
