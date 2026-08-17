@@ -134,9 +134,11 @@ ensure_polybar() {
   if pgrep -u "${USER_NAME}" -x polybar >/dev/null 2>&1; then
     return 0
   fi
-  # Hung launch (pkill-then-xrandr) looks "active" with zero bars.
-  systemctl --user kill --kill-whom=all -s SIGKILL polybar.service 2>/dev/null || true
-  systemctl --user reset-failed polybar.service 2>/dev/null || true
+  # Service "active" during feh/xrandr startup — do not SIGKILL (that is what
+  # made the bar vanish in a restart loop).
+  if systemctl --user is-active --quiet polybar.service 2>/dev/null; then
+    return 0
+  fi
   systemctl --user start polybar.service 2>/dev/null || true
 }
 
