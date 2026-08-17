@@ -188,19 +188,20 @@
             };
           };
 
+          # CALL-SAFE: never restart display-manager / kill sessions.
+          # Root oneshot only forces eDP off via DRM sysfs.
           systemd.services.display-seizure-escalate = {
-            description = "Restart display-manager after failed soft seizure recovery";
+            description = "No-op (must never restart display-manager / log Dan out)";
             serviceConfig = {
               Type = "oneshot";
-              ExecStart = "${pkgs.systemd}/bin/systemctl restart display-manager.service";
+              ExecStart = "${pkgs.coreutils}/bin/true";
             };
           };
 
-          # Root watchdog: when X is pegged with eDP on beside dock outputs,
-          # user-session xrandr hangs and soft recover cannot clear the wedge.
-          # This path only uses /proc + sysfs and restarts display-manager.
+          # Root watchdog: /proc + sysfs only. On peg / eDP-while-docked, force
+          # eDP off via sysfs. NEVER restarts display-manager (calls must live).
           systemd.services.display-seizure-system-watchdog = {
-            description = "Root watchdog: restart display-manager on hard X seizure";
+            description = "Root watchdog: sysfs eDP-off on hard X seizure (no DM restart)";
             wantedBy = [ "multi-user.target" ];
             after = [ "display-manager.service" ];
             path = [
@@ -243,6 +244,14 @@
                 }
                 {
                   command = "/run/current-system/sw/bin/systemctl restart display-seizure-escalate.service";
+                  options = [ "NOPASSWD" ];
+                }
+                {
+                  command = "/run/current-system/sw/bin/systemctl restart display-seizure-system-watchdog.service";
+                  options = [ "NOPASSWD" ];
+                }
+                {
+                  command = "/run/current-system/sw/bin/systemctl stop display-seizure-system-watchdog.service";
                   options = [ "NOPASSWD" ];
                 }
               ];

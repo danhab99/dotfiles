@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
-# Keep tradezero usable after KVM/USB hub blips.
+# Keep tradezero usable after KVM/USB hub blips — CALL-SAFE.
 # - Always: no compositors, kill real xfsettingsd, eDP off when docked
-# - On X peg: STOP heavy clients → xrandr → CONT → reattach
-# - If still pegged after several soft recovers: restart display-manager
+# - On X peg: layout reset + input reattach + ensure polybar (NO SIGSTOP Slack,
+#   NO display-manager restart, NO session terminate)
 # See docs/kvm-display-seizure.md.
 set -uo pipefail
 
 USER_NAME="${USER:-dan}"
 EDP_SYSFS="${EDP_SYSFS:-/sys/class/drm/card1-eDP-1/enabled}"
-ESCALATE_AFTER="${ESCALATE_AFTER:-2}"
-ESCALATE_WINDOW="${ESCALATE_WINDOW:-90}"
 
 resolve_display_env() {
   if [ -n "${DISPLAY:-}" ] && [ -n "${XAUTHORITY:-}" ] && [ -r "${XAUTHORITY}" ]; then
@@ -61,7 +59,6 @@ edp_enabled() {
   [ "$(cat "${EDP_SYSFS}" 2>/dev/null)" = "enabled" ]
 }
 
-# Count enabled DP-* DRM connectors (dock/KVM path). eDP is separate.
 dock_output_count() {
   local n=0 d
   for d in /sys/class/drm/card1-DP-*/enabled; do
@@ -79,26 +76,20 @@ undocked() {
   [ "$(dock_output_count)" -lt 2 ]
 }
 
-cont_all_stopped() {
-  local p
-  for p in $(ps -o state=,pid= -u "${USER_NAME}" 2>/dev/null | awk '$1=="T"{print $2}'); do
-    kill -CONT "${p}" 2>/dev/null || true
-  done
-}
-
-stop_heavy_x_clients() {
+# Never SIGSTOP Slack / Electron call clients. Optional: pause VirtualBox only
+# (VPN VM) — disabled by default; set STOP_VBOX_ON_PEG=1 to enable.
+stop_optional_heavy() {
+  [ "${STOP_VBOX_ON_PEG:-0}" = "1" ] || return 0
   local p
   for p in $(pgrep -u "${USER_NAME}" -x VirtualBoxVM 2>/dev/null || true); do
     kill -STOP "${p}" 2>/dev/null || true
   done
-  for p in $(pgrep -u "${USER_NAME}" -x slack 2>/dev/null || true); do
-    kill -STOP "${p}" 2>/dev/null || true
-  done
-  for p in $(pgrep -u "${USER_NAME}" -x firefox 2>/dev/null || true); do
-    kill -STOP "${p}" 2>/dev/null || true
-  done
-  for p in $(pgrep -u "${USER_NAME}" -x cursor 2>/dev/null || true); do
-    kill -STOP "${p}" 2>/dev/null || true
+}
+
+cont_vbox_if_stopped() {
+  local p
+  for p in $(pgrep -u "${USER_NAME}" -x VirtualBoxVM 2>/dev/null || true); do
+    kill -CONT "${p}" 2>/dev/null || true
   done
 }
 
@@ -109,7 +100,6 @@ force_edp_off() {
 
 enable_laptop_panel() {
   command -v xrandr >/dev/null 2>&1 || return 1
-  # Prefer explicit mode; fall back to --auto if the panel rejects 1080p briefly.
   if timeout -k 1 5 xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 >/dev/null 2>&1; then
     return 0
   fi
@@ -140,19 +130,36 @@ assert_mobile_layout() {
   fi
 }
 
+ensure_polybar() {
+  if pgrep -u "${USER_NAME}" -x polybar >/dev/null 2>&1; then
+    return 0
+  fi
+  # Hung launch (pkill-then-xrandr) looks "active" with zero bars.
+  systemctl --user kill --kill-whom=all -s SIGKILL polybar.service 2>/dev/null || true
+  systemctl --user reset-failed polybar.service 2>/dev/null || true
+  systemctl --user start polybar.service 2>/dev/null || true
+}
+
+# Skip ALL RandR while X is pegged — xrandr hangs and is what kills polybar
+# (launch used to pkill bars then block on xrandr).
+x_is_pegged() {
+  local xpid pct
+  xpid="$(find_x_pid)"
+  [ -n "${xpid}" ] || return 1
+  pct="$(x_cpu_pct "${xpid}" 1)"
+  [ "${pct}" -ge "${PEG_PCT_SKIP_RANDR:-80}" ]
+}
+
 keep_edp_off_if_docked() {
   dock_outputs_up || return 0
   edp_enabled || return 0
+  x_is_pegged && return 0
   resolve_display_env || return 0
-  printf 'display-seizure-watchdog: eDP on while docked — forcing off\n' >&2
+  printf 'display-seizure-watchdog: eDP on while docked — xrandr off only (X not pegged)\n' >&2
   kill_xfsettingsd
   force_edp_off || true
-  if edp_enabled; then
-    assert_dock_layout
-  fi
 }
 
-# Undock / lid-only: ensure the built-in panel is on (xfsettingsd is stubbed).
 keep_edp_on_if_undocked() {
   undocked || return 0
   edp_enabled && return 0
@@ -161,43 +168,33 @@ keep_edp_on_if_undocked() {
   assert_mobile_layout
 }
 
-escalate_restart_dm() {
-  printf 'display-seizure-watchdog: ESCALATE — restarting display-manager\n' >&2
-  local systemctl_bin
-  systemctl_bin="$(command -v systemctl || echo /run/current-system/sw/bin/systemctl)"
-  if command -v sudo >/dev/null 2>&1; then
-    sudo -n "${systemctl_bin}" start display-seizure-escalate.service >/dev/null 2>&1 && return 0
-    sudo -n /run/current-system/sw/bin/systemctl start display-seizure-escalate.service >/dev/null 2>&1 && return 0
-  fi
-  # Own-session fallback (no root): drop GUI so SDDM comes back.
-  local sid
-  sid="$(loginctl 2>/dev/null | awk -v u="${USER_NAME}" '$3==u && $5=="user" && $4 ~ /^seat/ {print $1; exit}')"
-  if [ -n "${sid}" ]; then
-    printf 'display-seizure-watchdog: escalate via loginctl terminate-session %s\n' "${sid}" >&2
-    loginctl terminate-session "${sid}" >/dev/null 2>&1 && return 0
-  fi
-  printf 'display-seizure-watchdog: escalate failed\n' >&2
-  return 1
+# If docked monitors drifted to native 1440p, force 1080p (known X peg trigger).
+keep_dock_1080p() {
+  dock_outputs_up || return 0
+  x_is_pegged && return 0
+  resolve_display_env || return 0
+  command -v xrandr >/dev/null 2>&1 || return 0
+  local screen
+  screen="$(timeout -k 1 3 xrandr --query 2>/dev/null | awk '/^Screen 0:/ {print $8"x"$10}' | tr -d ',')"
+  case "${screen}" in
+    *1440*|*2560x*)
+      printf 'display-seizure-watchdog: dock at %s — forcing 1080p layout\n' "${screen}" >&2
+      assert_dock_layout
+      ensure_polybar
+      ;;
+  esac
 }
 
 soft_recover() {
-  printf 'display-seizure-soft-recover: running (reason=%s)\n' "${1:-unspecified}" >&2
+  printf 'display-seizure-soft-recover: running (reason=%s) [no RandR on peg, no logout, keep polybar]\n' \
+    "${1:-unspecified}" >&2
   kill_compositors
   kill_transparent_i3bar
   kill_xfsettingsd
-  stop_heavy_x_clients
-  sleep 0.5
-  if resolve_display_env; then
-    if dock_outputs_up; then
-      assert_dock_layout
-    else
-      assert_mobile_layout
-    fi
-  fi
-  cont_all_stopped
   if [ -x /etc/nixos/scripts/reattach-x-inputs.sh ]; then
     /etc/nixos/scripts/reattach-x-inputs.sh 2>/dev/null || true
   fi
+  ensure_polybar
 }
 
 x_cpu_pct() {
@@ -218,13 +215,16 @@ find_x_pid() {
 main_loop() {
   local peg_pct="${PEG_PCT:-85}" peg_streak_need="${PEG_STREAK:-2}" idle_sleep="${IDLE_SLEEP:-1}"
   local streak=0 xpid pct last_recover=0 now
-  local recover_times=()
 
   while true; do
     kill_compositors
     kill_xfsettingsd
-    keep_edp_off_if_docked
-    keep_edp_on_if_undocked
+    if ! x_is_pegged; then
+      keep_edp_off_if_docked
+      keep_edp_on_if_undocked
+      keep_dock_1080p
+    fi
+    ensure_polybar
 
     xpid="$(find_x_pid)"
     if [ -z "${xpid}" ]; then
@@ -246,28 +246,11 @@ main_loop() {
       if [ $((now - last_recover)) -ge 15 ]; then
         soft_recover "X pegged ~${pct}%"
         last_recover="${now}"
-        recover_times+=("${now}")
-        local filtered=() t
-        for t in "${recover_times[@]}"; do
-          [ $((now - t)) -le "${ESCALATE_WINDOW}" ] && filtered+=("${t}")
-        done
-        recover_times=("${filtered[@]}")
-
         sleep 2
         pct="$(x_cpu_pct "${xpid}" 2)"
         if [ "${pct}" -ge "${peg_pct}" ]; then
-          printf 'display-seizure-watchdog: still pegged (~%s%%) fails=%s\n' "${pct}" "${#recover_times[@]}" >&2
-          # Hard wedge signature: eDP still on while docked — escalate immediately.
-          if dock_outputs_up && edp_enabled; then
-            printf 'display-seizure-watchdog: eDP still on while docked after soft recover — escalate now\n' >&2
-            escalate_restart_dm || true
-            recover_times=()
-            sleep 10
-          elif [ "${#recover_times[@]}" -ge "${ESCALATE_AFTER}" ]; then
-            escalate_restart_dm || true
-            recover_times=()
-            sleep 10
-          fi
+          printf 'display-seizure-watchdog: still pegged (~%s%%) after call-safe recover — NOT escalating to logout\n' \
+            "${pct}" >&2
         else
           printf 'display-seizure-watchdog: soft recover cleared peg (now ~%s%%)\n' "${pct}" >&2
         fi

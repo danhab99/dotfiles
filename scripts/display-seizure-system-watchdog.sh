@@ -1,31 +1,26 @@
 #!/usr/bin/env bash
 # Root-level display seizure watchdog (tradezero).
-# Does NOT talk to X — only /proc + sysfs. When X is pegged (especially with
-# eDP left on beside dock outputs), soft user-session recovery cannot run
-# xrandr. Restart display-manager so the machine becomes usable again.
-#
-# See docs/kvm-display-seizure.md.
+# NEVER restart display-manager / terminate sessions.
+# When X is pegged with eDP on beside dock outputs, force laptop panel off via
+# DRM sysfs only (RandR hangs). Do not touch eDP when X is healthy.
 set -uo pipefail
 
 PEG_PCT="${PEG_PCT:-90}"
-PEG_STREAK="${PEG_STREAK:-3}"          # consecutive samples (~2s each) before action
-COOLDOWN_SEC="${COOLDOWN_SEC:-90}"     # min seconds between DM restarts
-EDP_SYSFS="${EDP_SYSFS:-/sys/class/drm/card1-eDP-1/enabled}"
-STATE_DIR=/run/display-seizure-system-watchdog
-mkdir -p "${STATE_DIR}"
+PEG_STREAK="${PEG_STREAK:-3}"
+COOLDOWN_SEC="${COOLDOWN_SEC:-45}"
+EDP_STATUS="${EDP_STATUS:-/sys/class/drm/card1-eDP-1/status}"
+EDP_ENABLED="${EDP_ENABLED:-/sys/class/drm/card1-eDP-1/enabled}"
 
 find_x_pid() {
   pgrep -f '/bin/X(org)?( |$)' 2>/dev/null | head -1 || true
 }
 
-# utime+stime jiffies from /proc/<pid>/stat (fields 14+15). Pure bash.
 proc_cpu_jiffies() {
   local stat rest
   stat="$(cat "$1" 2>/dev/null)" || { echo 0; return; }
   rest="${stat##*)}"
   # shellcheck disable=SC2086
   set -- ${rest}
-  # After comm: 1=state … 12=utime 13=stime
   echo $(( ${12:-0} + ${13:-0} ))
 }
 
@@ -50,10 +45,15 @@ dock_dp_count() {
 }
 
 edp_on() {
-  [ -r "${EDP_SYSFS}" ] && [ "$(cat "${EDP_SYSFS}" 2>/dev/null)" = "enabled" ]
+  [ -r "${EDP_ENABLED}" ] && [ "$(cat "${EDP_ENABLED}" 2>/dev/null)" = "enabled" ]
 }
 
-last_restart=0
+force_edp_off_sysfs() {
+  [ -w "${EDP_STATUS}" ] || return 0
+  printf 'off\n' > "${EDP_STATUS}" 2>/dev/null || true
+}
+
+last_action=0
 streak=0
 
 while true; do
@@ -69,39 +69,22 @@ while true; do
   edp=0
   edp_on && edp=1
 
-  # Pegged X is always bad. Pegged + eDP beside dock is the known hard wedge
-  # (xrandr hangs; user-session soft recover cannot clear it).
   if [ "${pct}" -ge "${PEG_PCT}" ]; then
     streak=$((streak + 1))
     printf 'display-seizure-system-watchdog: X pid=%s cpu~%s%% streak=%s eDP=%s dock_dp=%s\n' \
       "${xpid}" "${pct}" "${streak}" "${edp}" "${dock}" >&2
   else
     streak=0
+    sleep 1
+    continue
   fi
 
-  should_restart=0
-  if [ "${streak}" -ge "${PEG_STREAK}" ]; then
-    if [ "${edp}" -eq 1 ] && [ "${dock}" -ge 2 ]; then
-      should_restart=1
-      reason="X pegged with eDP on while docked"
-    elif [ "${streak}" -ge $((PEG_STREAK + 3)) ]; then
-      # Longer streak without the eDP signature — still unusable
-      should_restart=1
-      reason="X pegged sustained"
-    fi
-  fi
-
-  if [ "${should_restart}" -eq 1 ]; then
+  if [ "${streak}" -ge "${PEG_STREAK}" ] && [ "${edp}" -eq 1 ] && [ "${dock}" -ge 2 ]; then
     now="$(date +%s)"
-    if [ $((now - last_restart)) -ge "${COOLDOWN_SEC}" ]; then
-      printf 'display-seizure-system-watchdog: RESTART display-manager (%s)\n' "${reason}" >&2
-      systemctl restart display-manager.service || true
-      last_restart="${now}"
-      streak=0
-      sleep 15
-    else
-      printf 'display-seizure-system-watchdog: cooldown (%ss left)\n' \
-        "$((COOLDOWN_SEC - (now - last_restart)))" >&2
+    if [ $((now - last_action)) -ge "${COOLDOWN_SEC}" ]; then
+      printf 'display-seizure-system-watchdog: pegged with eDP on — sysfs eDP off (no logout)\n' >&2
+      force_edp_off_sysfs
+      last_action="${now}"
       streak=0
     fi
   fi

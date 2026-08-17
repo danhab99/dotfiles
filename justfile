@@ -27,7 +27,7 @@ switch:
         --flake ./machine/{{ name }}#subflake
 
     -sudo systemctl restart wg-quick-wg0
-    -i3-msg restart
+    -timeout 2 i3-msg restart
     -sudo udevadm control --reload
     -sudo udevadm trigger
     # -sudo systemctl restart n8n.service &
