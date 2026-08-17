@@ -130,12 +130,15 @@ assert_mobile_layout() {
   fi
 }
 
+polybar_running() {
+  pgrep -u "${USER_NAME}" -f '/bin/polybar ' >/dev/null 2>&1
+}
+
 ensure_polybar() {
-  if pgrep -u "${USER_NAME}" -x polybar >/dev/null 2>&1; then
-    return 0
-  fi
+  polybar_running && return 0
   # Service "active" during feh/xrandr startup — do not SIGKILL (that is what
-  # made the bar vanish in a restart loop).
+  # made the bar vanish in a restart loop). Nix wraps the binary as .polybar-wrappe
+  # so `pgrep -x polybar` is always false here.
   if systemctl --user is-active --quiet polybar.service 2>/dev/null; then
     return 0
   fi
