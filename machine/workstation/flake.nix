@@ -155,7 +155,7 @@
               "mistral-small3.2:24b-instruct-2506-q8_0"
               "nemotron3:33b"
               "opencoder:8b"
-              "qwen3.6:27b"
+              "qwen3.8:27b"
             ];
             enableGpu = true;
           };
