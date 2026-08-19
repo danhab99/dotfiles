@@ -132,7 +132,6 @@
           i3blocks
           i3status
           nemo
-          nitrogen
           oneko
           imagemagick
           ripgrep

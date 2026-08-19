@@ -284,10 +284,10 @@ in
       command = "ssh-add ~/.ssh/id_rsa";
       always = true;
     }
-    {
-      command = "nitrogen --restore";
-      always = true;
-    }
+    # {
+    #   command = "nitrogen --restore";
+    #   always = true;
+    # }
     {
       command = "setxkbmap -option caps:none";
       always = true;
