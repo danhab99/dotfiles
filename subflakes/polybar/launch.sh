@@ -43,8 +43,9 @@ done
 
 sleep 0.4
 # Drop only stale polybar processes, keep the ones we just started.
-if pgrep -x polybar >/dev/null 2>&1; then
-  for p in $(pgrep -x polybar); do
+# Binary comm is `.polybar-wrappe` on Nix — match by argv.
+if pgrep -f '/bin/polybar ' >/dev/null 2>&1; then
+  for p in $(pgrep -f '/bin/polybar '); do
     keep=0
     for n in "${new_pids[@]}"; do
       [ "$p" = "$n" ] && keep=1 && break

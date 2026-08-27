@@ -1,0 +1,504 @@
+--- a/dix/resource.c
++++ b/dix/resource.c
+@@ -149,6 +149,360 @@
+ #define TypeNameString(t) LookupResourceName(t)
+ #endif
+ 
++/* O(1) GetXIDRange: free XID extent rb-tree (Roberto Ragusa RFC, May 2013).
++ * rb-tree from LiteratePrograms (red-black tree C); production port for 21.1.23. */
++
++typedef struct XIDextent_t {
++    XID from;
++    XID to;
++} XIDextent;
++
++enum rbtree_node_color { RB_RED, RB_BLACK };
++
++typedef struct rbtree_node_t {
++    XIDextent extent;
++    struct rbtree_node_t *left;
++    struct rbtree_node_t *right;
++    struct rbtree_node_t *parent;
++    enum rbtree_node_color color;
++} *rbtree_node;
++
++typedef struct rbtree_t {
++    rbtree_node root;
++} *rbtree;
++
++typedef int (*compare_extent_func)(XIDextent *left, XIDextent *right);
++
++static rbtree rbtree_create(void);
++static void rbtree_destroy(rbtree t);
++static XIDextent *rbtree_lookup(rbtree t, XIDextent *extent, compare_extent_func compare);
++static void rbtree_insert(rbtree t, XIDextent *extent, compare_extent_func compare);
++static void rbtree_delete(rbtree t, XIDextent *extent, compare_extent_func compare);
++static int compare_extent_exactly(XIDextent *p1, XIDextent *p2);
++static int compare_extent_overlap(XIDextent *p1, XIDextent *p2);
++static void mark_id_as_used(rbtree tree, XID id);
++static void mark_id_as_unused(rbtree tree, XID id);
++static void find_unused_range(rbtree tree, XID min, XID max, XID *minp, XID *maxp);
++
++typedef rbtree_node node;
++typedef enum rbtree_node_color color;
++
++static node grandparent(node n) { return n->parent->parent; }
++static node sibling(node n) { return n == n->parent->left ? n->parent->right : n->parent->left; }
++static node uncle(node n) { return sibling(n->parent); }
++static color node_color(node n) { return n == NULL ? RB_BLACK : n->color; }
++
++static void replace_node(rbtree t, node oldn, node newn)
++{
++    if (oldn->parent == NULL) t->root = newn;
++    else if (oldn == oldn->parent->left) oldn->parent->left = newn;
++    else oldn->parent->right = newn;
++    if (newn != NULL) newn->parent = oldn->parent;
++}
++
++static node new_node(XIDextent *extent, color c, node left, node right)
++{
++    node result = malloc(sizeof(*result));
++    if (!result) return NULL;
++    result->extent = *extent;
++    result->color = c;
++    result->left = left;
++    result->right = right;
++    if (left) left->parent = result;
++    if (right) right->parent = result;
++    result->parent = NULL;
++    return result;
++}
++
++static node lookup_node(rbtree t, XIDextent *extent, compare_extent_func compare)
++{
++    node n = t->root;
++    while (n != NULL) {
++        int comp_result = compare(extent, &n->extent);
++        if (comp_result == 0) return n;
++        n = comp_result < 0 ? n->left : n->right;
++    }
++    return NULL;
++}
++
++static void rotate_left(rbtree t, node n)
++{
++    node r = n->right;
++    replace_node(t, n, r);
++    n->right = r->left;
++    if (r->left != NULL) r->left->parent = n;
++    r->left = n;
++    n->parent = r;
++}
++
++static void rotate_right(rbtree t, node n)
++{
++    node L = n->left;
++    replace_node(t, n, L);
++    n->left = L->right;
++    if (L->right != NULL) L->right->parent = n;
++    L->right = n;
++    n->parent = L;
++}
++
++static void insert_case1(rbtree t, node n);
++static void insert_case2(rbtree t, node n);
++static void insert_case3(rbtree t, node n);
++static void insert_case4(rbtree t, node n);
++static void insert_case5(rbtree t, node n);
++static void delete_case1(rbtree t, node n);
++static void delete_case2(rbtree t, node n);
++static void delete_case3(rbtree t, node n);
++static void delete_case4(rbtree t, node n);
++static void delete_case5(rbtree t, node n);
++static void delete_case6(rbtree t, node n);
++
++static void insert_case1(rbtree t, node n)
++{
++    if (n->parent == NULL) n->color = RB_BLACK;
++    else insert_case2(t, n);
++}
++static void insert_case2(rbtree t, node n)
++{
++    if (node_color(n->parent) == RB_BLACK) return;
++    insert_case3(t, n);
++}
++static void insert_case3(rbtree t, node n)
++{
++    if (node_color(uncle(n)) == RB_RED) {
++        n->parent->color = RB_BLACK;
++        uncle(n)->color = RB_BLACK;
++        grandparent(n)->color = RB_RED;
++        insert_case1(t, grandparent(n));
++    } else insert_case4(t, n);
++}
++static void insert_case4(rbtree t, node n)
++{
++    if (n == n->parent->right && n->parent == grandparent(n)->left) {
++        rotate_left(t, n->parent);
++        n = n->left;
++    } else if (n == n->parent->left && n->parent == grandparent(n)->right) {
++        rotate_right(t, n->parent);
++        n = n->right;
++    }
++    insert_case5(t, n);
++}
++static void insert_case5(rbtree t, node n)
++{
++    n->parent->color = RB_BLACK;
++    grandparent(n)->color = RB_RED;
++    if (n == n->parent->left && n->parent == grandparent(n)->left)
++        rotate_right(t, grandparent(n));
++    else rotate_left(t, grandparent(n));
++}
++
++static node maximum_node(node root)
++{
++    while (root->right != NULL) root = root->right;
++    return root;
++}
++
++static void delete_case1(rbtree t, node n) { if (n->parent != NULL) delete_case2(t, n); }
++static void delete_case2(rbtree t, node n)
++{
++    if (node_color(sibling(n)) == RB_RED) {
++        n->parent->color = RB_RED;
++        sibling(n)->color = RB_BLACK;
++        if (n == n->parent->left) rotate_left(t, n->parent);
++        else rotate_right(t, n->parent);
++    }
++    delete_case3(t, n);
++}
++static void delete_case3(rbtree t, node n)
++{
++    if (node_color(n->parent) == RB_BLACK && node_color(sibling(n)) == RB_BLACK &&
++        node_color(sibling(n)->left) == RB_BLACK && node_color(sibling(n)->right) == RB_BLACK) {
++        sibling(n)->color = RB_RED;
++        delete_case1(t, n->parent);
++    } else delete_case4(t, n);
++}
++static void delete_case4(rbtree t, node n)
++{
++    if (node_color(n->parent) == RB_RED && node_color(sibling(n)) == RB_BLACK &&
++        node_color(sibling(n)->left) == RB_BLACK && node_color(sibling(n)->right) == RB_BLACK) {
++        sibling(n)->color = RB_RED;
++        n->parent->color = RB_BLACK;
++    } else delete_case5(t, n);
++}
++static void delete_case5(rbtree t, node n)
++{
++    if (n == n->parent->left && node_color(sibling(n)) == RB_BLACK &&
++        node_color(sibling(n)->left) == RB_RED && node_color(sibling(n)->right) == RB_BLACK) {
++        sibling(n)->color = RB_RED;
++        sibling(n)->left->color = RB_BLACK;
++        rotate_right(t, sibling(n));
++    } else if (n == n->parent->right && node_color(sibling(n)) == RB_BLACK &&
++               node_color(sibling(n)->right) == RB_RED && node_color(sibling(n)->left) == RB_BLACK) {
++        sibling(n)->color = RB_RED;
++        sibling(n)->right->color = RB_BLACK;
++        rotate_left(t, sibling(n));
++    }
++    delete_case6(t, n);
++}
++static void delete_case6(rbtree t, node n)
++{
++    sibling(n)->color = node_color(n->parent);
++    n->parent->color = RB_BLACK;
++    if (n == n->parent->left) {
++        sibling(n)->right->color = RB_BLACK;
++        rotate_left(t, n->parent);
++    } else {
++        sibling(n)->left->color = RB_BLACK;
++        rotate_right(t, n->parent);
++    }
++}
++
++static void recursively_destroy_node(node n)
++{
++    if (n->left) recursively_destroy_node(n->left);
++    if (n->right) recursively_destroy_node(n->right);
++    free(n);
++}
++
++static rbtree rbtree_create(void)
++{
++    rbtree t = malloc(sizeof(*t));
++    if (!t) return NULL;
++    t->root = NULL;
++    return t;
++}
++
++static void rbtree_destroy(rbtree t)
++{
++    if (!t) return;
++    if (t->root) recursively_destroy_node(t->root);
++    free(t);
++}
++
++static XIDextent *rbtree_lookup(rbtree t, XIDextent *extent, compare_extent_func compare)
++{
++    node n = lookup_node(t, extent, compare);
++    return n == NULL ? NULL : &n->extent;
++}
++
++static void rbtree_insert(rbtree t, XIDextent *extent, compare_extent_func compare)
++{
++    node inserted_node = new_node(extent, RB_RED, NULL, NULL);
++    if (!inserted_node) return;
++    if (t->root == NULL) t->root = inserted_node;
++    else {
++        node n = t->root;
++        while (1) {
++            int comp_result = compare(extent, &n->extent);
++            if (comp_result == 0) {
++                n->extent = *extent;
++                free(inserted_node);
++                return;
++            }
++            if (comp_result < 0) {
++                if (n->left == NULL) { n->left = inserted_node; break; }
++                n = n->left;
++            } else {
++                if (n->right == NULL) { n->right = inserted_node; break; }
++                n = n->right;
++            }
++        }
++        inserted_node->parent = n;
++    }
++    insert_case1(t, inserted_node);
++}
++
++static void rbtree_delete(rbtree t, XIDextent *extent, compare_extent_func compare)
++{
++    node child, n = lookup_node(t, extent, compare);
++    if (n == NULL) return;
++    if (n->left != NULL && n->right != NULL) {
++        node pred = maximum_node(n->left);
++        n->extent = pred->extent;
++        n = pred;
++    }
++    child = n->right == NULL ? n->left : n->right;
++    if (node_color(n) == RB_BLACK) {
++        n->color = node_color(child);
++        delete_case1(t, n);
++    }
++    replace_node(t, n, child);
++    if (n->parent == NULL && child != NULL) child->color = RB_BLACK;
++    free(n);
++}
++
++static int compare_extent_exactly(XIDextent *p1, XIDextent *p2)
++{
++    if (p1->from != p2->from) return p1->from < p2->from ? -1 : 1;
++    if (p1->to != p2->to) return p1->to < p2->to ? -1 : 1;
++    return 0;
++}
++
++static int compare_extent_overlap(XIDextent *p1, XIDextent *p2)
++{
++    if (p1->to < p2->from) return -1;
++    if (p1->from > p2->to) return 1;
++    return 0;
++}
++
++static void mark_id_as_unused(rbtree tree, XID id)
++{
++    XIDextent ex, *minus1 = NULL, *plus1 = NULL;
++    if (id > 0) {
++        ex.from = id - 1; ex.to = id - 1;
++        minus1 = rbtree_lookup(tree, &ex, compare_extent_overlap);
++    }
++    if (id < (XID) 0x7fffffff) {
++        ex.from = id + 1; ex.to = id + 1;
++        plus1 = rbtree_lookup(tree, &ex, compare_extent_overlap);
++    }
++    if (minus1 == NULL) {
++        if (plus1 == NULL) {
++            ex.from = id; ex.to = id;
++            rbtree_insert(tree, &ex, compare_extent_exactly);
++        } else plus1->from = id;
++    } else if (plus1 == NULL) minus1->to = id;
++    else {
++        minus1->to = plus1->to;
++        ex.from = plus1->from; ex.to = plus1->to;
++        rbtree_delete(tree, &ex, compare_extent_exactly);
++    }
++}
++
++static void mark_id_as_used(rbtree tree, XID id)
++{
++    XIDextent ex, *overlapping;
++    ex.from = id; ex.to = id;
++    overlapping = rbtree_lookup(tree, &ex, compare_extent_overlap);
++    if (overlapping == NULL) return;
++    if (overlapping->from == id) {
++        if (overlapping->to == id) rbtree_delete(tree, &ex, compare_extent_exactly);
++        else overlapping->from = id + 1;
++    } else if (overlapping->to == id) overlapping->to = id - 1;
++    else {
++        ex.from = id + 1; ex.to = overlapping->to;
++        overlapping->to = id - 1;
++        rbtree_insert(tree, &ex, compare_extent_exactly);
++    }
++}
++
++static void find_unused_range(rbtree tree, XID min, XID max, XID *minp, XID *maxp)
++{
++    XIDextent ex, *unused;
++    ex.from = min; ex.to = max;
++    unused = rbtree_lookup(tree, &ex, compare_extent_overlap);
++    if (unused == NULL) *minp = *maxp = 0;
++    else {
++        *minp = unused->from < min ? min : unused->from;
++        *maxp = unused->to > max ? max : unused->to;
++    }
++}
++
++/* tradezero patch marker - must survive -O2 for ensure-patched-x.sh */
++static const char tradezero_getxidrange_rfc2013[]
++    __attribute__((used)) = "GetXIDRange O(1) free-extent rb-tree (RFC 2013 port)";
++
++
+ static void RebuildTable(int    /*client */
+     );
+ 
+@@ -170,10 +524,21 @@
+     int elements;
+     int buckets;
+     int hashsize;               /* log(2)(buckets) */
++    rbtree free_extents;
+     XID fakeID;
+     XID endFakeID;
+ } ClientResourceRec;
+ 
++static void maybe_mark_id_as_unused(ClientResourceRec *rrec, XID id)
++{
++    ResourcePtr res = rrec->resources[HashResourceID(id, rrec->hashsize)];
++    while (res && res->id != id)
++        res = res->next;
++    if (res == NULL)
++        mark_id_as_unused(rrec->free_extents, id);
++}
++
++
+ RESTYPE lastResourceType;
+ static RESTYPE lastResourceClass;
+ RESTYPE TypeMask;
+@@ -670,6 +1035,15 @@
+     for (j = 0; j < INITBUCKETS; j++) {
+         clientTable[i].resources[j] = NULL;
+     }
++    {
++        XIDextent ex;
++        clientTable[i].free_extents = rbtree_create();
++        if (!clientTable[i].free_extents)
++            return FALSE;
++        ex.from = 0;
++        ex.to = (XID) 0x7fffffff;
++        rbtree_insert(clientTable[i].free_extents, &ex, compare_extent_exactly);
++    }
+     return TRUE;
+ }
+ 
+@@ -686,54 +1060,17 @@
+     return (id ^ (id >> numBits)) & ~((~0U) << numBits);
+ }
+ 
+-static XID
+-AvailableID(int client, XID id, XID maxid, XID goodid)
+-{
+-    ResourcePtr res;
+-
+-    if ((goodid >= id) && (goodid <= maxid))
+-        return goodid;
+-    for (; id <= maxid; id++) {
+-        res = clientTable[client].resources[HashResourceID(id, clientTable[client].hashsize)];
+-        while (res && (res->id != id))
+-            res = res->next;
+-        if (!res)
+-            return id;
+-    }
+-    return 0;
+-}
+ 
+ void
+ GetXIDRange(int client, Bool server, XID *minp, XID *maxp)
+ {
+     XID id, maxid;
+-    ResourcePtr *resp;
+-    ResourcePtr res;
+-    int i;
+-    XID goodid;
+ 
+     id = (Mask) client << CLIENTOFFSET;
+     if (server)
+         id |= client ? SERVER_BIT : SERVER_MINID;
+     maxid = id | RESOURCE_ID_MASK;
+-    goodid = 0;
+-    for (resp = clientTable[client].resources, i = clientTable[client].buckets;
+-         --i >= 0;) {
+-        for (res = *resp++; res; res = res->next) {
+-            if ((res->id < id) || (res->id > maxid))
+-                continue;
+-            if (((res->id - id) >= (maxid - res->id)) ?
+-                (goodid = AvailableID(client, id, res->id - 1, goodid)) :
+-                !(goodid = AvailableID(client, res->id + 1, maxid, goodid)))
+-                maxid = res->id - 1;
+-            else
+-                id = res->id + 1;
+-        }
+-    }
+-    if (id > maxid)
+-        id = maxid = 0;
+-    *minp = id;
+-    *maxp = maxid;
++    find_unused_range(clientTable[client].free_extents, id, maxid, minp, maxp);
+ }
+ 
+ /**
+@@ -832,6 +1169,7 @@
+     res->value = value;
+     *head = res;
+     rrec->elements++;
++    mark_id_as_used(rrec->free_extents, id);
+     CallResourceStateCallback(ResourceStateAdding, res);
+     return TRUE;
+ }
+@@ -916,6 +1254,7 @@
+                 elements = --*eltptr;
+ 
+                 doFreeResource(res, rtype == skipDeleteFuncType);
++                maybe_mark_id_as_unused(&clientTable[cid], id);
+ 
+                 if (*eltptr != elements)
+                     prev = head;        /* prev may no longer be valid */
+@@ -947,6 +1286,7 @@
+                 clientTable[cid].elements--;
+ 
+                 doFreeResource(res, skipFree);
++                maybe_mark_id_as_unused(&clientTable[cid], id);
+ 
+                 break;
+             }
+@@ -1103,6 +1443,7 @@
+                 elements = *eltptr;
+ 
+                 doFreeResource(this, FALSE);
++                maybe_mark_id_as_unused(&clientTable[client->index], this->id);
+ 
+                 if (*eltptr != elements)
+                     prev = &resources[j];       /* prev may no longer be valid */
+@@ -1152,11 +1493,14 @@
+             clientTable[client->index].elements--;
+ 
+             doFreeResource(this, FALSE);
++            maybe_mark_id_as_unused(&clientTable[client->index], this->id);
+         }
+     }
+     free(clientTable[client->index].resources);
+     clientTable[client->index].resources = NULL;
+     clientTable[client->index].buckets = 0;
++    rbtree_destroy(clientTable[client->index].free_extents);
++    clientTable[client->index].free_extents = NULL;
+ }
+ 
+ void

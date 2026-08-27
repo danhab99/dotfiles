@@ -55,7 +55,7 @@ EOF
 
 cat > "${HOME}/.config/systemd/user/display-seizure-watchdog.service" <<EOF
 [Unit]
-Description=Soft-recover X display seizure (pegged CPU / eDP / compositor)
+Description=Call-safe display seizure watchdog (layout/polybar; no logout)
 After=graphical-session-pre.target
 PartOf=graphical-session.target
 
@@ -64,6 +64,7 @@ Type=simple
 ExecStart=${BASH_BIN} /etc/nixos/scripts/display-seizure-watchdog.sh watch
 Restart=always
 RestartSec=1
+Environment=STOP_VBOX_ON_PEG=0
 
 [Install]
 WantedBy=graphical-session.target
@@ -104,9 +105,12 @@ if [ -n "${XPID}" ]; then
   echo "X pid=${XPID}"
   top -b -n 2 -d 1 -p "${XPID}" 2>/dev/null | tail -4
 else
-  echo "No X server — if the greeter is stuck: sudo systemctl restart display-manager"
+  echo "No X server — greeter only: sudo systemctl restart display-manager (manual; not automatic)"
 fi
 
 echo "=== done ==="
-echo "If GUI still unusable: sudo systemctl restart display-manager"
+echo "CALL-SAFE policy: automatic recovery must NOT restart display-manager or SIGSTOP Slack."
+echo "If root watchdog still has old DM-restart code in memory:"
+echo "  sudo systemctl restart display-seizure-system-watchdog.service"
+echo "  sudo systemctl mask display-seizure-escalate.service"
 echo "Durable: nixos-rebuild switch (docs/kvm-display-seizure.md) — NO picom on this machine"

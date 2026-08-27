@@ -93,7 +93,14 @@ cont_vbox_if_stopped() {
   done
 }
 
+force_edp_off_sysfs() {
+  local status="${EDP_STATUS:-/sys/class/drm/card1-eDP-1/status}"
+  [ -w "${status}" ] || return 1
+  printf 'off\n' > "${status}" 2>/dev/null
+}
+
 force_edp_off() {
+  force_edp_off_sysfs && return 0
   command -v xrandr >/dev/null 2>&1 || return 1
   timeout -k 1 3 xrandr --output eDP-1 --off >/dev/null 2>&1
 }
@@ -174,20 +181,28 @@ keep_edp_on_if_undocked() {
 }
 
 # If docked monitors drifted to native 1440p, force 1080p (known X peg trigger).
+# Read DRM sysfs — never xrandr --query. modesetting drmModeGetConnector() on
+# every RandR query re-reads KVM EDIDs over i915 MST AUX (see drmmode_output_detect).
+dock_mode_is_1440() {
+  local f mode
+  for f in /sys/class/drm/card1-DP-*/mode; do
+    [ -r "$f" ] || continue
+    mode="$(cat "$f" 2>/dev/null || true)"
+    case "${mode}" in
+      *1440*|*2560x*) return 0 ;;
+    esac
+  done
+  return 1
+}
+
 keep_dock_1080p() {
   dock_outputs_up || return 0
   x_is_pegged && return 0
+  dock_mode_is_1440 || return 0
   resolve_display_env || return 0
-  command -v xrandr >/dev/null 2>&1 || return 0
-  local screen
-  screen="$(timeout -k 1 3 xrandr --query 2>/dev/null | awk '/^Screen 0:/ {print $8"x"$10}' | tr -d ',')"
-  case "${screen}" in
-    *1440*|*2560x*)
-      printf 'display-seizure-watchdog: dock at %s — forcing 1080p layout\n' "${screen}" >&2
-      assert_dock_layout
-      ensure_polybar
-      ;;
-  esac
+  printf 'display-seizure-watchdog: dock mode 1440/2560 via sysfs — forcing 1080p layout\n' >&2
+  assert_dock_layout
+  ensure_polybar
 }
 
 soft_recover() {

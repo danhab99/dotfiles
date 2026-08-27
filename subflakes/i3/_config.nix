@@ -183,7 +183,7 @@ in
       "${mod}+Shift+9" = "move container to workspace number 9";
       "${mod}+Shift+0" = "move container to workspace number 10";
       "${mod}+Shift+c" = "reload";
-      "${mod}+Shift+r" = "restart";
+      "${mod}+Shift+r" = "exec /etc/nixos/scripts/i3-safe-recover.sh";
       "${mod}+Shift+e" =
         "exec i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'";
       "${mod}+r" = "mode resize";

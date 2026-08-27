@@ -1,0 +1,24 @@
+--- a/hw/xfree86/drivers/modesetting/vblank.c
++++ b/hw/xfree86/drivers/modesetting/vblank.c
+@@ -319,7 +319,20 @@
+             ms_drm_abort_seq(scrn, seq);
+             return FALSE;
+         }
+-        ms_flush_drm_events(screen);
++        /* When i915 stops delivering vblank IRQs (Intel DP-MST + KVM EDID
++         * flaps), drmWaitVBlank returns EBUSY and ms_flush_drm_events()
++         * returns 0 (nothing to process). Stock code ignores that return and
++         * spins forever at ~100% CPU. Match pageflip.c: abort if flush cannot
++         * make progress (pre-2015 / pageflip semantics). See xorg-devel
++         * 2015-06 ms_flush_drm_events API and 2017 ms_queue_vblank helper.
++         */
++        if (ms_flush_drm_events(screen) <= 0) {
++            xf86DrvMsg(scrn->scrnIndex, X_WARNING,
++                       "ms_queue_vblank: EBUSY and flush empty; aborting "
++                       "(tradezero MST livelock fix)\n");
++            ms_drm_abort_seq(scrn, seq);
++            return FALSE;
++        }
+     }
+ }
+ 

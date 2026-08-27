@@ -185,7 +185,6 @@
           xorg = {
             enable = true;
             videoDrivers = [
-              "displaylink"
               "modesetting"
             ];
             extraConfig = ''
@@ -259,6 +258,12 @@
           ];
 
         raw = { pkgs, lib, ... }: {
+          # TB3 dock is i915 MST, not DisplayLink. evdi + DisplayLinkManager
+          # emit extra drm_minor uevents that make X reprobe all MST EDIDs.
+          boot.blacklistedKernelModules = [ "evdi" ];
+          systemd.services.displaylink.wantedBy = lib.mkForce [ ];
+          systemd.services.dlm.wantedBy = lib.mkForce [ ];
+
           # Systemd service for on-demand USB controller reset
           systemd.services.reset-usb = {
             description = "Reset xHCI USB controller to recover from stuck devices";

@@ -1,0 +1,28 @@
+--- a/hw/xfree86/drivers/modesetting/pageflip.c
++++ b/hw/xfree86/drivers/modesetting/pageflip.c
+@@ -205,19 +205,12 @@
+     /* take a reference on flipdata for use in flip */
+     flipdata->flip_count++;
+ 
+-    while (do_queue_flip_on_crtc(ms, crtc, flags, seq)) {
+-        /* We may have failed because the event queue was full.  Flush it
+-         * and retry.  If there was nothing to flush, then we failed for
+-         * some other reason and should just return an error.
+-         */
+-        if (ms_flush_drm_events(screen) <= 0) {
+-            /* Aborting will also decrement flip_count and free(flip). */
+-            ms_drm_abort_seq(scrn, seq);
+-            return QUEUE_FLIP_DRM_FLUSH_FAILED;
+-        }
+-
+-        /* We flushed some events, so try again. */
+-        xf86DrvMsg(scrn->scrnIndex, X_WARNING, "flip queue retry\n");
++    /* tradezero: never spin on flip queue (KVM/MST). One attempt only. */
++    if (do_queue_flip_on_crtc(ms, crtc, flags, seq)) {
++        ms_flush_drm_events(screen);
++        ms_drm_abort_seq(scrn, seq);
++        xf86DrvMsg(scrn->scrnIndex, X_WARNING, "flip queue failed (no retry)\n");
++        return QUEUE_FLIP_DRM_FLUSH_FAILED;
+     }
+ 
+     /* The page flip succeeded. */

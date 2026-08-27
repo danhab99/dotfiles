@@ -74,7 +74,9 @@
             Service = {
               Type = "simple";
               ExecStart = "${launch}";
-              Restart = "on-failure";
+              # Topology/session blips kill polybar; always bring the bar back
+              # (tradezero acceptance: status bar always visible).
+              Restart = "always";
               RestartSec = 2;
             };
             Install = {

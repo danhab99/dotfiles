@@ -1,0 +1,30 @@
+# After reboot — agent confirmation (tradezero X livelock fixes)
+
+When Dan restores this Cursor session after `just switch` + reboot + login:
+
+## Do immediately (one command)
+
+```bash
+bash /etc/nixos/scripts/confirm-xorg-livelock-fixes-live.sh
+```
+
+- Exit **0** + `RESULT: INSTALLED AND LIVE` → both fixes are in the **running** X session.
+- Exit **1** → report which FAIL lines; do not claim success.
+
+## What must be live
+
+1. GetXIDRange O(1) rb-tree (`get-xidrange-rfc2013-rbtree.patch`)
+2. `ms_queue_vblank` abort when EBUSY && flush<=0 (`ms-queue-vblank-ebusy-abort-on-empty-flush.patch`)
+
+Running X binary path must equal `readlink -f /run/current-system/sw/bin/X`.
+
+## Optional follow-up
+
+```bash
+bash /etc/nixos/scripts/diagnose-display-now.sh
+systemctl --user status ensure-patched-x.service --no-pager
+```
+
+## Goal reminder
+
+Docked KVM session must not peg X ~100% from these two livelocks; no logout recovery.

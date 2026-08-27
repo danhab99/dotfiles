@@ -71,6 +71,23 @@
             '';
           };
 
+          systemd.user.services.kvm-seizure-capture = {
+            Unit = {
+              Description = "Log X CPU / i915 IRQ / DRM state (no xrandr)";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "simple";
+              ExecStart = "${pkgs.bash}/bin/bash ${../../scripts/kvm-seizure-capture.sh}";
+              Restart = "always";
+              RestartSec = 2;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+
           systemd.user.services.x-input-guard = {
             Unit = {
               Description = "Reattach floating X input devices (KVM/USB hub)";
@@ -104,9 +121,73 @@
               WantedBy = [ "graphical-session.target" ];
             };
           };
+
+          systemd.user.services.ensure-patched-x = {
+            Unit = {
+              Description = "Verify running Xorg has GetXIDRange + vblank-abort livelock fixes";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "oneshot";
+              ExecStart = "${pkgs.bash}/bin/bash ${../../scripts/ensure-patched-x.sh}";
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+
+          # Mod4+Shift+Escape works when i3 is dead (xbindkeys grabs at X level).
+          home.file.".xbindkeysrc" = {
+            text = ''
+              "/etc/nixos/scripts/i3-safe-recover.sh"
+                Mod4+Shift + Escape
+            '';
+          };
+
+          systemd.user.services.xbindkeys-recover = {
+            Unit = {
+              Description = "Global hotkey for i3-safe-recover when WM is dead";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "simple";
+              ExecStart = "${pkgs.writeShellScript "xbindkeys-recover" ''
+                exec ${pkgs.xbindkeys}/bin/xbindkeys -f "''${HOME}/.xbindkeysrc"
+              ''}";
+              Restart = "always";
+              RestartSec = 2;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+
         };
 
         nixos = {
+          # Two research-backed Xorg fixes (no Wayland, no nuclear vblank disable):
+          # 1) GetXIDRange O(1) rb-tree (Ragusa RFC 2013) — multi-day XID livelock
+          # 2) ms_queue_vblank abort when EBUSY && flush<=0 — MST/KVM IRQ stall spin
+          # See /etc/nixos/notes/upstream-research.md
+          nixpkgs.overlays = [
+            (final: prev: {
+              xorg-server = prev.xorg-server.overrideAttrs (old: {
+                patches = (old.patches or [ ]) ++ [
+                  ../xorg/patches/get-xidrange-rfc2013-rbtree.patch
+                  ../xorg/patches/ms-queue-vblank-ebusy-abort-on-empty-flush.patch
+                ];
+              });
+              i3 = prev.i3.overrideAttrs (_: {
+                doCheck = false;
+              });
+              i3-rounded = prev.i3-rounded.overrideAttrs (_: {
+                doCheck = false;
+              });
+            })
+          ];
+
           boot = {
             kernelParams = [
               "usbcore.autosuspend=-1"
@@ -177,6 +258,18 @@
             serviceConfig = {
               Type = "oneshot";
               ExecStart = disableUsbSuspend;
+            };
+          };
+
+          systemd.services.force-edp-off-when-docked = {
+            description = "Force eDP off via DRM sysfs when dock monitors connected (pre-X)";
+            wantedBy = [ "display-manager.service" ];
+            before = [ "display-manager.service" ];
+            path = [ pkgs.coreutils pkgs.bash ];
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+              ExecStart = "${pkgs.bash}/bin/bash ${../../scripts/force-edp-off-when-docked.sh}";
             };
           };
 

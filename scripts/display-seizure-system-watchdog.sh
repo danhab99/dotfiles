@@ -79,10 +79,10 @@ while true; do
     continue
   fi
 
-  if [ "${streak}" -ge "${PEG_STREAK}" ] && [ "${edp}" -eq 1 ] && [ "${dock}" -ge 2 ]; then
+  if [ "${streak}" -ge "${PEG_STREAK}" ] && [ "${dock}" -ge 2 ]; then
     now="$(date +%s)"
     if [ $((now - last_action)) -ge "${COOLDOWN_SEC}" ]; then
-      printf 'display-seizure-system-watchdog: pegged with eDP on — sysfs eDP off (no logout)\n' >&2
+      printf 'display-seizure-system-watchdog: pegged at dock — sysfs eDP off (no logout)\n' >&2
       force_edp_off_sysfs
       last_action="${now}"
       streak=0
