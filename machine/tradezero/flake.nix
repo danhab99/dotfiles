@@ -141,11 +141,12 @@
             #   "DP-3-3-1"
             # ];
 
-            # Physical left → center → right (confirmed via arandr).
+            # DisplayLink: DVI-I-2-2 left, DVI-I-1-1 center, eDP-1 laptop.
+            # MST fallback: DP-2-2, DP-2-1, DP-2-3.
             screen = [
-              "DP-2-2"
-              "DP-2-1"
-              "DP-2-3"
+              "DVI-I-2-2"
+              "DVI-I-1-1"
+              "eDP-1"
             ];
 
             defaultLayoutScript = "auto.sh";
@@ -185,6 +186,7 @@
           xorg = {
             enable = true;
             videoDrivers = [
+              "displaylink"
               "modesetting"
             ];
             extraConfig = ''
@@ -258,11 +260,8 @@
           ];
 
         raw = { pkgs, lib, ... }: {
-          # TB3 dock is i915 MST, not DisplayLink. evdi + DisplayLinkManager
-          # emit extra drm_minor uevents that make X reprobe all MST EDIDs.
-          boot.blacklistedKernelModules = [ "evdi" ];
-          systemd.services.displaylink.wantedBy = lib.mkForce [ ];
-          systemd.services.dlm.wantedBy = lib.mkForce [ ];
+          boot.extraModulePackages = [ pkgs.linuxPackages.evdi ];
+          boot.kernelModules = [ "evdi" ];
 
           # Systemd service for on-demand USB controller reset
           systemd.services.reset-usb = {
@@ -340,6 +339,24 @@
               text = ''
                 #!/usr/bin/env bash
                 set -euo pipefail
+                # DisplayLink USB dock (DVI-I-* on provider "displaylink").
+                if xrandr --listproviders | grep -qi displaylink; then
+                  xrandr --setprovideroutputsource 1 0 2>/dev/null \
+                    || xrandr --setprovideroutputsource 2 0
+                  mapfile -t dl_outs < <(xrandr --query | awk '/^DVI-I-.* connected/ { print $1 }')
+                  for out in "''${dl_outs[@]}"; do
+                    xrandr --addmode "$out" 1920x1080 2>/dev/null || true
+                  done
+                  if ((''${#dl_outs[@]} >= 2)); then
+                    xrandr \
+                      --output eDP-1 --off \
+                      --output "''${dl_outs[0]}" --mode 1920x1080 --pos 0x0 --rotate normal \
+                      --output "''${dl_outs[1]}" --mode 1920x1080 --pos 1920x0 --rotate normal --primary
+                    systemctl --user restart polybar.service 2>/dev/null || true
+                    exit 0
+                  fi
+                fi
+                # TB3 / KVM MST dock (DP-2-*).
                 xrandr --query | awk '/^DP-[0-9]+-[0-9]+ connected/ { print $1 }' | while read -r out; do
                   xrandr --addmode "$out" 1920x1080 2>/dev/null || true
                 done
@@ -348,6 +365,7 @@
                   --output DP-2-2 --mode 1920x1080 --pos 0x0 --rotate normal \
                   --output DP-2-1 --mode 1920x1080 --pos 1920x0 --rotate normal \
                   --output DP-2-3 --mode 1920x1080 --pos 3840x0 --rotate normal --primary
+                systemctl --user restart polybar.service 2>/dev/null || true
               '';
             };
 
@@ -362,7 +380,9 @@
                   --output DP-2-2 --off \
                   --output DP-2-3 --off \
                   --output DP-1 --off \
-                  --output HDMI-1 --off 2>/dev/null || \
+                  --output HDMI-1 --off \
+                  --output DVI-I-1 --off \
+                  --output DVI-I-2 --off 2>/dev/null || \
                 xrandr --output eDP-1 --primary --auto
               '';
             };

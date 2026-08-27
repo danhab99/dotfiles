@@ -141,7 +141,34 @@ polybar_running() {
   pgrep -u "${USER_NAME}" -f '/bin/polybar ' >/dev/null 2>&1
 }
 
+active_monitor_count() {
+  if command -v xrandr >/dev/null 2>&1; then
+    timeout -k 1 3 xrandr --query 2>/dev/null \
+      | awk '/ connected/ && /[0-9]+x[0-9]+/ { c++ } END { print c + 0 }' \
+      || echo 0
+    return
+  fi
+  echo 0
+}
+
+polybar_bar_count() {
+  pgrep -u "${USER_NAME}" -cf '/bin/polybar ' 2>/dev/null || echo 0
+}
+
+polybar_needs_reconcile() {
+  local want have
+  want="$(active_monitor_count)"
+  have="$(polybar_bar_count)"
+  [ "${want}" -gt 0 ] && [ "${want}" -ne "${have}" ]
+}
+
 ensure_polybar() {
+  if polybar_needs_reconcile; then
+    printf 'display-seizure-watchdog: polybar count %s != monitors %s — restarting\n' \
+      "$(polybar_bar_count)" "$(active_monitor_count)" >&2
+    systemctl --user restart polybar.service 2>/dev/null || true
+    return 0
+  fi
   polybar_running && return 0
   # Service "active" during feh/xrandr startup — do not SIGKILL (that is what
   # made the bar vanish in a restart loop). Nix wraps the binary as .polybar-wrappe

@@ -48,9 +48,12 @@
             pkgs.gnugrep
             pkgs.gawk
             pkgs.procps
+            pkgs.jq
+            pkgs.i3
           ]}:$PATH"
           export POLYBAR_CONFIG=${cfg.polybarConfig}
           export POLYBAR_BAR=${cfg.barName}
+          export POLYBAR_POLL_SEC=2
           ${builtins.readFile ./launch.sh}
         '';
       in
@@ -74,6 +77,7 @@
             Service = {
               Type = "simple";
               ExecStart = "${launch}";
+              KillMode = "control-group";
               # Topology/session blips kill polybar; always bring the bar back
               # (tradezero acceptance: status bar always visible).
               Restart = "always";
