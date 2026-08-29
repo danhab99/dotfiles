@@ -1,0 +1,41 @@
+--- a/src/main/kotlin/io/github/bujjuisabee/shimelinux/linux/LinuxEnvironment.kt	2026-08-29 00:59:15.612176166 -0400
++++ b/src/main/kotlin/io/github/bujjuisabee/shimelinux/linux/LinuxEnvironment.kt	2026-08-29 01:08:46.807584404 -0400
+@@ -25,10 +25,37 @@
+ import com.group_finity.mascot.environment.Area
+ import com.group_finity.mascot.environment.Environment
+ import java.awt.Point
++import java.awt.Rectangle
++
++// screen is the full monitor bounds; workArea should exclude space reserved
++// by panels/bars (e.g. polybar), or mascots walk the literal screen edge
++// and end up half-hidden behind the bar. i3 doesn't populate _NET_WORKAREA
++// (unlike GNOME/KDE), so Toolkit.getScreenInsets can't detect this — hardcode
++// the reserved height instead. Matches polybar's configured height (30px)
++// across this fleet's machines.
++private const val BOTTOM_INSET = 30
+ 
+ class LinuxEnvironment : Environment() {
++    // MascotEnvironment.getWorkArea() caches this by reference (`!=`, no
++    // equals() override on Area) and Area's own border objects are tied to
++    // one instance — returning a fresh Area() on every access breaks that
++    // identity and caused mascots/cursor tracking to jump erratically.
++    // Mutate one stable instance in place instead, same as how the base
++    // class's own `screen` field is updated every tick.
++    private val workAreaValue = Area()
++
+     override val workArea: Area
+-        get() = screen
++        get() {
++            workAreaValue.set(
++                Rectangle(
++                    screen.left,
++                    screen.top,
++                    screen.width,
++                    screen.height - BOTTOM_INSET
++                )
++            )
++            return workAreaValue
++        }
+ 
+     override val activeIE = Area()
+     override val activeIETitle = ""

@@ -119,6 +119,23 @@
           config.allowUnfree = true;
         };
         flameshot = nixpkgs2411.flameshot;
+
+        # x_shape_window() applies its rounded-corner X Shape mask to every
+        # floating window unconditionally — it checks fullscreen_mode and
+        # smart_gaps, but never border style. A `for_window ... border none`
+        # window (e.g. the shimeji subflake's mascot) still gets shaped, and
+        # for a window that's *already* Shape-masked to a non-rectangular
+        # sprite and reshaped every ~40ms animation tick, that produced
+        # "Surface ... is not initialized, skipping drawing" in the i3 log
+        # roughly once a second for as long as the mascot ran — observed
+        # over a ~10.5h session on 2026-08-29, and plausibly what wedged
+        # input badly enough to need a hard power-off. Skip shaping (same as
+        # the existing fullscreen/smart_gaps bail-out) for BS_NONE windows,
+        # matching how the rest of this file already treats border style
+        # (con_border_style, used the same way a few lines up).
+        i3-rounded = pkgs.i3-rounded.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [ ./shape-skip-border-none.patch ];
+        });
       in
       {
         packages = [
@@ -150,7 +167,7 @@
         nixos = {
           services.xserver.windowManager.i3 = {
             enable = true;
-            package = pkgs.i3-rounded;
+            package = i3-rounded;
           };
 
           services.xserver = {
@@ -176,7 +193,7 @@
         homeManager = {
           xsession.windowManager.i3 = {
             enable = true;
-            package = pkgs.i3-rounded;
+            package = i3-rounded;
 
             config = (import ./_config.nix { inherit pkgs cfg lib; });
 
@@ -279,7 +296,7 @@
                   Type = "oneshot";
                   RemainAfterExit = true;
                   # PATH so the script finds magick/rg/i3-msg from the profile.
-                  Environment = "PATH=${lib.makeBinPath [ pkgs.imagemagick pkgs.ripgrep pkgs.i3-rounded pkgs.coreutils pkgs.gnused pkgs.gnugrep ]}";
+                  Environment = "PATH=${lib.makeBinPath [ pkgs.imagemagick pkgs.ripgrep i3-rounded pkgs.coreutils pkgs.gnused pkgs.gnugrep ]}";
                   ExecStart = pkgs.writeShellScript "i3-bar-wallpaper-match" (
                     builtins.readFile ../../scripts/i3-bar-wallpaper-match.sh
                   );

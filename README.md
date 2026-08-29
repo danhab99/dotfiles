@@ -2,12 +2,7 @@
 
 Dan's NixOS, nix-on-droid, and home-manager configuration using the subflake model.
 
-## tradezero display / KVM seizure
-
-If the GUI flashes or input dies after a KVM/USB hub blip, read
-**[`docs/kvm-display-seizure.md`](docs/kvm-display-seizure.md)** before
-re-enabling picom/xcompmgr. Live recovery:
-`sudo /etc/nixos/scripts/display-seizure-recover.sh`
+![brushbuddy and oneko, best friends <333](./docs/2026-08-29_01-21.png)
 
 ## justfile
 
