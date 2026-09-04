@@ -1,0 +1,109 @@
+Xorg modesetting livelock on Intel DP-MST + KVM
+================================================
+Status: READY TO FILE (do not file until after the local patches are in a
+new X session and we still have a reproduce, or file now as the 21.1.23
+stock bug with this host as the reproducer).
+
+Where to file
+-------------
+Primary: https://gitlab.freedesktop.org/xorg/xserver/-/issues
+  Title: modesetting: ms_queue_vblank livelocks at 100% CPU when drmWaitVBlank
+         returns EBUSY and ms_flush_drm_events finds nothing (Intel i915 MST + KVM)
+
+Optional (after X patch is proven): https://gitlab.freedesktop.org/drm/i915/kernel/-/issues
+  Title: i915 DP-MST: vblank IRQs stall after KVM-emulated EDID/link flaps
+         (ThinkPad L14 Alder Lake, TB3 dock, 3x MST)
+
+Do NOT file against picom for this overnight crash. No compositor was running.
+
+Why this is an upstream bug
+---------------------------
+xorg-server 21.1.23 hw/xfree86/drivers/modesetting/vblank.c ms_queue_vblank():
+
+  for (;;) {
+      ret = drmCrtcQueueSequence(...) / drmWaitVBlank(...);
+      if (ret == 0) return TRUE;
+      if (errno != EBUSY) { abort; return FALSE; }
+      ms_flush_drm_events(screen);   /* poll(timeout=0); if nothing, returns 0 */
+  }
+
+When i915 stops delivering vblank IRQs, ioctl keeps returning EBUSY and flush
+returns 0. The loop never sleeps. Xorg pegs one core, i3 IPC dies, input lags.
+Killing compositors does not recover. Soft recovery (reattach inputs, skip
+RandR) does not recover. Only a new X server recovers.
+
+Present/DRI2 (Electron/Slack, Firefox, Cursor) call this path with no picom.
+
+A related 2015 change switched "abort if flush returns <= 0" to "abort only if
+flush < 0" so EINTR/EBUSY could retry. That made flush==0 (empty queue) an
+infinite spin.
+
+Overnight crash on this host (proof)
+------------------------------------
+Host: tradezero, NixOS, ThinkPad L14 Intel (PCI 8086:46A8 Iris Xe)
+Dock: Lenovo ThinkPad Thunderbolt 3 Dock
+KVM path: VIA Labs hub 2109:0817 / 2109:2817
+Outputs: DP-2-1 / DP-2-2 / DP-2-3 (DRM card1-DP-5/6/7) @ 1920x1080
+Xorg: 1.21.1.23 modesetting  store:/nix/store/qsdmhmzxmhpdmp5a7hn68id3i9q1qwdl-xorg-server-21.1.23
+Kernel: 6.18.37  i915.enable_psr=0 enable_fbc=0 enable_dc=0
+No picom / xcompmgr.
+
+Boot: 2026-08-17 16:43 EDT
+X pid 3950 started ~16:44
+First peg: 2026-08-17 18:21:55  "X pid=3950 cpu~99%"
+Still pegged: 2026-08-18 09:43:30  "X pid=3950 cpu~100%"
+~15 hours at ~100% CPU. User watchdog soft-recover did not clear it.
+Root watchdog sysfs-off eDP at 09:42:15 (eDP=1 dock_dp=3) did not clear it.
+
+Xorg.0.log for that session: only 9 "EDID for output", 15 "HDMI max TMDS"
+(no probe storm this time). Last useful lines are USB input re-add at
+session death, then "Server terminated successfully".
+
+Kernel log around 18:21: no USB disconnect / i915 dump. Video-only KVM EDID
+or Present vblank stall is enough.
+
+Captured files (local)
+----------------------
+/home/dan/.local/share/kvm-seizure-capture/watchdog-user-20260818.log
+/home/dan/.local/share/kvm-seizure-capture/watchdog-system-20260818.log
+/home/dan/.local/share/kvm-seizure-capture/Xorg.0.log.old-20260818
+/home/dan/.local/share/kvm-seizure-capture/kern-20260818.log
+
+Proposed upstream patch (already in this NixOS repo)
+----------------------------------------------------
+subflakes/xorg/patches/ms-queue-vblank-ebusy-no-spin.patch
+  If EBUSY and ms_flush_drm_events() <= 0, abort the queue request.
+  Logs: "ms_queue_vblank: abort EBUSY spin (flush=%d)"
+
+subflakes/xorg/patches/drmmode-uevent-debounce.patch
+  Ignore non-card DRM udev nodes; debounce RRGetInfo/drmModeGetConnector
+  to 2s (KVM EDID flaps otherwise force-probe MST AUX on every uevent).
+
+Also local: drop DisplayLink/evdi on this host (TB3 MST, not EVDI). Extra
+drm_minor uevents made X reprobe all i915 connectors.
+
+How to reproduce
+----------------
+1. Intel i915 laptop, 3x DP-MST through a KVM that rewrites EDIDs.
+2. Xorg modesetting 21.1.23, i3, GL clients (Slack/Firefox), no compositor.
+3. Leave docked overnight or switch KVM away/back.
+4. Observe X at ~100% of one core, i915 IRQ rate near 0-2/s (healthy ~100-200/s
+   for 3x60Hz), xrandr may still answer, i3-msg hangs.
+
+Expected
+--------
+USB/KVM blip may drop input briefly. X stays schedulable. Present may miss
+frames. Session remains usable.
+
+Actual
+------
+X livelocks in ms_queue_vblank until the X server is replaced.
+
+Versions to attach when filing
+------------------------------
+xorg-server 21.1.23
+libdrm from NixOS unstable (host generation 26.11.20260702.6517942)
+Linux 6.18.37 i915
+lspci: 00:02.0 VGA 8086:46A8 (Alder Lake-UP3 GT2)
+
+Do not paste secrets. Logs above have no passwords.
