@@ -49,6 +49,7 @@
     neovim.url = "path:../../subflakes/neovim";
     nextjs.url = "path:../../subflakes/nextjs";
     nginx.url = "path:../../subflakes/nginx";
+    nightshift.url = "path:../../subflakes/nightshift";
     nix.url = "path:../../subflakes/nix";
     nixos-packages.url = "path:../../subflakes/nixos-packages";
     node.url = "path:../../subflakes/node";
@@ -122,17 +123,9 @@
           i18n.enable = true;
           i3 = {
             enable = true;
-            i3blocksConfig = ./i3blocks.conf;
-
-            # No picom/i3bar — polybar owns status chrome.
-            # docs/kvm-display-seizure.md (tradezero KVM policy; applied fleet-wide).
-            enablePicom = false;
-            enablePicomMinimal = false;
-            enableXcompmgr = false;
-            enableFocusUnderline = true;
-            enableBarWallpaperMatch = false;
-            borderRadius = 12;
-            focusBorderWidth = 0;
+            extraKeybindings = {
+              "Mod4+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
+            };
 
             # screen = [
             #   "DVI-I-1-1"
@@ -200,9 +193,22 @@
               urxvt*tintColor: #525252
             '';
             fontSize = 16;
+            serverConfig = ''
+              Section "InputClass"
+              Identifier "keyboard-all"
+              Option "XkbOptions" "terminate:ctrl_alt_bksp"
+              EndSection
+            '';
           };
           zoxide.enable = true;
-          zsh.enable = true;
+          zsh = {
+            enable = true;
+            extraAliases = {
+              restart-display = "sudo systemctl restart display-manager.service";
+              usb-status = "bash /etc/nixos/scripts/usb-status.sh";
+              usb-watch = "bash /etc/nixos/scripts/usb-watch.sh";
+            };
+          };
           thinkpad.enable = true;
           ranger.enable = true;
           audio = {
@@ -210,6 +216,7 @@
             enableBluetooth = true;
           };
           obs.enable = true;
+          nightshift.enable = true;
           neovim.enable = true;
           watchdog.enable = false;
           vscode.enable = true;
@@ -248,22 +255,6 @@
           pkgs: with pkgs; [
             twingate
           ];
-
-        i3Config =
-          { mod }:
-          {
-            keybindings = {
-              "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-              "${mod}+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
-            };
-          };
-
-        xserver = ''
-          Section "InputClass"
-          Identifier "keyboard-all"
-          Option "XkbOptions" "terminate:ctrl_alt_bksp"
-          EndSection
-        '';
 
         raw = { pkgs, lib, ... }: {
           # Systemd service for on-demand USB controller reset
@@ -446,12 +437,6 @@
               };
 
           };
-        };
-
-        aliases = pkgs: {
-          restart-display = "sudo systemctl restart display-manager.service";
-          usb-status = "bash /etc/nixos/scripts/usb-status.sh";
-          usb-watch = "bash /etc/nixos/scripts/usb-watch.sh";
         };
       };
     };

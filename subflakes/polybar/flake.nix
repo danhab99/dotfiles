@@ -14,7 +14,7 @@
       {
         polybarConfig = mkOption {
           type = types.path;
-          description = "Machine-specific Polybar config (sibling of i3blocksConfig).";
+          description = "Machine-specific Polybar config.";
         };
 
         barName = mkOption {

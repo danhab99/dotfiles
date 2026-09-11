@@ -17,9 +17,10 @@
           description = "Machine specific i3 config file";
           default = null;
         };
-        i3blocksConfig = mkOption {
-          type = types.path;
-          description = "Machine specific i3blocks config file";
+        extraKeybindings = mkOption {
+          type = types.attrsOf types.str;
+          default = { };
+          description = "Machine-specific i3 keybindings, merged over (and overriding) the shared defaults.";
         };
         screen = mkOption {
           type = types.listOf types.str;
@@ -41,54 +42,6 @@
           type = types.str;
           default = "Mod1";
           description = "The modifier key used by i3 (e.g. 'Mod4' or 'Mod1').";
-        };
-
-        # Opt out of compositors by default (KVM/USB hard-locks on tradezero;
-        # other hosts use polybar pseudo-transparency instead).
-        # See docs/kvm-display-seizure.md.
-        enablePicom = mkEnableOption "picom compositor";
-
-        # ARGB-only picom (bar transparency + flameshot). No shadows/fading.
-        enablePicomMinimal = mkEnableOption "minimal picom (ARGB only, no shadows)";
-
-        # Avoid on tradezero: BadRegion storms froze X input (2026-08-06).
-        enableXcompmgr = mkEnableOption "xcompmgr (bar transparency only)";
-
-        # Bottom-edge focus cue (no picom shadow / no full border required).
-        enableFocusUnderline = mkEnableOption "focused-window bottom underline";
-
-        # Without a compositor, i3bar -t cannot do real ARGB transparency.
-        # Instead paint the bar the average color of the wallpaper bottom strip
-        # so it visually blends (fake transparency).
-        enableBarWallpaperMatch = mkEnableOption "match i3bar bg to wallpaper (no compositor)";
-
-        # Default off — polybar subflake owns the status bar on all hosts.
-        enableI3bar = mkEnableOption "i3bar + i3blocks status bar";
-
-        # Opaque bar/workspace chrome when not using ARGB compositor bar.
-        barBackground = mkOption {
-          type = types.str;
-          default = "#2f343f";
-          description = "i3bar background when not using ARGB transparency.";
-        };
-
-        # i3-rounded Shape clip radius. Does NOT need a compositor.
-        borderRadius = mkOption {
-          type = types.ints.unsigned;
-          default = 12;
-          description = "i3-rounded border_radius (X Shape; no compositor).";
-        };
-
-        focusBorderWidth = mkOption {
-          type = types.ints.unsigned;
-          default = 0;
-          description = "i3 pixel border width; 0 disables borders.";
-        };
-
-        focusBorderColor = mkOption {
-          type = types.str;
-          default = "#c0caf5";
-          description = "Border/indicator color for the focused window.";
         };
       };
 
@@ -146,17 +99,11 @@
           dmenu
           i3-rounded
           firefox
-          i3blocks
-          i3status
           nemo
           oneko
           imagemagick
           ripgrep
-        ]) ++ lib.optionals (cfg.enablePicom || cfg.enablePicomMinimal) [
-          pkgs.picom
-        ] ++ lib.optionals cfg.enableXcompmgr [
-          pkgs.xcompmgr
-        ] ++ lib.optionals cfg.enableFocusUnderline [
+        ]) ++ [
           focusUnderline
         ] ++ (with pkgs; [
           playerctl
@@ -198,145 +145,27 @@
             config = (import ./_config.nix { inherit pkgs cfg lib; });
 
             # i3-rounded uses X Shape for corners — no compositor required
-            # (unlike picom shaders). Always emit when radius > 0.
+            # (unlike picom shaders).
             extraConfig = ''
-              ${lib.optionalString (cfg.borderRadius > 0) "border_radius ${toString cfg.borderRadius}"}
+              border_radius 12
               ${if cfg.configFile == null then "" else (builtins.readFile cfg.configFile)}
             '';
           };
 
-          # Explicit enable=false when no compositor flag is set — otherwise a
-          # prior HM generation's picom.service can linger via mkMerge gaps.
-          services.picom = lib.mkMerge [
-            (lib.mkIf (!(cfg.enablePicom || cfg.enablePicomMinimal)) {
-              enable = false;
-            })
-            (lib.mkIf cfg.enablePicom {
-              enable = true;
-              vSync = true;
-              shadow = true;
-              shadowOpacity = 0.9;
-
-              shadowExclude = [
-                "name = 'Notification'"
-                "class_g = 'Conky'"
-                "class_g ?= 'Notify-osd'"
-                "class_g = 'Cairo-clock'"
-                "_GTK_FRAME_EXTENTS@:c"
-                "!focused && !floating"
-                "_NET_WM_NAME@:s *= 'Android Emulator'"
-              ];
-
-              settings.blur = {
-                shadow-radius = 12;
-              };
-            })
-            (lib.mkIf cfg.enablePicomMinimal {
-              enable = true;
-              backend = "xrender";
-              vSync = true;
-              fade = false;
-              shadow = false;
-              settings = {
-                # Damage tracking has XID-leaked on this KVM/multi-DP setup.
-                use-damage = false;
-                mark-wmwin-focused = true;
-                mark-ovredir-focused = true;
-                # Unredirect fullscreen when possible — less composite work
-                # during KVM stress (still needed for ARGB bar/corners).
-                unredir-if-possible = true;
-              };
-            })
-          ];
-
-          systemd.user.services = lib.mkMerge [
-            (lib.mkIf cfg.enableXcompmgr {
-              xcompmgr = {
-                Unit = {
-                  Description = "xcompmgr (i3bar transparency only, no shadows)";
-                  After = [ "graphical-session-pre.target" ];
-                  PartOf = [ "graphical-session.target" ];
-                };
-                Service = {
-                  ExecStart = "${pkgs.xcompmgr}/bin/xcompmgr -n";
-                  Restart = "on-failure";
-                  RestartSec = 2;
-                };
-                Install = {
-                  WantedBy = [ "graphical-session.target" ];
-                };
-              };
-            })
-            (lib.mkIf cfg.enableFocusUnderline {
-              i3-focus-underline = {
-                Unit = {
-                  Description = "i3 focused-window bottom underline";
-                  After = [ "graphical-session-pre.target" ];
-                  PartOf = [ "graphical-session.target" ];
-                };
-                Service = {
-                  ExecStart = "${focusUnderline}/bin/i3-focus-underline";
-                  # Clean IPC disconnects used to exit 0 and leave no indicator.
-                  Restart = "always";
-                  RestartSec = 1;
-                };
-                Install = {
-                  WantedBy = [ "graphical-session.target" ];
-                };
-              };
-            })
-            (lib.mkIf cfg.enableBarWallpaperMatch {
-              i3-bar-wallpaper-match = {
-                Unit = {
-                  Description = "Match i3bar background to wallpaper (fake transparency)";
-                  After = [ "graphical-session-pre.target" ];
-                  PartOf = [ "graphical-session.target" ];
-                };
-                Service = {
-                  Type = "oneshot";
-                  RemainAfterExit = true;
-                  # PATH so the script finds magick/rg/i3-msg from the profile.
-                  Environment = "PATH=${lib.makeBinPath [ pkgs.imagemagick pkgs.ripgrep i3-rounded pkgs.coreutils pkgs.gnused pkgs.gnugrep ]}";
-                  ExecStart = pkgs.writeShellScript "i3-bar-wallpaper-match" (
-                    builtins.readFile ../../scripts/i3-bar-wallpaper-match.sh
-                  );
-                };
-                Install = {
-                  WantedBy = [ "graphical-session.target" ];
-                };
-              };
-            })
-          ];
-
-          systemd.user.timers = lib.mkIf (!(cfg.enablePicom || cfg.enablePicomMinimal || cfg.enableXcompmgr)) {
-            no-compositor-guard = {
-              Unit = {
-                Description = "Periodically kill stray X compositors";
-              };
-              Timer = {
-                OnBootSec = "30s";
-                OnUnitActiveSec = "60s";
-                AccuracySec = "15s";
-                Unit = "no-compositor-guard.service";
-              };
-              Install = {
-                WantedBy = [ "timers.target" "graphical-session.target" ];
-              };
+          systemd.user.services.i3-focus-underline = {
+            Unit = {
+              Description = "i3 focused-window bottom underline";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
             };
-          };
-
-          home.file = {
-            ".config/i3blocks-contrib" = {
-              source = builtins.fetchGit {
-                shallow = true;
-                url = "https://github.com/vivien/i3blocks-contrib.git";
-                rev = "9d66d81da8d521941a349da26457f4965fd6fcbd";
-              };
-              recursive = true;
+            Service = {
+              ExecStart = "${focusUnderline}/bin/i3-focus-underline";
+              # Clean IPC disconnects used to exit 0 and leave no indicator.
+              Restart = "always";
+              RestartSec = 1;
             };
-
-            ".config/i3blocks.conf" = {
-              source = cfg.i3blocksConfig;
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
             };
           };
         };

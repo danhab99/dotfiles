@@ -16,6 +16,11 @@
           type = types.str;
           default = "";
         };
+        extraAliases = mkOption {
+          type = types.attrsOf types.str;
+          default = { };
+          description = "Machine-specific extra/override shell aliases, merged over the shared defaults.";
+        };
       };
 
     output =
@@ -177,7 +182,8 @@
 
               oc = "opencode";
               c = "clear";
-            };
+            }
+            // cfg.extraAliases;
 
             initContent = ''
               if [[ -r /etc/nixos/subflakes/zsh/extras.sh ]]; then

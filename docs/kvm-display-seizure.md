@@ -1,7 +1,12 @@
 # KVM / USB-C hub display seizure (tradezero)
 
 **Policy (2026-08-07):** work / calls machine. **No picom. No xcompmgr.**
-Fleet-wide: all desktop hosts use **polybar** (not i3bar) and leave picom off by default.
+Fleet-wide: all desktop hosts use **polybar** (not i3bar) and never run a
+compositor. (2026-09-04: this used to be a per-machine toggle in the i3
+subflake — `enablePicom`/`enableXcompmgr`/`enableI3bar` etc. — but no machine
+ever turned any of them on, so the options and their dead code paths were
+removed. Compositor-free is now just how the subflake behaves, fleet-wide,
+not a setting.)
 
 ## Aesthetics without a compositor
 
@@ -31,17 +36,16 @@ That turns a KVM/USB hub blip into a frozen session here. We do not use it.
 i3 = {
   enable = true;
   i3blocksConfig = ./i3blocks.conf;
-  # enablePicom / enableI3bar default false
-  enableFocusUnderline = true;
-  borderRadius = 12;
-  focusBorderWidth = 0;
+  # no compositor / borderRadius / focus-underline knobs to set — the
+  # subflake always runs compositor-free with rounded corners and the
+  # focus-underline service on.
 };
 polybar = {
   enable = true;
   polybarConfig = ./polybar.ini;
 };
 kvm-switch.enable = true;  # tradezero
-# + no-compositor-guard on tradezero
+# + tradezero's own no-compositor-guard (machine/tradezero/flake.nix)
 ```
 
 ## Live recovery
