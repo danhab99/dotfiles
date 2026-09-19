@@ -8,8 +8,8 @@ set -uo pipefail
 
 USER_NAME="${USER:-dan}"
 EDP_SYSFS="${EDP_SYSFS:-/sys/class/drm/card1-eDP-1/enabled}"
-ESCALATE_AFTER="${ESCALATE_AFTER:-3}"
-ESCALATE_WINDOW="${ESCALATE_WINDOW:-120}"
+ESCALATE_AFTER="${ESCALATE_AFTER:-2}"
+ESCALATE_WINDOW="${ESCALATE_WINDOW:-90}"
 
 resolve_display_env() {
   if [ -n "${DISPLAY:-}" ] && [ -n "${XAUTHORITY:-}" ] && [ -r "${XAUTHORITY}" ]; then
@@ -61,13 +61,22 @@ edp_enabled() {
   [ "$(cat "${EDP_SYSFS}" 2>/dev/null)" = "enabled" ]
 }
 
-dock_outputs_up() {
+# Count enabled DP-* DRM connectors (dock/KVM path). eDP is separate.
+dock_output_count() {
   local n=0 d
   for d in /sys/class/drm/card1-DP-*/enabled; do
     [ -r "$d" ] || continue
     [ "$(cat "$d" 2>/dev/null)" = "enabled" ] && n=$((n + 1))
   done
-  [ "${n}" -ge 2 ]
+  echo "${n}"
+}
+
+dock_outputs_up() {
+  [ "$(dock_output_count)" -ge 2 ]
+}
+
+undocked() {
+  [ "$(dock_output_count)" -lt 2 ]
 }
 
 cont_all_stopped() {
@@ -98,6 +107,15 @@ force_edp_off() {
   timeout -k 1 3 xrandr --output eDP-1 --off >/dev/null 2>&1
 }
 
+enable_laptop_panel() {
+  command -v xrandr >/dev/null 2>&1 || return 1
+  # Prefer explicit mode; fall back to --auto if the panel rejects 1080p briefly.
+  if timeout -k 1 5 xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 >/dev/null 2>&1; then
+    return 0
+  fi
+  timeout -k 1 5 xrandr --output eDP-1 --primary --auto >/dev/null 2>&1
+}
+
 assert_dock_layout() {
   command -v xrandr >/dev/null 2>&1 || return 0
   force_edp_off || true
@@ -113,6 +131,15 @@ assert_dock_layout() {
   fi
 }
 
+assert_mobile_layout() {
+  command -v xrandr >/dev/null 2>&1 || return 0
+  if [ -x "${HOME}/.screenlayout/mobile.sh" ]; then
+    timeout -k 1 8 "${HOME}/.screenlayout/mobile.sh" >/dev/null 2>&1 || true
+  else
+    enable_laptop_panel || true
+  fi
+}
+
 keep_edp_off_if_docked() {
   dock_outputs_up || return 0
   edp_enabled || return 0
@@ -123,6 +150,15 @@ keep_edp_off_if_docked() {
   if edp_enabled; then
     assert_dock_layout
   fi
+}
+
+# Undock / lid-only: ensure the built-in panel is on (xfsettingsd is stubbed).
+keep_edp_on_if_undocked() {
+  undocked || return 0
+  edp_enabled && return 0
+  resolve_display_env || return 0
+  printf 'display-seizure-watchdog: undocked and eDP off — enabling laptop panel\n' >&2
+  assert_mobile_layout
 }
 
 escalate_restart_dm() {
@@ -152,8 +188,11 @@ soft_recover() {
   stop_heavy_x_clients
   sleep 0.5
   if resolve_display_env; then
-    force_edp_off || true
-    assert_dock_layout
+    if dock_outputs_up; then
+      assert_dock_layout
+    else
+      assert_mobile_layout
+    fi
   fi
   cont_all_stopped
   if [ -x /etc/nixos/scripts/reattach-x-inputs.sh ]; then
@@ -185,6 +224,7 @@ main_loop() {
     kill_compositors
     kill_xfsettingsd
     keep_edp_off_if_docked
+    keep_edp_on_if_undocked
 
     xpid="$(find_x_pid)"
     if [ -z "${xpid}" ]; then
@@ -217,7 +257,13 @@ main_loop() {
         pct="$(x_cpu_pct "${xpid}" 2)"
         if [ "${pct}" -ge "${peg_pct}" ]; then
           printf 'display-seizure-watchdog: still pegged (~%s%%) fails=%s\n' "${pct}" "${#recover_times[@]}" >&2
-          if [ "${#recover_times[@]}" -ge "${ESCALATE_AFTER}" ]; then
+          # Hard wedge signature: eDP still on while docked — escalate immediately.
+          if dock_outputs_up && edp_enabled; then
+            printf 'display-seizure-watchdog: eDP still on while docked after soft recover — escalate now\n' >&2
+            escalate_restart_dm || true
+            recover_times=()
+            sleep 10
+          elif [ "${#recover_times[@]}" -ge "${ESCALATE_AFTER}" ]; then
             escalate_restart_dm || true
             recover_times=()
             sleep 10

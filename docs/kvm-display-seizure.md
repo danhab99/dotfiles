@@ -40,8 +40,8 @@ That turns a KVM/USB hub blip into a frozen session here. We do not use it.
 | Service | Action |
 | --- | --- |
 | **`x-input-guard`** | Reattach floating slaves every 0.5s |
-| **`display-seizure-watchdog`** | Keep eDP off when docked; on X peg STOP heavies → layout → CONT → reattach; after 3 failed soft recovers escalate |
-| **`display-seizure-escalate`** | `systemctl restart display-manager` (NOPASSWD for dan); watchdog also falls back to `loginctl terminate-session` |
+| **`display-seizure-watchdog`** | Keep eDP **off** when ≥2 dock DP outputs are on; keep eDP **on** when undocked (&lt;2 DP). On X peg: layout for dock *or* laptop, then reattach. Escalate after repeated soft failures. |
+| **`display-seizure-system-watchdog`** (root) | `/proc`+sysfs only. If X pegged with eDP on while docked (or sustained peg), **restarts display-manager** — the only reliable clear when xrandr hangs. |
 
 Also: stub `~/.local/bin/xfsettingsd`, hide autostart, xfconf `Default/eDP-1/Active = false`.
 

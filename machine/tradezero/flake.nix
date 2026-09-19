@@ -124,7 +124,9 @@
           i3 = {
             enable = true;
             extraKeybindings = {
+              "Mod4+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
               "Mod4+Shift+d" = "exec /home/dan/.screenlayout/restart.sh";
+              "Mod4+Shift+m" = "exec /home/dan/.screenlayout/mobile.sh";
             };
 
             # screen = [
@@ -339,6 +341,22 @@
                   --output DP-2-2 --mode 1920x1080 --pos 0x0 --rotate normal \
                   --output DP-2-1 --mode 1920x1080 --pos 1920x0 --rotate normal \
                   --output DP-2-3 --mode 1920x1080 --pos 3840x0 --rotate normal --primary
+              '';
+            };
+
+            ".screenlayout/mobile.sh" = {
+              executable = true;
+              text = ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                # Undocked / laptop-only. Used by display-seizure-watchdog and Mod4+Shift+m.
+                xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+                  --output DP-2-1 --off \
+                  --output DP-2-2 --off \
+                  --output DP-2-3 --off \
+                  --output DP-1 --off \
+                  --output HDMI-1 --off 2>/dev/null || \
+                xrandr --output eDP-1 --primary --auto
               '';
             };
 

@@ -196,6 +196,41 @@
             };
           };
 
+          # Root watchdog: when X is pegged with eDP on beside dock outputs,
+          # user-session xrandr hangs and soft recover cannot clear the wedge.
+          # This path only uses /proc + sysfs and restarts display-manager.
+          systemd.services.display-seizure-system-watchdog = {
+            description = "Root watchdog: restart display-manager on hard X seizure";
+            wantedBy = [ "multi-user.target" ];
+            after = [ "display-manager.service" ];
+            path = [
+              pkgs.coreutils
+              pkgs.procps
+              pkgs.gnugrep
+              pkgs.gnused
+              pkgs.bash
+              pkgs.util-linux
+              pkgs.systemd
+            ];
+            serviceConfig = {
+              Type = "simple";
+              ExecStart = pkgs.writeShellScript "display-seizure-system-watchdog" ''
+                export PATH="${lib.makeBinPath [
+                  pkgs.coreutils
+                  pkgs.procps
+                  pkgs.gnugrep
+                  pkgs.gnused
+                  pkgs.bash
+                  pkgs.util-linux
+                  pkgs.systemd
+                ]}:$PATH"
+                exec bash ${../../scripts/display-seizure-system-watchdog.sh}
+              '';
+              Restart = "always";
+              RestartSec = 2;
+            };
+          };
+
           security.sudo.extraRules = [
             {
               users = [ "dan" ];
