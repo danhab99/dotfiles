@@ -52,6 +52,7 @@
     neovim.url = "path:../../subflakes/neovim";
     nextjs.url = "path:../../subflakes/nextjs";
     nginx.url = "path:../../subflakes/nginx";
+    nightshift.url = "path:../../subflakes/nightshift";
     nix.url = "path:../../subflakes/nix";
     nixos-packages.url = "path:../../subflakes/nixos-packages";
     node.url = "path:../../subflakes/node";
@@ -132,7 +133,6 @@
             screen = [ "eDP-1" ];
             defaultLayoutScript = "normal.sh";
             fontSize = 12.0;
-            i3blocksConfig = ../laptop/i3blocks.conf;
             modKey = "Mod1";
             altModKey = "Mod2";
           };
@@ -141,6 +141,7 @@
             polybarConfig = ../laptop/polybar.ini;
           };
           libreoffice.enable = false;
+          nightshift.enable = true;
           neovim.enable = true;
           nix = {
             enable = true;

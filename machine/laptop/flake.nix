@@ -42,6 +42,7 @@
     neovim.url = "path:../../subflakes/neovim";
     nextjs.url = "path:../../subflakes/nextjs";
     nginx.url = "path:../../subflakes/nginx";
+    nightshift.url = "path:../../subflakes/nightshift";
     nix.url = "path:../../subflakes/nix";
     nixos-packages.url = "path:../../subflakes/nixos-packages";
     node.url = "path:../../subflakes/node";
@@ -68,6 +69,7 @@
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
+    systemd-jobs.url = "path:../../subflakes/systemd-jobs";
     thinkpad.url = "path:../../subflakes/thinkpad";
     threedtools.url = "path:../../subflakes/threedtools";
     timezone.url = "path:../../subflakes/timezone";
@@ -114,7 +116,6 @@
           i18n.enable = true;
           i3 = {
             enable = true;
-            i3blocksConfig = ./i3blocks.conf;
             screen = [ "eDP-1" ];
             fontSize = 12.0;
             defaultLayoutScript = "";
@@ -156,6 +157,27 @@
           zoxide.enable = true;
           zsh.enable = true;
           thinkpad.enable = true;
+          nightshift.enable = true;
+          i3.extraKeybindings = {
+            "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
+          };
+          systemd-jobs = {
+            enable = true;
+            jobs =
+              { pkgs }:
+              [
+                {
+                  name = "ssh-desktop-channel";
+                  schedule = "*-*-*";
+                  script = ''
+                    rm -f /tmp/ssh-master-desktop.sock
+                    ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
+                  '';
+                  packages = [ pkgs.openssh ];
+                  user = "dan";
+                }
+              ];
+          };
           neovim.enable = true;
           ranger.enable = true;
           obs.enable = true;
@@ -187,29 +209,6 @@
           all-packages.enable = true;
           nixos-packages.enable = true;
         };
-
-        i3Config =
-          { mod }:
-          {
-            keybindings = {
-              "Mod4+Shift+Return" = "exec urxvt -e ssh -S /tmp/ssh-master-desktop.sock desktop";
-            };
-          };
-
-        jobs =
-          { pkgs }:
-          [
-            {
-              name = "ssh-desktop-channel";
-              schedule = "*-*-*";
-              script = ''
-                rm -f /tmp/ssh-master-desktop.sock
-                ${pkgs.openssh}/bin/ssh -N -M -S "/tmp/ssh-master-desktop.sock" -L 20080:localhost:20080 desktop
-              '';
-              packages = [ pkgs.openssh ];
-              user = "dan";
-            }
-          ];
       };
     };
   };

@@ -8,12 +8,7 @@
   outputs = inputs: import ../output.nix inputs {
     name = "nightshift";
 
-    options = { lib, ... }: with lib; {
-      scriptDirectory = mkOption { };
-      time = mkOption { };
-    };
-
-    output = { pkgs, cfg, config, ... }:
+    output = { pkgs, config, ... }:
       {
         nixos = {
           systemd.services.nightshift = {
@@ -25,7 +20,7 @@
             script = ''
               # Get today's date in YYYY-MM-DD format (e.g., 2026-06-24)
               TODAY=$(${pkgs.coreutils}/bin/date +%Y-%m-%d)
-              SCRIPT_PATH="${cfg.scriptDirectory}/$TODAY.sh"
+              SCRIPT_PATH="/home/dan/Documents/nightshift/$TODAY.sh"
 
               echo "Looking for today's script: $SCRIPT_PATH"
 
@@ -50,7 +45,7 @@
             wantedBy = [ "timers.target" ];
 
             timerConfig = {
-              OnCalendar = "*-*-* ${cfg.time}";
+              OnCalendar = "*-*-* 03:00:00";
               Persistent = false;
             };
           };

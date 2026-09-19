@@ -14,6 +14,11 @@
         type = types.str;
         default = "";
       };
+      serverConfig = mkOption {
+        type = types.lines;
+        default = "";
+        description = "Machine-specific raw xorg.conf snippet (services.xserver.config) — Device/Monitor/Screen/InputClass sections, etc.";
+      };
       fontSize = mkOption {
         type = types.int;
       };
@@ -40,6 +45,7 @@
             enable = true;
             displayManager.startx.enable = true;
             videoDrivers = cfg.videoDrivers;
+            config = cfg.serverConfig;
 
             xautolock.enable = false;
             desktopManager.xterm.enable = false;

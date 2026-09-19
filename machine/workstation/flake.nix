@@ -19,6 +19,7 @@
     csharp.url = "path:../../subflakes/csharp";
     cursor.url = "path:../../subflakes/cursor";
     default.url = "path:../../subflakes/default";
+    dir-bind.url = "path:../../subflakes/dir-bind";
     docker.url = "path:../../subflakes/docker";
     droid-packages.url = "path:../../subflakes/droid-packages";
     duh.url = "path:../../subflakes/duh";
@@ -77,6 +78,7 @@
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
     steam.url = "path:../../subflakes/steam";
+    systemd-jobs.url = "path:../../subflakes/systemd-jobs";
     thinkpad.url = "path:../../subflakes/thinkpad";
     threedtools.url = "path:../../subflakes/threedtools";
     timezone.url = "path:../../subflakes/timezone";
@@ -128,7 +130,6 @@
           i3 = {
             enable = true;
             # configFile = ./i3/config;
-            i3blocksConfig = ./i3blocks.conf;
             screen = [
               "DP-4"
               "HDMI-0"
@@ -188,6 +189,39 @@
               urxvt*tintColor: #525252
             '';
             fontSize = 21;
+            serverConfig = ''
+              Section "Device"
+                Identifier "GPU0"
+                Driver "nvidia"
+                Option "AllowFlipping" "True"
+                Option "TripleBuffer" "True"
+                Option "ForceFullCompositionPipeline" "True"
+              EndSection
+
+              Section "Monitor"
+                Identifier "HDMI-0"
+                Option "PreferredMode" "2560x1440"
+              EndSection
+
+              Section "Monitor"
+                Identifier "DP-0"
+                Option "PreferredMode" "2560x1440"
+                Option "LeftOf" "HDMI-0"
+              EndSection
+
+              Section "Monitor"
+                Identifier "DP-4"
+                Option "PreferredMode" "2560x1440"
+                Option "LeftOf" "DP-1"
+              EndSection
+
+              Section "Screen"
+                Identifier "Screen0"
+                Device "GPU0"
+                Option "AllowIndirectGLXProtocol" "True"
+                Option "TripleBuffer" "True"
+              EndSection
+            '';
           };
           zoxide.enable = true;
           zsh.enable = true;
@@ -245,16 +279,87 @@
           atop.enable = true;
           opencode.enable = true;
           claude.enable = true;
-          nightshift = {
-            enable = true;
-            scriptDirectory = "/home/dan/Documents/nightshift";
-            time = "03:00:00";
-          };
+          nightshift.enable = true;
           cursor.enable = true;
 
           all-packages.enable = true;
           nixos-packages.enable = true;
           my-packages.enable = true;
+
+          dir-bind = {
+            enable = true;
+            binds =
+              let
+                bucket = dir: {
+                  inherit dir;
+                  dest = "bucket";
+                };
+              in
+              [
+                (bucket "Videos")
+                (bucket "Music")
+                (bucket "Pictures")
+              ];
+          };
+
+          systemd-jobs = {
+            enable = true;
+            jobs =
+              { pkgs }:
+              [
+                {
+                  name = "full-system-backup";
+                  packages = with pkgs; [
+                    gnutar
+                    gzip
+                    findutils
+                  ];
+                  schedule = "*-*-* 04:00:00";
+
+                  script = ''
+                    set -eu
+
+                    function cleanup_old_backups() {
+                    ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +15 -delete
+                    }
+
+                    function backup() {
+                    ${pkgs.gnutar}/bin/tar -cz \
+                    --exclude-caches \
+                    --exclude="**/node_modules" \
+                    --exclude="**/*[Cc]ache*" \
+                    --exclude="/home/dan/Videos" \
+                    --exclude="/home/dan/Pictures" \
+                    --seek \
+                    -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
+                    }
+
+                    cleanup_old_backups
+
+                    backup Documents /home/dan/Documents &
+                    backup Downloads /home/dan/Downloads &
+                    backup open-webui /var/lib/open-webui &
+                    backup etc /etc &
+                    backup usr /usr &
+
+                    wait
+                  '';
+                }
+                {
+                  script = "/home/dan/Music/download.sh";
+                  packages = with pkgs; [
+                    gnutar
+                    gzip
+                    findutils
+                    scdl
+                    ffmpeg_6-full
+                    yt-dlp
+                  ];
+                  name = "download-music";
+                  schedule = "*-*-* 02:00:00";
+                }
+              ];
+          };
         };
 
         raw = {
@@ -262,118 +367,6 @@
           boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
         };
-
-        i3Config =
-          { mod }:
-          {
-            keybindings = {
-              "${mod}+Ctrl+Return" = "exec rm /tmp/workdir && urxvt";
-              # "${mod}+w" = "exec brave";
-            };
-          };
-
-        xserver = ''
-          Section "Device"
-            Identifier "GPU0"
-            Driver "nvidia"
-            Option "AllowFlipping" "True"
-            Option "TripleBuffer" "True"
-            Option "ForceFullCompositionPipeline" "True"
-          EndSection
-
-          Section "Monitor"
-            Identifier "HDMI-0"
-            Option "PreferredMode" "2560x1440"
-          EndSection
-
-          Section "Monitor"
-            Identifier "DP-0"
-            Option "PreferredMode" "2560x1440"
-            Option "LeftOf" "HDMI-0"
-          EndSection
-
-          Section "Monitor"
-            Identifier "DP-4"
-            Option "PreferredMode" "2560x1440"
-            Option "LeftOf" "DP-1"
-          EndSection
-
-          Section "Screen"
-            Identifier "Screen0"
-            Device "GPU0"
-            Option "AllowIndirectGLXProtocol" "True"
-            Option "TripleBuffer" "True"
-          EndSection
-        '';
-
-        bind =
-          let
-            bucket = dir: {
-              inherit dir;
-              dest = "bucket";
-            };
-          in
-          [
-            (bucket "Videos")
-            (bucket "Music")
-            (bucket "Pictures")
-          ];
-
-        jobs =
-          { pkgs }:
-          [
-            {
-              name = "full-system-backup";
-              packages = with pkgs; [
-                gnutar
-                gzip
-                findutils
-              ];
-              schedule = "*-*-* 04:00:00";
-
-              script = ''
-                set -eu
-
-                function cleanup_old_backups() {
-                ${pkgs.findutils}/bin/find /bucket/backup -type f -name "*.tar.gz" -mtime +15 -delete
-                }
-
-                function backup() {
-                ${pkgs.gnutar}/bin/tar -cz \
-                --exclude-caches \
-                --exclude="**/node_modules" \
-                --exclude="**/*[Cc]ache*" \
-                --exclude="/home/dan/Videos" \
-                --exclude="/home/dan/Pictures" \
-                --seek \
-                -f /bucket/backup/$1.$(date +%Y-%m-%d).tar.gz $2
-                }
-
-                cleanup_old_backups
-
-                backup Documents /home/dan/Documents &
-                backup Downloads /home/dan/Downloads &
-                backup open-webui /var/lib/open-webui &
-                backup etc /etc &
-                backup usr /usr &
-
-                wait
-              '';
-            }
-            {
-              script = "/home/dan/Music/download.sh";
-              packages = with pkgs; [
-                gnutar
-                gzip
-                findutils
-                scdl
-                ffmpeg_6-full
-                yt-dlp
-              ];
-              name = "download-music";
-              schedule = "*-*-* 02:00:00";
-            }
-          ];
 
         output = system: oi@{ nixpkgs, axelera-driver, ... }: modules: (nixpkgs.lib.nixosSystem {
           inherit system;

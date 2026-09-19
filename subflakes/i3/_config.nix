@@ -30,7 +30,7 @@ in
 
   window = {
     titlebar = false;
-    border = cfg.focusBorderWidth;
+    border = 0;
 
     commands = [
       {
@@ -45,17 +45,18 @@ in
           class = "hl2_linux";
         };
       }
-    ] ++ lib.optional (cfg.focusBorderWidth == 0) {
-      command = "border pixel 0";
-      # Excludes the shimeji subflake's mascot (com-group_finity-mascot):
-      # it needs "border none" instead of "pixel 0" so i3-rounded's X Shape
-      # corner-rounding never touches it — see the shimeji subflake for why.
-      # Written as a negative lookahead (i3 criteria compile via PCRE) so
-      # this stays correct regardless of subflake import order.
-      criteria = {
-        class = "^(?!com-group_finity-mascot$).*";
-      };
-    };
+      {
+        command = "border pixel 0";
+        # Excludes the shimeji subflake's mascot (com-group_finity-mascot):
+        # it needs "border none" instead of "pixel 0" so i3-rounded's X Shape
+        # corner-rounding never touches it — see the shimeji subflake for why.
+        # Written as a negative lookahead (i3 criteria compile via PCRE) so
+        # this stays correct regardless of subflake import order.
+        criteria = {
+          class = "^(?!com-group_finity-mascot$).*";
+        };
+      }
+    ];
   };
 
   gaps = {
@@ -66,95 +67,39 @@ in
     smartBorders = "off";
   };
 
-  colors =
-    let
-      # ARGB (#rrggbbaa) without a compositor confuses i3-rounded damage and
-      # has shown up in tradezero X redraw storms. Stay opaque unless a
-      # compositor flag is on.
-      useArgb =
-        cfg.enablePicom || cfg.enablePicomMinimal || cfg.enableXcompmgr;
-      transparent = if useArgb then "#2f343f00" else "#2f343f";
-    in
-    {
-      focused = {
-        border = cfg.focusBorderColor;
-        background = "#2f343f";
-        text = "#f3f4f5";
-        indicator = cfg.focusBorderColor;
-        childBorder = cfg.focusBorderColor;
-      };
-      unfocused = {
-        border = if cfg.focusBorderWidth > 0 then "#2f343f" else transparent;
-        background = transparent;
-        text = "#676E7D";
-        indicator = "#333333";
-        childBorder = if cfg.focusBorderWidth > 0 then "#2f343f" else "";
-      };
-      focusedInactive = {
-        border = if cfg.focusBorderWidth > 0 then "#2f343f" else transparent;
-        background = transparent;
-        text = "#676E7D";
-        indicator = "#333333";
-        childBorder = if cfg.focusBorderWidth > 0 then "#2f343f" else "";
-      };
-      urgent = {
-        border = "#E53935";
-        background = "#E53935";
-        text = "#f3f4f5";
-        indicator = "#333333";
-        childBorder = "";
-      };
+  colors = {
+    focused = {
+      border = "#c0caf5";
+      background = "#2f343f";
+      text = "#f3f4f5";
+      indicator = "#c0caf5";
+      childBorder = "#c0caf5";
     };
+    unfocused = {
+      border = "#2f343f";
+      background = "#2f343f";
+      text = "#676E7D";
+      indicator = "#333333";
+      childBorder = "";
+    };
+    focusedInactive = {
+      border = "#2f343f";
+      background = "#2f343f";
+      text = "#676E7D";
+      indicator = "#333333";
+      childBorder = "";
+    };
+    urgent = {
+      border = "#E53935";
+      background = "#E53935";
+      text = "#f3f4f5";
+      indicator = "#333333";
+      childBorder = "";
+    };
+  };
 
-  # Empty when enableI3bar=false (e.g. polybar subflake owns the status chrome).
-  bars =
-    if !cfg.enableI3bar then
-      [ ]
-    else
-      let
-        # Real ARGB (`i3bar -t` + #rrggbbaa) needs a compositor.
-        # Wallpaper-match uses an opaque color sampled from the wallpaper.
-        useTransparentBar = cfg.enablePicom || cfg.enablePicomMinimal || cfg.enableXcompmgr;
-        barBg =
-          if useTransparentBar then "#2f343f00"
-          else cfg.barBackground;
-        inactiveBg =
-          if useTransparentBar then "#2f343f00"
-          else cfg.barBackground;
-      in
-      [
-        {
-          position = "bottom";
-          statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c ${cfg.i3blocksConfig}";
-          command = if useTransparentBar then "i3bar -t" else "i3bar";
-
-          fonts = {
-            names = [ "monospace" ];
-            size = fontSize;
-          };
-
-          colors = {
-            background = barBg;
-            statusline = "#f3f4f5";
-            separator = "#f3f4f5";
-            focusedWorkspace = {
-              border = "#2f343f";
-              background = "#2f343f";
-              text = "#f3f4f5";
-            };
-            inactiveWorkspace = {
-              border = inactiveBg;
-              background = inactiveBg;
-              text = "#676E7D";
-            };
-            urgentWorkspace = {
-              border = "#E53935";
-              background = "#E53935";
-              text = "#f3f4f5";
-            };
-          };
-        }
-      ];
+  # i3bar is unused — polybar subflake owns the status chrome on every host.
+  bars = [ ];
 
   keybindings =
     let
@@ -245,7 +190,8 @@ in
       "${mod}+d" = "exec app-launcher";
       "${mod}+Tab" = "exec $HOME/.config/rofi/launchers/misc/launch_windows.sh";
       "${mod}+shift+x" = lockScreenExe;
-    };
+    }
+    // cfg.extraKeybindings;
 
   workspaceOutputAssign =
     let
@@ -316,7 +262,7 @@ in
   ];
 
   focus = {
-    wrapping = "force";
+    wrapping = "yes";
     followMouse = true;
     mouseWarping = true;
   };
