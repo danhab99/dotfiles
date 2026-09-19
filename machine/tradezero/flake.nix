@@ -190,8 +190,7 @@
               "modesetting"
             ];
             extraConfig = ''
-              urxvt*depth: 32
-              urxvt*blurRadius: 0
+              urxvt*depth: 0
               urxvt*transparent: true
               urxvt*tintColor: #525252
             '';
