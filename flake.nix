@@ -69,6 +69,7 @@
     rust.url = "path:subflakes/rust";
     sddm.url = "path:subflakes/sddm";
     secrets.url = "path:subflakes/secrets";
+    shimeji.url = "path:subflakes/shimeji";
     slack.url = "path:subflakes/slack";
     smartgit.url = "path:subflakes/smartgit";
     soulseek.url = "path:subflakes/soulseek";

@@ -73,6 +73,7 @@
     rust.url = "path:../../subflakes/rust";
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
+    shimeji.url = "path:../../subflakes/shimeji";
     slack.url = "path:../../subflakes/slack";
     soulseek.url = "path:../../subflakes/soulseek";
     ssh.url = "path:../../subflakes/ssh";
@@ -156,6 +157,12 @@
           rtlsdr.enable = true;
           sddm.enable = true;
           secrets.enable = true;
+          shimeji = {
+            enable = true;
+            characters = {
+              Shimeji = ../../subflakes/shimeji/characters/Shimeji;
+            };
+          };
           ssh.enable = true;
           steam.enable = false;
           thinkpad.enable = false;

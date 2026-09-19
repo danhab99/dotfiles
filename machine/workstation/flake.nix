@@ -71,6 +71,7 @@
     rust.url = "path:../../subflakes/rust";
     sddm.url = "path:../../subflakes/sddm";
     secrets.url = "path:../../subflakes/secrets";
+    shimeji.url = "path:../../subflakes/shimeji";
     slack.url = "path:../../subflakes/slack";
     smartgit.url = "path:../../subflakes/smartgit";
     soulseek.url = "path:../../subflakes/soulseek";
@@ -162,6 +163,12 @@
           printing.enable = true;
           sddm.enable = true;
           secrets.enable = true;
+          shimeji = {
+            enable = true;
+            characters = {
+              Shimeji = ../../subflakes/shimeji/characters/Shimeji;
+            };
+          };
           ssh = {
             enable = true;
             enableFail2Ban = true;
@@ -237,7 +244,6 @@
           jenkins.enable = true;
           atop.enable = true;
           opencode.enable = true;
-          kvm-switch.enable = true;
           claude.enable = true;
           nightshift = {
             enable = true;

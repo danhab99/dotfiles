@@ -1,0 +1,24 @@
+--- a/src/main/kotlin/com/group_finity/mascot/action/Dragged.kt	2026-08-30 00:59:03.696887493 -0400
++++ b/src/main/kotlin/com/group_finity/mascot/action/Dragged.kt	2026-08-30 00:59:10.530795056 -0400
+@@ -87,7 +87,20 @@
+ 
+         checkNotNull(animation).next(mascot, time)
+ 
+-        mascot.anchor = Point(cursor.x + offsetX, cursor.y + offsetY)
++        // screen.bottom is the raw union of all monitors, and this offset
++        // places the anchor below the cursor. A mascot resting at floor
++        // level (where it spends nearly all its time) already has a cursor
++        // y close to that bound, so cursor.y + offsetY routinely lands past
++        // environment.screen.bottom the instant it's grabbed.
++        // UserBehavior.next() treats that as "out of the screen bounds" and
++        // aborts straight into Fall/Thrown, so a normal grab at floor level
++        // never actually works. Clamp to the screen instead of letting a
++        // routine grab trip the same check meant for genuinely flinging the
++        // mascot off-screen.
++        mascot.anchor = Point(
++            (cursor.x + offsetX).coerceIn(environment.screen.left, environment.screen.right - 1),
++            (cursor.y + offsetY).coerceIn(environment.screen.top, environment.screen.bottom - 1)
++        )
+ 
+         if (time == timeToRegist - 1 && Math.random() >= 0.1) {
+             timeToRegist++

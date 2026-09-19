@@ -47,8 +47,13 @@ in
       }
     ] ++ lib.optional (cfg.focusBorderWidth == 0) {
       command = "border pixel 0";
+      # Excludes the shimeji subflake's mascot (com-group_finity-mascot):
+      # it needs "border none" instead of "pixel 0" so i3-rounded's X Shape
+      # corner-rounding never touches it — see the shimeji subflake for why.
+      # Written as a negative lookahead (i3 criteria compile via PCRE) so
+      # this stays correct regardless of subflake import order.
       criteria = {
-        class = "^.*";
+        class = "^(?!com-group_finity-mascot$).*";
       };
     };
   };
