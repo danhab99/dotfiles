@@ -288,6 +288,7 @@
           home-manager.users.dan.xfconf.settings.displays = {
             AutoEnableProfiles = 0;
             Notify = 0;
+            "Default/eDP-1/Active" = false;
           };
 
           # WORK MACHINE: never allow a compositor. Picom after KVM/USB blips
@@ -306,7 +307,7 @@
                   pkill -x picom 2>/dev/null || true
                   pkill -x xcompmgr 2>/dev/null || true
                   pkill -x compton 2>/dev/null || true
-                  sleep 3
+                  sleep 1
                 done
               '';
               Restart = "always";

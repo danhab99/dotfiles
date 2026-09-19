@@ -13,11 +13,98 @@
     output = { pkgs, lib, ... }:
       let
         disableUsbSuspend = pkgs.writeShellScript "disable-usb-suspend" ''
+          export PATH="${lib.makeBinPath [
+            pkgs.coreutils
+            pkgs.findutils
+            pkgs.util-linux
+            pkgs.gnugrep
+          ]}:$PATH"
           ${builtins.readFile ../../scripts/disable-usb-suspend.sh}
+        '';
+
+        xInputGuard = pkgs.writeShellScript "x-input-guard" ''
+          export PATH="${lib.makeBinPath [
+            pkgs.xorg.xinput
+            pkgs.coreutils
+            pkgs.gnused
+            pkgs.gnugrep
+            pkgs.procps
+            pkgs.bash
+          ]}:$PATH"
+          set -uo pipefail
+          while true; do
+            bash ${../../scripts/reattach-x-inputs.sh} || true
+            sleep 0.5
+          done
+        '';
+
+        seizureWatchdog = pkgs.writeShellScript "display-seizure-watchdog" ''
+          export PATH="${lib.makeBinPath [
+            pkgs.xorg.xinput
+            pkgs.xorg.xrandr
+            pkgs.coreutils
+            pkgs.gnused
+            pkgs.gnugrep
+            pkgs.procps
+            pkgs.bash
+            pkgs.util-linux
+            pkgs.systemd
+            pkgs.sudo
+          ]}:$PATH"
+          exec bash ${../../scripts/display-seizure-watchdog.sh} watch
         '';
       in
       {
         packages = with pkgs; [ ];
+
+        homeManager = {
+          home.file.".config/autostart/xfsettingsd.desktop".text = ''
+            [Desktop Entry]
+            Hidden=true
+          '';
+          home.file.".local/bin/xfsettingsd" = {
+            executable = true;
+            text = ''
+              #!/bin/sh
+              # tradezero: real xfsettingsd fights dock layout / re-enables eDP.
+              exec sleep infinity
+            '';
+          };
+
+          systemd.user.services.x-input-guard = {
+            Unit = {
+              Description = "Reattach floating X input devices (KVM/USB hub)";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "simple";
+              ExecStart = "${xInputGuard}";
+              Restart = "always";
+              RestartSec = 1;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+
+          systemd.user.services.display-seizure-watchdog = {
+            Unit = {
+              Description = "Soft-recover X display seizure (pegged CPU / eDP / compositor)";
+              After = [ "graphical-session-pre.target" ];
+              PartOf = [ "graphical-session.target" ];
+            };
+            Service = {
+              Type = "simple";
+              ExecStart = "${seizureWatchdog}";
+              Restart = "always";
+              RestartSec = 1;
+            };
+            Install = {
+              WantedBy = [ "graphical-session.target" ];
+            };
+          };
+        };
 
         nixos = {
           boot = {
@@ -27,14 +114,7 @@
               "nvme_core.io_timeout=4294967295"
               "pci=noaer"
               "pcie_aspm=off"
-              # Hub/dock USB: disable autosuspend (k). Includes Genesys, Realtek,
-              # Terminus, VIA Labs (ThinkPad USB-C hub path), Lenovo TB3 dock.
-              # k=NO_LPM. Include input devices on the flapping VIA hub path
-              # (Moonlander 3297:1969, Magic Trackpad 05ac:0265) — hub 3-2.2
-              # USB-disconnected multiple times on 2026-08-06.
               "usbcore.quirks=05e3:0626:k,05e3:0610:k,0bda:0411:k,0bda:5411:k,1a40:0801:k,2109:0817:k,2109:2817:k,2109:8887:k,17ef:307f:k,17ef:3080:k,17ef:3081:k,17ef:3082:k,3297:1969:k,05ac:0265:k"
-              # Stop i915 DP link from entering deep display C-states / PSR that
-              # flap through KVM EDID emulation (Xorg "link-state is BAD" every ~2s).
               "i915.enable_psr=0"
               "i915.enable_fbc=0"
               "i915.enable_dc=0"
@@ -48,21 +128,13 @@
           };
 
           services.udev.extraRules = ''
-            # Set power attrs directly. Do NOT RUN+= a script on usb change —
-            # writing power/* generates more change events and cascades into
-            # hub/KVM reset storms (flashing screens, dead input, clock jumps).
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on"
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/autosuspend", ATTR{power/autosuspend}="-1"
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/autosuspend_delay_ms", ATTR{power/autosuspend_delay_ms}="0"
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
             ACTION=="add", SUBSYSTEM=="usb", TEST=="power/persist", ATTR{power/persist}="1"
-
-            # xHCI hosts drift back to power/control=auto (TLP/PCI runtime PM).
-            # Pin on add — still re-enforced by disable-usb-suspend.timer.
             ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/control", ATTR{power/control}="on"
             ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/wakeup", ATTR{power/wakeup}="disabled"
-
-            # Thunderbolt/USB4: keep runtime PM off on the dock path.
             ACTION=="add", SUBSYSTEM=="thunderbolt", TEST=="power/control", ATTR{power/control}="on"
             ACTION=="add", SUBSYSTEM=="pci", DRIVER=="thunderbolt", TEST=="power/control", ATTR{power/control}="on"
           '';
@@ -71,6 +143,12 @@
             description = "Disable USB autosuspend, wakeup, and USB3 LPM on all ports";
             wantedBy = [ "multi-user.target" ];
             after = [ "systemd-udev-settle.service" ];
+            path = [
+              pkgs.coreutils
+              pkgs.findutils
+              pkgs.util-linux
+              pkgs.gnugrep
+            ];
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
@@ -78,8 +156,6 @@
             };
           };
 
-          # Re-enforce often enough that TLP/PCI flipping xHCI back to auto
-          # cannot linger. Never on every USB uevent (that causes storms).
           systemd.timers.disable-usb-suspend-enforce = {
             description = "Periodically re-enforce USB no-suspend settings";
             wantedBy = [ "timers.target" ];
@@ -92,6 +168,12 @@
 
           systemd.services.disable-usb-suspend-enforce = {
             description = "Re-enforce USB no-suspend settings";
+            path = [
+              pkgs.coreutils
+              pkgs.findutils
+              pkgs.util-linux
+              pkgs.gnugrep
+            ];
             serviceConfig = {
               Type = "oneshot";
               ExecStart = disableUsbSuspend;
@@ -106,10 +188,33 @@
             };
           };
 
+          systemd.services.display-seizure-escalate = {
+            description = "Restart display-manager after failed soft seizure recovery";
+            serviceConfig = {
+              Type = "oneshot";
+              ExecStart = "${pkgs.systemd}/bin/systemctl restart display-manager.service";
+            };
+          };
+
+          security.sudo.extraRules = [
+            {
+              users = [ "dan" ];
+              commands = [
+                {
+                  command = "/run/current-system/sw/bin/systemctl start display-seizure-escalate.service";
+                  options = [ "NOPASSWD" ];
+                }
+                {
+                  command = "/run/current-system/sw/bin/systemctl restart display-seizure-escalate.service";
+                  options = [ "NOPASSWD" ];
+                }
+              ];
+            }
+          ];
+
           services.tlp.settings = {
             USB_AUTOSUSPEND = 0;
             USB_AUTOSUSPEND_DISABLE_ON_SHUTDOWN = 1;
-            # mkForce: thinkpad also sets USB_DENYLIST; keep the KVM/dock set.
             USB_DENYLIST = lib.mkForce "0bda:0411 0bda:5411 05e3:0626 05e3:0610 1a40:0801 2109:0817 2109:2817 2109:8887 17ef:307f 17ef:3080 17ef:3081 17ef:3082 3297:1969 05ac:0265";
             RUNTIME_PM_ON_AC = "on";
             RUNTIME_PM_ON_BAT = "on";

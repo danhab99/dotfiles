@@ -19,23 +19,39 @@ not a setting.)
 Real ARGB (`i3bar -t` / compositor Polybar) **requires** a compositor on X11.
 That turns a KVM/USB hub blip into a frozen session here. We do not use it.
 
-## Symptom (when policy was violated)
+## Symptoms
 
-- Windows flash / “seizure”; input dead; X at ~100% CPU
+| Symptom | Cause |
+| --- | --- |
+| Tiles flash; X ~100% CPU | Compositor and/or **eDP left on** beside dock outputs |
+| Dead KB/trackpad; X otherwise OK | All devices `[floating slave]` (only XTEST on masters) |
 
 ## Root causes
 
-1. Any X compositor after a hub blip (full picom, minimal picom, xcompmgr)
+1. Any X compositor after a hub blip
 2. VIA USB hub disconnects on the dock path
-3. USB enforce `flock -n || exit 0` false success
+3. USB enforce false success / missing `flock` in PATH
 4. Ad-hoc `picom-*-live.service` units
+5. Floating XInput after hub blip
+6. **eDP re-enabled** (xfsettingsd / DRM) while three dock monitors are up — soft `xrandr` hangs once X is pegged
+
+## Automatic recovery (`kvm-switch`)
+
+| Service | Action |
+| --- | --- |
+| **`x-input-guard`** | Reattach floating slaves every 0.5s |
+| **`display-seizure-watchdog`** | Keep eDP off when docked; on X peg STOP heavies → layout → CONT → reattach; after 3 failed soft recovers escalate |
+| **`display-seizure-escalate`** | `systemctl restart display-manager` (NOPASSWD for dan); watchdog also falls back to `loginctl terminate-session` |
+
+Also: stub `~/.local/bin/xfsettingsd`, hide autostart, xfconf `Default/eDP-1/Active = false`.
+
+**Commit these scripts** — they lived only as uncommitted files once and vanished, leaving guards broken.
 
 ## Intended config
 
 ```nix
 i3 = {
   enable = true;
-  i3blocksConfig = ./i3blocks.conf;
   # no compositor / borderRadius / focus-underline knobs to set — the
   # subflake always runs compositor-free with rounded corners and the
   # focus-underline service on.
@@ -52,8 +68,11 @@ kvm-switch.enable = true;  # tradezero
 
 ```bash
 /etc/nixos/scripts/display-seizure-recover.sh
+/etc/nixos/scripts/reattach-x-inputs.sh
+/etc/nixos/scripts/display-seizure-watchdog.sh recover
 # last resort:
 sudo systemctl restart display-manager
+# or (no root): loginctl terminate-session <gui-session>
 ```
 
 ## Do not
@@ -61,3 +80,4 @@ sudo systemctl restart display-manager
 - Re-enable picom for “real” bar transparency
 - Enable xcompmgr
 - USB `change` udev `RUN+=` of disable-usb-suspend.sh
+- Leave STOP’d processes after recovery (always CONT)
