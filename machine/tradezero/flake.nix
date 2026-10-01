@@ -216,6 +216,12 @@
           audio = {
             enable = true;
             enableBluetooth = true;
+            # At-home desk mic; Galaxy Buds (any bluez) still rank higher when connected.
+            preferredSourceMatch = "~alsa_input.usb-046d_C270.*";
+            # WebRTC AEC: apps should use "Echo Cancelled Microphone" (auto-preferred
+            # over raw C270). Capture is pinned to the C270 so AEC does not loop.
+            enableEchoCancel = true;
+            echoCancelCaptureTarget = "alsa_input.usb-046d_C270_HD_WEBCAM_B238AF60-02.mono-fallback";
           };
           obs.enable = true;
           nightshift.enable = true;
