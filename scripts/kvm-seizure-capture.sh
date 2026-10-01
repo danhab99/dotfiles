@@ -35,16 +35,26 @@ drm_line() {
 }
 
 xorg_counts() {
-  python3 - <<'PY' 2>/dev/null || echo 'edid=0 tmds=0 modeline=0 lines=0'
+  # Never slurp the whole log — on this host it grows to 100MB+ from
+  # modesetting EDID/modeline spam on every RandR query and stalls the UI.
+  python3 - <<'PY' 2>/dev/null || echo 'edid=0 tmds=0 modeline=0 lines=0 bytes=0'
 from pathlib import Path
 p = Path("/var/log/Xorg.0.log")
 if not p.exists():
-    print("edid=0 tmds=0 modeline=0 lines=0")
+    print("edid=0 tmds=0 modeline=0 lines=0 bytes=0")
     raise SystemExit
-t = p.read_text(errors="replace")
+st = p.stat()
+# Tail only — enough to see recent spam rate without a multi-second read.
+tail = p.read_bytes()[-256_000:].decode("utf-8", errors="replace")
 print(
-    "edid=%d tmds=%d modeline=%d lines=%d"
-    % (t.count("EDID for output"), t.count("HDMI max TMDS"), t.count("Modeline"), t.count("\n"))
+    "edid=%d tmds=%d modeline=%d lines~tail=%d bytes=%d"
+    % (
+        tail.count("EDID for output"),
+        tail.count("HDMI max TMDS"),
+        tail.count("Modeline"),
+        tail.count("\n"),
+        st.st_size,
+    )
 )
 PY
 }

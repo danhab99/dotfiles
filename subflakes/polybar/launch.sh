@@ -24,11 +24,14 @@ refresh_wallpaper() {
 }
 
 # Active outputs with a mode line (connected and lit).
+# Use --current, never --query/--listactivemonitors: on tradezero's KVM/MST
+# dock those re-probe EDIDs over i915 AUX (~0.8–2s) and stutter the display
+# every POLL_SEC. --current is ~30ms and still returns live CRTC names.
 active_monitors() {
   if ! command -v xrandr >/dev/null 2>&1; then
     return 1
   fi
-  timeout -k 1 3 xrandr --query 2>/dev/null \
+  timeout -k 1 3 xrandr --current 2>/dev/null \
     | awk '/ connected/ && /[0-9]+x[0-9]+/ { print $1 }'
 }
 

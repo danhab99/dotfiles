@@ -141,14 +141,22 @@ polybar_running() {
   pgrep -u "${USER_NAME}" -f '/bin/polybar ' >/dev/null 2>&1
 }
 
+# DRM sysfs only — never xrandr --query. On this KVM/MST dock, RandR query
+# re-reads EDIDs over i915 AUX (~0.8–2s) and freezes the display every loop.
 active_monitor_count() {
-  if command -v xrandr >/dev/null 2>&1; then
-    timeout -k 1 3 xrandr --query 2>/dev/null \
-      | awk '/ connected/ && /[0-9]+x[0-9]+/ { c++ } END { print c + 0 }' \
-      || echo 0
-    return
+  local n=0 d
+  for d in /sys/class/drm/card*-*/enabled; do
+    [ -r "$d" ] || continue
+    case "$(basename "$(dirname "$d")")" in
+      card*-eDP-*|card*-Writeback-*) continue ;;
+    esac
+    [ "$(cat "$d" 2>/dev/null)" = "enabled" ] && n=$((n + 1))
+  done
+  # Undocked laptop: eDP alone still needs a bar.
+  if [ "${n}" -eq 0 ] && edp_enabled; then
+    n=1
   fi
-  echo 0
+  echo "${n}"
 }
 
 polybar_bar_count() {

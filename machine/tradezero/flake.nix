@@ -129,24 +129,10 @@
               "Mod4+Shift+m" = "exec /home/dan/.screenlayout/mobile.sh";
             };
 
-            # screen = [
-            #   "DVI-I-1-1"
-            #   "eDP-1"
-            #   "DVI-I-2-2"
-            # ];
-
-            # screen = [
-            #   "DP-3-2"
-            #   "DP-3-1"
-            #   "DP-3-3-1"
-            # ];
-
-            # DisplayLink: DVI-I-2-2 left, DVI-I-1-1 center, eDP-1 laptop.
-            # MST fallback: DP-2-2, DP-2-1, DP-2-3.
             screen = [
-              "DVI-I-2-2"
-              "DVI-I-1-1"
-              "eDP-1"
+              "DP-2-2"
+              "DP-2-1"
+              "DP-2-3"
             ];
 
             defaultLayoutScript = "auto.sh";
