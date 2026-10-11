@@ -34,6 +34,34 @@ function vacay {
     rm /tmp/nixshell
 }
 
+# Inline calculator: type `=1+1` at the prompt and hit enter to evaluate it.
+autoload -Uz zcalc
+aliases[=]='zcalc -f -e'
+
+autoload -Uz add-zle-hook-widget
+_vbe_calc_quote() {
+  case $BUFFER in
+    "="*)
+      typeset -g _vbe_calc_expr=$BUFFER
+      BUFFER="= ${(q-)${${BUFFER#=}# }}"
+      ;;
+  esac
+}
+add-zle-hook-widget line-finish _vbe_calc_quote
+
+autoload -Uz add-zsh-hook
+_vbe_calc_history() {
+  return ${+_vbe_calc_expr}
+}
+add-zsh-hook zshaddhistory _vbe_calc_history
+
+_vbe_calc_preexec() {
+  (( ${+_vbe_calc_expr} )) && print -s $_vbe_calc_expr
+  unset _vbe_calc_expr
+  return 0
+}
+add-zsh-hook preexec _vbe_calc_preexec
+
 export DIRENV_WARN_TIMEOUT=0
 
 function ns() {
